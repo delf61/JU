@@ -202,3 +202,6 @@ Also, custom functions were found in JU.TTT:
 5. **Authentication/Authorization:** The legacy DOS system likely lacked modern
    security. A proper user login and role management system must be designed for
    the web application.
+
+
+<!-- Full analysis appended via separate files, see TABLES.md, PROCEDURES.md, etc. for deep inventory -->
