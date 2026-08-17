@@ -1,0 +1,389 @@
+                       DEKLARACE SOUBORU - kapitola F
+   ──────────────────────────────────────────────────────────────────────────
+   Deklarace datového souboru obsahuje povinně uložené  údaje, další odstavce
+   kapitoly (začínají speciálním znakem # a písmenem-zkratkou) jsou volitelné:
+
+   ■ uložené údaje              definice fyzické struktury souboru na disku
+   ■ vypočítané údaje      (#C) pojmenované výrazy pro další použití
+   ■ klíče                 (#K) vyhledávání, spojení mezi soubory, integrita
+   ■ aditivní změny        (#A) číselná aktualizace údajů nadřízeného souboru
+   ■ uživatelské pohledy   (#U) navigace po databázi, přístupová práva
+   ■ závislosti            (#D) kontextové pořízení a editace dat
+   ■ logické kontroly      (#L) kontrola správnosti zadaných dat
+   ■ implicitní hodnoty    (#I) pohodlnější pořizování nových vět
+
+   Názvem kapitoly F (NázevSouboru) se na datový soubor odvoláváme v projektu,
+   výjimečně se v názvu kapitoly F (ne v dalších odkazech) zadává přípona:
+
+   ■ indexovaný soubor   (.X  ) automatická indexová podpora pro vlastní klíče
+   ■ projektový soubor   (.RDB) údržba jiného projektu
+   ■ soubor pro nápovědu (.HLP) nápověda k úloze (help-soubor)
+   ■ soubor formátu .DBF (.DBF) datová kompatibilita s databázemi typu XBase
+   ■ SQL - tabulka       (.SQL) možnost prezentace souboru jako tabulky na SQL
+                                serveru
+
+   ■ speciální deklarace: like ...... zjednodušená deklarace stejných souborů
+     (odkaz místo textu)  journalof ... žurnál pro sledování změn při editaci
+   ──────────────────────────────────────────────────────────────────────────
+
+                               ULOŽENÉ ÚDAJE
+   ──────────────────────────────────────────────────────────────────────────
+   Seznam údajů, které budou fyzicky uloženy v souboru, ve tvaru:
+
+   ██  NázevÚdaje : Typ ;
+
+                typy údajů v PC FANDu:
+
+   █ F,m.n ... číslo,  m, n udává počet míst před a za čárkou,
+               rozsah čísla je až 18 míst, z toho je 11 platných míst
+               ve verzi pro matematický koprocesor 15 platných míst
+   █ R     ... reálné číslo v pohyblivé řádové čárce, interně uložen
+               jako (Pascal) typ real v 6 bytech.
+   █ A,n   ... znakový řetězec, n udává délku (až 255 znaků)
+   █ N,n   ... číselný řetězec, n udává délku (až 79 znaků)
+   █ D     ... datum s implicitní maskou 'DD.MM.YY'
+   █ B     ... logický typ (pravda=true='A', nepravda=false='N')
+   █ T     ... volný text (formátovaný text maxim. délky 65 000 B)
+
+   ░░░░░░░░░░░░
+   ░░příklady░░  Množství: F,6.0;          Cena: F,4.2;        Aktiva: F,9.2;
+   ░░░░░░░░░░░░     Název: A,12;          Titul: A,30;       Poznámka: A,250;
+                      Kód: N,3;             Psč: N,5;             Ičo: N,8;
+                    Datum: D;        Proplaceno: B;          Poznámky: T;
+   ──────────────────────────────────────────────────────────────────────────
+
+                               ULOŽENÉ ÚDAJE
+   ──────────────────────────────────────────────────────────────────────────
+   Seznam údajů, které budou fyzicky uloženy v souboru, ve tvaru:
+
+   ██  NázevÚdaje : Typ ;
+
+                typy údajů v PC FANDu:
+
+   █ F,m.n ... číslo,  m, n udává počet míst před a za čárkou,
+               rozsah čísla je až 18 míst, z toho je 11 platných míst
+               ve verzi pro matematický koprocesor 15 platných míst
+   █ R     ... reálné číslo v pohyblivé řádové čárce, interně uložen
+               jako (Pascal) typ real v 6 bytech.
+   █ A,n   ... znakový řetězec, n udává délku (až 255 znaků)
+   █ N,n   ... číselný řetězec, n udává délku (až 79 znaků)
+   █ D     ... datum s implicitní maskou 'DD.MM.YY'
+   █ B     ... logický typ (pravda=true='A', nepravda=false='N')
+   █ T     ... volný text (formátovaný text maxim. délky 65 000 B)
+
+   ░░░░░░░░░░░░
+   ░░příklady░░  Množství: F,6.0;          Cena: F,4.2;        Aktiva: F,9.2;
+   ░░░░░░░░░░░░     Název: A,12;          Titul: A,30;       Poznámka: A,250;
+                      Kód: N,3;             Psč: N,5;             Ičo: N,8;
+                    Datum: D;        Proplaceno: B;          Poznámky: T;
+   ──────────────────────────────────────────────────────────────────────────
+
+                           VÝJIMKY V TYPECH ÚDAJŮ
+   ──────────────────────────────────────────────────────────────────────────
+   Pro speciální případy jsou určeny následující typy údajů:
+
+   █ F,m,n   ... (čárka místo tečky) číslo s myšlenou desetinnou čárkou,
+                 číslo bude interně uloženo jako celé, což odstraňuje potíže
+                 se zaokrouhlováním desetinné části v binární soustavě
+
+   █ A,nR    ... znakový řetězec bude při pořízení zarovnaný doprava
+   █ A,...!  ... Znak ! na konci deklarace znamená, že údaj bude na disku
+                 uložen v zakódované formě.
+   █ A,'Maska'.. Maska pro alfanumerický řetězec,text. konstanta v apostrofech.
+                 Délka údaje odpovídá největší možné délce podle masky a údaj
+                 je vždy uložen se zarovnáním doleva. Význam znaku masky:
+                 # číslice
+                 9 číslice
+                 @ písmeno
+                 ? libovolný znak
+                 $ písmeno s automatickou změnou na velké (upcase)
+                 ! libovolný znak s automatickou změnou na velké (upcase)
+                 [....]  volitelná skupina znaků
+                 (...|...|...) alternativní skupiny znaků příp. různé délky
+                 Ostatní znaky musí přesně souhlasit se vstupem (zadávají se
+                 a negenerují). Není povoleno vnoření závorek.
+                 Kontrola (a upcase) je až po Enter na údaji.
+
+   █ N,nL    ... číselný řetězec bude při pořízení zarovnaný doleva
+
+   █ D,'Maska'.. datum se speciální maskou
+                 Maska pro datum je libovolný řetězec v apostrofech obsahující
+                 kromě oddělovačů také speciální znaky pro jednotky datumu a
+                 času. Tyto znaky budou ve výsledku nahrazeny skutečnými
+                 hodnotami. Maska určuje způsob zobrazení datumu.
+                 ■ Y-rok, M-měsíc, D-den,
+                 ■ h-hodina, m-minuta, s-vteřina, t-setina vteřiny
+                 instalace konstant
+
+   █ T,n     ... volný text, při editaci se zobrazí také n znaků prvního řádku
+   █ T,...!  ... Znak ! na konci deklarace znamená, že údaj bude na disku
+                 uložen v zakódované formě.
+
+   ░░░░░░░░░░░░
+   ░░příklady░░
+   ░░░░░░░░░░░░
+
+           Cena: F,9,2;                                {myšlená řádová čárka}
+          Nazev: A,20R;                                   {zarovnané doprava}
+     RodneCislo: A,'######/###(#| )';                  {maska s alternativou}
+      EvidCislo: N,6L;            {zarovnané doleva a doplněné nulami zprava}
+         Obdobi: D,'YMM';                             {různé varianty datumu}
+            Cas: D,'mm:ss.tt';
+    UplnyRozsah: D,'DD.MM.YYYY hh:mm:ss';
+   PopisVyrobku: T,40;                     {volný text s viditelným začátkem}
+
+
+                            KLÍČE - odstavec #K
+   ──────────────────────────────────────────────────────────────────────────
+   Klíč je jeden  nebo  několik  údajů ( uložených nebo vypočítaných ) z věty
+   souboru, které postačují k identifikaci celé věty. Používají se k vyhledá-
+   vání vět a ke spojování souborů. Rozlišujeme následující typy klíčů:
+
+   ■ vlastní klíč ........ slouží k identifikaci věty uvnitř souboru
+                           umožňuje rychlé hledání v datovém editoru pomocí
+                           F3 a připojení podřízených souborů cizím klíčem
+   ■ parametrický klíč ... definice globálních proměnných úlohy
+   ■ cizí klíč ........... napojení do nadřízeného souboru (číselníku)
+                           umožňuje přebírat údaje z viditelné věty
+                           (věta nadřízeného souboru se stejnou hodnotou klíče)
+                           a navigaci po databázi směrem nahoru i dolů
+
+   Definice klíčů se mohou v deklaraci střídat s odstavcem vypočítaných údajů.
+   Pomocí parametrických a cizích klíčů se odvoláváme ve výrazech na údaje
+   viditelných souborů tečkovou notací:
+
+   █ NázevSouboru.NázevÚdaje ... tečková notace
+   █ NázevSpojení.NázevÚdaje ... podle typu spojení nadřízeného souboru
+   ──────────────────────────────────────────────────────────────────────────
+
+
+                                VLASTNÍ KLÍČ
+   ──────────────────────────────────────────────────────────────────────────
+   Vlastní klíč  identifikuje zadáním jednoho nebo několika údajů větu soubo-
+   ru. Může být  jednoznačný nebo duplicitní. Soubor musí být podle vlastního
+   klíče setříděn.  Soubor může mít jeden nebo několik vlastních klíčů, potom
+   rozlišujeme  jeden  vlastní klíč ( na něj se odvoláváme jménem souboru ) a
+   ostatní  alternativní vlastní klíče,  které musíme pojmenovat. Volné texty
+   (textové údaje typu T) nemohou být součástí klíče.
+
+   █ @ KlíčovéÚdaje ............... vlastní klíč (identifikace věty,jen jeden)
+   █ NázevKlíče(@) KlíčovéÚdaje ... alternativní vlastní klíč
+     (udržuje najednou setřídění souboru podle několika různých hledisek)
+
+   ■ <= před seznamem údajů ... intervalový klíč (klíče pro celé intervaly)
+   ■ *  před seznamem údajů ... duplicitní klíč (jinak jsou duplic. zakázány)
+   ■ >  před názvem klíčového údaje ... sestupné třídění (jinak vzestupné)
+   ■ ~  před názvem klíčového údaje ... lexikální třídění (národní abeceda)
+                                        lze použít jen pro údaje typu A
+
+   Vlastní klíče  mohou být  podporovány  indexy.  Potom je setřídění souboru
+   podle všech vlastních  klíčů  automaticky  zajištěno indexovaným souborem.
+   Pokud soubor nemá indexy,může mít nejvýše jeden vlastní klíč a programátor
+   musí zajistit, aby byl soubor setříděn podle vlastního klíče.
+
+
+   ░░░░░░░░░░░░
+   ░░příklady░░
+   ░░░░░░░░░░░░
+
+   #K @ Název;                           {příklady deklarace vlastních klíčů}
+   #K @ Datum,Číslo,~Jméno;                  {klíč s lexikálním vyhledáváním}
+   #K @ * Měsíc;                                            {duplicitní klíč}
+   #K @ <= TarifPásmo;                                     {intervalový klíč}
+   #K ČÍSFAK(@) ČísloFaktury;                     {alternativní vlastní klíč}
+
+   ──────────────────────────────────────────────────────────────────────────
+
+
+                                 CIZÍ KLÍČ
+   ───────────────────────────────────────────────────────────────────────────
+   Cizí klíč definuje vazbu z podřízeného do nadřízeného souboru, resp.do sebe
+   sama. V nadřízeném souboru musí existovat vlastní klíč , potom lze vybrat v
+   podřízeném  souboru odpovídající klíčové údaje (musí souhlasit jejich počet
+   a typy) a definovat je jako cizí klíč. Tato vazba  definuje viditelnou větu
+   nadřízeného souboru, což je věta se stejnými hodnotami vlastního klíče,jako
+   jsou hodnoty cizího klíče v podřízeném souboru. V kontextu věty podřízeného
+   souboru  lze používat  údaje  z viditelné  věty ve výrazech  pomocí tečkové
+   notace. Většinou  jde o vazbu 1:N a jedné nadřízené  větě odpovídá  skupina
+   podřízených vět se stejným cizím klíčem.
+
+   █ NázevSouboru SeznamÚdajů ... vazba do nadřízeného souboru podle vlastního
+                                  klíče
+   █ NázevKlíče   SeznamÚdajů ... vazba podle alternativního vlastního klíče
+   █ NázevRole(NázevSouboru) SeznamÚdajů ... role: pojmenování cizího klíče
+   █ NázevRole(NázevKlíče) SeznamÚdajů       při vícenásobném spojení souborů
+
+   ■ prefix NázevSouboru, NázevKlíče nebo NázevRole nazveme NázevSpojení
+
+   Role ............... Role se používá pro vytvoření vícenásobné vazby do
+                        jednoho souboru podle jednoho klíče v nadříz. souboru.
+
+   Vazba typu owner ... speciální typ vazby mezi soubory, který vytváří
+                        podporu pro další konstrukce v PC FANDu. Většinou
+                        jde o urychlení výběru podmnožiny v podříz. souboru.
+
+   █ NázevSpojení ! SeznamÚdajů ......... Referenční integrita
+                        Datový editor hlídá referenční integritu,i rekurzivně.
+                        Vazba musí být typu OWNER. Při vyřazení nadřízené věty
+                        se vyřadí i všechny podřízené. Při změně klíče nadř.
+                        věty se změní i odpovídající hodnoty podříz. souboru.
+                        Omezení: všechny položky cizího klíče musí být uložené
+                                 údaje.
+                        Přepínač aditivních změn v datovém editoru vypne
+                        i referenční integritu.
+
+   █ NázevSpojení !! SeznamÚdajů
+                        Varianta referenční integrity, která odmítne pokus o
+                        zrušení věty v datovém editoru, pokud pro tuto větu
+                        existují podřízené věty (podle definice vazby owner
+                        obdobně jako předchozí případ).
+
+
+   █ NázevSpojení.exist : boolean .......... funkce pro test viditelné věty
+
+   Cizí klíč umožňuje navigaci nahoru (F7 v podřízeném souboru). Pokud je
+   podřízený soubor podporován indexy, a jeho vlastní klíč je rozšířením
+   cizího klíče, funguje také navigace dolů (Ctrl-F7 z nadřízeného souboru).
+
+   █ NázevSpojení.NázevÚdaje ... tzv. viditelný údaj, použitelný ve výrazech
+                                 pro vypočítané údaje, a dále v kapitolách R
+                                 a M. V proceduře pro record-proměnnou.
+                                 Místo názvu údaje lze použít i funkci owned
+
+   ■ Odkaz na viditelný údaj může být víceúrovňový.
+     NázevSpojení1.NázevSpojení2. ... NázevSpojeníX.NázevÚdaje
+
+
+   ░░░░░░░░░░░░
+   ░░příklady░░
+   ░░░░░░░░░░░░
+
+   ██ Deklarace nadřízeného souboru
+      F  MESTA.X    Mesto : A,30 ;
+                    PSC   : N,5  ;
+                    #K          @   PSC   ;                  { vlastní klíč }
+                       DleNazvu(@) ~Mesto ;     { alternativní vlastní klíč }
+
+
+      Deklarace podřízeného souboru
+      F  ADRESY.X   Jméno    : A,25 ;
+                    PSC      : N,5  ;
+                    MatkaPSC : N,5  ;      { směrovací číslo bydliště matky }
+                    MestoOtce: A,30 ;
+
+                    #K              @  *PSC  ; { vlastní klíč s duplicitami }
+                                MESTA ! PSC  ;                  { cizí klíč }
+                       NaMatku(MESTA)   MatkaPSC  ;         { definice role }
+                       NaOtce(DleNazvu) MestoOtce ;         { definice role }
+
+
+                    #C Mesto:=MESTA.Mesto : A,30 ;          { využití vazby }
+                       MestoMatky:=NaMatku.Mesto : A,30 ;
+                       PscOtce:=NaOtce.PSC : N,5 ;
+
+      F  UCTY       JménoMajitele:A,25;
+                    Kolik:F,6.2;
+                    #K ADRESY JménoMajitele ;
+                    #C Mesto:=ADRESY.MESTA.Mesto:A,30 ; {víceúrovňový odkaz}
+
+      KOMENTÁŘ : Cizí klíč je vazba typu owner s referenční integritou.
+                 Vazby NaOtce a NaMatku nejsou typu owner.
+                 Vazba NaMatku musí být formou role, neboť jde o druhou vazbu
+                 přes primární klíč souboru MĚSTA.
+
+
+   ─────────────────────────────────────────────────────────
+
+   ██ Vazby do vlastního souboru / evidence občanů (rekurze)
+
+      F LIDI.x   rc : N,6 ;
+                 jmeno : A,20 ;
+                 rc_matka : N,6 ;
+                 rc_otec : N,6 ;
+                 PocetDeti : F,2.0;
+
+                 #K @ rc ;
+                 AlterM (@) * rc_matka;
+                 AlterO (@) * rc_otec ;
+                 NaMatku(lidi) ! rc_matka ;   {!!! referenční integrita}
+                 NaOtce(lidi) ! rc_otec ;     {!!! referenční integrita}
+
+                 { údaje z jiných vět toho samého souboru }
+                 #C JmenoMatky := cond( NaMatku.exist: NaMatku.Jmeno,
+                                        else:'neuvedena') : A,20 ;
+                    ...
+                    JmenoBabiM  := cond( NaMatku.exist: NaMatku.JmenoMatky,
+                    {rekurzivní odkaz}   else:'neuvedena') : A,20 ;
+
+                 #A NaMatku.PocetDeti+= cond( IsNewRec: 1 );
+
+   ──────────────────────────────────────────────────────────────────────────
+
+
+                             PARAMETRICKÝ KLÍČ
+   ──────────────────────────────────────────────────────────────────────────
+   Datový soubor s definovaným  parametrickým  klíčem je parametrický soubor.
+   Jeho poslední věta je viditelná (tj. jeho údaje se mohou vyskytovat pomocí
+   tečkové notace ve výrazech i na levé straně přiřazovacího příkazu) v celém
+   projektu.
+
+   █ @ @ ....................... definice parametrického klíče
+
+   Parametrický soubor může být dále v projektu zpracováván jako obyčejný
+   datový soubor a může mít více vět, většinou má však pouze jednu větu. Když
+   je parametrický soubor prázdný, PC FAND automaticky vytváří při prvním
+   přístupu jednu větu a naplní ji nulami a mezerami.
+
+   Údaje poslední věty parametrického souboru nazýváme globální proměnné.
+   Na globální proměnné se v celém projektu odkazujeme tečkovou notací
+   a mohou vystupovat ve výrazech i na levé straně přiřazovacího příkazu.
+
+   █ NázevSouboru.NázevÚdaje ... globální proměnná
+
+
+   ░░░░░░░░░░░░
+   ░░příklady░░
+   ░░░░░░░░░░░░
+
+   ██ Deklarace parametrického souboru PARAM
+
+      F  PARAM    Datum : D ;
+                  ....
+                  #K @ @ ;
+
+      Odkaz na globální proměnnou PARAM.Datum kdekoliv v projektu
+      PARAM.Datum:=today;
+
+   ──────────────────────────────────────────────────────────────────────────
+
+
+                              INDEXOVANÝ SOUBOR
+   ───────────────────────────────────────────────────────────────────────────
+   Indexovaný soubor je datový soubor  podporovaný indexy. Indexy jsou fyzicky
+   uloženy v pomocném souboru na disku s příponou .X00, PC FAND je automaticky
+   vytváří, při  editaci aktualizuje, v případě potřeby zruší a znovu vytvoří.
+
+   Zavedení indexové podpory:
+   K definici souboru v kapitole F doplňte příponu .X za NázevSouboru. Smazání
+   přípony zruší i indexy pro tento datový soubor. Soubor může být indexovaný,
+   když má alespoň jeden  vlastní klíč.  Naopak soubor, který má alespoň jeden
+   alternativní vlastní klíč, již musí být nutně indexovaný.
+
+   Použití indexů:
+   Udržuje  soubor  setříděný  bez ohledu na fyzické  pořadí vět, a to i podle
+   několika různých hledisek najednou.  Zabraňuje  nechtěným duplicitám klíčů,
+   zrychluje odezvu editoru při mazání a vkládání vět (zrušené věty jsou pouze
+   označeny, ne fyzicky mazány). Umožňuje navigaci směrem dolů (Ctrl-F7)- pod-
+   řízený soubor musí mít vlastní klíč podporovaný indexy, který je rozšířením
+   cizího klíče, podle kterého se hledá (tzv. vazba typu owner).
+   Má vliv na celý projekt:
+
+   navigace nahoru a dolů, editace podle klíče, F3 hledání v datovém editoru
+   vlastní klíč, alternativní vlastní klíč, uživatelské pohledy v deklaraci
+   soub. formulář, VstupSestavy, VstupTransformace: pořadí vět v souboru podle
+   indexu, hledání recno a link, volání forall, edit a report podle indexu
+   v proceduře
+   ──────────────────────────────────────────────────────────────────────────
+
+
+
