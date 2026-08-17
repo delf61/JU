@@ -12,7 +12,6 @@ def test_tables():
             print(f"Filepath: {res['filepath']}")
             print(f"Header Record Count: {res['header_num_recs']}")
             print(f"Header Record Length: {res['header_rec_len']}")
-            print(f"Schema Expected Length: {res['schema_expected_len']}")
 
             # Print .x00 results if any
             x00_path = res.get('x00_path')
@@ -44,7 +43,6 @@ def test_tables():
     print(f"Filepath: {res['filepath']}")
     print(f"Header Record Count: {res['header_num_recs']}")
     print(f"Header Record Length: {res['header_rec_len']}")
-    print(f"Schema Expected Length: 39")
     records = res['records']
     print(f"Actual Extracted Records: {len(records)}")
     active = sum(1 for r in records if not r.get('__deleted__', False))

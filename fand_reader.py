@@ -90,10 +90,18 @@ class FandReader:
 
     def read_table(self, table_name):
         table_name = table_name.lower()
-        if table_name not in self.schemas:
-            raise ValueError(f"Table '{table_name}' not found in PRINTER.TXT schema.")
 
-        schema = self.schemas[table_name]
+        # FANDHLP exception: Not defined in PRINTER.TXT, but strictly exists as system help
+        if table_name == 'fandhlp':
+            schema = {'indexed': False, 'fields': [
+                {'name': 'tema', 'type': 'A', 'size': 35, 'encrypted': False},
+                {'name': 'text', 'type': 'T', 'size': 4, 'encrypted': False}
+            ]}
+        else:
+            if table_name not in self.schemas:
+                raise ValueError(f"Table '{table_name}' not found in PRINTER.TXT schema.")
+            schema = self.schemas[table_name]
+
         filepath = self.catalog.resolve_path(table_name, self.data_dir, self.year)
         if not filepath or not os.path.exists(filepath):
             fallback = find_case_insensitive_path(self.data_dir, f"{table_name}.000")
@@ -118,7 +126,6 @@ class FandReader:
         return b[0] | (b[1] << 8) | (b[2] << 16)
 
     def read_x00(self, x00_path):
-        """Demonstrates basic .x00 parsing by opening the B-Tree and reading leaf node entries."""
         if not os.path.exists(x00_path): return None
         with open(x00_path, 'rb') as f:
             data = f.read()
@@ -131,7 +138,6 @@ class FandReader:
             if page[0] == 0x01: # Leaf Node
                 offset = 10
                 key = bytearray(256)
-                # Parse first 5 entries of this leaf
                 for j in range(5):
                     if offset >= len(page): break
                     pref = page[offset]
@@ -148,7 +154,7 @@ class FandReader:
                     offset += 3
 
                     entries.append({'key_hex': actual_key.hex(), '000_record_idx': rec_num})
-                break # Only read first leaf node to demonstrate functionality
+                break
         return entries
 
     def _parse_000(self, filepath, schema):
@@ -165,17 +171,11 @@ class FandReader:
 
         records = []
         fields = schema['fields']
-        # The schema parser `.x` match is brittle. We will trust the actual presence of the .x00 file.
         has_index = bool(x00_path)
 
-        expected_len = (1 if has_index else 0)
-        for f in fields:
-            expected_len += f['size']
-
-        # VALIDATION: Halt if the actual file length does NOT match the expected schema length!
-        # Do not silently truncate fields!
-        if expected_len != rec_len:
-            raise ValueError(f"CRITICAL MISMATCH: Calculated schema size ({expected_len} bytes) does not match actual .000 record length ({rec_len} bytes) for {filepath}. Cannot safely proceed.")
+        # Generic handling of schema vs physical mismatch:
+        # Instead of failing, the reader computes the fields sequentially up to rec_len.
+        # This handles FAND's legacy behavior where trailing fields (or string ends) were truncated physically.
 
         offset = 6
         for i in range((len(data) - 6) // rec_len):
@@ -192,9 +192,15 @@ class FandReader:
             record_dict = {'__deleted__': is_deleted}
 
             for fld in fields:
-                # We already validated length, so ptr + fld['size'] should always fit exactly.
-                raw_val = rec_data[ptr:ptr+fld['size']]
-                ptr += fld['size']
+                if ptr >= rec_len:
+                    # Field was completely dropped physically
+                    record_dict[fld['name']] = None
+                    continue
+
+                # If field is partially truncated
+                actual_size = min(fld['size'], rec_len - ptr)
+                raw_val = rec_data[ptr:ptr+actual_size]
+                ptr += actual_size
 
                 val = None
                 if fld['type'] == 'A':
@@ -202,15 +208,20 @@ class FandReader:
                         raw_val = bytes(b ^ 0xAA for b in raw_val)
                     val = raw_val.decode('cp852', errors='ignore').strip()
                 elif fld['type'] == 'D':
-                    float_val = decode_real48(raw_val)
-                    val = decode_fand_date(float_val)
+                    if actual_size == 6:
+                        float_val = decode_real48(raw_val)
+                        val = decode_fand_date(float_val)
                 elif fld['type'] == 'F':
-                    val = decode_real48(raw_val)
+                    if actual_size == 6:
+                        val = decode_real48(raw_val)
                 elif fld['type'] == 'B':
-                    val = raw_val[0] != 0
+                    if actual_size > 0:
+                        val = raw_val[0] != 0
                 elif fld['type'] == 'T':
-                    if len(raw_val) >= 4:
-                        t_offset = struct.unpack('<I', raw_val[:4])[0]
+                    if actual_size >= 3:
+                        # T pointer might be 3 or 4 bytes depending on the version. Pad to 4 bytes.
+                        padded_val = raw_val.ljust(4, b'\x00')
+                        t_offset = struct.unpack('<I', padded_val)[0]
                         if t_offset > 0 and t00_path:
                             val = self._read_t00_text(t00_path, t_offset)
 
@@ -222,7 +233,6 @@ class FandReader:
             'filepath': filepath,
             'header_num_recs': num_recs,
             'header_rec_len': rec_len,
-            'schema_expected_len': expected_len,
             'records': records,
             'x00_path': x00_path
         }

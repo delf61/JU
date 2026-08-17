@@ -7,50 +7,6 @@ def parse_printer_txt(filename='PRINTER.TXT'):
     blocks = re.split(r'\x11\s+F\s+', text)
     tables = {}
 
-    physical_overrides = {
-        'den_prac': [
-            {'name': 'a', 'type': 'D', 'size': 6, 'encrypted': False},
-            {'name': 'b', 'type': 'A', 'size': 8, 'encrypted': False},
-            {'name': 'DATUM', 'type': 'D', 'size': 6, 'encrypted': False},
-            {'name': 'Zaciat', 'type': 'D', 'size': 6, 'encrypted': False},
-            {'name': 'Koniec', 'type': 'D', 'size': 6, 'encrypted': False},
-            {'name': 'u_zakaz', 'type': 'B', 'size': 1, 'encrypted': False},
-            {'name': 'TEXT_1', 'type': 'A', 'size': 60, 'encrypted': False},
-            {'name': 'TEXT_2', 'type': 'A', 'size': 60, 'encrypted': False},
-            {'name': 'TEXT_3', 'type': 'A', 'size': 60, 'encrypted': False},
-            {'name': 'bb', 'type': 'F', 'size': 6, 'encrypted': False},
-            {'name': 'program', 'type': 'B', 'size': 1, 'encrypted': False},
-            {'name': 'TEXT', 'type': 'A', 'size': 251, 'encrypted': False}
-        ],
-        'help': [
-            {'name': 'tema', 'type': 'A', 'size': 5, 'encrypted': False},
-            {'name': 'text', 'type': 'T', 'size': 4, 'encrypted': False}
-        ],
-        'dph': [
-            {'name': 'OD', 'type': 'D', 'size': 6, 'encrypted': False},
-            {'name': 'DO', 'type': 'D', 'size': 6, 'encrypted': False},
-            {'name': 'DPH1', 'type': 'F', 'size': 6, 'encrypted': False},
-            {'name': 'DPH2', 'type': 'F', 'size': 6, 'encrypted': False},
-            {'name': 'SUM1VSTUP', 'type': 'F', 'size': 6, 'encrypted': False},
-            {'name': 'DPH1VSTUP', 'type': 'F', 'size': 6, 'encrypted': False},
-            {'name': 'SUM2VSTUP', 'type': 'F', 'size': 6, 'encrypted': False},
-            {'name': 'DPH2VSTUP', 'type': 'F', 'size': 6, 'encrypted': False},
-            {'name': 'SUM1VYSTUP', 'type': 'F', 'size': 6, 'encrypted': False},
-            {'name': 'DPH1VYSTUP', 'type': 'F', 'size': 6, 'encrypted': False},
-            {'name': 'SUM2VYSTUP', 'type': 'F', 'size': 6, 'encrypted': False},
-            {'name': 'ArcIntCis', 'type': 'A', 'size': 1, 'encrypted': False}
-        ],
-        'ucty': [
-            {'name': 'ba', 'type': 'A', 'size': 4, 'encrypted': False},
-            {'name': 'pr', 'type': 'A', 'size': 6, 'encrypted': False},
-            {'name': 'cu', 'type': 'A', 'size': 10, 'encrypted': False},
-            {'name': 'zv_od', 'type': 'F', 'size': 6, 'encrypted': False},
-            {'name': 'zv_do', 'type': 'F', 'size': 6, 'encrypted': False},
-            {'name': 'os', 'type': 'B', 'size': 1, 'encrypted': False},
-            {'name': 'popis', 'type': 'A', 'size': 23, 'encrypted': False}
-        ]
-    }
-
     for block in blocks[1:]:
         content = block.split('\x11')[0].strip()
         lines = content.split('\n')
@@ -75,9 +31,12 @@ def parse_printer_txt(filename='PRINTER.TXT'):
             if m:
                 fname = m.group(1).strip()
                 ftype_def = m.group(2).strip().upper()
+
                 if '=' in ftype_def: continue
+
                 encrypted = '!' in ftype_def
                 ftype_clean = ftype_def.replace('!', '').replace("'", "")
+
                 parts = ftype_clean.split(',')
                 base_type = parts[0].strip()
 
@@ -98,10 +57,8 @@ def parse_printer_txt(filename='PRINTER.TXT'):
                     size = 4
                 else:
                     continue
-                fields.append({'name': fname, 'type': base_type, 'size': size, 'encrypted': encrypted})
 
-        if table_name in physical_overrides:
-            fields = physical_overrides[table_name]
+                fields.append({'name': fname, 'type': base_type, 'size': size, 'encrypted': encrypted})
 
         tables[table_name] = {'indexed': is_indexed, 'fields': fields}
 
