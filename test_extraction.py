@@ -6,7 +6,7 @@ from fand_reader import FandReader, FandCatalog
 class TestFandExtraction(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.data_dir = '/tmp/JU_DATA'
+        cls.data_dir = 'JU_DATA_ORIGINAL'
         cls.year = '2025'
         cls.reader = FandReader(cls.data_dir, year=cls.year)
 

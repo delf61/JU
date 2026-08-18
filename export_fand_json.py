@@ -4,7 +4,7 @@ import sys
 from fand_reader import FandReader
 
 def export_table(table_name, year='2025'):
-    reader = FandReader('/tmp/JU_DATA', year=year)
+    reader = FandReader('JU_DATA_ORIGINAL', year=year)
 
     try:
         res = reader.read_table(table_name)

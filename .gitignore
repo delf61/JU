@@ -1,2 +1,11 @@
 JU_DATA_ORIGINAL/
 __pycache__/
+
+# FAND data
+*.[0xX]00
+*.t00
+*.T00
+DELF*/
+Delf*/
+
+# Output directories

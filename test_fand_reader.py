@@ -1,7 +1,7 @@
 from fand_reader import FandReader
 
 def test_tables():
-    reader = FandReader('/tmp/JU_DATA', year='2025')
+    reader = FandReader('JU_DATA_ORIGINAL', year='2025')
 
     tables_to_test = ['dph', 'ucty', 'den_prac', 'help']
 
@@ -39,7 +39,7 @@ def test_tables():
     # Manually test fandhlp which isn't in PRINTER.TXT
     print(f"\n{'='*50}\nTESTING TABLE: FANDHLP\n{'='*50}")
     schema = {'indexed': False, 'fields': [{'name': 'tema', 'type': 'A', 'size': 35, 'encrypted': False}, {'name': 'text', 'type': 'T', 'size': 4, 'encrypted': False}]}
-    res = reader._parse_000('/tmp/JU_DATA/fandhlp.000', schema)
+    res = reader._parse_000('JU_DATA_ORIGINAL/fandhlp.000', schema)
     print(f"Filepath: {res['filepath']}")
     print(f"Header Record Count: {res['header_num_recs']}")
     print(f"Header Record Length: {res['header_rec_len']}")

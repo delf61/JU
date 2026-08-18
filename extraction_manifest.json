@@ -1,0 +1,140 @@
+{
+  "pd": [
+    {
+      "year": "1998",
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/Delf1998/PD.000",
+      "total_records": 369,
+      "active_records": 369,
+      "deleted_records": 0,
+      "unresolved_t_count": 0
+    },
+    {
+      "year": "2012",
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/DELF2012/PD.000",
+      "total_records": 145,
+      "active_records": 145,
+      "deleted_records": 0,
+      "unresolved_t_count": 0
+    },
+    {
+      "year": "2025",
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/DELF2025/PD.000",
+      "total_records": 143,
+      "active_records": 143,
+      "deleted_records": 0,
+      "unresolved_t_count": 0
+    }
+  ],
+  "ucet": [
+    {
+      "year": "1998",
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/UCET.000",
+      "total_records": 5101,
+      "active_records": 5101,
+      "deleted_records": 0,
+      "unresolved_t_count": 0
+    },
+    {
+      "year": "2012",
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/UCET.000",
+      "total_records": 5101,
+      "active_records": 5101,
+      "deleted_records": 0,
+      "unresolved_t_count": 0
+    },
+    {
+      "year": "2025",
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/UCET.000",
+      "total_records": 5101,
+      "active_records": 5101,
+      "deleted_records": 0,
+      "unresolved_t_count": 0
+    }
+  ],
+  "kalendar": [
+    {
+      "year": "1998",
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/Delf1998/KALENDAR.000",
+      "total_records": 366,
+      "active_records": 366,
+      "deleted_records": 0,
+      "unresolved_t_count": 366
+    },
+    {
+      "year": "2012",
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/DELF2012/KALENDAR.000",
+      "total_records": 366,
+      "active_records": 366,
+      "deleted_records": 0,
+      "unresolved_t_count": 366
+    },
+    {
+      "year": "2025",
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/DELF2025/KALENDAR.000",
+      "total_records": 366,
+      "active_records": 366,
+      "deleted_records": 0,
+      "unresolved_t_count": 366
+    }
+  ],
+  "kppol": [
+    {
+      "year": "1998",
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/KPPOL.000",
+      "total_records": 2668,
+      "active_records": 2668,
+      "deleted_records": 0,
+      "unresolved_t_count": 2668
+    },
+    {
+      "year": "2012",
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/KPPOL.000",
+      "total_records": 2668,
+      "active_records": 2668,
+      "deleted_records": 0,
+      "unresolved_t_count": 2668
+    },
+    {
+      "year": "2025",
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/KPPOL.000",
+      "total_records": 2668,
+      "active_records": 2668,
+      "deleted_records": 0,
+      "unresolved_t_count": 2668
+    }
+  ],
+  "auto": [
+    {
+      "year": null,
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/AUTO.000",
+      "total_records": 6,
+      "active_records": 6,
+      "deleted_records": 0,
+      "unresolved_t_count": 0
+    }
+  ],
+  "fandhlp": [
+    {
+      "year": null,
+      "status": "SUCCESS",
+      "filepath": "JU_DATA_ORIGINAL/fandhlp.000",
+      "total_records": 941,
+      "active_records": 941,
+      "deleted_records": 0,
+      "unresolved_t_count": 433
+    }
+  ]
+}
