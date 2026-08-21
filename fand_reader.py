@@ -163,28 +163,35 @@ class FandReader:
 
         if len(data) < 6: return []
 
-        num_recs = struct.unpack('<I', data[0:4])[0]
+        header_int32 = struct.unpack('<i', data[0:4])[0]
         rec_len = struct.unpack('<H', data[4:6])[0]
 
         t00_path = find_case_insensitive_path(os.path.dirname(filepath), os.path.basename(filepath)[:-4] + '.T00')
         x00_path = find_case_insensitive_path(os.path.dirname(filepath), os.path.basename(filepath)[:-4] + '.X00')
 
+        is_indexed = header_int32 < 0
+        num_recs = abs(header_int32)
+
+        # Physical capacity validation
+        phys_cap = (len(data) - 6) // rec_len if rec_len > 0 else 0
+        if phys_cap != num_recs:
+            print(f"WARNING: Physical capacity {phys_cap} != parsed count {num_recs} in {filepath}")
+
         records = []
         fields = schema['fields']
-        has_index = bool(x00_path)
 
         # Generic handling of schema vs physical mismatch:
         # Instead of failing, the reader computes the fields sequentially up to rec_len.
         # This handles FAND's legacy behavior where trailing fields (or string ends) were truncated physically.
 
         offset = 6
-        for i in range((len(data) - 6) // rec_len):
+        for i in range(phys_cap):
             rec_data = data[offset:offset+rec_len]
             offset += rec_len
 
             ptr = 0
             is_deleted = False
-            if has_index:
+            if is_indexed:
                 if rec_data[0] != 0:
                     is_deleted = True
                 ptr += 1
