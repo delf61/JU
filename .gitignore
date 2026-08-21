@@ -10,3 +10,7 @@ Delf*/
 
 # Output directories
 full_extraction/data/
+*.sql
+schema_analysis.json
+analysis_summary.txt
+*.sql
