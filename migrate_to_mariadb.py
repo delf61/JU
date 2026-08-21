@@ -51,16 +51,11 @@ def escape_sql_string(val):
     if isinstance(val, bool):
         return "1" if val else "0"
     if isinstance(val, (int, float)):
-        # format float specifically to avoid e notation if possible, but mariaDB handles e-notation.
-        if 'e' in str(val).lower():
-            # MariaDB handles standard e notation directly. BUT we need to make sure we don't have strings
-            pass
         return str(val)
 
-
-    s = str(val)
-    s = s.replace("'", "''")
-    pass
+    import mysql.connector.conversion
+    # We let mysql connector handle the string escaping perfectly
+    s = mysql.connector.conversion.MySQLConverter().escape(str(val))
     return f"'{s}'"
 
 def generate_ddl(schema):

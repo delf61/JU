@@ -88,8 +88,8 @@ class TestMigration(unittest.TestCase):
         self.assertEqual(escape_sql_string(123), '123')
         self.assertEqual(escape_sql_string(12.34), '12.34')
         self.assertEqual(escape_sql_string("hello"), "'hello'")
-        self.assertEqual(escape_sql_string("it's"), "'it''s'")
-        self.assertEqual(escape_sql_string("back\\slash"), "'back\\slash'")
+        self.assertEqual(escape_sql_string("it's"), "'it\\'s'")
+        self.assertEqual(escape_sql_string("back\\slash"), "'back\\\\slash'")
 
     def test_looks_like_date(self):
         self.assertTrue(looks_like_date("2025-01-01"))
