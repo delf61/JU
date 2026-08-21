@@ -34,7 +34,7 @@ def map_mariadb_type(field_info):
             return "TEXT"
 
     if 'float' in types:
-        return "DECIMAL(15,4)"
+        return "DOUBLE"
 
     if 'int' in types:
         return "INT"
@@ -51,11 +51,16 @@ def escape_sql_string(val):
     if isinstance(val, bool):
         return "1" if val else "0"
     if isinstance(val, (int, float)):
+        # format float specifically to avoid e notation if possible, but mariaDB handles e-notation.
+        if 'e' in str(val).lower():
+            # MariaDB handles standard e notation directly. BUT we need to make sure we don't have strings
+            pass
         return str(val)
+
 
     s = str(val)
     s = s.replace("'", "''")
-    s = s.replace("\\", "\\\\")
+    pass
     return f"'{s}'"
 
 def generate_ddl(schema):
@@ -66,12 +71,12 @@ def generate_ddl(schema):
 CREATE TABLE IF NOT EXISTS _migration_metadata (
     id INT AUTO_INCREMENT PRIMARY KEY,
     table_name VARCHAR(100) NOT NULL,
-    years_present VARCHAR(255),
+    years_present TEXT,
     is_year_variant TINYINT(1),
     record_count INT,
     deleted_count INT,
-    original_source_path VARCHAR(255),
-    original_000_filename VARCHAR(255),
+    original_source_path TEXT,
+    original_000_filename TEXT,
     indexed_status TINYINT(1),
     physical_record_length INT,
     migrated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

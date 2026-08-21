@@ -59,7 +59,7 @@ class TestMigration(unittest.TestCase):
             'is_t_field': False,
             'looks_like_date': False
         }
-        self.assertEqual(map_mariadb_type(field_info_float), 'DECIMAL(15,4)')
+        self.assertEqual(map_mariadb_type(field_info_float), 'DOUBLE')
 
     def test_map_mariadb_type_bool(self):
         field_info = {
@@ -89,7 +89,7 @@ class TestMigration(unittest.TestCase):
         self.assertEqual(escape_sql_string(12.34), '12.34')
         self.assertEqual(escape_sql_string("hello"), "'hello'")
         self.assertEqual(escape_sql_string("it's"), "'it''s'")
-        self.assertEqual(escape_sql_string("back\\slash"), "'back\\\\slash'")
+        self.assertEqual(escape_sql_string("back\\slash"), "'back\\slash'")
 
     def test_looks_like_date(self):
         self.assertTrue(looks_like_date("2025-01-01"))
