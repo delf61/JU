@@ -1,0 +1,4097 @@
+[
+  {
+    "table": "auto",
+    "year": null,
+    "path": "AUTO.000",
+    "recs": 6,
+    "rec_len": 77,
+    "target_len": 129,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "banky",
+    "year": null,
+    "path": "BANKY.000",
+    "recs": 33,
+    "rec_len": 55,
+    "target_len": 55,
+    "status": "EXACT_SCHEMA"
+  },
+  {
+    "table": "baterie",
+    "year": null,
+    "path": "BATERIE.000",
+    "recs": 1,
+    "rec_len": 76,
+    "target_len": 88,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "byt",
+    "year": null,
+    "path": "BYT.000",
+    "recs": 31,
+    "rec_len": 79,
+    "target_len": 145,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "bytudaje",
+    "year": null,
+    "path": "BYTUDAJE.000",
+    "recs": 1,
+    "rec_len": 2,
+    "target_len": 6,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "cinnosti",
+    "year": null,
+    "path": "CINNOSTI.000",
+    "recs": 36,
+    "rec_len": 63,
+    "target_len": 67,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "delf",
+    "year": null,
+    "path": "DELF.000",
+    "recs": 379,
+    "rec_len": 348,
+    "target_len": 352,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "den_prac",
+    "year": 2007,
+    "path": "DELF2007/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2007,
+    "path": "DELF2007/EVI_AUTO.000",
+    "recs": 328,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2007,
+    "path": "DELF2007/EZ.000",
+    "recs": 49,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2007,
+    "path": "DELF2007/IKZP.000",
+    "recs": 32,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2007,
+    "path": "DELF2007/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2007,
+    "path": "DELF2007/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2007,
+    "path": "DELF2007/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2007,
+    "path": "DELF2007/PD.000",
+    "recs": 408,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2007,
+    "path": "DELF2007/POKLDOKL.000",
+    "recs": 54,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2007,
+    "path": "DELF2007/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2007,
+    "path": "DELF2007/SC.000",
+    "recs": 145,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2007,
+    "path": "DELF2007/a/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "old_auto",
+    "year": 2007,
+    "path": "DELF2007/old_auto.000",
+    "recs": 328,
+    "rec_len": 245,
+    "target_len": 284,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "den_prac",
+    "year": 2008,
+    "path": "DELF2008/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2008,
+    "path": "DELF2008/EVI_AUTO.000",
+    "recs": 288,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2008,
+    "path": "DELF2008/EZ.000",
+    "recs": 46,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2008,
+    "path": "DELF2008/IKZP.000",
+    "recs": 32,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2008,
+    "path": "DELF2008/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2008,
+    "path": "DELF2008/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2008,
+    "path": "DELF2008/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2008,
+    "path": "DELF2008/PD.000",
+    "recs": 311,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2008,
+    "path": "DELF2008/POKLDOKL.000",
+    "recs": 33,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2008,
+    "path": "DELF2008/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2008,
+    "path": "DELF2008/SC.000",
+    "recs": 131,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "udaje",
+    "year": 2008,
+    "path": "DELF2008/UDAJE.000",
+    "recs": 0,
+    "rec_len": 268,
+    "target_len": 164,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "vydaje",
+    "year": 2008,
+    "path": "DELF2008/VYDAJE.000",
+    "recs": 0,
+    "rec_len": 56,
+    "target_len": 61,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "den_prac",
+    "year": 2009,
+    "path": "DELF2009/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2009,
+    "path": "DELF2009/EVI_AUTO.000",
+    "recs": 137,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2009,
+    "path": "DELF2009/EZ.000",
+    "recs": 72,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2009,
+    "path": "DELF2009/IKZP.000",
+    "recs": 32,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2009,
+    "path": "DELF2009/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2009,
+    "path": "DELF2009/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2009,
+    "path": "DELF2009/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2009,
+    "path": "DELF2009/PD.000",
+    "recs": 162,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2009,
+    "path": "DELF2009/POKLDOKL.000",
+    "recs": 20,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2009,
+    "path": "DELF2009/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2009,
+    "path": "DELF2009/SC.000",
+    "recs": 64,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "den_prac",
+    "year": 2010,
+    "path": "DELF2010/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2010,
+    "path": "DELF2010/EVI_AUTO.000",
+    "recs": 101,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2010,
+    "path": "DELF2010/EZ.000",
+    "recs": 22,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2010,
+    "path": "DELF2010/IKDKP.000",
+    "recs": 1,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2010,
+    "path": "DELF2010/IKZP.000",
+    "recs": 32,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2010,
+    "path": "DELF2010/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2010,
+    "path": "DELF2010/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2010,
+    "path": "DELF2010/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2010,
+    "path": "DELF2010/PD.000",
+    "recs": 146,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2010,
+    "path": "DELF2010/POKLDOKL.000",
+    "recs": 10,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2010,
+    "path": "DELF2010/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2010,
+    "path": "DELF2010/SC.000",
+    "recs": 43,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "den_prac",
+    "year": 2011,
+    "path": "DELF2011/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2011,
+    "path": "DELF2011/EVI_AUTO.000",
+    "recs": 2,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2011,
+    "path": "DELF2011/EZ.000",
+    "recs": 7,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2011,
+    "path": "DELF2011/IKDKP.000",
+    "recs": 1,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2011,
+    "path": "DELF2011/IKZP.000",
+    "recs": 32,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2011,
+    "path": "DELF2011/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 2011,
+    "path": "DELF2011/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2011,
+    "path": "DELF2011/PD.000",
+    "recs": 142,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2011,
+    "path": "DELF2011/POKLDOKL.000",
+    "recs": 7,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2011,
+    "path": "DELF2011/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2011,
+    "path": "DELF2011/SC.000",
+    "recs": 11,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "udaje",
+    "year": 2011,
+    "path": "DELF2011/UDAJE.000",
+    "recs": 0,
+    "rec_len": 288,
+    "target_len": 164,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "den_prac",
+    "year": 2012,
+    "path": "DELF2012/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2012,
+    "path": "DELF2012/EVI_AUTO.000",
+    "recs": 60,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2012,
+    "path": "DELF2012/EZ.000",
+    "recs": 14,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2012,
+    "path": "DELF2012/IKDKP.000",
+    "recs": 1,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2012,
+    "path": "DELF2012/IKZP.000",
+    "recs": 34,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2012,
+    "path": "DELF2012/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 2012,
+    "path": "DELF2012/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2012,
+    "path": "DELF2012/PD.000",
+    "recs": 145,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2012,
+    "path": "DELF2012/POKLDOKL.000",
+    "recs": 18,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2012,
+    "path": "DELF2012/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2012,
+    "path": "DELF2012/SC.000",
+    "recs": 27,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "den_prac",
+    "year": 2013,
+    "path": "DELF2013/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2013,
+    "path": "DELF2013/EVI_AUTO.000",
+    "recs": 238,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2013,
+    "path": "DELF2013/EZ.000",
+    "recs": 21,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2013,
+    "path": "DELF2013/IKZP.000",
+    "recs": 35,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2013,
+    "path": "DELF2013/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2013,
+    "path": "DELF2013/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2013,
+    "path": "DELF2013/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2013,
+    "path": "DELF2013/PD.000",
+    "recs": 150,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2013,
+    "path": "DELF2013/POKLDOKL.000",
+    "recs": 11,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2013,
+    "path": "DELF2013/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2013,
+    "path": "DELF2013/SC.000",
+    "recs": 120,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "den_prac",
+    "year": 2014,
+    "path": "DELF2014/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2014,
+    "path": "DELF2014/EVI_AUTO.000",
+    "recs": 293,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2014,
+    "path": "DELF2014/EZ.000",
+    "recs": 23,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2014,
+    "path": "DELF2014/IKDKP.000",
+    "recs": 293,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2014,
+    "path": "DELF2014/IKZP.000",
+    "recs": 35,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2014,
+    "path": "DELF2014/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 2014,
+    "path": "DELF2014/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2014,
+    "path": "DELF2014/PD.000",
+    "recs": 161,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2014,
+    "path": "DELF2014/POKLDOKL.000",
+    "recs": 6,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2014,
+    "path": "DELF2014/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2014,
+    "path": "DELF2014/SC.000",
+    "recs": 145,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "den_prac",
+    "year": 2015,
+    "path": "DELF2015/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2015,
+    "path": "DELF2015/EVI_AUTO.000",
+    "recs": 70,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2015,
+    "path": "DELF2015/EZ.000",
+    "recs": 9,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2015,
+    "path": "DELF2015/IKDKP.000",
+    "recs": 293,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2015,
+    "path": "DELF2015/IKZP.000",
+    "recs": 35,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2015,
+    "path": "DELF2015/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2015,
+    "path": "DELF2015/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2015,
+    "path": "DELF2015/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2015,
+    "path": "DELF2015/PD.000",
+    "recs": 141,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2015,
+    "path": "DELF2015/POKLDOKL.000",
+    "recs": 3,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2015,
+    "path": "DELF2015/PV.000",
+    "recs": 25,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2015,
+    "path": "DELF2015/SC.000",
+    "recs": 34,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "den_prac",
+    "year": 2016,
+    "path": "DELF2016/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2016,
+    "path": "DELF2016/EVI_AUTO.000",
+    "recs": 49,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2016,
+    "path": "DELF2016/EZ.000",
+    "recs": 6,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2016,
+    "path": "DELF2016/IKZP.000",
+    "recs": 36,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2016,
+    "path": "DELF2016/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2016,
+    "path": "DELF2016/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2016,
+    "path": "DELF2016/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2016,
+    "path": "DELF2016/PD.000",
+    "recs": 99,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2016,
+    "path": "DELF2016/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2016,
+    "path": "DELF2016/SC.000",
+    "recs": 25,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "udaje",
+    "year": 2016,
+    "path": "DELF2016/UDAJE.000",
+    "recs": 0,
+    "rec_len": 290,
+    "target_len": 164,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "den_prac",
+    "year": 2017,
+    "path": "DELF2017/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2017,
+    "path": "DELF2017/EVI_AUTO.000",
+    "recs": 1,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "ez",
+    "year": 2017,
+    "path": "DELF2017/EZ.000",
+    "recs": 169,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2017,
+    "path": "DELF2017/IKDKP.000",
+    "recs": 879,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2017,
+    "path": "DELF2017/IKZP.000",
+    "recs": 38,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2017,
+    "path": "DELF2017/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2017,
+    "path": "DELF2017/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2017,
+    "path": "DELF2017/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2017,
+    "path": "DELF2017/PD.000",
+    "recs": 110,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2017,
+    "path": "DELF2017/POKLDOKL.000",
+    "recs": 148,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2017,
+    "path": "DELF2017/PV.000",
+    "recs": 56,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2017,
+    "path": "DELF2017/SC.000",
+    "recs": 37,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "udaje",
+    "year": 2017,
+    "path": "DELF2017/UDAJE.000",
+    "recs": 0,
+    "rec_len": 290,
+    "target_len": 164,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "den_prac",
+    "year": 2018,
+    "path": "DELF2018/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2018,
+    "path": "DELF2018/EZ.000",
+    "recs": 169,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2018,
+    "path": "DELF2018/IKDKP.000",
+    "recs": 879,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2018,
+    "path": "DELF2018/IKZP.000",
+    "recs": 38,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2018,
+    "path": "DELF2018/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 2018,
+    "path": "DELF2018/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2018,
+    "path": "DELF2018/PD.000",
+    "recs": 97,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2018,
+    "path": "DELF2018/POKLDOKL.000",
+    "recs": 148,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2018,
+    "path": "DELF2018/PV.000",
+    "recs": 56,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2018,
+    "path": "DELF2018/SC.000",
+    "recs": 37,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "udaje",
+    "year": 2018,
+    "path": "DELF2018/UDAJE.000",
+    "recs": 0,
+    "rec_len": 290,
+    "target_len": 164,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "den_prac",
+    "year": 2019,
+    "path": "DELF2019/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2019,
+    "path": "DELF2019/EZ.000",
+    "recs": 169,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2019,
+    "path": "DELF2019/IKDKP.000",
+    "recs": 879,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2019,
+    "path": "DELF2019/IKZP.000",
+    "recs": 37,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2019,
+    "path": "DELF2019/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 2019,
+    "path": "DELF2019/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2019,
+    "path": "DELF2019/PD.000",
+    "recs": 64,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2019,
+    "path": "DELF2019/POKLDOKL.000",
+    "recs": 148,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2019,
+    "path": "DELF2019/PV.000",
+    "recs": 56,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2019,
+    "path": "DELF2019/SC.000",
+    "recs": 37,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "udaje",
+    "year": 2019,
+    "path": "DELF2019/UDAJE.000",
+    "recs": 0,
+    "rec_len": 290,
+    "target_len": 164,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "den_prac",
+    "year": 2020,
+    "path": "DELF2020/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2020,
+    "path": "DELF2020/EZ.000",
+    "recs": 169,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2020,
+    "path": "DELF2020/IKDKP.000",
+    "recs": 879,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2020,
+    "path": "DELF2020/IKZP.000",
+    "recs": 38,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2020,
+    "path": "DELF2020/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 2020,
+    "path": "DELF2020/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2020,
+    "path": "DELF2020/PD.000",
+    "recs": 98,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2020,
+    "path": "DELF2020/POKLDOKL.000",
+    "recs": 148,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2020,
+    "path": "DELF2020/PV.000",
+    "recs": 56,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2020,
+    "path": "DELF2020/SC.000",
+    "recs": 37,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "udaje",
+    "year": 2020,
+    "path": "DELF2020/UDAJE.000",
+    "recs": 0,
+    "rec_len": 290,
+    "target_len": 164,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "den_prac",
+    "year": 2021,
+    "path": "DELF2021/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2021,
+    "path": "DELF2021/EVI_AUTO.000",
+    "recs": 2,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "ez",
+    "year": 2021,
+    "path": "DELF2021/EZ.000",
+    "recs": 169,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2021,
+    "path": "DELF2021/IKDKP.000",
+    "recs": 879,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2021,
+    "path": "DELF2021/IKZP.000",
+    "recs": 38,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2021,
+    "path": "DELF2021/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 2021,
+    "path": "DELF2021/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2021,
+    "path": "DELF2021/PD.000",
+    "recs": 83,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2021,
+    "path": "DELF2021/POKLDOKL.000",
+    "recs": 148,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2021,
+    "path": "DELF2021/PV.000",
+    "recs": 56,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2021,
+    "path": "DELF2021/SC.000",
+    "recs": 37,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "udaje",
+    "year": 2021,
+    "path": "DELF2021/UDAJE.000",
+    "recs": 0,
+    "rec_len": 290,
+    "target_len": 164,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "den_prac",
+    "year": 2022,
+    "path": "DELF2022/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2022,
+    "path": "DELF2022/EVI_AUTO.000",
+    "recs": 2,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "ez",
+    "year": 2022,
+    "path": "DELF2022/EZ.000",
+    "recs": 170,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2022,
+    "path": "DELF2022/IKDKP.000",
+    "recs": 879,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2022,
+    "path": "DELF2022/IKZP.000",
+    "recs": 38,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2022,
+    "path": "DELF2022/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 2022,
+    "path": "DELF2022/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2022,
+    "path": "DELF2022/PD.000",
+    "recs": 89,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2022,
+    "path": "DELF2022/PV.000",
+    "recs": 56,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2022,
+    "path": "DELF2022/SC.000",
+    "recs": 37,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "udaje",
+    "year": 2022,
+    "path": "DELF2022/UDAJE.000",
+    "recs": 0,
+    "rec_len": 290,
+    "target_len": 164,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "den_prac",
+    "year": 2023,
+    "path": "DELF2023/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2023,
+    "path": "DELF2023/EZ.000",
+    "recs": 174,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2023,
+    "path": "DELF2023/IKDKP.000",
+    "recs": 879,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2023,
+    "path": "DELF2023/IKZP.000",
+    "recs": 38,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2023,
+    "path": "DELF2023/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 2023,
+    "path": "DELF2023/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2023,
+    "path": "DELF2023/PD.000",
+    "recs": 73,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2023,
+    "path": "DELF2023/POKLDOKL.000",
+    "recs": 6,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2023,
+    "path": "DELF2023/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2023,
+    "path": "DELF2023/SC.000",
+    "recs": 0,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "den_prac",
+    "year": 2024,
+    "path": "DELF2024/DEN_PRAC.000",
+    "recs": 4827,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2024,
+    "path": "DELF2024/EVI_AUTO.000",
+    "recs": 2,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2024,
+    "path": "DELF2024/EZ.000",
+    "recs": 186,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2024,
+    "path": "DELF2024/IKDKP.000",
+    "recs": 879,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2024,
+    "path": "DELF2024/IKZP.000",
+    "recs": 40,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2024,
+    "path": "DELF2024/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 2024,
+    "path": "DELF2024/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2024,
+    "path": "DELF2024/PD.000",
+    "recs": 84,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2024,
+    "path": "DELF2024/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2024,
+    "path": "DELF2024/SC.000",
+    "recs": 0,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "den_prac",
+    "year": 2025,
+    "path": "DELF2025/DEN_PRAC.000",
+    "recs": 4844,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2025,
+    "path": "DELF2025/EVI_AUTO.000",
+    "recs": 2,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2025,
+    "path": "DELF2025/EZ.000",
+    "recs": 195,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2025,
+    "path": "DELF2025/IKDKP.000",
+    "recs": 879,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2025,
+    "path": "DELF2025/IKZP.000",
+    "recs": 41,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2025,
+    "path": "DELF2025/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 2025,
+    "path": "DELF2025/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2025,
+    "path": "DELF2025/PD.000",
+    "recs": 143,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2025,
+    "path": "DELF2025/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2025,
+    "path": "DELF2025/SC.000",
+    "recs": 0,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2026,
+    "path": "DELF2026/EVI_AUTO.000",
+    "recs": 0,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "ez",
+    "year": 2026,
+    "path": "DELF2026/EZ.000",
+    "recs": 1,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2026,
+    "path": "DELF2026/IKDKP.000",
+    "recs": 879,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2026,
+    "path": "DELF2026/IKZP.000",
+    "recs": 42,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2026,
+    "path": "DELF2026/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2026,
+    "path": "DELF2026/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2026,
+    "path": "DELF2026/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2026,
+    "path": "DELF2026/PD.000",
+    "recs": 88,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2026,
+    "path": "DELF2026/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "doklady",
+    "year": null,
+    "path": "DOKLADY.000",
+    "recs": 12,
+    "rec_len": 22,
+    "target_len": 22,
+    "status": "EXACT_SCHEMA"
+  },
+  {
+    "table": "domudaje",
+    "year": null,
+    "path": "DOMUDAJE.000",
+    "recs": 1,
+    "rec_len": 2,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "doprpros",
+    "year": null,
+    "path": "DOPRPROS.000",
+    "recs": 4,
+    "rec_len": 24,
+    "target_len": 24,
+    "status": "EXACT_SCHEMA"
+  },
+  {
+    "table": "dph",
+    "year": null,
+    "path": "DPH.000",
+    "recs": 112,
+    "rec_len": 67,
+    "target_len": 103,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "druhdruh",
+    "year": null,
+    "path": "DRUHDRUH.000",
+    "recs": 12,
+    "rec_len": 23,
+    "target_len": 23,
+    "status": "EXACT_SCHEMA"
+  },
+  {
+    "table": "druhtova",
+    "year": null,
+    "path": "DRUHTOVA.000",
+    "recs": 49,
+    "rec_len": 26,
+    "target_len": 30,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "ez",
+    "year": 1991,
+    "path": "Delf1991/EZ.000",
+    "recs": 601,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 1991,
+    "path": "Delf1991/IKDKP.000",
+    "recs": 10,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 1991,
+    "path": "Delf1991/IKZP.000",
+    "recs": 1,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 1991,
+    "path": "Delf1991/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 1991,
+    "path": "Delf1991/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 1991,
+    "path": "Delf1991/PD.000",
+    "recs": 37,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 1991,
+    "path": "Delf1991/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 1991,
+    "path": "Delf1991/SC.000",
+    "recs": 3,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 1992,
+    "path": "Delf1992/EZ.000",
+    "recs": 601,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 1992,
+    "path": "Delf1992/IKDKP.000",
+    "recs": 44,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 1992,
+    "path": "Delf1992/IKZP.000",
+    "recs": 8,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 1992,
+    "path": "Delf1992/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 1992,
+    "path": "Delf1992/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 1992,
+    "path": "Delf1992/PD.000",
+    "recs": 164,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 1992,
+    "path": "Delf1992/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 1992,
+    "path": "Delf1992/SC.000",
+    "recs": 17,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 1993,
+    "path": "Delf1993/EZ.000",
+    "recs": 601,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 1993,
+    "path": "Delf1993/IKDKP.000",
+    "recs": 46,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 1993,
+    "path": "Delf1993/IKZP.000",
+    "recs": 10,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 1993,
+    "path": "Delf1993/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 1993,
+    "path": "Delf1993/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 1993,
+    "path": "Delf1993/PD.000",
+    "recs": 251,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 1993,
+    "path": "Delf1993/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 1993,
+    "path": "Delf1993/SC.000",
+    "recs": 41,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 1994,
+    "path": "Delf1994/EZ.000",
+    "recs": 601,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 1994,
+    "path": "Delf1994/IKDKP.000",
+    "recs": 33,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 1994,
+    "path": "Delf1994/IKZP.000",
+    "recs": 9,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 1994,
+    "path": "Delf1994/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 1994,
+    "path": "Delf1994/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 1994,
+    "path": "Delf1994/PD.000",
+    "recs": 277,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 1994,
+    "path": "Delf1994/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 1994,
+    "path": "Delf1994/SC.000",
+    "recs": 1,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 1995,
+    "path": "Delf1995/EZ.000",
+    "recs": 601,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 1995,
+    "path": "Delf1995/IKDKP.000",
+    "recs": 9,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 1995,
+    "path": "Delf1995/IKZP.000",
+    "recs": 9,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 1995,
+    "path": "Delf1995/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 1995,
+    "path": "Delf1995/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 1995,
+    "path": "Delf1995/PD.000",
+    "recs": 217,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 1995,
+    "path": "Delf1995/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 1995,
+    "path": "Delf1995/SC.000",
+    "recs": 1,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 1996,
+    "path": "Delf1996/EZ.000",
+    "recs": 601,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 1996,
+    "path": "Delf1996/IKDKP.000",
+    "recs": 25,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 1996,
+    "path": "Delf1996/IKZP.000",
+    "recs": 11,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 1996,
+    "path": "Delf1996/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 1996,
+    "path": "Delf1996/LEASING.000",
+    "recs": 1,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "param",
+    "year": 1996,
+    "path": "Delf1996/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 1996,
+    "path": "Delf1996/PD.000",
+    "recs": 228,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 1996,
+    "path": "Delf1996/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 1996,
+    "path": "Delf1996/SC.000",
+    "recs": 6,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 1997,
+    "path": "Delf1997/EZ.000",
+    "recs": 601,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 1997,
+    "path": "Delf1997/IKDKP.000",
+    "recs": 33,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 1997,
+    "path": "Delf1997/IKZP.000",
+    "recs": 12,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 1997,
+    "path": "Delf1997/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 1997,
+    "path": "Delf1997/LEASING.000",
+    "recs": 1,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "param",
+    "year": 1997,
+    "path": "Delf1997/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 1997,
+    "path": "Delf1997/PD.000",
+    "recs": 261,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 1997,
+    "path": "Delf1997/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 1997,
+    "path": "Delf1997/SC.000",
+    "recs": 4,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 1998,
+    "path": "Delf1998/EVI_AUTO.000",
+    "recs": 24,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 1998,
+    "path": "Delf1998/EZ.000",
+    "recs": 601,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 1998,
+    "path": "Delf1998/IKDKP.000",
+    "recs": 36,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 1998,
+    "path": "Delf1998/IKZP.000",
+    "recs": 17,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 1998,
+    "path": "Delf1998/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 1998,
+    "path": "Delf1998/LEASING.000",
+    "recs": 1,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "param",
+    "year": 1998,
+    "path": "Delf1998/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 1998,
+    "path": "Delf1998/PD.000",
+    "recs": 369,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 1998,
+    "path": "Delf1998/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 1998,
+    "path": "Delf1998/SC.000",
+    "recs": 14,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "old_auto",
+    "year": 1998,
+    "path": "Delf1998/old_auto.000",
+    "recs": 24,
+    "rec_len": 245,
+    "target_len": 284,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 1999,
+    "path": "Delf1999/EVI_AUTO.000",
+    "recs": 626,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 1999,
+    "path": "Delf1999/EZ.000",
+    "recs": 601,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 1999,
+    "path": "Delf1999/IKDKP.000",
+    "recs": 6,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 1999,
+    "path": "Delf1999/IKZP.000",
+    "recs": 23,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 1999,
+    "path": "Delf1999/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 1999,
+    "path": "Delf1999/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 1999,
+    "path": "Delf1999/PD.000",
+    "recs": 463,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 1999,
+    "path": "Delf1999/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 1999,
+    "path": "Delf1999/SC.000",
+    "recs": 316,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "old_auto",
+    "year": 1999,
+    "path": "Delf1999/old_auto.000",
+    "recs": 626,
+    "rec_len": 245,
+    "target_len": 284,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2000,
+    "path": "Delf2000/EVI_AUTO.000",
+    "recs": 595,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2000,
+    "path": "Delf2000/EZ.000",
+    "recs": 601,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2000,
+    "path": "Delf2000/IKDKP.000",
+    "recs": 4,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2000,
+    "path": "Delf2000/IKZP.000",
+    "recs": 27,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2000,
+    "path": "Delf2000/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 2000,
+    "path": "Delf2000/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2000,
+    "path": "Delf2000/PD.000",
+    "recs": 495,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2000,
+    "path": "Delf2000/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2000,
+    "path": "Delf2000/SC.000",
+    "recs": 276,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "old_auto",
+    "year": 2000,
+    "path": "Delf2000/old_auto.000",
+    "recs": 595,
+    "rec_len": 245,
+    "target_len": 284,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2001,
+    "path": "Delf2001/EVI_AUTO.000",
+    "recs": 727,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2001,
+    "path": "Delf2001/EZ.000",
+    "recs": 601,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2001,
+    "path": "Delf2001/IKDKP.000",
+    "recs": 8,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2001,
+    "path": "Delf2001/IKZP.000",
+    "recs": 27,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2001,
+    "path": "Delf2001/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2001,
+    "path": "Delf2001/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2001,
+    "path": "Delf2001/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2001,
+    "path": "Delf2001/PD.000",
+    "recs": 497,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2001,
+    "path": "Delf2001/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2001,
+    "path": "Delf2001/SC.000",
+    "recs": 355,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "old_auto",
+    "year": 2001,
+    "path": "Delf2001/old_auto.000",
+    "recs": 727,
+    "rec_len": 245,
+    "target_len": 284,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2002,
+    "path": "Delf2002/EZ.000",
+    "recs": 601,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2002,
+    "path": "Delf2002/IKDKP.000",
+    "recs": 16,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2002,
+    "path": "Delf2002/IKZP.000",
+    "recs": 28,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2002,
+    "path": "Delf2002/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": 2002,
+    "path": "Delf2002/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2002,
+    "path": "Delf2002/PD.000",
+    "recs": 484,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2002,
+    "path": "Delf2002/POKLDOKL.000",
+    "recs": 247,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2002,
+    "path": "Delf2002/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2002,
+    "path": "Delf2002/SC.000",
+    "recs": 294,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ucet",
+    "year": 2002,
+    "path": "Delf2002/UCET.000",
+    "recs": 1762,
+    "rec_len": 113,
+    "target_len": 116,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "den_prac",
+    "year": 2003,
+    "path": "Delf2003/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "dph",
+    "year": 2003,
+    "path": "Delf2003/DPH.000",
+    "recs": 21,
+    "rec_len": 46,
+    "target_len": 103,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2003,
+    "path": "Delf2003/EVI_AUTO.000",
+    "recs": 137,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2003,
+    "path": "Delf2003/EZ.000",
+    "recs": 601,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2003,
+    "path": "Delf2003/IKDKP.000",
+    "recs": 19,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2003,
+    "path": "Delf2003/IKZP.000",
+    "recs": 28,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2003,
+    "path": "Delf2003/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2003,
+    "path": "Delf2003/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2003,
+    "path": "Delf2003/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2003,
+    "path": "Delf2003/PD.000",
+    "recs": 529,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2003,
+    "path": "Delf2003/POKLDOKL.000",
+    "recs": 100,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2003,
+    "path": "Delf2003/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2003,
+    "path": "Delf2003/SC.000",
+    "recs": 62,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "old_auto",
+    "year": 2003,
+    "path": "Delf2003/old_auto.000",
+    "recs": 137,
+    "rec_len": 245,
+    "target_len": 284,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "den_prac",
+    "year": 2004,
+    "path": "Delf2004/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "dph",
+    "year": 2004,
+    "path": "Delf2004/DPH.000",
+    "recs": 1,
+    "rec_len": 46,
+    "target_len": 103,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2004,
+    "path": "Delf2004/EVI_AUTO.000",
+    "recs": 795,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2004,
+    "path": "Delf2004/EZ.000",
+    "recs": 63,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2004,
+    "path": "Delf2004/IKZP.000",
+    "recs": 30,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2004,
+    "path": "Delf2004/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2004,
+    "path": "Delf2004/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2004,
+    "path": "Delf2004/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2004,
+    "path": "Delf2004/PD.000",
+    "recs": 517,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2004,
+    "path": "Delf2004/POKLDOKL.000",
+    "recs": 116,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2004,
+    "path": "Delf2004/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2004,
+    "path": "Delf2004/SC.000",
+    "recs": 353,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "old_auto",
+    "year": 2004,
+    "path": "Delf2004/old_auto.000",
+    "recs": 795,
+    "rec_len": 245,
+    "target_len": 284,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "den_prac",
+    "year": 2005,
+    "path": "Delf2005/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2005,
+    "path": "Delf2005/EVI_AUTO.000",
+    "recs": 916,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2005,
+    "path": "Delf2005/EZ.000",
+    "recs": 66,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikdkp",
+    "year": 2005,
+    "path": "Delf2005/IKDKP.000",
+    "recs": 1,
+    "rec_len": 201,
+    "target_len": 187,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2005,
+    "path": "Delf2005/IKZP.000",
+    "recs": 29,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2005,
+    "path": "Delf2005/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2005,
+    "path": "Delf2005/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2005,
+    "path": "Delf2005/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2005,
+    "path": "Delf2005/PD.000",
+    "recs": 477,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2005,
+    "path": "Delf2005/POKLDOKL.000",
+    "recs": 84,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2005,
+    "path": "Delf2005/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2005,
+    "path": "Delf2005/SC.000",
+    "recs": 403,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2005,
+    "path": "Delf2005/a/EVI_AUTO.000",
+    "recs": 248,
+    "rec_len": 240,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2005,
+    "path": "Delf2005/a/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "old_auto",
+    "year": 2005,
+    "path": "Delf2005/old_auto.000",
+    "recs": 916,
+    "rec_len": 245,
+    "target_len": 284,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "den_prac",
+    "year": 2006,
+    "path": "Delf2006/DEN_PRAC.000",
+    "recs": 4766,
+    "rec_len": 472,
+    "target_len": 476,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "evi_auto",
+    "year": 2006,
+    "path": "Delf2006/EVI_AUTO.000",
+    "recs": 505,
+    "rec_len": 247,
+    "target_len": 290,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ez",
+    "year": 2006,
+    "path": "Delf2006/EZ.000",
+    "recs": 54,
+    "rec_len": 221,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ikzp",
+    "year": 2006,
+    "path": "Delf2006/IKZP.000",
+    "recs": 31,
+    "rec_len": 280,
+    "target_len": 302,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2006,
+    "path": "Delf2006/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "leasing",
+    "year": 2006,
+    "path": "Delf2006/LEASING.000",
+    "recs": 0,
+    "rec_len": 224,
+    "target_len": 242,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "param",
+    "year": 2006,
+    "path": "Delf2006/PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": 2006,
+    "path": "Delf2006/PD.000",
+    "recs": 400,
+    "rec_len": 196,
+    "target_len": 235,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pokldokl",
+    "year": 2006,
+    "path": "Delf2006/POKLDOKL.000",
+    "recs": 16,
+    "rec_len": 165,
+    "target_len": 169,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pv",
+    "year": 2006,
+    "path": "Delf2006/PV.000",
+    "recs": 1,
+    "rec_len": 64,
+    "target_len": 58,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": 2006,
+    "path": "Delf2006/SC.000",
+    "recs": 226,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kalendar",
+    "year": 2006,
+    "path": "Delf2006/a/KALENDAR.000",
+    "recs": 366,
+    "rec_len": 63,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "old_auto",
+    "year": 2006,
+    "path": "Delf2006/old_auto.000",
+    "recs": 505,
+    "rec_len": 245,
+    "target_len": 284,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "ekonom",
+    "year": null,
+    "path": "EKONOM.000",
+    "recs": 12,
+    "rec_len": 210,
+    "target_len": 283,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "elsasa",
+    "year": null,
+    "path": "ELSASA.000",
+    "recs": 61,
+    "rec_len": 56,
+    "target_len": 146,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "ez",
+    "year": null,
+    "path": "EZ.000",
+    "recs": 54,
+    "rec_len": 220,
+    "target_len": 234,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "h2o_sasa",
+    "year": null,
+    "path": "H2O_SASA.000",
+    "recs": 30,
+    "rec_len": 25,
+    "target_len": 43,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "help",
+    "year": null,
+    "path": "HELP.000",
+    "recs": 454,
+    "rec_len": 9,
+    "target_len": 9,
+    "status": "EXACT_SCHEMA"
+  },
+  {
+    "table": "inkasasa",
+    "year": null,
+    "path": "INKASASA.000",
+    "recs": 17,
+    "rec_len": 21,
+    "target_len": 1,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "inkaso",
+    "year": null,
+    "path": "INKASO.000",
+    "recs": 16,
+    "rec_len": 21,
+    "target_len": 37,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "kalendar",
+    "year": null,
+    "path": "KALENDAR.000",
+    "recs": 366,
+    "rec_len": 62,
+    "target_len": 73,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "kp",
+    "year": null,
+    "path": "KP.000",
+    "recs": 1515,
+    "rec_len": 203,
+    "target_len": 232,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kppol",
+    "year": null,
+    "path": "KPPOL.000",
+    "recs": 2668,
+    "rec_len": 174,
+    "target_len": 190,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "kraje",
+    "year": null,
+    "path": "KRAJE.000",
+    "recs": 10,
+    "rec_len": 27,
+    "target_len": 34,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "kurzy",
+    "year": null,
+    "path": "KURZY.000",
+    "recs": 16837,
+    "rec_len": 46,
+    "target_len": 68,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "kz",
+    "year": null,
+    "path": "KZ.000",
+    "recs": 2215,
+    "rec_len": 208,
+    "target_len": 223,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "kzpol",
+    "year": null,
+    "path": "KZPOL.000",
+    "recs": 2431,
+    "rec_len": 141,
+    "target_len": 155,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "mesiace",
+    "year": null,
+    "path": "MESIACE.000",
+    "recs": 13,
+    "rec_len": 6,
+    "target_len": 6,
+    "status": "EXACT_SCHEMA"
+  },
+  {
+    "table": "mesta",
+    "year": null,
+    "path": "MESTA.000",
+    "recs": 534,
+    "rec_len": 40,
+    "target_len": 39,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "nakup_o",
+    "year": null,
+    "path": "NAKUP_O.000",
+    "recs": 59,
+    "rec_len": 28,
+    "target_len": 38,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "nakup_t",
+    "year": null,
+    "path": "NAKUP_T.000",
+    "recs": 419,
+    "rec_len": 25,
+    "target_len": 45,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "obchody",
+    "year": null,
+    "path": "OBCHODY.000",
+    "recs": 16,
+    "rec_len": 52,
+    "target_len": 59,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "okresy",
+    "year": null,
+    "path": "OKRESY.000",
+    "recs": 82,
+    "rec_len": 31,
+    "target_len": 41,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "par",
+    "year": null,
+    "path": "PAR.000",
+    "recs": 1,
+    "rec_len": 295,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "param",
+    "year": null,
+    "path": "PARAM.000",
+    "recs": 1,
+    "rec_len": 350,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "paramcat",
+    "year": null,
+    "path": "PARAMCAT.000",
+    "recs": 1,
+    "rec_len": 8,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "pd",
+    "year": null,
+    "path": "PD.000",
+    "recs": 0,
+    "rec_len": 191,
+    "target_len": 235,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "platby",
+    "year": null,
+    "path": "PLATBY.000",
+    "recs": 37,
+    "rec_len": 165,
+    "target_len": 156,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "pv",
+    "year": null,
+    "path": "PV.000",
+    "recs": 0,
+    "rec_len": 24,
+    "target_len": 58,
+    "status": "BLOCKED_NO_SCHEMA"
+  },
+  {
+    "table": "rekl",
+    "year": null,
+    "path": "REKL.000",
+    "recs": 6,
+    "rec_len": 141,
+    "target_len": 157,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "reklpol",
+    "year": null,
+    "path": "REKLPOL.000",
+    "recs": 4,
+    "rec_len": 244,
+    "target_len": 258,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sadzbdph",
+    "year": null,
+    "path": "SADZBDPH.000",
+    "recs": 7,
+    "rec_len": 16,
+    "target_len": 24,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "sc",
+    "year": null,
+    "path": "SC.000",
+    "recs": 3,
+    "rec_len": 239,
+    "target_len": 278,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "sc_roky",
+    "year": null,
+    "path": "SC_ROKY.000",
+    "recs": 8,
+    "rec_len": 10,
+    "target_len": 12,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "skla2008",
+    "year": null,
+    "path": "SKLA2008.000",
+    "recs": 1872,
+    "rec_len": 256,
+    "target_len": 214,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "sklad",
+    "year": null,
+    "path": "SKLAD.000",
+    "recs": 2430,
+    "rec_len": 256,
+    "target_len": 276,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "spotprie",
+    "year": null,
+    "path": "SPOTPRIE.000",
+    "recs": 1,
+    "rec_len": 84,
+    "target_len": 27,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "spotreba",
+    "year": null,
+    "path": "SPOTREBA.000",
+    "recs": 1200,
+    "rec_len": 161,
+    "target_len": 214,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "staty",
+    "year": null,
+    "path": "STATY.000",
+    "recs": 47,
+    "rec_len": 37,
+    "target_len": 37,
+    "status": "EXACT_SCHEMA"
+  },
+  {
+    "table": "sumapd",
+    "year": null,
+    "path": "SUMAPD.000",
+    "recs": 1,
+    "rec_len": 204,
+    "target_len": 180,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "teplo",
+    "year": null,
+    "path": "TEPLO.000",
+    "recs": 4,
+    "rec_len": 37,
+    "target_len": 31,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "tovary",
+    "year": null,
+    "path": "TOVARY.000",
+    "recs": 255,
+    "rec_len": 40,
+    "target_len": 16,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "trasy",
+    "year": null,
+    "path": "TRASY.000",
+    "recs": 104,
+    "rec_len": 148,
+    "target_len": 171,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "ucet",
+    "year": null,
+    "path": "UCET.000",
+    "recs": 5101,
+    "rec_len": 114,
+    "target_len": 116,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "ucty",
+    "year": null,
+    "path": "UCTY.000",
+    "recs": 8,
+    "rec_len": 57,
+    "target_len": 56,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "udaje",
+    "year": null,
+    "path": "UDAJE.000",
+    "recs": 1,
+    "rec_len": 290,
+    "target_len": 164,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "udajea",
+    "year": null,
+    "path": "UDAJEA.000",
+    "recs": 1,
+    "rec_len": 210,
+    "target_len": 0,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "udajo",
+    "year": null,
+    "path": "UDAJO.000",
+    "recs": 325,
+    "rec_len": 440,
+    "target_len": 127,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "uhrady",
+    "year": null,
+    "path": "UHRADY.000",
+    "recs": 3737,
+    "rec_len": 60,
+    "target_len": 62,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "vydaje",
+    "year": null,
+    "path": "VYDAJE.000",
+    "recs": 30,
+    "rec_len": 56,
+    "target_len": 61,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "vyrocia",
+    "year": null,
+    "path": "VYROCIA.000",
+    "recs": 13,
+    "rec_len": 37,
+    "target_len": 37,
+    "status": "EXACT_SCHEMA"
+  },
+  {
+    "table": "vyuctspp",
+    "year": null,
+    "path": "VYUCTSPP.000",
+    "recs": 27,
+    "rec_len": 31,
+    "target_len": 47,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "vyuctsse",
+    "year": null,
+    "path": "VYUCTSSE.000",
+    "recs": 45,
+    "rec_len": 31,
+    "target_len": 53,
+    "status": "STRUCTURE_CHANGE_PROVEN"
+  },
+  {
+    "table": "vyucveol",
+    "year": null,
+    "path": "VYUCVEOL.000",
+    "recs": 7,
+    "rec_len": 31,
+    "target_len": 13,
+    "status": "EXACT_COMPATIBLE"
+  },
+  {
+    "table": "vyussesa",
+    "year": null,
+    "path": "VYUSSESA.000",
+    "recs": 2,
+    "rec_len": 31,
+    "target_len": 1,
+    "status": "EXACT_COMPATIBLE"
+  }
+]

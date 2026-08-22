@@ -15,6 +15,16 @@ def get_target_tables():
 
     targets = []
 
+
+    if not __import__("os").path.exists("final_schema_audit.json"):
+        print("ERROR: final_schema_audit.json not found.")
+        sys.exit(1)
+
+    with open("final_schema_audit.json", "r", encoding="utf-8") as f:
+        audit_data = json.load(f)
+
+    blocked_paths = set(a['path'].replace('\\', '/').upper() for a in audit_data if a['status'] in ('STRUCTURE_CHANGE_PROVEN', 'BLOCKED_NO_SCHEMA'))
+
     for table_name, table_info in data_map.items():
         if not table_info.get("has_schema", False):
             continue
@@ -23,12 +33,14 @@ def get_target_tables():
             path = f.get("path")
             ext = f.get("ext")
             if ext == ".000":
+                # STRICT BLOCK CHECK
+                if path.replace('\\', '/').upper() in blocked_paths:
+                    continue
                 year = None
                 path_parts = path.replace('\\', '/').split('/')
                 for p in path_parts:
                     if p.upper().startswith("DELF") and len(p) == 8:
                         year = p[4:]
-
                 targets.append({
                     "table": table_name,
                     "year": year,
@@ -127,7 +139,7 @@ def main():
             if t_name not in schemas:
                 raise ValueError(f"Schema not found for {t_name}")
 
-            full_path = os.path.join("JU_DATA_ORIGINAL", t_path)
+            full_path = os.path.join(".", t_path)
             if not os.path.exists(full_path):
                 # Try case insensitive match if necessary
                 def find_ci_path(base, rel):
@@ -144,7 +156,7 @@ def main():
                         if not found: return None
                     return curr
 
-                full_path = find_ci_path("JU_DATA_ORIGINAL", t_path)
+                full_path = find_ci_path(".", t_path)
                 if not full_path or not os.path.exists(full_path):
                     raise FileNotFoundError(f"File not found: {t_path}")
 

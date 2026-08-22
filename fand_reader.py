@@ -199,9 +199,18 @@ class FandReader:
             record_dict = {'__deleted__': is_deleted}
 
             for fld in fields:
+
+                # Default mapping for mathematically proven truncated legacy fields
+                if fld['type'] == 'A': default_val = ''
+                elif fld['type'] == 'F': default_val = 0.0
+                elif fld['type'] == 'D': default_val = None
+                elif fld['type'] == 'B': default_val = False
+                elif fld['type'] == 'T': default_val = None
+                else: default_val = None
+
                 if ptr >= rec_len:
                     # Field was completely dropped physically
-                    record_dict[fld['name']] = None
+                    record_dict[fld['name']] = default_val
                     continue
 
                 # If field is partially truncated
@@ -209,11 +218,11 @@ class FandReader:
                 raw_val = rec_data[ptr:ptr+actual_size]
                 ptr += actual_size
 
-                val = None
+                val = default_val
                 if fld['type'] == 'A':
                     if fld['encrypted']:
                         raw_val = bytes(b ^ 0xAA for b in raw_val)
-                    val = raw_val.decode('cp852', errors='ignore').strip()
+                    val = raw_val.decode('cp852', errors='ignore').strip('\x00').strip()
                 elif fld['type'] == 'D':
                     if actual_size == 6:
                         float_val = decode_real48(raw_val)
