@@ -24,7 +24,7 @@
     "recs": 1,
     "rec_len": 76,
     "target_len": 88,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "byt",
@@ -33,7 +33,7 @@
     "recs": 31,
     "rec_len": 79,
     "target_len": 145,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "bytudaje",
@@ -69,7 +69,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -78,7 +78,7 @@
     "recs": 328,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -159,7 +159,7 @@
     "recs": 145,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "kalendar",
@@ -177,7 +177,7 @@
     "recs": 328,
     "rec_len": 245,
     "target_len": 284,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "den_prac",
@@ -186,7 +186,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -195,7 +195,7 @@
     "recs": 288,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -276,7 +276,7 @@
     "recs": 131,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "udaje",
@@ -303,7 +303,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -312,7 +312,7 @@
     "recs": 137,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -393,7 +393,7 @@
     "recs": 64,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "den_prac",
@@ -402,7 +402,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -411,7 +411,7 @@
     "recs": 101,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -420,7 +420,7 @@
     "recs": 22,
     "rec_len": 221,
     "target_len": 234,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikdkp",
@@ -429,7 +429,7 @@
     "recs": 1,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -501,7 +501,7 @@
     "recs": 43,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "den_prac",
@@ -510,7 +510,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -519,7 +519,7 @@
     "recs": 2,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -528,7 +528,7 @@
     "recs": 7,
     "rec_len": 221,
     "target_len": 234,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikdkp",
@@ -537,7 +537,7 @@
     "recs": 1,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -600,7 +600,7 @@
     "recs": 11,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "udaje",
@@ -618,7 +618,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -627,7 +627,7 @@
     "recs": 60,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -636,7 +636,7 @@
     "recs": 14,
     "rec_len": 221,
     "target_len": 234,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikdkp",
@@ -645,7 +645,7 @@
     "recs": 1,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -708,7 +708,7 @@
     "recs": 27,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "den_prac",
@@ -717,7 +717,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -726,7 +726,7 @@
     "recs": 238,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -735,7 +735,7 @@
     "recs": 21,
     "rec_len": 221,
     "target_len": 234,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -807,7 +807,7 @@
     "recs": 120,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "den_prac",
@@ -816,7 +816,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -825,7 +825,7 @@
     "recs": 293,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -843,7 +843,7 @@
     "recs": 293,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -906,7 +906,7 @@
     "recs": 145,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "den_prac",
@@ -915,7 +915,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -924,7 +924,7 @@
     "recs": 70,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -942,7 +942,7 @@
     "recs": 293,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -1014,7 +1014,7 @@
     "recs": 34,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "den_prac",
@@ -1023,7 +1023,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -1032,7 +1032,7 @@
     "recs": 49,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -1104,7 +1104,7 @@
     "recs": 25,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "udaje",
@@ -1122,7 +1122,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -1149,7 +1149,7 @@
     "recs": 879,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -1221,7 +1221,7 @@
     "recs": 37,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "udaje",
@@ -1239,7 +1239,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -1257,7 +1257,7 @@
     "recs": 879,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -1320,7 +1320,7 @@
     "recs": 37,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "udaje",
@@ -1338,7 +1338,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -1356,7 +1356,7 @@
     "recs": 879,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -1419,7 +1419,7 @@
     "recs": 37,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "udaje",
@@ -1437,7 +1437,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -1455,7 +1455,7 @@
     "recs": 879,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -1518,7 +1518,7 @@
     "recs": 37,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "udaje",
@@ -1536,7 +1536,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -1563,7 +1563,7 @@
     "recs": 879,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -1626,7 +1626,7 @@
     "recs": 37,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "udaje",
@@ -1644,7 +1644,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -1671,7 +1671,7 @@
     "recs": 879,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -1725,7 +1725,7 @@
     "recs": 37,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "udaje",
@@ -1743,7 +1743,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -1761,7 +1761,7 @@
     "recs": 879,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -1833,7 +1833,7 @@
     "recs": 4827,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -1842,7 +1842,7 @@
     "recs": 2,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -1860,7 +1860,7 @@
     "recs": 879,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -1923,7 +1923,7 @@
     "recs": 4844,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -1932,7 +1932,7 @@
     "recs": 2,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -1950,7 +1950,7 @@
     "recs": 879,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -2031,7 +2031,7 @@
     "recs": 879,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -2157,7 +2157,7 @@
     "recs": 10,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -2211,7 +2211,7 @@
     "recs": 3,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -2229,7 +2229,7 @@
     "recs": 44,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -2283,7 +2283,7 @@
     "recs": 17,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -2301,7 +2301,7 @@
     "recs": 46,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -2355,7 +2355,7 @@
     "recs": 41,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -2373,7 +2373,7 @@
     "recs": 33,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -2427,7 +2427,7 @@
     "recs": 1,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -2445,7 +2445,7 @@
     "recs": 9,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -2499,7 +2499,7 @@
     "recs": 1,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -2517,7 +2517,7 @@
     "recs": 25,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -2544,7 +2544,7 @@
     "recs": 1,
     "rec_len": 224,
     "target_len": 242,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "param",
@@ -2580,7 +2580,7 @@
     "recs": 6,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -2598,7 +2598,7 @@
     "recs": 33,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -2625,7 +2625,7 @@
     "recs": 1,
     "rec_len": 224,
     "target_len": 242,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "param",
@@ -2661,7 +2661,7 @@
     "recs": 4,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -2670,7 +2670,7 @@
     "recs": 24,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -2688,7 +2688,7 @@
     "recs": 36,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -2715,7 +2715,7 @@
     "recs": 1,
     "rec_len": 224,
     "target_len": 242,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "param",
@@ -2751,7 +2751,7 @@
     "recs": 14,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "old_auto",
@@ -2760,7 +2760,7 @@
     "recs": 24,
     "rec_len": 245,
     "target_len": 284,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -2769,7 +2769,7 @@
     "recs": 626,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -2787,7 +2787,7 @@
     "recs": 6,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -2841,7 +2841,7 @@
     "recs": 316,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "old_auto",
@@ -2850,7 +2850,7 @@
     "recs": 626,
     "rec_len": 245,
     "target_len": 284,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -2859,7 +2859,7 @@
     "recs": 595,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -2877,7 +2877,7 @@
     "recs": 4,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -2931,7 +2931,7 @@
     "recs": 276,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "old_auto",
@@ -2940,7 +2940,7 @@
     "recs": 595,
     "rec_len": 245,
     "target_len": 284,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -2949,7 +2949,7 @@
     "recs": 727,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -2967,7 +2967,7 @@
     "recs": 8,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -3030,7 +3030,7 @@
     "recs": 355,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "old_auto",
@@ -3039,7 +3039,7 @@
     "recs": 727,
     "rec_len": 245,
     "target_len": 284,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -3057,7 +3057,7 @@
     "recs": 16,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -3120,7 +3120,7 @@
     "recs": 294,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ucet",
@@ -3138,7 +3138,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "dph",
@@ -3156,7 +3156,7 @@
     "recs": 137,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -3174,7 +3174,7 @@
     "recs": 19,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -3246,7 +3246,7 @@
     "recs": 62,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "old_auto",
@@ -3255,7 +3255,7 @@
     "recs": 137,
     "rec_len": 245,
     "target_len": 284,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "den_prac",
@@ -3264,7 +3264,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "dph",
@@ -3282,7 +3282,7 @@
     "recs": 795,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -3363,7 +3363,7 @@
     "recs": 353,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "old_auto",
@@ -3372,7 +3372,7 @@
     "recs": 795,
     "rec_len": 245,
     "target_len": 284,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "den_prac",
@@ -3381,7 +3381,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -3390,7 +3390,7 @@
     "recs": 916,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -3408,7 +3408,7 @@
     "recs": 1,
     "rec_len": 201,
     "target_len": 187,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ikzp",
@@ -3480,7 +3480,7 @@
     "recs": 403,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -3489,7 +3489,7 @@
     "recs": 248,
     "rec_len": 240,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "kalendar",
@@ -3507,7 +3507,7 @@
     "recs": 916,
     "rec_len": 245,
     "target_len": 284,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "den_prac",
@@ -3516,7 +3516,7 @@
     "recs": 4766,
     "rec_len": 472,
     "target_len": 476,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "evi_auto",
@@ -3525,7 +3525,7 @@
     "recs": 505,
     "rec_len": 247,
     "target_len": 290,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ez",
@@ -3606,7 +3606,7 @@
     "recs": 226,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "kalendar",
@@ -3624,7 +3624,7 @@
     "recs": 505,
     "rec_len": 245,
     "target_len": 284,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "ekonom",
@@ -3651,7 +3651,7 @@
     "recs": 54,
     "rec_len": 220,
     "target_len": 234,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "h2o_sasa",
@@ -3741,7 +3741,7 @@
     "recs": 2215,
     "rec_len": 208,
     "target_len": 223,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "kzpol",
@@ -3894,7 +3894,7 @@
     "recs": 3,
     "rec_len": 239,
     "target_len": 278,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "sc_roky",
@@ -3912,7 +3912,7 @@
     "recs": 1872,
     "rec_len": 256,
     "target_len": 214,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "sklad",
@@ -3921,7 +3921,7 @@
     "recs": 2430,
     "rec_len": 256,
     "target_len": 276,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "spotprie",
@@ -4002,7 +4002,7 @@
     "recs": 8,
     "rec_len": 57,
     "target_len": 56,
-    "status": "STRUCTURE_CHANGE_PROVEN"
+    "status": "EXACT_COMPATIBLE"
   },
   {
     "table": "udaje",

@@ -202,7 +202,7 @@ class FandReader:
 
                 # Default mapping for mathematically proven truncated legacy fields
                 if fld['type'] == 'A': default_val = ''
-                elif fld['type'] == 'F': default_val = 0.0
+                elif fld['type'] in ['F', 'R', 'N', 'I']: default_val = 0.0
                 elif fld['type'] == 'D': default_val = None
                 elif fld['type'] == 'B': default_val = False
                 elif fld['type'] == 'T': default_val = None

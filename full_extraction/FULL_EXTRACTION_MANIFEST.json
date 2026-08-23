@@ -21,6 +21,28 @@
     "deleted_record_count": 0,
     "is_indexed": true
   },
+  "BATERIE.000": {
+    "status": "SUCCESS",
+    "table": "baterie",
+    "year": null,
+    "source_path": "BATERIE.000",
+    "output_jsonl_path": "full_extraction/data/baterie.jsonl",
+    "record_count": 1,
+    "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "BYT.000": {
+    "status": "SUCCESS",
+    "table": "byt",
+    "year": null,
+    "source_path": "BYT.000",
+    "output_jsonl_path": "full_extraction/data/byt.jsonl",
+    "record_count": 30,
+    "physical_record_count": 31,
+    "deleted_record_count": 1,
+    "is_indexed": true
+  },
   "BYTUDAJE.000": {
     "status": "SUCCESS",
     "table": "bytudaje",
@@ -46,11 +68,22 @@
   "DELF.000": {
     "status": "SUCCESS",
     "table": "delf",
-    "year": ".000",
+    "year": null,
     "source_path": "DELF.000",
-    "output_jsonl_path": "full_extraction/data/delf_.000.jsonl",
+    "output_jsonl_path": "full_extraction/data/delf.jsonl",
     "record_count": 379,
     "physical_record_count": 379,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "Delf1991/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "1991",
+    "source_path": "Delf1991/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_1991.jsonl",
+    "record_count": 10,
+    "physical_record_count": 10,
     "deleted_record_count": 0,
     "is_indexed": false
   },
@@ -98,6 +131,28 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf1991/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "1991",
+    "source_path": "Delf1991/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_1991.jsonl",
+    "record_count": 3,
+    "physical_record_count": 3,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf1992/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "1992",
+    "source_path": "Delf1992/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_1992.jsonl",
+    "record_count": 44,
+    "physical_record_count": 44,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "Delf1992/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -139,6 +194,28 @@
     "output_jsonl_path": "full_extraction/data/pv_1992.jsonl",
     "record_count": 1,
     "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "Delf1992/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "1992",
+    "source_path": "Delf1992/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_1992.jsonl",
+    "record_count": 17,
+    "physical_record_count": 17,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf1993/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "1993",
+    "source_path": "Delf1993/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_1993.jsonl",
+    "record_count": 46,
+    "physical_record_count": 46,
     "deleted_record_count": 0,
     "is_indexed": false
   },
@@ -186,6 +263,28 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf1993/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "1993",
+    "source_path": "Delf1993/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_1993.jsonl",
+    "record_count": 41,
+    "physical_record_count": 41,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf1994/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "1994",
+    "source_path": "Delf1994/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_1994.jsonl",
+    "record_count": 33,
+    "physical_record_count": 33,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "Delf1994/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -227,6 +326,28 @@
     "output_jsonl_path": "full_extraction/data/pv_1994.jsonl",
     "record_count": 1,
     "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "Delf1994/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "1994",
+    "source_path": "Delf1994/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_1994.jsonl",
+    "record_count": 1,
+    "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf1995/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "1995",
+    "source_path": "Delf1995/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_1995.jsonl",
+    "record_count": 9,
+    "physical_record_count": 9,
     "deleted_record_count": 0,
     "is_indexed": false
   },
@@ -274,6 +395,28 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf1995/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "1995",
+    "source_path": "Delf1995/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_1995.jsonl",
+    "record_count": 1,
+    "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf1996/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "1996",
+    "source_path": "Delf1996/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_1996.jsonl",
+    "record_count": 25,
+    "physical_record_count": 25,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "Delf1996/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -284,6 +427,17 @@
     "physical_record_count": 366,
     "deleted_record_count": 0,
     "is_indexed": true
+  },
+  "Delf1996/LEASING.000": {
+    "status": "SUCCESS",
+    "table": "leasing",
+    "year": "1996",
+    "source_path": "Delf1996/LEASING.000",
+    "output_jsonl_path": "full_extraction/data/leasing_1996.jsonl",
+    "record_count": 1,
+    "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": false
   },
   "Delf1996/PARAM.000": {
     "status": "SUCCESS",
@@ -318,6 +472,28 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf1996/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "1996",
+    "source_path": "Delf1996/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_1996.jsonl",
+    "record_count": 6,
+    "physical_record_count": 6,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf1997/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "1997",
+    "source_path": "Delf1997/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_1997.jsonl",
+    "record_count": 33,
+    "physical_record_count": 33,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "Delf1997/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -328,6 +504,17 @@
     "physical_record_count": 366,
     "deleted_record_count": 0,
     "is_indexed": true
+  },
+  "Delf1997/LEASING.000": {
+    "status": "SUCCESS",
+    "table": "leasing",
+    "year": "1997",
+    "source_path": "Delf1997/LEASING.000",
+    "output_jsonl_path": "full_extraction/data/leasing_1997.jsonl",
+    "record_count": 1,
+    "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": false
   },
   "Delf1997/PARAM.000": {
     "status": "SUCCESS",
@@ -362,6 +549,39 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf1997/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "1997",
+    "source_path": "Delf1997/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_1997.jsonl",
+    "record_count": 4,
+    "physical_record_count": 4,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf1998/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "1998",
+    "source_path": "Delf1998/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_1998.jsonl",
+    "record_count": 24,
+    "physical_record_count": 24,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "Delf1998/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "1998",
+    "source_path": "Delf1998/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_1998.jsonl",
+    "record_count": 36,
+    "physical_record_count": 36,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "Delf1998/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -370,6 +590,28 @@
     "output_jsonl_path": "full_extraction/data/kalendar_1998.jsonl",
     "record_count": 366,
     "physical_record_count": 366,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf1998/LEASING.000": {
+    "status": "SUCCESS",
+    "table": "leasing",
+    "year": "1998",
+    "source_path": "Delf1998/LEASING.000",
+    "output_jsonl_path": "full_extraction/data/leasing_1998.jsonl",
+    "record_count": 1,
+    "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "Delf1998/old_auto.000": {
+    "status": "SUCCESS",
+    "table": "old_auto",
+    "year": "1998",
+    "source_path": "Delf1998/old_auto.000",
+    "output_jsonl_path": "full_extraction/data/old_auto_1998.jsonl",
+    "record_count": 24,
+    "physical_record_count": 24,
     "deleted_record_count": 0,
     "is_indexed": true
   },
@@ -406,6 +648,39 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf1998/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "1998",
+    "source_path": "Delf1998/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_1998.jsonl",
+    "record_count": 14,
+    "physical_record_count": 14,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf1999/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "1999",
+    "source_path": "Delf1999/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_1999.jsonl",
+    "record_count": 626,
+    "physical_record_count": 626,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "Delf1999/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "1999",
+    "source_path": "Delf1999/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_1999.jsonl",
+    "record_count": 6,
+    "physical_record_count": 6,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "Delf1999/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -414,6 +689,17 @@
     "output_jsonl_path": "full_extraction/data/kalendar_1999.jsonl",
     "record_count": 366,
     "physical_record_count": 366,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf1999/old_auto.000": {
+    "status": "SUCCESS",
+    "table": "old_auto",
+    "year": "1999",
+    "source_path": "Delf1999/old_auto.000",
+    "output_jsonl_path": "full_extraction/data/old_auto_1999.jsonl",
+    "record_count": 626,
+    "physical_record_count": 626,
     "deleted_record_count": 0,
     "is_indexed": true
   },
@@ -450,6 +736,39 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf1999/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "1999",
+    "source_path": "Delf1999/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_1999.jsonl",
+    "record_count": 316,
+    "physical_record_count": 316,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf2000/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2000",
+    "source_path": "Delf2000/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2000.jsonl",
+    "record_count": 595,
+    "physical_record_count": 595,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "Delf2000/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2000",
+    "source_path": "Delf2000/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2000.jsonl",
+    "record_count": 4,
+    "physical_record_count": 4,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "Delf2000/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -458,6 +777,17 @@
     "output_jsonl_path": "full_extraction/data/kalendar_2000.jsonl",
     "record_count": 366,
     "physical_record_count": 366,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf2000/old_auto.000": {
+    "status": "SUCCESS",
+    "table": "old_auto",
+    "year": "2000",
+    "source_path": "Delf2000/old_auto.000",
+    "output_jsonl_path": "full_extraction/data/old_auto_2000.jsonl",
+    "record_count": 595,
+    "physical_record_count": 595,
     "deleted_record_count": 0,
     "is_indexed": true
   },
@@ -494,6 +824,39 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf2000/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2000",
+    "source_path": "Delf2000/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2000.jsonl",
+    "record_count": 276,
+    "physical_record_count": 276,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf2001/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2001",
+    "source_path": "Delf2001/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2001.jsonl",
+    "record_count": 727,
+    "physical_record_count": 727,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "Delf2001/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2001",
+    "source_path": "Delf2001/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2001.jsonl",
+    "record_count": 8,
+    "physical_record_count": 8,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "Delf2001/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -502,6 +865,17 @@
     "output_jsonl_path": "full_extraction/data/kalendar_2001.jsonl",
     "record_count": 366,
     "physical_record_count": 366,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf2001/old_auto.000": {
+    "status": "SUCCESS",
+    "table": "old_auto",
+    "year": "2001",
+    "source_path": "Delf2001/old_auto.000",
+    "output_jsonl_path": "full_extraction/data/old_auto_2001.jsonl",
+    "record_count": 727,
+    "physical_record_count": 727,
     "deleted_record_count": 0,
     "is_indexed": true
   },
@@ -535,6 +909,28 @@
     "output_jsonl_path": "full_extraction/data/pv_2001.jsonl",
     "record_count": 1,
     "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "Delf2001/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2001",
+    "source_path": "Delf2001/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2001.jsonl",
+    "record_count": 355,
+    "physical_record_count": 355,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf2002/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2002",
+    "source_path": "Delf2002/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2002.jsonl",
+    "record_count": 16,
+    "physical_record_count": 16,
     "deleted_record_count": 0,
     "is_indexed": false
   },
@@ -593,6 +989,17 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf2002/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2002",
+    "source_path": "Delf2002/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2002.jsonl",
+    "record_count": 294,
+    "physical_record_count": 294,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
   "Delf2002/UCET.000": {
     "status": "SUCCESS",
     "table": "ucet",
@@ -603,6 +1010,17 @@
     "physical_record_count": 1762,
     "deleted_record_count": 0,
     "is_indexed": false
+  },
+  "Delf2003/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2003",
+    "source_path": "Delf2003/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2003.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
   },
   "Delf2003/DPH.000": {
     "status": "SUCCESS",
@@ -615,6 +1033,28 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf2003/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2003",
+    "source_path": "Delf2003/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2003.jsonl",
+    "record_count": 137,
+    "physical_record_count": 137,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "Delf2003/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2003",
+    "source_path": "Delf2003/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2003.jsonl",
+    "record_count": 19,
+    "physical_record_count": 19,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "Delf2003/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -623,6 +1063,17 @@
     "output_jsonl_path": "full_extraction/data/kalendar_2003.jsonl",
     "record_count": 366,
     "physical_record_count": 366,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf2003/old_auto.000": {
+    "status": "SUCCESS",
+    "table": "old_auto",
+    "year": "2003",
+    "source_path": "Delf2003/old_auto.000",
+    "output_jsonl_path": "full_extraction/data/old_auto_2003.jsonl",
+    "record_count": 137,
+    "physical_record_count": 137,
     "deleted_record_count": 0,
     "is_indexed": true
   },
@@ -670,6 +1121,28 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf2003/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2003",
+    "source_path": "Delf2003/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2003.jsonl",
+    "record_count": 62,
+    "physical_record_count": 62,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf2004/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2004",
+    "source_path": "Delf2004/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2004.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
   "Delf2004/DPH.000": {
     "status": "SUCCESS",
     "table": "dph",
@@ -681,6 +1154,17 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf2004/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2004",
+    "source_path": "Delf2004/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2004.jsonl",
+    "record_count": 795,
+    "physical_record_count": 795,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "Delf2004/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -689,6 +1173,17 @@
     "output_jsonl_path": "full_extraction/data/kalendar_2004.jsonl",
     "record_count": 366,
     "physical_record_count": 366,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf2004/old_auto.000": {
+    "status": "SUCCESS",
+    "table": "old_auto",
+    "year": "2004",
+    "source_path": "Delf2004/old_auto.000",
+    "output_jsonl_path": "full_extraction/data/old_auto_2004.jsonl",
+    "record_count": 795,
+    "physical_record_count": 795,
     "deleted_record_count": 0,
     "is_indexed": true
   },
@@ -736,6 +1231,28 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf2004/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2004",
+    "source_path": "Delf2004/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2004.jsonl",
+    "record_count": 344,
+    "physical_record_count": 353,
+    "deleted_record_count": 9,
+    "is_indexed": true
+  },
+  "Delf2005/a/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2005",
+    "source_path": "Delf2005/a/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2005.jsonl",
+    "record_count": 248,
+    "physical_record_count": 248,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
   "Delf2005/a/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -747,6 +1264,39 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf2005/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2005",
+    "source_path": "Delf2005/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2005.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf2005/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2005",
+    "source_path": "Delf2005/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2005.jsonl",
+    "record_count": 916,
+    "physical_record_count": 916,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "Delf2005/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2005",
+    "source_path": "Delf2005/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2005.jsonl",
+    "record_count": 1,
+    "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "Delf2005/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -755,6 +1305,17 @@
     "output_jsonl_path": "full_extraction/data/kalendar_2005.jsonl",
     "record_count": 366,
     "physical_record_count": 366,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf2005/old_auto.000": {
+    "status": "SUCCESS",
+    "table": "old_auto",
+    "year": "2005",
+    "source_path": "Delf2005/old_auto.000",
+    "output_jsonl_path": "full_extraction/data/old_auto_2005.jsonl",
+    "record_count": 916,
+    "physical_record_count": 916,
     "deleted_record_count": 0,
     "is_indexed": true
   },
@@ -802,6 +1363,17 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf2005/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2005",
+    "source_path": "Delf2005/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2005.jsonl",
+    "record_count": 387,
+    "physical_record_count": 403,
+    "deleted_record_count": 16,
+    "is_indexed": true
+  },
   "Delf2006/a/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -813,6 +1385,28 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf2006/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2006",
+    "source_path": "Delf2006/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2006.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf2006/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2006",
+    "source_path": "Delf2006/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2006.jsonl",
+    "record_count": 505,
+    "physical_record_count": 505,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "Delf2006/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -821,6 +1415,17 @@
     "output_jsonl_path": "full_extraction/data/kalendar_2006.jsonl",
     "record_count": 366,
     "physical_record_count": 366,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "Delf2006/old_auto.000": {
+    "status": "SUCCESS",
+    "table": "old_auto",
+    "year": "2006",
+    "source_path": "Delf2006/old_auto.000",
+    "output_jsonl_path": "full_extraction/data/old_auto_2006.jsonl",
+    "record_count": 505,
+    "physical_record_count": 505,
     "deleted_record_count": 0,
     "is_indexed": true
   },
@@ -868,6 +1473,17 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "Delf2006/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2006",
+    "source_path": "Delf2006/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2006.jsonl",
+    "record_count": 219,
+    "physical_record_count": 226,
+    "deleted_record_count": 7,
+    "is_indexed": true
+  },
   "DELF2007/a/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -879,6 +1495,28 @@
     "deleted_record_count": 0,
     "is_indexed": true
   },
+  "DELF2007/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2007",
+    "source_path": "DELF2007/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2007.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2007/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2007",
+    "source_path": "DELF2007/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2007.jsonl",
+    "record_count": 328,
+    "physical_record_count": 328,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "DELF2007/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -887,6 +1525,17 @@
     "output_jsonl_path": "full_extraction/data/kalendar_2007.jsonl",
     "record_count": 366,
     "physical_record_count": 366,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2007/old_auto.000": {
+    "status": "SUCCESS",
+    "table": "old_auto",
+    "year": "2007",
+    "source_path": "DELF2007/old_auto.000",
+    "output_jsonl_path": "full_extraction/data/old_auto_2007.jsonl",
+    "record_count": 328,
+    "physical_record_count": 328,
     "deleted_record_count": 0,
     "is_indexed": true
   },
@@ -933,6 +1582,39 @@
     "physical_record_count": 1,
     "deleted_record_count": 0,
     "is_indexed": false
+  },
+  "DELF2007/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2007",
+    "source_path": "DELF2007/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2007.jsonl",
+    "record_count": 140,
+    "physical_record_count": 145,
+    "deleted_record_count": 5,
+    "is_indexed": true
+  },
+  "DELF2008/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2008",
+    "source_path": "DELF2008/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2008.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2008/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2008",
+    "source_path": "DELF2008/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2008.jsonl",
+    "record_count": 288,
+    "physical_record_count": 288,
+    "deleted_record_count": 0,
+    "is_indexed": true
   },
   "DELF2008/KALENDAR.000": {
     "status": "SUCCESS",
@@ -989,6 +1671,39 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "DELF2008/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2008",
+    "source_path": "DELF2008/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2008.jsonl",
+    "record_count": 124,
+    "physical_record_count": 131,
+    "deleted_record_count": 7,
+    "is_indexed": true
+  },
+  "DELF2009/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2009",
+    "source_path": "DELF2009/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2009.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2009/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2009",
+    "source_path": "DELF2009/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2009.jsonl",
+    "record_count": 137,
+    "physical_record_count": 137,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
   "DELF2009/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -1039,6 +1754,61 @@
     "year": "2009",
     "source_path": "DELF2009/PV.000",
     "output_jsonl_path": "full_extraction/data/pv_2009.jsonl",
+    "record_count": 1,
+    "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "DELF2009/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2009",
+    "source_path": "DELF2009/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2009.jsonl",
+    "record_count": 61,
+    "physical_record_count": 64,
+    "deleted_record_count": 3,
+    "is_indexed": true
+  },
+  "DELF2010/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2010",
+    "source_path": "DELF2010/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2010.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2010/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2010",
+    "source_path": "DELF2010/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2010.jsonl",
+    "record_count": 101,
+    "physical_record_count": 101,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2010/EZ.000": {
+    "status": "SUCCESS",
+    "table": "ez",
+    "year": "2010",
+    "source_path": "DELF2010/EZ.000",
+    "output_jsonl_path": "full_extraction/data/ez_2010.jsonl",
+    "record_count": 22,
+    "physical_record_count": 22,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2010/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2010",
+    "source_path": "DELF2010/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2010.jsonl",
     "record_count": 1,
     "physical_record_count": 1,
     "deleted_record_count": 0,
@@ -1099,6 +1869,61 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "DELF2010/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2010",
+    "source_path": "DELF2010/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2010.jsonl",
+    "record_count": 43,
+    "physical_record_count": 43,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2011/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2011",
+    "source_path": "DELF2011/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2011.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2011/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2011",
+    "source_path": "DELF2011/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2011.jsonl",
+    "record_count": 2,
+    "physical_record_count": 2,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2011/EZ.000": {
+    "status": "SUCCESS",
+    "table": "ez",
+    "year": "2011",
+    "source_path": "DELF2011/EZ.000",
+    "output_jsonl_path": "full_extraction/data/ez_2011.jsonl",
+    "record_count": 7,
+    "physical_record_count": 7,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2011/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2011",
+    "source_path": "DELF2011/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2011.jsonl",
+    "record_count": 1,
+    "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "DELF2011/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -1149,6 +1974,61 @@
     "year": "2011",
     "source_path": "DELF2011/PV.000",
     "output_jsonl_path": "full_extraction/data/pv_2011.jsonl",
+    "record_count": 1,
+    "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "DELF2011/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2011",
+    "source_path": "DELF2011/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2011.jsonl",
+    "record_count": 1,
+    "physical_record_count": 11,
+    "deleted_record_count": 10,
+    "is_indexed": true
+  },
+  "DELF2012/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2012",
+    "source_path": "DELF2012/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2012.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2012/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2012",
+    "source_path": "DELF2012/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2012.jsonl",
+    "record_count": 60,
+    "physical_record_count": 60,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2012/EZ.000": {
+    "status": "SUCCESS",
+    "table": "ez",
+    "year": "2012",
+    "source_path": "DELF2012/EZ.000",
+    "output_jsonl_path": "full_extraction/data/ez_2012.jsonl",
+    "record_count": 14,
+    "physical_record_count": 14,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2012/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2012",
+    "source_path": "DELF2012/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2012.jsonl",
     "record_count": 1,
     "physical_record_count": 1,
     "deleted_record_count": 0,
@@ -1209,6 +2089,50 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "DELF2012/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2012",
+    "source_path": "DELF2012/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2012.jsonl",
+    "record_count": 25,
+    "physical_record_count": 27,
+    "deleted_record_count": 2,
+    "is_indexed": true
+  },
+  "DELF2013/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2013",
+    "source_path": "DELF2013/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2013.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2013/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2013",
+    "source_path": "DELF2013/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2013.jsonl",
+    "record_count": 238,
+    "physical_record_count": 238,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2013/EZ.000": {
+    "status": "SUCCESS",
+    "table": "ez",
+    "year": "2013",
+    "source_path": "DELF2013/EZ.000",
+    "output_jsonl_path": "full_extraction/data/ez_2013.jsonl",
+    "record_count": 20,
+    "physical_record_count": 21,
+    "deleted_record_count": 1,
+    "is_indexed": true
+  },
   "DELF2013/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -1261,6 +2185,50 @@
     "output_jsonl_path": "full_extraction/data/pv_2013.jsonl",
     "record_count": 1,
     "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "DELF2013/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2013",
+    "source_path": "DELF2013/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2013.jsonl",
+    "record_count": 114,
+    "physical_record_count": 120,
+    "deleted_record_count": 6,
+    "is_indexed": true
+  },
+  "DELF2014/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2014",
+    "source_path": "DELF2014/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2014.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2014/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2014",
+    "source_path": "DELF2014/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2014.jsonl",
+    "record_count": 289,
+    "physical_record_count": 293,
+    "deleted_record_count": 4,
+    "is_indexed": true
+  },
+  "DELF2014/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2014",
+    "source_path": "DELF2014/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2014.jsonl",
+    "record_count": 293,
+    "physical_record_count": 293,
     "deleted_record_count": 0,
     "is_indexed": false
   },
@@ -1319,6 +2287,50 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "DELF2014/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2014",
+    "source_path": "DELF2014/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2014.jsonl",
+    "record_count": 139,
+    "physical_record_count": 145,
+    "deleted_record_count": 6,
+    "is_indexed": true
+  },
+  "DELF2015/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2015",
+    "source_path": "DELF2015/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2015.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2015/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2015",
+    "source_path": "DELF2015/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2015.jsonl",
+    "record_count": 70,
+    "physical_record_count": 70,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2015/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2015",
+    "source_path": "DELF2015/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2015.jsonl",
+    "record_count": 293,
+    "physical_record_count": 293,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "DELF2015/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -1374,6 +2386,39 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "DELF2015/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2015",
+    "source_path": "DELF2015/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2015.jsonl",
+    "record_count": 34,
+    "physical_record_count": 34,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2016/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2016",
+    "source_path": "DELF2016/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2016.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2016/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2016",
+    "source_path": "DELF2016/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2016.jsonl",
+    "record_count": 49,
+    "physical_record_count": 49,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
   "DELF2016/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -1418,6 +2463,28 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "DELF2016/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2016",
+    "source_path": "DELF2016/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2016.jsonl",
+    "record_count": 24,
+    "physical_record_count": 25,
+    "deleted_record_count": 1,
+    "is_indexed": true
+  },
+  "DELF2017/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2017",
+    "source_path": "DELF2017/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2017.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
   "DELF2017/EVI_AUTO.000": {
     "status": "SUCCESS",
     "table": "evi_auto",
@@ -1428,6 +2495,17 @@
     "physical_record_count": 1,
     "deleted_record_count": 0,
     "is_indexed": true
+  },
+  "DELF2017/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2017",
+    "source_path": "DELF2017/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2017.jsonl",
+    "record_count": 879,
+    "physical_record_count": 879,
+    "deleted_record_count": 0,
+    "is_indexed": false
   },
   "DELF2017/KALENDAR.000": {
     "status": "SUCCESS",
@@ -1481,6 +2559,39 @@
     "output_jsonl_path": "full_extraction/data/pv_2017.jsonl",
     "record_count": 56,
     "physical_record_count": 56,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "DELF2017/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2017",
+    "source_path": "DELF2017/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2017.jsonl",
+    "record_count": 35,
+    "physical_record_count": 37,
+    "deleted_record_count": 2,
+    "is_indexed": true
+  },
+  "DELF2018/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2018",
+    "source_path": "DELF2018/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2018.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2018/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2018",
+    "source_path": "DELF2018/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2018.jsonl",
+    "record_count": 879,
+    "physical_record_count": 879,
     "deleted_record_count": 0,
     "is_indexed": false
   },
@@ -1539,6 +2650,39 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "DELF2018/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2018",
+    "source_path": "DELF2018/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2018.jsonl",
+    "record_count": 37,
+    "physical_record_count": 37,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2019/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2019",
+    "source_path": "DELF2019/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2019.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2019/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2019",
+    "source_path": "DELF2019/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2019.jsonl",
+    "record_count": 879,
+    "physical_record_count": 879,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "DELF2019/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -1591,6 +2735,39 @@
     "output_jsonl_path": "full_extraction/data/pv_2019.jsonl",
     "record_count": 56,
     "physical_record_count": 56,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "DELF2019/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2019",
+    "source_path": "DELF2019/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2019.jsonl",
+    "record_count": 37,
+    "physical_record_count": 37,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2020/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2020",
+    "source_path": "DELF2020/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2020.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2020/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2020",
+    "source_path": "DELF2020/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2020.jsonl",
+    "record_count": 879,
+    "physical_record_count": 879,
     "deleted_record_count": 0,
     "is_indexed": false
   },
@@ -1649,6 +2826,28 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "DELF2020/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2020",
+    "source_path": "DELF2020/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2020.jsonl",
+    "record_count": 37,
+    "physical_record_count": 37,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2021/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2021",
+    "source_path": "DELF2021/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2021.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
   "DELF2021/EVI_AUTO.000": {
     "status": "SUCCESS",
     "table": "evi_auto",
@@ -1659,6 +2858,17 @@
     "physical_record_count": 2,
     "deleted_record_count": 0,
     "is_indexed": true
+  },
+  "DELF2021/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2021",
+    "source_path": "DELF2021/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2021.jsonl",
+    "record_count": 879,
+    "physical_record_count": 879,
+    "deleted_record_count": 0,
+    "is_indexed": false
   },
   "DELF2021/KALENDAR.000": {
     "status": "SUCCESS",
@@ -1715,6 +2925,28 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "DELF2021/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2021",
+    "source_path": "DELF2021/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2021.jsonl",
+    "record_count": 37,
+    "physical_record_count": 37,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2022/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2022",
+    "source_path": "DELF2022/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2022.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
   "DELF2022/EVI_AUTO.000": {
     "status": "SUCCESS",
     "table": "evi_auto",
@@ -1725,6 +2957,17 @@
     "physical_record_count": 2,
     "deleted_record_count": 0,
     "is_indexed": true
+  },
+  "DELF2022/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2022",
+    "source_path": "DELF2022/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2022.jsonl",
+    "record_count": 879,
+    "physical_record_count": 879,
+    "deleted_record_count": 0,
+    "is_indexed": false
   },
   "DELF2022/KALENDAR.000": {
     "status": "SUCCESS",
@@ -1767,6 +3010,39 @@
     "output_jsonl_path": "full_extraction/data/pv_2022.jsonl",
     "record_count": 56,
     "physical_record_count": 56,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "DELF2022/SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": "2022",
+    "source_path": "DELF2022/SC.000",
+    "output_jsonl_path": "full_extraction/data/sc_2022.jsonl",
+    "record_count": 35,
+    "physical_record_count": 37,
+    "deleted_record_count": 2,
+    "is_indexed": true
+  },
+  "DELF2023/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2023",
+    "source_path": "DELF2023/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2023.jsonl",
+    "record_count": 4766,
+    "physical_record_count": 4766,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2023/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2023",
+    "source_path": "DELF2023/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2023.jsonl",
+    "record_count": 879,
+    "physical_record_count": 879,
     "deleted_record_count": 0,
     "is_indexed": false
   },
@@ -1825,6 +3101,39 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "DELF2024/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2024",
+    "source_path": "DELF2024/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2024.jsonl",
+    "record_count": 4826,
+    "physical_record_count": 4827,
+    "deleted_record_count": 1,
+    "is_indexed": true
+  },
+  "DELF2024/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2024",
+    "source_path": "DELF2024/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2024.jsonl",
+    "record_count": 2,
+    "physical_record_count": 2,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2024/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2024",
+    "source_path": "DELF2024/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2024.jsonl",
+    "record_count": 879,
+    "physical_record_count": 879,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "DELF2024/KALENDAR.000": {
     "status": "SUCCESS",
     "table": "kalendar",
@@ -1866,6 +3175,39 @@
     "output_jsonl_path": "full_extraction/data/pv_2024.jsonl",
     "record_count": 1,
     "physical_record_count": 1,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
+  "DELF2025/DEN_PRAC.000": {
+    "status": "SUCCESS",
+    "table": "den_prac",
+    "year": "2025",
+    "source_path": "DELF2025/DEN_PRAC.000",
+    "output_jsonl_path": "full_extraction/data/den_prac_2025.jsonl",
+    "record_count": 4843,
+    "physical_record_count": 4844,
+    "deleted_record_count": 1,
+    "is_indexed": true
+  },
+  "DELF2025/EVI_AUTO.000": {
+    "status": "SUCCESS",
+    "table": "evi_auto",
+    "year": "2025",
+    "source_path": "DELF2025/EVI_AUTO.000",
+    "output_jsonl_path": "full_extraction/data/evi_auto_2025.jsonl",
+    "record_count": 2,
+    "physical_record_count": 2,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "DELF2025/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2025",
+    "source_path": "DELF2025/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2025.jsonl",
+    "record_count": 879,
+    "physical_record_count": 879,
     "deleted_record_count": 0,
     "is_indexed": false
   },
@@ -1923,6 +3265,17 @@
     "physical_record_count": 1,
     "deleted_record_count": 0,
     "is_indexed": true
+  },
+  "DELF2026/IKDKP.000": {
+    "status": "SUCCESS",
+    "table": "ikdkp",
+    "year": "2026",
+    "source_path": "DELF2026/IKDKP.000",
+    "output_jsonl_path": "full_extraction/data/ikdkp_2026.jsonl",
+    "record_count": 879,
+    "physical_record_count": 879,
+    "deleted_record_count": 0,
+    "is_indexed": false
   },
   "DELF2026/KALENDAR.000": {
     "status": "SUCCESS",
@@ -2056,6 +3409,17 @@
     "deleted_record_count": 0,
     "is_indexed": true
   },
+  "EZ.000": {
+    "status": "SUCCESS",
+    "table": "ez",
+    "year": null,
+    "source_path": "EZ.000",
+    "output_jsonl_path": "full_extraction/data/ez.jsonl",
+    "record_count": 54,
+    "physical_record_count": 54,
+    "deleted_record_count": 0,
+    "is_indexed": false
+  },
   "H2O_SASA.000": {
     "status": "SUCCESS",
     "table": "h2o_sasa",
@@ -2142,6 +3506,17 @@
     "record_count": 16806,
     "physical_record_count": 16837,
     "deleted_record_count": 31,
+    "is_indexed": true
+  },
+  "KZ.000": {
+    "status": "SUCCESS",
+    "table": "kz",
+    "year": null,
+    "source_path": "KZ.000",
+    "output_jsonl_path": "full_extraction/data/kz.jsonl",
+    "record_count": 2215,
+    "physical_record_count": 2215,
+    "deleted_record_count": 0,
     "is_indexed": true
   },
   "KZPOL.000": {
@@ -2287,6 +3662,17 @@
     "deleted_record_count": 0,
     "is_indexed": false
   },
+  "SC.000": {
+    "status": "SUCCESS",
+    "table": "sc",
+    "year": null,
+    "source_path": "SC.000",
+    "output_jsonl_path": "full_extraction/data/sc.jsonl",
+    "record_count": 2,
+    "physical_record_count": 3,
+    "deleted_record_count": 1,
+    "is_indexed": true
+  },
   "SC_ROKY.000": {
     "status": "SUCCESS",
     "table": "sc_roky",
@@ -2297,6 +3683,28 @@
     "physical_record_count": 8,
     "deleted_record_count": 0,
     "is_indexed": false
+  },
+  "SKLA2008.000": {
+    "status": "SUCCESS",
+    "table": "skla2008",
+    "year": null,
+    "source_path": "SKLA2008.000",
+    "output_jsonl_path": "full_extraction/data/skla2008.jsonl",
+    "record_count": 1872,
+    "physical_record_count": 1872,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "SKLAD.000": {
+    "status": "SUCCESS",
+    "table": "sklad",
+    "year": null,
+    "source_path": "SKLAD.000",
+    "output_jsonl_path": "full_extraction/data/sklad.jsonl",
+    "record_count": 2430,
+    "physical_record_count": 2430,
+    "deleted_record_count": 0,
+    "is_indexed": true
   },
   "SPOTPRIE.000": {
     "status": "SUCCESS",
@@ -2372,6 +3780,17 @@
     "output_jsonl_path": "full_extraction/data/ucet.jsonl",
     "record_count": 5101,
     "physical_record_count": 5101,
+    "deleted_record_count": 0,
+    "is_indexed": true
+  },
+  "UCTY.000": {
+    "status": "SUCCESS",
+    "table": "ucty",
+    "year": null,
+    "source_path": "UCTY.000",
+    "output_jsonl_path": "full_extraction/data/ucty.jsonl",
+    "record_count": 8,
+    "physical_record_count": 8,
     "deleted_record_count": 0,
     "is_indexed": true
   },

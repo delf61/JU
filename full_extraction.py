@@ -40,7 +40,8 @@ def get_target_tables():
                 path_parts = path.replace('\\', '/').split('/')
                 for p in path_parts:
                     if p.upper().startswith("DELF") and len(p) == 8:
-                        year = p[4:]
+                        if p[4:].isdigit():
+                            year = p[4:]
                 targets.append({
                     "table": table_name,
                     "year": year,
@@ -139,7 +140,7 @@ def main():
             if t_name not in schemas:
                 raise ValueError(f"Schema not found for {t_name}")
 
-            full_path = os.path.join(".", t_path)
+            full_path = os.path.join("JU_DATA_ORIGINAL", t_path)
             if not os.path.exists(full_path):
                 # Try case insensitive match if necessary
                 def find_ci_path(base, rel):
@@ -156,7 +157,7 @@ def main():
                         if not found: return None
                     return curr
 
-                full_path = find_ci_path(".", t_path)
+                full_path = find_ci_path("JU_DATA_ORIGINAL", t_path)
                 if not full_path or not os.path.exists(full_path):
                     raise FileNotFoundError(f"File not found: {t_path}")
 
@@ -171,9 +172,7 @@ def main():
             out_filename = f"{t_name}_{t_year}.jsonl" if t_year else f"{t_name}.jsonl"
             out_path = os.path.join(data_dir, out_filename)
 
-            # ensure file is empty before writing
-            with open(out_path, "w", encoding="utf-8") as f:
-                pass
+
 
             with open(out_path, "a", encoding="utf-8") as f:
                 for j in json_records:
