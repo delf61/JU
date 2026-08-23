@@ -10,3 +10,6 @@ Delf*/
 
 # Output directories
 full_extraction/data/
+
+migration_dump/ju_migration.sql
+sql_verification.py
