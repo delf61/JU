@@ -22,6 +22,14 @@ def decode_real48(b):
 def decode_fand_date(val):
     if val == 0.0:
         return None
+    if 0.0 < val < 1.0:
+        hours = val * 24
+        h = int(hours)
+        m = int(round((hours - h) * 60))
+        if m == 60:
+            h += 1
+            m = 0
+        return f"{h:02d}:{m:02d}"
     try:
         base = datetime(1, 1, 1) + timedelta(days=val-1)
         return base.strftime('%Y-%m-%d')

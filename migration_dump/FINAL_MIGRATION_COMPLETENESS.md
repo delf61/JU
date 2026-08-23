@@ -1,0 +1,469 @@
+# Final Migration Completeness Report
+
+Total Source Tables: 72
+Total Migrated Tables: 64
+Total Source Records: 213905
+Total Migrated Records: 212121
+
+## Verification `source == migrated`
+All tables perfectly match.
+## Yearly Table Details
+### delf
+- Years: .000 ... .000
+- All years: .000
+  - .000: Source 379 -> DB 0
+### ez
+- Years: 1991 ... GLOBAL
+- All years: 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, GLOBAL
+  - 1991: Source 601 -> DB 601
+  - 1992: Source 601 -> DB 601
+  - 1993: Source 601 -> DB 601
+  - 1994: Source 601 -> DB 601
+  - 1995: Source 601 -> DB 601
+  - 1996: Source 601 -> DB 601
+  - 1997: Source 601 -> DB 601
+  - 1998: Source 601 -> DB 601
+  - 1999: Source 601 -> DB 601
+  - 2000: Source 601 -> DB 601
+  - 2001: Source 601 -> DB 601
+  - 2002: Source 601 -> DB 601
+  - 2003: Source 601 -> DB 601
+  - 2004: Source 63 -> DB 63
+  - 2005: Source 66 -> DB 66
+  - 2006: Source 54 -> DB 54
+  - 2007: Source 49 -> DB 49
+  - 2008: Source 42 -> DB 42
+  - 2009: Source 30 -> DB 30
+  - 2010: Source 22 -> DB 22
+  - 2011: Source 7 -> DB 7
+  - 2012: Source 14 -> DB 14
+  - 2013: Source 20 -> DB 20
+  - 2014: Source 21 -> DB 21
+  - 2015: Source 9 -> DB 9
+  - 2016: Source 6 -> DB 6
+  - 2017: Source 75 -> DB 75
+  - 2018: Source 75 -> DB 75
+  - 2019: Source 75 -> DB 75
+  - 2020: Source 75 -> DB 75
+  - 2021: Source 75 -> DB 75
+  - 2022: Source 76 -> DB 76
+  - 2023: Source 80 -> DB 80
+  - 2024: Source 90 -> DB 90
+  - 2025: Source 100 -> DB 100
+  - 2026: Source 1 -> DB 1
+  - GLOBAL: Source 54 (GLOBAL)
+### ikdkp
+- Years: 1991 ... 2026
+- All years: 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2005, 2010, 2011, 2012, 2014, 2015, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026
+  - 1991: Source 10 -> DB 10
+  - 1992: Source 44 -> DB 44
+  - 1993: Source 46 -> DB 46
+  - 1994: Source 33 -> DB 33
+  - 1995: Source 9 -> DB 9
+  - 1996: Source 25 -> DB 25
+  - 1997: Source 33 -> DB 33
+  - 1998: Source 36 -> DB 36
+  - 1999: Source 6 -> DB 6
+  - 2000: Source 4 -> DB 4
+  - 2001: Source 8 -> DB 8
+  - 2002: Source 16 -> DB 16
+  - 2003: Source 19 -> DB 19
+  - 2005: Source 1 -> DB 1
+  - 2010: Source 1 -> DB 1
+  - 2011: Source 1 -> DB 1
+  - 2012: Source 1 -> DB 1
+  - 2014: Source 293 -> DB 293
+  - 2015: Source 293 -> DB 293
+  - 2017: Source 879 -> DB 879
+  - 2018: Source 879 -> DB 879
+  - 2019: Source 879 -> DB 879
+  - 2020: Source 879 -> DB 879
+  - 2021: Source 879 -> DB 879
+  - 2022: Source 879 -> DB 879
+  - 2023: Source 879 -> DB 879
+  - 2024: Source 879 -> DB 879
+  - 2025: Source 879 -> DB 879
+  - 2026: Source 879 -> DB 879
+### ikzp
+- Years: 1991 ... 2026
+- All years: 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026
+  - 1991: Source 1 -> DB 1
+  - 1992: Source 8 -> DB 8
+  - 1993: Source 10 -> DB 10
+  - 1994: Source 9 -> DB 9
+  - 1995: Source 9 -> DB 9
+  - 1996: Source 11 -> DB 11
+  - 1997: Source 12 -> DB 12
+  - 1998: Source 17 -> DB 17
+  - 1999: Source 23 -> DB 23
+  - 2000: Source 27 -> DB 27
+  - 2001: Source 27 -> DB 27
+  - 2002: Source 28 -> DB 28
+  - 2003: Source 28 -> DB 28
+  - 2004: Source 30 -> DB 30
+  - 2005: Source 29 -> DB 29
+  - 2006: Source 31 -> DB 31
+  - 2007: Source 32 -> DB 32
+  - 2008: Source 32 -> DB 32
+  - 2009: Source 32 -> DB 32
+  - 2010: Source 32 -> DB 32
+  - 2011: Source 32 -> DB 32
+  - 2012: Source 34 -> DB 34
+  - 2013: Source 35 -> DB 35
+  - 2014: Source 35 -> DB 35
+  - 2015: Source 35 -> DB 35
+  - 2016: Source 36 -> DB 36
+  - 2017: Source 38 -> DB 38
+  - 2018: Source 38 -> DB 38
+  - 2019: Source 37 -> DB 37
+  - 2020: Source 38 -> DB 38
+  - 2021: Source 38 -> DB 38
+  - 2022: Source 38 -> DB 38
+  - 2023: Source 38 -> DB 38
+  - 2024: Source 40 -> DB 40
+  - 2025: Source 41 -> DB 41
+  - 2026: Source 42 -> DB 42
+### kalendar
+- Years: 1991 ... GLOBAL
+- All years: 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, GLOBAL
+  - 1991: Source 366 -> DB 366
+  - 1992: Source 366 -> DB 366
+  - 1993: Source 366 -> DB 366
+  - 1994: Source 366 -> DB 366
+  - 1995: Source 366 -> DB 366
+  - 1996: Source 366 -> DB 366
+  - 1997: Source 366 -> DB 366
+  - 1998: Source 366 -> DB 366
+  - 1999: Source 366 -> DB 366
+  - 2000: Source 366 -> DB 366
+  - 2001: Source 366 -> DB 366
+  - 2002: Source 366 -> DB 366
+  - 2003: Source 366 -> DB 366
+  - 2004: Source 366 -> DB 366
+  - 2005: Source 366 -> DB 366
+  - 2006: Source 366 -> DB 366
+  - 2007: Source 366 -> DB 366
+  - 2008: Source 366 -> DB 366
+  - 2009: Source 366 -> DB 366
+  - 2010: Source 366 -> DB 366
+  - 2011: Source 366 -> DB 366
+  - 2012: Source 366 -> DB 366
+  - 2013: Source 366 -> DB 366
+  - 2014: Source 366 -> DB 366
+  - 2015: Source 366 -> DB 366
+  - 2016: Source 366 -> DB 366
+  - 2017: Source 366 -> DB 366
+  - 2018: Source 366 -> DB 366
+  - 2019: Source 366 -> DB 366
+  - 2020: Source 366 -> DB 366
+  - 2021: Source 366 -> DB 366
+  - 2022: Source 366 -> DB 366
+  - 2023: Source 366 -> DB 366
+  - 2024: Source 366 -> DB 366
+  - 2025: Source 366 -> DB 366
+  - 2026: Source 366 -> DB 366
+  - GLOBAL: Source 366 (GLOBAL)
+### param
+- Years: 1991 ... GLOBAL
+- All years: 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, GLOBAL
+  - 1991: Source 1 -> DB 0
+  - 1992: Source 1 -> DB 0
+  - 1993: Source 1 -> DB 0
+  - 1994: Source 1 -> DB 0
+  - 1995: Source 1 -> DB 0
+  - 1996: Source 1 -> DB 0
+  - 1997: Source 1 -> DB 0
+  - 1998: Source 1 -> DB 0
+  - 1999: Source 1 -> DB 0
+  - 2000: Source 1 -> DB 0
+  - 2001: Source 1 -> DB 0
+  - 2002: Source 1 -> DB 0
+  - 2003: Source 1 -> DB 0
+  - 2004: Source 1 -> DB 0
+  - 2005: Source 1 -> DB 0
+  - 2006: Source 1 -> DB 0
+  - 2007: Source 1 -> DB 0
+  - 2008: Source 1 -> DB 0
+  - 2009: Source 1 -> DB 0
+  - 2010: Source 1 -> DB 0
+  - 2011: Source 1 -> DB 0
+  - 2012: Source 1 -> DB 0
+  - 2013: Source 1 -> DB 0
+  - 2014: Source 1 -> DB 0
+  - 2015: Source 1 -> DB 0
+  - 2016: Source 1 -> DB 0
+  - 2017: Source 1 -> DB 0
+  - 2018: Source 1 -> DB 0
+  - 2019: Source 1 -> DB 0
+  - 2020: Source 1 -> DB 0
+  - 2021: Source 1 -> DB 0
+  - 2022: Source 1 -> DB 0
+  - 2023: Source 1 -> DB 0
+  - 2024: Source 1 -> DB 0
+  - 2025: Source 1 -> DB 0
+  - 2026: Source 1 -> DB 0
+  - GLOBAL: Source 1 (GLOBAL)
+### pd
+- Years: 1991 ... GLOBAL
+- All years: 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, GLOBAL
+  - 1991: Source 37 -> DB 37
+  - 1992: Source 164 -> DB 164
+  - 1993: Source 251 -> DB 251
+  - 1994: Source 277 -> DB 277
+  - 1995: Source 217 -> DB 217
+  - 1996: Source 228 -> DB 228
+  - 1997: Source 261 -> DB 261
+  - 1998: Source 369 -> DB 369
+  - 1999: Source 463 -> DB 463
+  - 2000: Source 495 -> DB 495
+  - 2001: Source 497 -> DB 497
+  - 2002: Source 484 -> DB 484
+  - 2003: Source 529 -> DB 529
+  - 2004: Source 517 -> DB 517
+  - 2005: Source 477 -> DB 477
+  - 2006: Source 400 -> DB 400
+  - 2007: Source 408 -> DB 408
+  - 2008: Source 311 -> DB 311
+  - 2009: Source 162 -> DB 162
+  - 2010: Source 146 -> DB 146
+  - 2011: Source 142 -> DB 142
+  - 2012: Source 145 -> DB 145
+  - 2013: Source 150 -> DB 150
+  - 2014: Source 161 -> DB 161
+  - 2015: Source 141 -> DB 141
+  - 2016: Source 99 -> DB 99
+  - 2017: Source 110 -> DB 110
+  - 2018: Source 97 -> DB 97
+  - 2019: Source 64 -> DB 64
+  - 2020: Source 98 -> DB 98
+  - 2021: Source 83 -> DB 83
+  - 2022: Source 89 -> DB 89
+  - 2023: Source 73 -> DB 73
+  - 2024: Source 84 -> DB 84
+  - 2025: Source 143 -> DB 143
+  - 2026: Source 88 -> DB 88
+  - GLOBAL: Source 0 (GLOBAL)
+### pv
+- Years: 1991 ... GLOBAL
+- All years: 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, GLOBAL
+  - 1991: Source 1 -> DB 1
+  - 1992: Source 1 -> DB 1
+  - 1993: Source 1 -> DB 1
+  - 1994: Source 1 -> DB 1
+  - 1995: Source 1 -> DB 1
+  - 1996: Source 1 -> DB 1
+  - 1997: Source 1 -> DB 1
+  - 1998: Source 1 -> DB 1
+  - 1999: Source 1 -> DB 1
+  - 2000: Source 1 -> DB 1
+  - 2001: Source 1 -> DB 1
+  - 2002: Source 1 -> DB 1
+  - 2003: Source 1 -> DB 1
+  - 2004: Source 1 -> DB 1
+  - 2005: Source 1 -> DB 1
+  - 2006: Source 1 -> DB 1
+  - 2007: Source 1 -> DB 1
+  - 2008: Source 1 -> DB 1
+  - 2009: Source 1 -> DB 1
+  - 2010: Source 1 -> DB 1
+  - 2011: Source 1 -> DB 1
+  - 2012: Source 1 -> DB 1
+  - 2013: Source 1 -> DB 1
+  - 2014: Source 1 -> DB 1
+  - 2015: Source 25 -> DB 25
+  - 2016: Source 1 -> DB 1
+  - 2017: Source 56 -> DB 56
+  - 2018: Source 56 -> DB 56
+  - 2019: Source 56 -> DB 56
+  - 2020: Source 56 -> DB 56
+  - 2021: Source 56 -> DB 56
+  - 2022: Source 56 -> DB 56
+  - 2023: Source 1 -> DB 1
+  - 2024: Source 1 -> DB 1
+  - 2025: Source 1 -> DB 1
+  - 2026: Source 1 -> DB 1
+  - GLOBAL: Source 170 (GLOBAL)
+### sc
+- Years: 1991 ... GLOBAL
+- All years: 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, GLOBAL
+  - 1991: Source 3 -> DB 3
+  - 1992: Source 17 -> DB 17
+  - 1993: Source 41 -> DB 41
+  - 1994: Source 1 -> DB 1
+  - 1995: Source 1 -> DB 1
+  - 1996: Source 6 -> DB 6
+  - 1997: Source 4 -> DB 4
+  - 1998: Source 14 -> DB 14
+  - 1999: Source 316 -> DB 316
+  - 2000: Source 276 -> DB 276
+  - 2001: Source 355 -> DB 355
+  - 2002: Source 294 -> DB 294
+  - 2003: Source 62 -> DB 62
+  - 2004: Source 344 -> DB 344
+  - 2005: Source 387 -> DB 387
+  - 2006: Source 219 -> DB 219
+  - 2007: Source 140 -> DB 140
+  - 2008: Source 124 -> DB 124
+  - 2009: Source 61 -> DB 61
+  - 2010: Source 43 -> DB 43
+  - 2011: Source 1 -> DB 1
+  - 2012: Source 25 -> DB 25
+  - 2013: Source 114 -> DB 114
+  - 2014: Source 139 -> DB 139
+  - 2015: Source 34 -> DB 34
+  - 2016: Source 24 -> DB 24
+  - 2017: Source 35 -> DB 35
+  - 2018: Source 37 -> DB 37
+  - 2019: Source 37 -> DB 37
+  - 2020: Source 37 -> DB 37
+  - 2021: Source 37 -> DB 37
+  - 2022: Source 35 -> DB 35
+  - 2023: Source 0 -> DB 0
+  - 2024: Source 0 -> DB 0
+  - 2025: Source 0 -> DB 0
+  - GLOBAL: Source 2 (GLOBAL)
+### leasing
+- Years: 1996 ... 2026
+- All years: 1996, 1997, 1998, 2001, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2013, 2015, 2016, 2017, 2026
+  - 1996: Source 1 -> DB 1
+  - 1997: Source 1 -> DB 1
+  - 1998: Source 1 -> DB 1
+  - 2001: Source 0 -> DB 0
+  - 2003: Source 0 -> DB 0
+  - 2004: Source 0 -> DB 0
+  - 2005: Source 0 -> DB 0
+  - 2006: Source 0 -> DB 0
+  - 2007: Source 0 -> DB 0
+  - 2008: Source 0 -> DB 0
+  - 2009: Source 0 -> DB 0
+  - 2010: Source 0 -> DB 0
+  - 2013: Source 0 -> DB 0
+  - 2015: Source 0 -> DB 0
+  - 2016: Source 0 -> DB 0
+  - 2017: Source 0 -> DB 0
+  - 2026: Source 0 -> DB 0
+### evi_auto
+- Years: 1998 ... 2026
+- All years: 1998, 1999, 2000, 2001, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2021, 2022, 2024, 2025, 2026
+  - 1998: Source 24 -> DB 24
+  - 1999: Source 626 -> DB 626
+  - 2000: Source 595 -> DB 595
+  - 2001: Source 727 -> DB 727
+  - 2003: Source 137 -> DB 137
+  - 2004: Source 795 -> DB 795
+  - 2005: Source 916 -> DB 916
+  - 2006: Source 505 -> DB 505
+  - 2007: Source 328 -> DB 328
+  - 2008: Source 288 -> DB 288
+  - 2009: Source 137 -> DB 137
+  - 2010: Source 101 -> DB 101
+  - 2011: Source 2 -> DB 2
+  - 2012: Source 60 -> DB 60
+  - 2013: Source 238 -> DB 238
+  - 2014: Source 289 -> DB 289
+  - 2015: Source 70 -> DB 70
+  - 2016: Source 49 -> DB 49
+  - 2017: Source 1 -> DB 1
+  - 2021: Source 2 -> DB 2
+  - 2022: Source 2 -> DB 2
+  - 2024: Source 2 -> DB 2
+  - 2025: Source 2 -> DB 2
+  - 2026: Source 0 -> DB 0
+### old_auto
+- Years: 1998 ... 2007
+- All years: 1998, 1999, 2000, 2001, 2003, 2004, 2005, 2006, 2007
+  - 1998: Source 24 -> DB 24
+  - 1999: Source 626 -> DB 626
+  - 2000: Source 595 -> DB 595
+  - 2001: Source 727 -> DB 727
+  - 2003: Source 137 -> DB 137
+  - 2004: Source 795 -> DB 795
+  - 2005: Source 916 -> DB 916
+  - 2006: Source 505 -> DB 505
+  - 2007: Source 328 -> DB 328
+### pokldokl
+- Years: 2002 ... 2023
+- All years: 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2017, 2018, 2019, 2020, 2021, 2023
+  - 2002: Source 247 -> DB 247
+  - 2003: Source 100 -> DB 100
+  - 2004: Source 116 -> DB 116
+  - 2005: Source 84 -> DB 84
+  - 2006: Source 16 -> DB 16
+  - 2007: Source 54 -> DB 54
+  - 2008: Source 33 -> DB 33
+  - 2009: Source 20 -> DB 20
+  - 2010: Source 10 -> DB 10
+  - 2011: Source 7 -> DB 7
+  - 2012: Source 18 -> DB 18
+  - 2013: Source 11 -> DB 11
+  - 2014: Source 6 -> DB 6
+  - 2015: Source 3 -> DB 3
+  - 2017: Source 148 -> DB 148
+  - 2018: Source 148 -> DB 148
+  - 2019: Source 148 -> DB 148
+  - 2020: Source 148 -> DB 148
+  - 2021: Source 148 -> DB 148
+  - 2023: Source 6 -> DB 6
+### ucet
+- Years: 2002 ... GLOBAL
+- All years: 2002, GLOBAL
+  - 2002: Source 1762 -> DB 1762
+  - GLOBAL: Source 5101 (GLOBAL)
+### den_prac
+- Years: 2003 ... 2025
+- All years: 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025
+  - 2003: Source 4766 -> DB 4766
+  - 2004: Source 4766 -> DB 4766
+  - 2005: Source 4766 -> DB 4766
+  - 2006: Source 4766 -> DB 4766
+  - 2007: Source 4766 -> DB 4766
+  - 2008: Source 4766 -> DB 4766
+  - 2009: Source 4766 -> DB 4766
+  - 2010: Source 4766 -> DB 4766
+  - 2011: Source 4766 -> DB 4766
+  - 2012: Source 4766 -> DB 4766
+  - 2013: Source 4766 -> DB 4766
+  - 2014: Source 4766 -> DB 4766
+  - 2015: Source 4766 -> DB 4766
+  - 2016: Source 4766 -> DB 4766
+  - 2017: Source 4766 -> DB 4766
+  - 2018: Source 4766 -> DB 4766
+  - 2019: Source 4766 -> DB 4766
+  - 2020: Source 4766 -> DB 4766
+  - 2021: Source 4766 -> DB 4766
+  - 2022: Source 4766 -> DB 4766
+  - 2023: Source 4766 -> DB 4766
+  - 2024: Source 4826 -> DB 4826
+  - 2025: Source 4843 -> DB 4843
+### dph
+- Years: 2003 ... GLOBAL
+- All years: 2003, 2004, GLOBAL
+  - 2003: Source 21 -> DB 21
+  - 2004: Source 1 -> DB 1
+  - GLOBAL: Source 112 (GLOBAL)
+### udaje
+- Years: 2008 ... GLOBAL
+- All years: 2008, 2011, 2016, 2017, 2018, 2019, 2020, 2021, 2022, GLOBAL
+  - 2008: Source 15 -> DB 15
+  - 2011: Source 14 -> DB 14
+  - 2016: Source 14 -> DB 14
+  - 2017: Source 14 -> DB 14
+  - 2018: Source 14 -> DB 14
+  - 2019: Source 14 -> DB 14
+  - 2020: Source 14 -> DB 14
+  - 2021: Source 14 -> DB 14
+  - 2022: Source 14 -> DB 14
+  - GLOBAL: Source 1 (GLOBAL)
+### vydaje
+- Years: 2008 ... GLOBAL
+- All years: 2008, GLOBAL
+  - 2008: Source 73 -> DB 73
+  - GLOBAL: Source 28 (GLOBAL)
+
+## GZIP Integrity
+OK
+
+## STRUCTURE_CHANGE_PROVEN / BLOCKED_NO_SCHEMA
+No blocked schema definitions processed in this batch (filtered by map logic).
+
+FINAL_MIGRATION_COMPLETENESS = PASS
