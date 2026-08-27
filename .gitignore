@@ -10,3 +10,9 @@ Delf*/
 
 # Output directories
 full_extraction/data/
+.gitignore
+ju_dbf_data/
+dbf_data.sql
+dbf_schema.sql
+ju_dbf.zip
+out_report.txt
