@@ -1,18 +1,9 @@
-JU_DATA_ORIGINAL/
-__pycache__/
-
-# FAND data
-*.[0xX]00
-*.t00
-*.T00
-DELF*/
-Delf*/
-
-# Output directories
-full_extraction/data/
-.gitignore
-ju_dbf_data/
-dbf_data.sql
-dbf_schema.sql
-ju_dbf.zip
-out_report.txt
+procedures_analyzed/
+procedures_dump.txt
+merges_dump.txt
+pPD_code.txt
+*.py
+blocks/
+ci4_app/vendor/
+ci4_app/writable/
+ci4_app/tests/
