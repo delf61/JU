@@ -1,18 +1,16 @@
-JU_DATA_ORIGINAL/
-__pycache__/
-
-# FAND data
-*.[0xX]00
-*.t00
-*.T00
-DELF*/
-Delf*/
-
-# Output directories
-full_extraction/data/
-.gitignore
-ju_dbf_data/
-dbf_data.sql
-dbf_schema.sql
-ju_dbf.zip
-out_report.txt
+ci4_app/vendor/
+ci4_app/tests/_support/
+ci4_app/tests/database/
+ci4_app/tests/session/
+ci4_app/tests/unit/
+ci4_app/app/Config/
+ci4_app/app/Controllers/BaseController.php
+ci4_app/app/Controllers/Home.php
+ci4_app/app/Services/HomeService.php
+ci4_app/app/Views/errors/
+ci4_app/public/index.php
+ci4_app/app/ThirdParty/
+ci4_app/app/Models/ExampleModel.php
+ci4_app/app/Views/welcome_message.php
+ci4_app/public/favicon.ico
+ci4_app/spark
