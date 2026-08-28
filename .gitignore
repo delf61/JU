@@ -1,3 +1,6 @@
+vendor/
+node_modules/
+__pycache__/
 ci4_app/vendor/
 ci4_app/tests/_support/
 ci4_app/tests/database/
