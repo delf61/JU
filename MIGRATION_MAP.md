@@ -20,13 +20,13 @@ This map defines how legacy FAND functions map to the proposed CodeIgniter 4 arc
 - **DOS Function:** `pPohladavky`
 - **Future CI4 Module:** `Invoices` (Controller: `ReceivableController`, Service: `InvoiceService`)
 - **MariaDB Tables:** `kp`, `kppol`, `platby`, `uhrady`
-- **Status:** NAVRHNUTÉ
+- **Status:** NAVRHNUTÉ (Čiastočne)
 
 ### Kniha došlých faktúr / Záväzky
 - **DOS Function:** `pZavazky`
 - **Future CI4 Module:** `Invoices` (Controller: `LiabilityController`, Service: `InvoiceService`)
 - **MariaDB Tables:** `kz`, `kzpol`, `platby`, `uhrady`
-- **Status:** NAVRHNUTÉ
+- **Status:** NAVRHNUTÉ (Čiastočne)
 
 ### DPH
 - **DOS Function:** `pDPH`, `pSadzbDPH`

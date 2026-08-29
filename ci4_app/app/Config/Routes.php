@@ -34,3 +34,22 @@ $routes->group('partners', function($routes) {
     $routes->get('api/udaje', 'PartnerController::getUdajeInfo');
     $routes->post('api/udaje', 'PartnerController::updateUdajeInfo');
 });
+
+// Invoices Routes (Receivables and Liabilities)
+$routes->group('invoices', function($routes) {
+    // Receivables (kp/kppol)
+    $routes->get('receivables', 'ReceivableController::index');
+    $routes->post('receivables', 'ReceivableController::create');
+    $routes->get('receivables/(:segment)/(:segment)', 'ReceivableController::show/$1/$2');
+    $routes->put('receivables/(:segment)/(:segment)', 'ReceivableController::update/$1/$2');
+    $routes->delete('receivables/(:segment)/(:segment)', 'ReceivableController::delete/$1/$2');
+    $routes->get('receivables/(:segment)/(:segment)/status', 'ReceivableController::calculateStatus/$1/$2');
+
+    // Liabilities (kz/kzpol)
+    $routes->get('liabilities', 'LiabilityController::index');
+    $routes->post('liabilities', 'LiabilityController::create');
+    $routes->get('liabilities/(:segment)/(:segment)', 'LiabilityController::show/$1/$2');
+    $routes->put('liabilities/(:segment)/(:segment)', 'LiabilityController::update/$1/$2');
+    $routes->delete('liabilities/(:segment)/(:segment)', 'LiabilityController::delete/$1/$2');
+    $routes->get('liabilities/(:segment)/(:segment)/status', 'LiabilityController::calculateStatus/$1/$2');
+});
