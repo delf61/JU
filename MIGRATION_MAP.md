@@ -82,4 +82,4 @@ This map defines how legacy FAND functions map to the proposed CodeIgniter 4 arc
 - **DOS Function:** `pVseobData`
 - **Future CI4 Module:** `Settings` (Controller: `DictionaryController`, Service: `DictionaryService`)
 - **MariaDB Tables:** `kraje`, `okresy`, `mesta`, `banky`, `staty`
-- **Status:** NAVRHNUTÉ
+- **Status:** IMPLEMENTOVANÉ
