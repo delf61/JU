@@ -75,8 +75,8 @@ This map defines how legacy FAND functions map to the proposed CodeIgniter 4 arc
 ### Obchodní partneri
 - **DOS Function:** `pTlf`
 - **Future CI4 Module:** `Partners` (Controller: `PartnerController`, Service: `PartnerService`)
-- **MariaDB Tables:** `udajo` (business partners), `udajea`
-- **Status:** NAVRHNUTÉ
+- **MariaDB Tables:** `partner` (business partners), `udaje` (company owner data)
+- **Status:** IMPLEMENTOVANÉ
 
 ### Všeobecné číselníky
 - **DOS Function:** `pVseobData`
