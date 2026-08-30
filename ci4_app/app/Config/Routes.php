@@ -53,3 +53,13 @@ $routes->group('invoices', function($routes) {
     $routes->delete('liabilities/(:segment)/(:segment)', 'LiabilityController::delete/$1/$2');
     $routes->get('liabilities/(:segment)/(:segment)/status', 'LiabilityController::calculateStatus/$1/$2');
 });
+
+
+// Cashbook Routes
+$routes->group('cashbook', function($routes) {
+    // API
+    $routes->get('api', 'CashbookController::index');
+    $routes->get('api/reasons', 'CashbookController::reasons');
+    $routes->get('api/totals/(:num)', 'CashbookController::totals/$1');
+    $routes->get('api/(:segment)/(:num)', 'CashbookController::show/$1/$2');
+});

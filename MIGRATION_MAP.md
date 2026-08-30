@@ -8,7 +8,7 @@ This map defines how legacy FAND functions map to the proposed CodeIgniter 4 arc
 - **DOS Function:** `pPD`, `pPDsuma`, `pPDkod`
 - **Future CI4 Module:** `Cashbook` (Controller: `CashbookController`, Service: `CashbookService`)
 - **MariaDB Tables:** `pd`, `dovod_bu`, `paramcat`
-- **Status:** NAVRHNUTÉ
+- **Status:** NAVRHNUTÉ (Čiastočne)
 
 ### Počiatočný stav
 - **DOS Function:** `pPV`
