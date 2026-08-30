@@ -32,7 +32,7 @@ This map defines how legacy FAND functions map to the proposed CodeIgniter 4 arc
 - **DOS Function:** `pDPH`, `pSadzbDPH`
 - **Future CI4 Module:** `Accounting` (Controller: `TaxController`, Service: `VatService`)
 - **MariaDB Tables:** `dph`, `sadzbdph`
-- **Status:** NAVRHNUTÉ
+- **Status:** PRIPRAVENÉ NA IMPLEMENTÁCIU
 
 ## 2. MAJETOK & SKLAD (Assets & Inventory)
 
