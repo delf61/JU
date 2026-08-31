@@ -7,4 +7,3 @@ blocks/
 ci4_app/vendor/
 ci4_app/writable/
 ci4_app/tests/
-__pycache__/
