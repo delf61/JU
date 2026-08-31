@@ -84,27 +84,33 @@ class LiabilityService
         $dph = (float)($invoice['dph'] ?? 0);
         $dph_1 = (float)($invoice['dph_1'] ?? 0);
         $pc = (float)($invoice['pc'] ?? 0);
+        $vyrovn = (float)($invoice['vyrovn'] ?? 0);
+        $par_69 = (int)($invoice['par_69'] ?? 0);
 
         if ($year < 2009) {
             $dph_sk1 = round($y * ($dph_1 / 100));
             $dph_sk = round($z * ($dph / 100));
         } else {
             $dph_sk1 = round($y * ($dph_1 / 100), 2);
-            $dph_sk = round($z * ($dph / 100), 2);
+            if ($par_69) {
+                $dph_sk = 0.0;
+            } else {
+                $dph_sk = round($z * ($dph / 100), 2);
+            }
         }
 
         $zn_x = $x;
         $zn_y = $y + $dph_sk1;
         $zn_z = $z + $dph_sk;
 
-        $zn = $zn_x + $zn_y + $zn_z;
+        $zn = $zn_x + $zn_y + $zn_z + $vyrovn;
         $uhrada = $pc;
 
         $status = '>';
 
         if ($uhrada == 0 && $zn != 0) {
             $status = '';
-        } elseif ($zn == $uhrada) {
+        } elseif (abs($zn - $uhrada) < 0.1) {
             $status = '■';
         } elseif ($zn > $uhrada) {
             $status = '<';

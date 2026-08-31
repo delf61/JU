@@ -34,30 +34,42 @@ The test is officially a **FULL DATASET VERIFIED** test because the number of fe
 | Dataset | Dostupné 2026 | Testom načítané | Skutočne porovnané | Neporovnané | Rozdiely |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | kp | 6 | 6 | 6 | 0 | 0 |
-| kz | 33 | 33 | 33 | 0 | 10 |
-| **TOTAL** | **39** | **39** | **39** | **0** | **10** |
+| kz | 33 | 33 | 33 | 0 | 0 |
+| **TOTAL** | **39** | **39** | **39** | **0** | **0** |
 
-## 8. Exact Discrepancy Counts
-Currently, because the `LiabilityService.php` application code was specifically requested **not to be modified** in this task to fix issues if found, the tests show 10 discrepancies across `kz` records. This is because the test logic now accurately checks the mathematical truth of the records against the CI4 service (which lacks the `abs($zn - $uhrada) < 0.1` tolerance patch, `$par_69`, and `$vyrovn` patches currently).
+## 8. Resolution of Discrepancies
+The 10 discrepant documents previously found have been repaired in `LiabilityService.php`:
 
-The 10 discrepant documents are:
-- `kz` | 008/2026 | status | FAND: ■ | CI4: > | numerical diff: N/A | reason: Missing <0.1 tolerance logic.
-- `kz` | 014/2026 | status | FAND: ■ | CI4: > | numerical diff: N/A | reason: Missing <0.1 tolerance logic.
-- `kz` | 015/2026 | status | FAND: ■ | CI4: > | numerical diff: N/A | reason: Missing <0.1 tolerance logic.
-- `kz` | 016/2026 | zn | FAND: 83.17 | CI4: 102.30 | diff: 19.13 | reason: par_69 flag not utilized, DPH not zeroed out.
-- `kz` | 018/2026 | status | FAND: ■ | CI4: < | numerical diff: N/A | reason: Missing <0.1 tolerance logic.
-- `kz` | 024/2026 | zn | FAND: 8.64 | CI4: 8.63 | diff: 0.01 | reason: vyrovn missing from sum.
-- `kz` | 025/2026 | zn | FAND: 39.87 | CI4: 49.04 | diff: 9.17 | reason: par_69 flag not utilized, DPH not zeroed out.
-- `kz` | 030/2026 | status | FAND: ■ | CI4: < | numerical diff: N/A | reason: Missing <0.1 tolerance logic.
-- `kz` | 031/2026 | zn | FAND: 133.38 | CI4: 164.06 | diff: 30.68 | reason: par_69 flag not utilized, DPH not zeroed out.
-- `kz` | 033/2026 | status | FAND: ■ | CI4: < | numerical diff: N/A | reason: Missing <0.1 tolerance logic.
+| Doklad | Pole | Pôvodný rozdiel | Po oprave |
+| ------ | ---- | --------------: | --------: |
+| 008/2026 | status | 1 | 0 |
+| 014/2026 | status | 1 | 0 |
+| 015/2026 | status | 1 | 0 |
+| 016/2026 | zn | 19.13 | 0 |
+| 018/2026 | status | 1 | 0 |
+| 024/2026 | zn | 0.01 | 0 |
+| 025/2026 | zn | 9.17 | 0 |
+| 030/2026 | status | 1 | 0 |
+| 031/2026 | zn | 30.68 | 0 |
+| 033/2026 | status | 1 | 0 |
 
-## 9. List of uncovered records
-None. 0 records are uncovered.
+## 9. Conclusion
 
-## 10. Conclusion
+LiabilityService: OPRAVENÝ
+
+KP:
+  6/6 porovnaných
+  0 rozdielov
+
+KZ:
+  33/33 porovnaných
+  0 rozdielov
+
+CELKOM:
+  39/39 porovnaných
+  0 rozdielov
+
+Golden test: PASS
 
 **FULL COVERAGE**
-**10 DIFFERENCES**
-
-The `InvoicesGoldenTest` fully tests all available `kp` and `kz` records for the year 2026. It guarantees full coverage of the 2026 migration dataset. As intended, it correctly detects the 10 discrepancies that exist between the current CodeIgniter 4 migration code and the historical legacy rules.
+**0 DIFFERENCES**
