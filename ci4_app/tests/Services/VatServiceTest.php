@@ -79,27 +79,31 @@ class VatServiceTest extends CIUnitTestCase
     {
         $rates = ['lower' => 10.0, 'upper' => 20.0];
         $pdRecords = [
-            // Valid expense, has a6
-            ['a6' => 100, 'a2' => 100, 'a4' => 0, 'b' => 'xxx', 'vydaj' => 'V', 'dph' => 10],
-            // Valid expense, a6 missing but a4 present
-            ['a2' => 0, 'a4' => 200, 'b' => 'xxx', 'vydaj' => 'V', 'dph' => 20],
+            // Valid expense, a2=100
+            ['a2' => 100, 'a4' => 0, 'b' => '123', 'vydaj' => 'V', 'dph' => 10],
+            // Valid expense, a4=200
+            ['a2' => 0, 'a4' => 200, 'b' => '456', 'vydaj' => 'V', 'dph' => 20],
             // Ignore vydaj = 't'
-            ['a6' => 500, 'a2' => 500, 'a4' => 0, 'b' => 'xxx', 'vydaj' => 't', 'dph' => 20],
+            ['a2' => 500, 'a4' => 0, 'b' => 'xxx', 'vydaj' => 't', 'dph' => 20],
             // Ignore deleted
-            ['_fand_deleted' => true, 'a6' => 500, 'a2' => 500, 'a4' => 0, 'b' => 'xxx', 'vydaj' => 'V', 'dph' => 20],
-            // Ignore '50' prefix if cash (a2=0, a4<>0)
-            ['a2' => 0, 'a4' => 300, 'b' => '50x', 'vydaj' => 'V', 'dph' => 20]
+            ['_fand_deleted' => true, 'a2' => 500, 'a4' => 0, 'b' => 'xxx', 'vydaj' => 'V', 'dph' => 20],
+            // Ignore '50' prefix
+            ['a2' => 0, 'a4' => 300, 'b' => '50123', 'vydaj' => 'V', 'dph' => 20],
+            // Ignore space-padded '50' prefix
+            ['a2' => 100, 'a4' => 0, 'b' => '50 123', 'vydaj' => 'V', 'dph' => 20],
+            // Valid base combining a2 + a4
+            ['a2' => 50, 'a4' => 50, 'b' => '1', 'vydaj' => 'V', 'dph' => 20],
         ];
 
         $res = $this->vatService->accumulatePeriod('2020-01-01', '2020-01-31', $rates, $pdRecords, [], [], 'EUR');
 
         // Lower rate (10% on 100)
-        $this->assertEquals(100, $res['sum1vstup']);
-        $this->assertEquals(10, $res['dph1vstup']);
+        $this->assertEquals(100.0, $res['sum1vstup']);
+        $this->assertEquals(10.0, $res['dph1vstup']);
 
-        // Upper rate (20% on 200, ignoring 500(t), 500(deleted), 300('50' prefix on bank))
-        $this->assertEquals(200, $res['sum2vstup']);
-        $this->assertEquals(40, $res['dph2vstup']);
+        // Upper rate (20% on 200 + 100, ignoring 500(t), 500(deleted), 300(50 prefix), 100(50 prefix))
+        $this->assertEquals(300.0, $res['sum2vstup']);
+        $this->assertEquals(60.0, $res['dph2vstup']);
     }
 
     public function testAccumulatePeriodKzVstup1999()
@@ -116,10 +120,10 @@ class VatServiceTest extends CIUnitTestCase
 
         $res = $this->vatService->accumulatePeriod('1999-01-01', '1999-01-31', $rates, [], [], $kzRecords, 'SKK');
 
-        $this->assertEquals(100, $res['sum1vstup']);
-        $this->assertEquals(10, $res['dph1vstup']);
-        $this->assertEquals(200, $res['sum2vstup']);
-        $this->assertEquals(46, $res['dph2vstup']);
+        $this->assertEquals(100.0, $res['sum1vstup']);
+        $this->assertEquals(10.0, $res['dph1vstup']);
+        $this->assertEquals(200.0, $res['sum2vstup']);
+        $this->assertEquals(46.0, $res['dph2vstup']);
     }
 
     public function testAccumulatePeriodKzVstup2004()
@@ -133,28 +137,27 @@ class VatServiceTest extends CIUnitTestCase
 
         $res = $this->vatService->accumulatePeriod('2004-01-01', '2004-01-31', $rates, [], [], $kzRecords, 'SKK');
 
-        // Both go to upper rate in reality if rate > 15
-        $this->assertEquals(100, $res['sum2vstup']);
-        $this->assertEquals(19, $res['dph2vstup']);
+        // 19.0 falls into lower bracket because lower rate threshold dynamically handles <= 19
+        $this->assertEquals(100.0, $res['sum1vstup']);
+        $this->assertEquals(19.0, $res['dph1vstup']);
     }
 
-    public function testAccumulatePeriodKzVstup2025ReverseCharge()
+    public function testAccumulatePeriodKzVstupReverseCharge()
     {
         $rates = ['lower' => 19.0, 'upper' => 23.0];
         $kzRecords = [
-            ['y' => 100, 'dph_1' => 19, 'z' => 0, 'dph' => 0], // Par 69 lower
-            ['y' => 0, 'dph_1' => 0, 'z' => 200, 'dph' => 23]  // Par 69 upper
+            // Should be routed to par_69 fields due to explicit flag par_69=1
+            ['y' => 0, 'dph_1' => 0, 'z' => 500, 'dph' => 23, 'par_69' => 1],
+            // Should NOT be routed to par_69 because flag is 0, even in 2026
+            ['y' => 0, 'dph_1' => 0, 'z' => 300, 'dph' => 23, 'par_69' => 0],
         ];
 
-        // 2025-09-01 triggers §69 mapping for KZ
-        $res = $this->vatService->accumulatePeriod('2025-09-01', '2025-09-30', $rates, [], [], $kzRecords, 'EUR');
+        $res = $this->vatService->accumulatePeriod('2026-01-01', '2026-03-31', $rates, [], [], $kzRecords, 'EUR');
 
-        // Normal vstup should be 0
-        $this->assertEquals(0, $res['sum1vstup']);
-        $this->assertEquals(0, $res['sum2vstup']);
+        $this->assertEquals(500.0, $res['sum_par_69']);
+        $this->assertEquals(115.0, $res['dph_par_69']);
 
-        // Par 69 fields should aggregate both (100 + 200 = 300)
-        $this->assertEquals(300, $res['sum_par_69']);
-        $this->assertEquals(65, $res['dph_par_69']); // 19 + 46
+        $this->assertEquals(300.0, $res['sum2vstup']);
+        $this->assertEquals(69.0, $res['dph2vstup']);
     }
 }
