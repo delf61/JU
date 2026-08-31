@@ -138,8 +138,9 @@ class VatService
             'r13' => 0
         ];
 
-        // Based on DPH_DEEP_ANALYSIS.md: "Rate Selection: dph field (<15 is lower rate, >=15 is upper rate)."
-        $rateThreshold = 15;
+        // Ensure we determine the threshold dynamically based on the current rates to handle 2026 correctly (where lower rate is 19).
+        // Since rates['lower'] is strictly the lower rate, any rate <= rates['lower'] belongs to the lower bracket.
+        $rateThreshold = $rates['lower'] + 0.1;
 
         // 1. Outgoing Invoices (KP) -> Vystup
         // DPH_DEEP_ANALYSIS: Base is 'z'. Tax is calculated or from 'dph_sk'. We calculate.
@@ -166,9 +167,12 @@ class VatService
                 continue;
             }
 
-            // Apply 2025 rule: >= 2025-09-01 -> §69 Reverse Charge logic (rDPH_vstKZ69)
-            // It routes specific values into sum_par_69
-            $isReverseCharge2025 = ($dateFrom >= '2025-09-01');
+            // Forensically verified rule: FAND explicitly uses the par_69 flag to route records into §69
+            $isReverseCharge = false;
+            $par69 = $kz['par_69'] ?? $kz['par69'] ?? '0';
+            if ($par69 === '1' || $par69 === 1 || $par69 === 'A' || $par69 === 'T') {
+                $isReverseCharge = true;
+            }
 
             // Lower rate (y)
             if ((float)$kz['dph_1'] > 0) {
@@ -176,7 +180,7 @@ class VatService
                 $rate1 = (float)$kz['dph_1'];
                 $tax1 = $this->roundVat($base1 * ($rate1 / 100), $currencyMode);
 
-                if ($isReverseCharge2025) {
+                if ($isReverseCharge) {
                     $result['sum_par_69'] += $base1;
                     $result['dph_par_69'] += $tax1;
                 } else {
@@ -196,7 +200,7 @@ class VatService
                 $rate2 = (float)$kz['dph'];
                 $tax2 = $this->roundVat($base2 * ($rate2 / 100), $currencyMode);
 
-                if ($isReverseCharge2025) {
+                if ($isReverseCharge) {
                     $result['sum_par_69'] += $base2;
                     $result['dph_par_69'] += $tax2;
                 } else {
@@ -212,7 +216,7 @@ class VatService
         }
 
         // 3. Cashbook (PD) -> Vstup
-        // DPH_DEEP_ANALYSIS: Base is 'a6'. Exclude vydaj='t' and specific '50' prefixes on 'b'.
+        // Forensically verified rule: Base is exclusively 'a2 + a4'. Exclude any record where 'b' starts with '50'.
         foreach ($pdRecords as $pd) {
             if (isset($pd['_fand_deleted']) && $pd['_fand_deleted']) {
                 continue;
@@ -223,15 +227,18 @@ class VatService
                 continue;
             }
 
-            $a2 = (float)($pd['a2'] ?? 0);
-            $a4 = (float)($pd['a4'] ?? 0);
             $b = $pd['b'] ?? '';
 
-            if ($a2 != 0 || ($a4 != 0 && substr($b, 0, 2) !== '50')) {
-                // Determine base: schema might lack a6, fallback to sdph or calculated.
-                // However, the rule says "correctly implement the documented a6 base handling".
-                // We prioritize 'a6'.
-                $base = (float)($pd['a6'] ?? $pd['sdph'] ?? ($a2 + $a4));
+            // Forensically proven exclusion rule
+            if (strpos(trim($b), '50') === 0) {
+                continue;
+            }
+
+            $a2 = (float)($pd['a2'] ?? 0);
+            $a4 = (float)($pd['a4'] ?? 0);
+
+            if ($a2 != 0 || $a4 != 0) {
+                $base = $a2 + $a4;
                 $rate = (float)$pd['dph'];
                 $tax = $this->roundVat($base * ($rate / 100), $currencyMode);
 

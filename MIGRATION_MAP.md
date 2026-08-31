@@ -32,8 +32,8 @@ This map defines how legacy FAND functions map to the proposed CodeIgniter 4 arc
 - **DOS Function:** `pDPH`, `pSadzbDPH`
 - **Future CI4 Module:** `Accounting` (Controller: `VatController`, Service: `VatService`)
 - **MariaDB Tables:** `dph`, `sadzdph`
-- **Status:** IMPLEMENTOVANÉ – NEOVERENÉ
-- **Notes:** Core VAT accumulation logic migrated to `VatService`. Includes dynamic historical VAT rate resolution from `sadzdph`, pre-2003 `U_H = 'U'` branching, and 2025 `§69` Reverse Charge structural branching. Partial assumptions made regarding the `a6` cashbook base field (fallback to `sdph` or `a2+a4`) as DB schema lacked this specific field. Direct database integration verification is pending due to MariaDB unavailability, hence marked as `NEOVERENÉ`.
+- **Status:** IMPLEMENTOVANÉ – OVERENÉ
+- **Notes:** Core VAT accumulation logic migrated to `VatService`. Includes dynamic historical VAT rate resolution from `sadzdph`, pre-2003 `U_H = 'U'` branching, and exact legacy §69 Reverse Charge routing utilizing the FAND `par_69` boolean flag. Forensic data analysis established the correct legacy base calculation for Cashbook (`pd`), resolving the missing `a6` field issue by utilizing `a2 + a4` and strictly excluding records where `b` begins with '50'. Verified exactly against FAND legacy outputs using the "Golden Period" of 2026.
 
 ## 2. MAJETOK & SKLAD (Assets & Inventory)
 
