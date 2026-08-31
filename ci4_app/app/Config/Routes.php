@@ -63,3 +63,10 @@ $routes->group('cashbook', function($routes) {
     $routes->get('api/totals/(:num)', 'CashbookController::totals/$1');
     $routes->get('api/(:segment)/(:num)', 'CashbookController::show/$1/$2');
 });
+
+// VAT (DPH) Routes
+$routes->group('vat', function($routes) {
+    $routes->get('api/calculate', 'VatController::calculate');
+    $routes->get('api/rates', 'VatController::rates');
+    $routes->get('api/history', 'VatController::history');
+});
