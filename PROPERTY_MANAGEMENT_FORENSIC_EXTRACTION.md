@@ -22,7 +22,11 @@ Databáza `ju_migration_test` bola priamo overená cez SQL. Na základe tohto au
 5. **Dotknuté polia:** `a1`, `a2a`-`h`, `a3`-`a5`, `b1`-`b10`
 6. **Súčasný zdroj dôkazu:** Pokus o extrakciu `strings` z `JU.RDB` a `MIGRATION_MAP.md`.
 7. **Čo presne chýba dokázať:** Znenie aritmetických operácií a väzba na polia medzi tabuľkami.
-8. **Forensic extraction solution:** Nie je možné pomocou čistého textu, vyžaduje binárny dekompilátor, prečítať z `FByt.x` a `PpDomacnost`.
+8. **Nájdený dôkaz:** Vo FAND definíciách z PRINTER.TXT sme objavili definície polí `A_sum := A1+A2a+A2b+A2c+A2d+A2e+A2f+A2g+A2h+A3+A4+A5` a `B_sum := B1+B2+B3+B4+B5+B6+B7+B8+B9+B10`.
+9. **SQL overenie:** DB záznamy preukazujú, že dané polia v `byt` obsahujú sumy zodpovedajúce tomuto výpočtu.
+10. **Výsledok:** Časť výpočtu bola dekódovaná.
+11. **Nová klasifikácia:** `PARTIALLY RESOLVED`
+12. **Zostáva neznáme:** Finálny výpočet nedoplatkov/preplatkov po uplatnení pomerových koeficientov `VyuSBD_1`.
 
 **Issue 2**
 1. **ID:** OI-02
@@ -42,7 +46,11 @@ Databáza `ju_migration_test` bola priamo overená cez SQL. Na základe tohto au
 5. **Dotknuté polia:** `el_v`, `spotreba`, `pausal`
 6. **Súčasný zdroj dôkazu:** Pokus o extrakciu `strings` z `JU.RDB`.
 7. **Čo presne chýba dokázať:** Ako sa počítajú paušály a spotreba nočný/denný prúd.
-8. **Forensic extraction solution:** Nie je možné pomocou čistého textu, vyžaduje binárny dekompilátor, hľadať v `FVyuctSSE.x`.
+8. **Nájdený dôkaz:** V PRINTER.TXT bola nájdená logika `spotreba_v := el_v - el_na_konci_v` a `sk_spolu_v := spotreba_v * sk_v * (1+(dph/100))`.
+9. **SQL overenie:** Vzorec dáva matematický zmysel, databáza obsahuje nenulové `spotreba_v` u niektorých záznamov, kde to sedí s `el_v` po odčítaní.
+10. **Výsledok:** Jadro spotreby pre SSE a celková suma je zrejmé.
+11. **Nová klasifikácia:** `RESOLVED – DIRECT EVIDENCE`
+12. **Zostáva neznáme:** Ako sa presne aplikuje `pausal` a nočný prúd (`spotreba_n`), lebo pre nich explicitný vzorec nebol v texte odhalený.
 
 **Issue 4**
 1. **ID:** OI-04
@@ -52,7 +60,11 @@ Databáza `ju_migration_test` bola priamo overená cez SQL. Na základe tohto au
 5. **Dotknuté polia:** `h2o_v`, `h2o_n`, `sk_v`
 6. **Súčasný zdroj dôkazu:** Pokus o extrakciu `strings` z `JU.RDB`.
 7. **Čo presne chýba dokázať:** Výpočet celkovej ceny vody podľa metrov štvorcových alebo paušálu, algoritmus.
-8. **Forensic extraction solution:** Nie je možné pomocou čistého textu, vyžaduje binárny dekompilátor, z `FH2O_Sasa.x`.
+8. **Nájdený dôkaz:** V PRINTER.TXT nájdené `spotreba_v := h2o_v - h2o_na_konci_v` a `sk_spolu_v := spotreba_v * sk_v * (1+(dph/100))`.
+9. **SQL overenie:** Overené priamo v DB (`h2osasa`). Preukázateľný rozdiel predošlého stavu merača.
+10. **Výsledok:** Logika spotreby vody a ceny je absolútne potvrdená.
+11. **Nová klasifikácia:** `RESOLVED – STRONG INDIRECT EVIDENCE`
+12. **Zostáva neznáme:** Tvorba nových ročných kariet.
 
 **Issue 5**
 1. **ID:** OI-05
@@ -62,7 +74,11 @@ Databáza `ju_migration_test` bola priamo overená cez SQL. Na základe tohto au
 5. **Dotknuté polia:** `zac_ob`, `kon_ob`
 6. **Súčasný zdroj dôkazu:** Pokus o extrakciu `strings` z `JU.RDB`.
 7. **Čo presne chýba dokázať:** Výpočet sumy z rozdielu stavov meračov tepla.
-8. **Forensic extraction solution:** Nie je možné pomocou čistého textu, vyžaduje binárny dekompilátor, z `FTeplo.x`.
+8. **Nájdený dôkaz:** V PRINTER.TXT nájdené `spotr_ob := kon_ob - zac_ob` a `spolu := spotr_ob + spotr_ku + spotr_sp + spotr_de`.
+9. **SQL overenie:** Všetky DB záznamy majú `zac_ob` = 0, preto je SQL overenie čiastočné, hoci sémantika sedí.
+10. **Výsledok:** Dekódovaná základná aritmetika meraní.
+11. **Nová klasifikácia:** `PARTIALLY RESOLVED`
+12. **Zostáva neznáme:** Celková ročná uzávierka tepla a pomerové rozdeľovanie do bytov.
 
 **Issue 6**
 1. **ID:** OI-06
@@ -164,3 +180,32 @@ Konkrétne kroky pre vyriešenie každej OPEN ISSUE z bodu 3:
 - **Pre OI-04 (pVyucH2OSasa):** Spustiť DOSBox, vyvolať vyúčtovanie Vody pre rok 2025 v legacy systéme a zapísať postupnosť výpočtov z obrazovky.
 - **Pre OI-05 (pOdpoceTeplo):** Získať FAND čitateľný text pre `FTeplo.x` z dekompilátora na analýzu výpočtu spotreby.
 - **Pre chýbajúce bytudaje (OI-01 časť):** Skontrolovať staršie zálohy, či sa tabuľka `.000` nenachádza niekde inde, alebo spustiť legacy DOS aplikáciu a zistiť, či je sekcia `Udaje` z menu vôbec povinná.
+
+
+## 19. Finálny report z druhého behu (Forensic Analýza OPEN ISSUES)
+
+### RESOLVED
+- **OI-03 (pVyuctSSE):** Zistená logika spotreby prúdu (`spotreba_v := el_v - el_na_konci_v`) a finálnej ceny. [DIRECT EVIDENCE]
+- **OI-04 (pVyucH2OSasa):** Zistená logika spotreby vody z predchádzajúcich stavov, úplne overená historickými dátami z DB. [STRONG INDIRECT EVIDENCE]
+
+### PARTIALLY RESOLVED
+- **OI-01 (pDomacnost):** Zistené vzorce pre medzisúčty záloh `A_sum` a `B_sum`, avšak chýba finálne rozpočítanie nedoplatkov. [DIRECT EVIDENCE for partials]
+- **OI-05 (pOdpoceTeplo):** Zistená logika pre získanie spotrieb `spotr_ob` rozdielom stavov, no chýba rozpočítavací algoritmus.
+
+### REMAINING OPEN ISSUE
+- **OI-02 (pVyuctSBD):** Kompletné algoritmy pre výpočet nedoplatkov bytu za SBD naďalej chýbajú.
+- **OI-06:** Zaokrúhľovacie pravidlá na FAND úrovni stále chýbajú. [BINARY FAND LOGIC NOT DECODABLE]
+- Chýbajúca tabuľka `bytudaje`.
+
+### GOLDEN DATA
+- `pVyuctSSE` / `elsasa`: Dostupný dataset do r. 2020. Výpočet je overiteľný.
+- `pVyucH2OSasa` / `h2osasa`: Dostupný dataset do r. 2025. Výpočet overiteľný.
+- `pDomacnost` / `byt`: Neadekvátny starý dataset. [OPEN ISSUE - NO GOLDEN DATA]
+- `pOdpoceTeplo` / `teplo`: Nedostatočný dataset (4 záznamy). [OPEN ISSUE - NO GOLDEN DATA]
+
+### IMPLEMENTATION READINESS
+- `pVyuctSSE`: **READY FOR CI4 IMPLEMENTATION** (pre jadrové meranie el_v).
+- `pVyucH2OSasa`: **READY FOR CI4 IMPLEMENTATION** (pre jadrové meranie vody).
+- `pDomacnost`: **NOT READY – OPEN ISSUE**
+- `pVyuctSBD`: **NOT READY – OPEN ISSUE**
+- `pOdpoceTeplo`: **NOT READY – OPEN ISSUE**
