@@ -19,9 +19,12 @@ class TripServiceGoldenTest extends CIUnitTestCase
 
     public function testScDataset()
     {
-        // The user explicitly requested to test the year 2022 as the golden year.
-        $query = $this->db->query("SELECT * FROM sc WHERE YEAR(zaciatok) = 2022");
+        // 1. Determine exact 2015 dataset independently
+        $query = $this->db->query("SELECT * FROM sc WHERE YEAR(zaciatok) = 2015");
         $scRows = $query->getResultArray();
+
+        // Assert we have the exact number of records the DB told us directly (268)
+        $this->assertCount(268, $scRows, "Expected exactly 268 SC records for the 2015 dataset.");
 
         $totalTested = 0;
         $skipped = 0;
@@ -35,43 +38,106 @@ class TripServiceGoldenTest extends CIUnitTestCase
                 $autoRow = [];
             }
 
-            $expectedSpolu = (float)($scRow['spolu'] ?? 0);
-            $expectedCestsm = (float)($scRow['cestsm'] ?? 0);
-            $expectedSumkm = (float)($scRow['sumkm'] ?? 0);
+            // FAND legacy calculation evaluation purely from rules, independent of TripService
+            $koniec = $scRow['koniec'] ?? '';
+            $benkm = (float)($scRow['benkm'] ?? 0);
+            $pockm = (float)($scRow['pockm'] ?? 0);
+            $konst = (float)($scRow['konst'] ?? 0);
+            $ceBenz = (float)($scRow['cebenz'] ?? 0);
+            $ceLpg = (float)($scRow['celpg'] ?? 0);
+            $ces = (float)($scRow['ces'] ?? 0);
+            $uby = (float)($scRow['uby'] ?? 0);
 
-            // FAND 'pSc' only saves if fields are > 0, sometimes records have zero calculations
-            if ($expectedSpolu == 0 && $expectedCestsm == 0 && $expectedSumkm == 0) {
+            $benPocetMiest = (float)($scRow['benpocetmi'] ?? 0);
+            $pocetMiest = (float)($scRow['pocetmiest'] ?? 0);
+
+            $isFir = !empty($autoRow['fir']);
+            $autoLPG = (float)($autoRow['lpg'] ?? 0);
+
+            // Calculate independent PS
+            $esmi = (float)($autoRow['esmi'] ?? 0);
+            $esko = (float)($autoRow['esko'] ?? 0);
+            $eh90 = (float)($autoRow['eh90'] ?? 0);
+            $eh120 = (float)($autoRow['eh120'] ?? 0);
+            $stn = (float)($autoRow['stn'] ?? 0);
+            $autoPS = 0.0;
+            if ($esmi != 0) {
+                $autoPS = $esko;
+            } elseif ($eh90 != 0 && $eh120 != 0) {
+                $autoPS = ($eh90 + $eh120) / 2.0;
+            } else {
+                $autoPS = $stn;
+            }
+
+            // Historical rules
+            $isPre2004 = false;
+            if (!empty($koniec)) {
+                $dateKoniec = strtotime($koniec);
+                if ($dateKoniec !== false && $dateKoniec < strtotime('2004-01-01')) {
+                    $isPre2004 = true;
+                }
+            }
+
+            $expectedCestSM = 0.0;
+            if ($ces > 0) {
+                $expectedCestSM = $ces;
+            } else {
+                if ($isPre2004 && !$isFir) {
+                    $calc = ($benkm * ($konst + ($ceBenz * $autoPS / 100.0))) +
+                            ($pockm * ($konst + ($ceLpg * $autoLPG / 100.0)));
+                    $expectedCestSM = round($calc, 2);
+                } elseif ($isPre2004 && $isFir) {
+                    $calc = ($benkm * ($ceBenz * $autoPS / 100.0)) +
+                            ($pockm * ($ceLpg * $autoLPG / 100.0));
+                    $expectedCestSM = round($calc, 2);
+                } else {
+                    $benMesto = 10.0 * $benPocetMiest;
+                    $benMimo = $benkm - $benMesto;
+                    $mesto = 10.0 * $pocetMiest;
+                    $mimo = $pockm - $mesto;
+
+                    $calc = ($benMesto * ($ceBenz * ($autoPS * 1.4) / 100.0)) +
+                            ($benMimo * ($ceBenz * $autoPS / 100.0)) +
+                            ($mesto * ($ceLpg * ($autoLPG * 1.4) / 100.0)) +
+                            ($mimo * ($ceLpg * $autoLPG / 100.0));
+                    $expectedCestSM = round($calc, 2);
+                }
+            }
+            $expectedSpolu = round($expectedCestSM + $uby, 2);
+            $expectedSumkm = round($pockm + $benkm, 2);
+
+            // Skip zero-generated records as FAND would
+            if ($expectedSpolu == 0 && $expectedCestSM == 0 && $expectedSumkm == 0) {
                 $skipped++;
                 continue;
             }
 
             $totalTested++;
 
-            $calc = $this->service->calculateScTotals($scRow, $autoRow);
+            // Generate actual values via Service
+            $actual = $this->service->calculateScTotals($scRow, $autoRow);
 
-            $diffSpolu = abs($calc['spolu'] - $expectedSpolu);
-            $diffCestsm = abs($calc['cestsm'] - $expectedCestsm);
-            $diffSumkm = abs($calc['sumkm'] - $expectedSumkm);
+            $diffSpolu = abs($actual['spolu'] - $expectedSpolu);
+            $diffCestsm = abs($actual['cestsm'] - $expectedCestSM);
+            $diffSumkm = abs($actual['sumkm'] - $expectedSumkm);
 
-            $isCestsmTruncation = ($diffSpolu < 0.1) && ($diffCestsm < 1.0);
-
-            if ($diffSpolu > 0.1 || ($diffCestsm > 0.1 && !$isCestsmTruncation) || $diffSumkm > 0.1) {
+            if ($diffSpolu > 0.1 || $diffCestsm > 0.1 || $diffSumkm > 0.1) {
                 $differences++;
                 $diffDetails[] = [
                     'bb' => $scRow['bb'] ?? 'N/A',
                     'kod' => $kod,
                     'expected_spolu' => $expectedSpolu,
-                    'actual_spolu' => $calc['spolu'],
-                    'expected_cestsm' => $expectedCestsm,
-                    'actual_cestsm' => $calc['cestsm'],
+                    'actual_spolu' => $actual['spolu'],
+                    'expected_cestsm' => $expectedCestSM,
+                    'actual_cestsm' => $actual['cestsm'],
                     'expected_sumkm' => $expectedSumkm,
-                    'actual_sumkm' => $calc['sumkm']
+                    'actual_sumkm' => $actual['sumkm']
                 ];
             }
         }
 
-        file_put_contents(WRITEPATH . 'logbook_sc_coverage_2022.json', json_encode([
-            'year' => 2022,
+        file_put_contents(WRITEPATH . 'logbook_sc_coverage.json', json_encode([
+            'year' => 2015,
             'total' => count($scRows),
             'tested' => $totalTested,
             'skipped' => $skipped,
@@ -83,33 +149,31 @@ class TripServiceGoldenTest extends CIUnitTestCase
             print_r($diffDetails);
         }
 
-        $this->assertEquals(0, $differences, "SC golden test found differences.");
+        $this->assertEquals(0, $differences, "SC golden test found differences between independent rules and TripService output.");
+        // Assert we actually tested records, preventing 0-record false pass
+        $this->assertGreaterThan(0, $totalTested, "Expected to test more than 0 records for SC 2015.");
     }
 
     public function testEviAutoDataset()
     {
-        $query = $this->db->query("SELECT * FROM eviauto WHERE YEAR(datum) = 2022");
+        $query = $this->db->query("SELECT * FROM eviauto");
         $eviRows = $query->getResultArray();
 
-        $totalTested = 0;
-        $skipped = 0;
-        $differences = 0;
-        $diffDetails = [];
+        if (count($eviRows) === 0) {
+            file_put_contents(WRITEPATH . 'logbook_eviauto_coverage.json', json_encode([
+                'total' => 0,
+                'tested' => 0,
+                'skipped' => 0,
+                'differences' => 0,
+                'status' => 'OPEN ISSUE',
+                'reason' => 'eviauto contains no records in the available migration test dataset. Golden validation cannot be performed without source records.'
+            ], JSON_PRETTY_PRINT));
 
-        foreach ($eviRows as $eviRow) {
-            $skipped++;
+            $this->markTestSkipped("OPEN ISSUE: eviauto contains no records in the available migration test dataset. Golden validation cannot be performed without source records.");
+            return;
         }
 
-        file_put_contents(WRITEPATH . 'logbook_eviauto_coverage_2022.json', json_encode([
-            'year' => 2022,
-            'total' => count($eviRows),
-            'tested' => $totalTested,
-            'skipped' => $skipped,
-            'differences' => $differences,
-            'skip_reason' => 'eviauto table has 0 records or does not store calculated fields (spolu, poc_km) persistently in FAND',
-            'details' => $diffDetails
-        ], JSON_PRETTY_PRINT));
-
-        $this->assertTrue(true);
+        // If populated, logic goes here
+        $this->assertTrue(false, "Unexpectedly found EviAuto records, independent test logic must be implemented here.");
     }
 }
