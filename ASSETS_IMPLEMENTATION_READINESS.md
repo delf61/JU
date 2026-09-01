@@ -38,7 +38,7 @@ Forensic audit and implementation readiness assessment of the Assets (`HaN Majet
 
 ## 6. Proven Legacy Logic
 *   **Výpočet základu DPH (IKZP/IKDKP):** Vzorec `((h * 100) / (100 + dph)) round 1` je bezpečne preukázaný z `PRINTER.TXT`. Zaokrúhľovanie na 1 desatinné miesto pred ďalšími výpočtami je striktne vyžadované FAND prostredím. (VERIFIED)
-*   **Odpisová matematika (IKZP):** Rozhodovací strom založený na kombinácii `so`, `ro` a `os` bol presne namapovaný a testovaný v `AssetService`. Obsahuje zaokrúhľovanie nahor (`ceil`) pre vypočítanú hodnotu odpisu `vo`. (VERIFIED)
+*   **Odpisová matematika (IKZP):** Rozhodovací strom založený na kombinácii `so`, `ro` a `os` bol presne namapovaný a testovaný v `AssetService`. Obsahuje zaokrúhľovanie nahor (`ceil`) pre vypočítanú hodnotu odpisu `vo` založené na vzorci `INT(VOO) + COND( FRAC(VOO)>0 : 1 )`. (VERIFIED)
 
 ## 7. Field Mapping
 *   `DOS h` → `ikzp.h` → Vstupná hodnota (VERIFIED - PRINTER.TXT / AssetService)
