@@ -209,3 +209,7 @@ Konkrétne kroky pre vyriešenie každej OPEN ISSUE z bodu 3:
 - `pDomacnost`: **NOT READY – OPEN ISSUE**
 - `pVyuctSBD`: **NOT READY – OPEN ISSUE**
 - `pOdpoceTeplo`: **NOT READY – OPEN ISSUE**
+
+
+## 20. Update - Forensic Closure Analysis
+Na základe hĺbkovej analýzy `PRINTER.TXT` boli identifikované presné výpočty pre `A_sum`, `B_sum`, `spotreba_v` a `spotr_ob`, čím sa pôvodné `BINARY FAND LOGIC NOT DECODABLE` čiastočne vyriešilo (`FORMULA VERIFIED` / `DB CROSS-CHECK VERIFIED`). Podrobná matica vyriešených a nevyriešených problémov sa teraz nachádza v dokumente `PROPERTY_MANAGEMENT_FORENSIC_OI_CLOSURE.md`.
