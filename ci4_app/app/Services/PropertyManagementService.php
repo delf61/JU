@@ -37,12 +37,12 @@ class PropertyManagementService
     {
         $el_v = (int) ($currentRecord['el_v'] ?? 0);
 
-        $vymena = (bool) ($currentRecord['vymena'] ?? false);
+
         $el_na_konci_v = 0;
 
-        if ($vymena) {
-            $el_na_konci_v = $el_v;
-        } elseif ($previousRecord !== null) {
+
+
+        if ($previousRecord !== null) {
             $el_na_konci_v = (int) ($previousRecord['el_v'] ?? 0);
         }
 
