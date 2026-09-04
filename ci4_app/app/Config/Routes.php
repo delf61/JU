@@ -17,6 +17,14 @@ $routes->group('dictionary/api', function($routes) {
     $routes->delete('delete/(:segment)/(:segment)', 'DictionaryController::delete/$1/$2');
 });
 
+$routes->group('api/accounting', ['namespace' => 'App\Controllers'], function ($routes) {
+    $routes->get('initial-states', 'AccountingController::index');
+    $routes->get('initial-states/(:segment)', 'AccountingController::show/$1');
+    $routes->post('initial-states', 'AccountingController::create');
+    $routes->put('initial-states/(:segment)', 'AccountingController::update/$1');
+    $routes->delete('initial-states/(:segment)', 'AccountingController::delete/$1');
+});
+
 // Partners and Udaje Routes
 $routes->group('partners', function($routes) {
     // Views
