@@ -47,3 +47,13 @@ V prostredí prípravy (sandboxe bez aktívnej služby MariaDB databázy) príka
 ### Známe obmedzenia (Limitations)
 1. **Databázové pripojenie v sandboxe:** Validácia plného smoke-testu pPV (`Accounting -> Počiatočný stav`) vrátane CREATE/UPDATE/DELETE nebola možná priamo pred tvorbou tohto exportu kvôli chýbajúcemu bežiacemu MariaDB serveru. Tento test musí užívateľ vykonať na pripravenom cieľovom XAMPP stroji presne podľa `LOCAL_SETUP.md`.
 2. **Nepribalený Vendor adresár:** Distribúcia bez `vendor` adresára vyžaduje u užívateľa pripojenie na internet pri prvom spustení `composer install`. (To je štandard, avšak nutné poznamenať).
+
+## Zdieľanie ZIP Exportu na GitHube (Release)
+
+*   **Názov ZIP súboru:** `JU-CI4-main-6b60c78.zip`
+*   **Source Commit:** `6b60c78`
+*   **SHA-256 Hash:** `68d67a0e46c6cb3304422aef6b9050ee648446d3d50c1a9edbcf7d3d048ca22a`
+*   **GitHub Release / Tag:** Na GitHube vytvorte nový Release s názvom `JU CI4 6b60c78` (naviazaný na tento commit) a priložte vytvorený ZIP ako Release Asset.
+
+**Upozornenie:** GitHub upload/release permission is unavailable pre bota/agenta v tomto sandbox prostredí, a preto nebolo možné vykonať automatický upload ZIP súboru priamo do Release.
+Užívateľ (alebo CI/CD pipeline) musí tento ZIP archív vytvorený v pracovnom prostredí manuálne nahrať do GitHub Releases ako Asset.
