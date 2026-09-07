@@ -14,6 +14,39 @@ class AccountingController extends ResourceController
         $this->initialStateService = new InitialStateService();
     }
 
+    // --- Views ---
+
+    public function initialStates()
+    {
+        $data = $this->initialStateService->getInitialStates();
+        return view('accounting/initial_states', [
+            'initialStates' => $data
+        ]);
+    }
+
+    public function updateInitialStatePost($date = null)
+    {
+        if ($date === null) {
+            return redirect()->to('/accounting/initial-states')->with('error', 'Chýba identifikátor (dátum).');
+        }
+
+        $postData = $this->request->getPost();
+
+        // Validácia existencie
+        if (!$this->initialStateService->getInitialStateByDate($date)) {
+            return redirect()->to('/accounting/initial-states')->with('error', 'Počiatočný stav nebol nájdený.');
+        }
+
+        try {
+            $this->initialStateService->updateInitialState($date, $postData);
+            return redirect()->to('/accounting/initial-states')->with('success', 'Záznam bol úspešne uložený.');
+        } catch (\Exception $e) {
+            return redirect()->to('/accounting/initial-states')->with('error', 'Nastala chyba pri ukladaní: ' . $e->getMessage());
+        }
+    }
+
+    // --- API ---
+
     public function index()
     {
         $data = $this->initialStateService->getInitialStates();
