@@ -5,7 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /** @var RouteCollection $routes */
 $routes->get('/', 'Home::index');
 
-$routes->get('cashbook', 'Home::cashbook');
+
 
 // Dictionary Routes
 $routes->get('dictionary', 'DictionaryController::index');
@@ -69,6 +69,13 @@ $routes->group('invoices', function($routes) {
 
 
 // Cashbook Routes
+// Cashbook Web UI Routes
+$routes->get('cashbook', 'CashbookController::webIndex');
+$routes->get('cashbook/create', 'CashbookController::create');
+$routes->post('cashbook/store', 'CashbookController::store');
+$routes->get('cashbook/edit/(:any)/(:num)', 'CashbookController::uiEdit/$1/$2');
+$routes->post('cashbook/update/(:any)/(:num)', 'CashbookController::uiUpdate/$1/$2');
+
 $routes->group('cashbook', function($routes) {
     // API
     $routes->get('api', 'CashbookController::index');

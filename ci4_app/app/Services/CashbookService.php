@@ -22,7 +22,7 @@ class CashbookService
     public function getEntries($year = null)
     {
         if ($year) {
-            return $this->pdModel->where('_year', $year)->findAll();
+            return $this->pdModel->where('YEAR(a)', $year)->findAll();
         }
         return $this->pdModel->findAll();
     }
@@ -32,7 +32,7 @@ class CashbookService
      */
     public function getEntry($b, $year)
     {
-        return $this->pdModel->where(['b' => $b, '_year' => $year])->first();
+        return $this->pdModel->where(['b' => $b, 'YEAR(a)' => $year])->first();
     }
 
     /**
