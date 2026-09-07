@@ -19,6 +19,7 @@ $routes->group('dictionary/api', function($routes) {
 
 $routes->group('accounting', function ($routes) {
     $routes->get('initial-states', 'AccountingController::initialStates');
+    $routes->post('initial-states/(:segment)', 'AccountingController::updateInitialStatePost/$1');
 });
 
 $routes->group('api/accounting', ['namespace' => 'App\Controllers'], function ($routes) {

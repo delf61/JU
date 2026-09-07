@@ -23,8 +23,13 @@
 <body>
     <h1>Počiatočné stavy</h1>
 
-    <div id="statusMessageSuccess" class="success-msg">Záznam bol úspešne uložený.</div>
-    <div id="statusMessageError" class="error-msg">Nastala chyba.</div>
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="success-msg" style="display: block;"><?= esc(session()->getFlashdata('success')) ?></div>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="error-msg" style="display: block;"><?= esc(session()->getFlashdata('error')) ?></div>
+    <?php endif; ?>
 
     <table id="initialStatesTable">
         <thead>
@@ -39,7 +44,37 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Data will be loaded here -->
+            <?php if (empty($initialStates)): ?>
+                <tr><td colspan="7">Žiadne záznamy na zobrazenie.</td></tr>
+            <?php else: ?>
+                <?php foreach ($initialStates as $item): ?>
+                    <tr>
+                        <td><?= esc(isset($item['a']) ? substr($item['a'], 0, 10) : 'N/A') ?></td>
+                        <td><?= esc($item['b'] ?? '') ?></td>
+                        <td><?= esc($item['ph'] ?? '0.00') ?></td>
+                        <td><?= esc($item['pu'] ?? '0.00') ?></td>
+                        <td><?= esc($item['m'] ?? '0.00') ?></td>
+                        <td><?= esc($item['zav'] ?? '0.00') ?></td>
+                        <td>
+                            <?php if (isset($item['a'])): ?>
+                                <!-- Priradenie dátových atribútov k preneseniu údajov do modalu pri čisto JS interakcii (žiadne API volania) -->
+                                <button type="button"
+                                    onclick="openEditModal(this)"
+                                    data-a="<?= esc($item['a']) ?>"
+                                    data-b="<?= esc($item['b'] ?? '') ?>"
+                                    data-ph="<?= esc($item['ph'] ?? '') ?>"
+                                    data-h="<?= esc($item['h'] ?? '') ?>"
+                                    data-pu="<?= esc($item['pu'] ?? '') ?>"
+                                    data-u="<?= esc($item['u'] ?? '') ?>"
+                                    data-m="<?= esc($item['m'] ?? '') ?>"
+                                    data-han="<?= esc($item['han'] ?? '') ?>"
+                                    data-poh="<?= esc($item['poh'] ?? '') ?>"
+                                    data-zav="<?= esc($item['zav'] ?? '') ?>">Upraviť</button>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </tbody>
     </table>
 
@@ -47,9 +82,8 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>Upraviť počiatočný stav</h2>
-            <form id="editForm">
-                <input type="hidden" id="editDate" name="a">
-
+            <!-- Klasický form submit -->
+            <form id="editForm" method="post" action="/accounting/initial-states/placeholder">
                 <div class="form-group">
                     <label for="b">Číslo dokladu (b):</label>
                     <input type="text" id="b" name="b" required>
@@ -95,142 +129,36 @@
                     <input type="number" step="0.01" id="zav" name="zav">
                 </div>
 
-                <button type="button" onclick="saveRecord()">Uložiť</button>
+                <button type="submit">Uložiť</button>
             </form>
         </div>
     </div>
 
     <script>
-        const apiUrl = '/api/accounting/initial-states';
-        let currentRecordDate = null;
+        function openEditModal(btn) {
+            const date = btn.getAttribute('data-a');
 
-        async function loadRecords() {
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    showError('Chyba pri načítavaní údajov z API.');
-                    return;
-                }
-                const data = await response.json();
+            // Set action URL dynamically for classic form submit
+            const form = document.getElementById('editForm');
+            form.action = '/accounting/initial-states/' + date;
 
-                const tbody = document.querySelector('#initialStatesTable tbody');
-                tbody.innerHTML = '';
+            // Populate inputs from dataset
+            document.getElementById('b').value = btn.getAttribute('data-b');
+            document.getElementById('ph').value = btn.getAttribute('data-ph');
+            document.getElementById('h').value = btn.getAttribute('data-h');
+            document.getElementById('pu').value = btn.getAttribute('data-pu');
+            document.getElementById('u').value = btn.getAttribute('data-u');
+            document.getElementById('m').value = btn.getAttribute('data-m');
+            document.getElementById('han').value = btn.getAttribute('data-han');
+            document.getElementById('poh').value = btn.getAttribute('data-poh');
+            document.getElementById('zav').value = btn.getAttribute('data-zav');
 
-                if (!data || data.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="7">Žiadne záznamy na zobrazenie.</td></tr>';
-                    return;
-                }
-
-                data.forEach(item => {
-                    const aValue = item.a ? item.a.substring(0, 10) : 'N/A';
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>${aValue}</td>
-                        <td>${item.b || ''}</td>
-                        <td>${item.ph || '0.00'}</td>
-                        <td>${item.pu || '0.00'}</td>
-                        <td>${item.m || '0.00'}</td>
-                        <td>${item.zav || '0.00'}</td>
-                        <td>
-                            ${item.a ? `<button onclick="openEditModal('${item.a}')">Upraviť</button>` : ''}
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            } catch (error) {
-                console.error('Error loading data:', error);
-                showError('Chyba spojenia pri načítavaní údajov.');
-            }
-        }
-
-        async function openEditModal(dateString) {
-            hideMessages();
-            try {
-                const response = await fetch(`${apiUrl}/${dateString}`);
-                if (!response.ok) {
-                    showError('Záznam sa nepodarilo načítať pre úpravu.');
-                    return;
-                }
-                const record = await response.json();
-
-                currentRecordDate = record.a;
-                document.getElementById('editDate').value = record.a;
-                document.getElementById('b').value = record.b || '';
-                document.getElementById('ph').value = record.ph || 0;
-                document.getElementById('h').value = record.h || '';
-                document.getElementById('pu').value = record.pu || 0;
-                document.getElementById('u').value = record.u || '';
-                document.getElementById('m').value = record.m || 0;
-                document.getElementById('han').value = record.han || 0;
-                document.getElementById('poh').value = record.poh || 0;
-                document.getElementById('zav').value = record.zav || 0;
-
-                document.getElementById('editModal').style.display = 'block';
-            } catch (error) {
-                console.error('Error fetching record for edit:', error);
-                showError('Chyba spojenia pri načítavaní záznamu.');
-            }
+            document.getElementById('editModal').style.display = 'block';
         }
 
         function closeModal() {
             document.getElementById('editModal').style.display = 'none';
-            currentRecordDate = null;
         }
-
-        async function saveRecord() {
-            if (!currentRecordDate) {
-                showError('Chýba identifikátor záznamu pre uloženie.');
-                return;
-            }
-
-            const form = document.getElementById('editForm');
-            const data = {};
-            new FormData(form).forEach((value, key) => {
-                data[key] = value;
-            });
-
-            try {
-                const response = await fetch(`${apiUrl}/${currentRecordDate}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                if (response.ok) {
-                    closeModal();
-                    showSuccess('Záznam bol úspešne uložený.');
-                    loadRecords();
-                } else {
-                    const result = await response.json();
-                    showError('Chyba API pri ukladaní: ' + JSON.stringify(result.messages || result));
-                }
-            } catch (error) {
-                console.error('Error saving record:', error);
-                showError('Chyba spojenia pri ukladaní.');
-            }
-        }
-
-        function showSuccess(msg) {
-            const el = document.getElementById('statusMessageSuccess');
-            el.textContent = msg;
-            el.style.display = 'block';
-            document.getElementById('statusMessageError').style.display = 'none';
-            setTimeout(() => { el.style.display = 'none'; }, 5000);
-        }
-
-        function showError(msg) {
-            const el = document.getElementById('statusMessageError');
-            el.textContent = msg;
-            el.style.display = 'block';
-            document.getElementById('statusMessageSuccess').style.display = 'none';
-        }
-
-        function hideMessages() {
-            document.getElementById('statusMessageError').style.display = 'none';
-            document.getElementById('statusMessageSuccess').style.display = 'none';
-        }
-
-        window.onload = loadRecords;
     </script>
 </body>
 </html>
