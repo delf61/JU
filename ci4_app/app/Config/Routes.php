@@ -17,6 +17,10 @@ $routes->group('dictionary/api', function($routes) {
     $routes->delete('delete/(:segment)/(:segment)', 'DictionaryController::delete/$1/$2');
 });
 
+$routes->group('accounting', function ($routes) {
+    $routes->get('initial-states', 'AccountingController::initialStates');
+});
+
 $routes->group('api/accounting', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->get('initial-states', 'AccountingController::index');
     $routes->get('initial-states/(:segment)', 'AccountingController::show/$1');

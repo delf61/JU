@@ -14,6 +14,15 @@ class AccountingController extends ResourceController
         $this->initialStateService = new InitialStateService();
     }
 
+    // --- Views ---
+
+    public function initialStates()
+    {
+        return view('accounting/initial_states');
+    }
+
+    // --- API ---
+
     public function index()
     {
         $data = $this->initialStateService->getInitialStates();
