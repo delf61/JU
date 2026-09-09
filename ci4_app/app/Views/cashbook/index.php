@@ -69,14 +69,14 @@
     <table id="cashbookTable" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>Dátum (a)</th>
-                <th>Doklad (b)</th>
-                <th>Kód OP</th>
-                <th>Text (d)</th>
-                <th class="text-right">Príjem Hot (a1)</th>
-                <th class="text-right">Výdaj Hot (a2)</th>
-                <th class="text-right">Príjem BÚ (a3)</th>
-                <th class="text-right">Výdaj BÚ (a4)</th>
+                <th>a</th>
+                <th>AkyDen</th>
+                <th>d40</th>
+                <th class="text-right">Celkove</th>
+                <th class="text-right">sDPH</th>
+                <th>typ_vyd</th>
+                <th>Vydaj</th>
+                <th>ok</th>
                 <th>Akcie</th>
             </tr>
         </thead>
@@ -87,15 +87,52 @@
                 </tr>
             <?php else: ?>
                 <?php foreach ($entries as $row): ?>
+                    <?php
+                        $dayOfWeek = date('N', strtotime($row['a']));
+                        $days = [1 => 'Po', 2 => 'Ut', 3 => 'St', 4 => 'Št', 5 => 'Pi', 6 => 'So', 7 => 'Ne'];
+                        $akyDen = $days[$dayOfWeek] ?? '';
+
+                        // FAND exact formulas
+                        $r = !empty($row['r']);
+                        $a1 = (float)($row['a1'] ?? 0);
+                        $a2 = (float)($row['a2'] ?? 0);
+                        $a3 = (float)($row['a3'] ?? 0);
+                        $a4 = (float)($row['a4'] ?? 0);
+                        $a14 = (float)($row['a14'] ?? 0);
+
+                        $a5 = $r ? ($a1 + $a3) : 0;
+                        $a6 = $r ? ($a2 + $a4 - $a14) : 0;
+                        $celkove = $a5 - $a6;
+
+                        $hod_pri = $a1 + $a3;
+                        $hod_vyd = $a2 + $a4;
+                        $hal = (float)($row['hal_p'] ?? 0);
+                        $dph_rate = (float)($row['dph'] ?? 0);
+                        $year = (int)date('Y', strtotime($row['a']));
+
+                        if ($year < 2009) {
+                            $dph_sk_p = round($hod_pri * ($dph_rate / 100));
+                            $dph_sk = round($hod_vyd * ($dph_rate / 100));
+                        } else {
+                            $dph_sk_p = round($hod_pri * ($dph_rate / 100), 2);
+                            $dph_sk = round($hod_vyd * ($dph_rate / 100), 2);
+                        }
+
+                        $zn_p = $hod_pri + ($hod_pri != 0 ? $hal : 0) + $dph_sk_p;
+                        $zn = $hod_vyd + ($hod_vyd != 0 ? $hal : 0) + $dph_sk;
+                        $sDPH = $zn_p - $zn;
+
+                        $ok = ''; // Not persistently stored in pd, dynamically evaluated in UI/Reports if matches criteria, default empty
+                    ?>
                     <tr>
                         <td><?= esc(date('d.m.Y', strtotime($row['a']))) ?></td>
-                        <td><?= esc($row['b']) ?></td>
-                        <td><?= esc($row['kodop']) ?></td>
-                        <td><?= esc($row['d']) ?></td>
-                        <td class="text-right"><?= number_format($row['a1'] ?? 0, 2, '.', '') ?></td>
-                        <td class="text-right"><?= number_format($row['a2'] ?? 0, 2, '.', '') ?></td>
-                        <td class="text-right"><?= number_format($row['a3'] ?? 0, 2, '.', '') ?></td>
-                        <td class="text-right"><?= number_format($row['a4'] ?? 0, 2, '.', '') ?></td>
+                        <td><?= esc($akyDen) ?></td>
+                        <td><?= esc($row['d'] ?? '') ?></td>
+                        <td class="text-right"><?= number_format($celkove, 2, '.', '') ?></td>
+                        <td class="text-right"><?= number_format($sDPH, 2, '.', '') ?></td>
+                        <td><?= esc($row['kodop'] ?? '') ?></td>
+                        <td><?= esc($row['vydaj'] ?? '') ?></td>
+                        <td><?= esc($ok) ?></td>
                         <td>
                             <a href="<?= site_url('cashbook/edit/' . esc($row['b']) . '/' . esc($year)) ?>" class="btn btn-edit">Editovať</a>
                             <form action="<?= site_url('cashbook/delete/' . esc($row['b']) . '/' . esc($year)) ?>" method="post" style="display:inline;" onsubmit="return confirm('Naozaj vymazať tento záznam?');">
