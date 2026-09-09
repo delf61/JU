@@ -75,6 +75,8 @@ $routes->get('cashbook/create', 'CashbookController::create');
 $routes->post('cashbook/store', 'CashbookController::store');
 $routes->get('cashbook/edit/(:any)/(:num)', 'CashbookController::uiEdit/$1/$2');
 $routes->post('cashbook/update/(:any)/(:num)', 'CashbookController::uiUpdate/$1/$2');
+$routes->post('cashbook/delete/(:any)/(:num)', 'CashbookController::uiDelete/$1/$2');
+
 
 $routes->group('cashbook', function($routes) {
     // API

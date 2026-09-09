@@ -3,21 +3,21 @@
 namespace App\Controllers;
 
 use App\Services\CashbookService;
-use App\Models\DovodBuModel;
+
 use App\Services\InitialStateService;
 use CodeIgniter\RESTful\ResourceController;
 
 class CashbookController extends ResourceController
 {
     protected $cashbookService;
-    protected $dovodBuModel;
+
     protected $initialStateService;
     protected $format = 'json';
 
     public function __construct()
     {
         $this->cashbookService = new CashbookService();
-        $this->dovodBuModel = new DovodBuModel();
+
         $this->initialStateService = new InitialStateService();
     }
 
@@ -54,7 +54,7 @@ class CashbookController extends ResourceController
 
     public function reasons()
     {
-        $reasons = $this->dovodBuModel->where('_fand_deleted !=', 1)->orWhere('_fand_deleted IS NULL')->findAll();
+        $reasons = []; // dovod_bu is transient in FAND
         return $this->respond($reasons);
     }
 
@@ -92,7 +92,7 @@ class CashbookController extends ResourceController
     public function create()
     {
         $year = $this->request->getGet('year') ?: date('Y');
-        $reasons = $this->dovodBuModel->where('_fand_deleted !=', 1)->orWhere('_fand_deleted IS NULL')->findAll();
+        $reasons = []; // dovod_bu is transient in FAND
 
         return view('cashbook/form', [
             'year' => $year,
@@ -147,17 +147,17 @@ class CashbookController extends ResourceController
 
         $pdModel->insert($data);
 
-        return redirect()->to('/cashbook?year=' . date('Y', strtotime($data['a'])))->with('success', 'Záznam bol úspešne pridaný.');
+        return redirect()->to('cashbook?year=' . date('Y', strtotime($data['a'])))->with('success', 'Záznam bol úspešne pridaný.');
     }
 
     public function uiEdit($b, $year)
     {
         $entry = $this->cashbookService->getEntry($b, $year);
         if (!$entry) {
-            return redirect()->to('/cashbook?year=' . $year)->with('error', 'Záznam nenájdený.');
+            return redirect()->to('cashbook?year=' . $year)->with('error', 'Záznam nenájdený.');
         }
 
-        $reasons = $this->dovodBuModel->where('_fand_deleted !=', 1)->orWhere('_fand_deleted IS NULL')->findAll();
+        $reasons = []; // dovod_bu is transient in FAND
 
         return view('cashbook/form', [
             'year' => $year,
@@ -223,6 +223,16 @@ class CashbookController extends ResourceController
            ->where('YEAR(a)', $year)
            ->update($updateData);
 
-        return redirect()->to('/cashbook?year=' . $newYear)->with('success', 'Záznam bol úspešne upravený.');
+        return redirect()->to('cashbook?year=' . $newYear)->with('success', 'Záznam bol úspešne upravený.');
+    }
+
+    public function uiDelete($b, $year)
+    {
+        $db = \Config\Database::connect();
+        $db->table('pd')
+           ->where('b', $b)
+           ->where('YEAR(a)', $year)
+           ->delete();
+        return redirect()->to('cashbook?year=' . $year)->with('success', 'Záznam bol úspešne vymazaný.');
     }
 }

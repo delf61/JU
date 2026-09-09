@@ -21,6 +21,11 @@
         .btn-edit { background: #ffc107; color: black; }
         .btn-edit:hover { background: #e0a800; }
     </style>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- DataTables CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 </head>
 <body>
     <h1>Peňažný denník (Cashbook)</h1>
@@ -32,15 +37,15 @@
         <div class="error-msg"><?= esc(session()->getFlashdata('error')) ?></div>
     <?php endif; ?>
 
-    <form method="get" action="/cashbook" class="year-selector">
+    <form method="get" action="<?= site_url('cashbook') ?>" class="year-selector">
         <label for="year">Účtovný rok:</label>
         <input type="number" name="year" id="year" value="<?= esc($year) ?>" min="1990" max="2100">
         <button type="submit">Zobraziť</button>
     </form>
 
     <div style="margin-bottom: 15px;">
-        <a href="/cashbook/create?year=<?= esc($year) ?>" class="btn">Pridať nový záznam</a>
-        <a href="/" style="margin-left: 10px;">Späť na domovskú stránku</a>
+        <a href="<?= site_url('cashbook/create') ?>?year=<?= esc($year) ?>" class="btn">Pridať nový záznam</a>
+        <a href="<?= base_url() ?>" style="margin-left: 10px;">Späť na domovskú stránku</a>
     </div>
 
     <div class="summary-box">
@@ -61,7 +66,7 @@
         </div>
     </div>
 
-    <table>
+    <table id="cashbookTable" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>Dátum (a)</th>
@@ -92,12 +97,42 @@
                         <td class="text-right"><?= number_format($row['a3'] ?? 0, 2, '.', '') ?></td>
                         <td class="text-right"><?= number_format($row['a4'] ?? 0, 2, '.', '') ?></td>
                         <td>
-                            <a href="/cashbook/edit/<?= esc($row['b']) ?>/<?= esc($year) ?>" class="btn btn-edit">Editovať</a>
+                            <a href="<?= site_url('cashbook/edit/' . esc($row['b']) . '/' . esc($year)) ?>" class="btn btn-edit">Editovať</a>
+                            <form action="<?= site_url('cashbook/delete/' . esc($row['b']) . '/' . esc($year)) ?>" method="post" style="display:inline;" onsubmit="return confirm('Naozaj vymazať tento záznam?');">
+                                <button type="submit" class="btn btn-danger" style="background:#dc3545;color:white;border:none;padding:5px 10px;border-radius:3px;cursor:pointer;">Vymazať</button>
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
         </tbody>
     </table>
+    <script>
+        $(document).ready(function () {
+            $('#cashbookTable').DataTable({
+                language: {
+                    search: "Vyhľadávanie:",
+                    lengthMenu: "Zobraziť _MENU_ záznamov na stranu",
+                    zeroRecords: "Žiadne záznamy neboli nájdené",
+                    info: "Zobrazených _START_ až _END_ z _TOTAL_ záznamov",
+                    infoEmpty: "Zobrazených 0 až 0 z 0 záznamov",
+                    infoFiltered: "(vyfiltrované z _MAX_ celkových záznamov)",
+                    emptyTable: "Žiadne dáta nie sú k dispozícii",
+                    paginate: {
+                        first: "Prvá",
+                        previous: "Predchádzajúca",
+                        next: "Ďalšia",
+                        last: "Posledná"
+                    }
+                },
+                ordering: true,
+                paging: true,
+                pageLength: 25,
+                columnDefs: [
+                    { orderable: false, targets: -1 } // Disable sorting on Action column
+                ]
+            });
+        });
+    </script>
 </body>
 </html>

@@ -17,14 +17,19 @@
         .form-group input, .form-group textarea { width: 100%; padding: 8px; box-sizing: border-box; }
         .close { float: right; cursor: pointer; font-size: 20px; }
     </style>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- DataTables CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 </head>
 <body>
     <h1>Obchodní partneri</h1>
 
     <button onclick="openCreateModal()">Pridať partnera</button>
-    <a href="/partners/udaje"><button>Údaje o podnikateľovi</button></a>
+    <a href="<?= site_url('partners/udaje') ?>"><button>Údaje o podnikateľovi</button></a>
 
-    <table id="partnersTable">
+    <table id="partnersTable" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>Kód (kodop)</th>
@@ -98,44 +103,107 @@
     </div>
 
     <script>
-        const apiUrl = '/partners/api';
+        const apiUrl = '<?= site_url('partners/api') ?>';
+
+        let partnersTable;
+
+        $(document).ready(function() {
+            partnersTable = $('#partnersTable').DataTable({
+                ajax: {
+                    url: apiUrl,
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'kodop' },
+                    { data: 'firma', defaultContent: '' },
+                    { data: 'meno', defaultContent: '' },
+                    { data: 'ico', defaultContent: '' },
+                    { data: 'miesto', defaultContent: '' },
+                    {
+                        data: null,
+                        orderable: false,
+                        render: function (data, type, row) {
+                            return `<button onclick='editPartnerFromTable(` + JSON.stringify(row) + `)'>Upraviť</button>
+                                    <button onclick='deletePartner(` + row.kodop + `)' style='margin-left: 5px;'>Zmazať</button>`;
+                        }
+                    }
+                ],
+                language: {
+                    search: "Vyhľadávanie:",
+                    lengthMenu: "Zobraziť _MENU_ záznamov na stranu",
+                    zeroRecords: "Žiadne záznamy neboli nájdené",
+                    info: "Zobrazených _START_ až _END_ z _TOTAL_ záznamov",
+                    infoEmpty: "Zobrazených 0 až 0 z 0 záznamov",
+                    infoFiltered: "(vyfiltrované z _MAX_ celkových záznamov)",
+                    emptyTable: "Žiadne dáta nie sú k dispozícii",
+                    paginate: {
+                        first: "Prvá",
+                        previous: "Predchádzajúca",
+                        next: "Ďalšia",
+                        last: "Posledná"
+                    }
+                },
+                ordering: true,
+                paging: true,
+                pageLength: 25
+            });
+        });
+
+        function editPartnerFromTable(rowObj) {
+            openEditModal(rowObj);
+        }
+
+        let partnersTable;
+
+        $(document).ready(function() {
+            partnersTable = $('#partnersTable').DataTable({
+                ajax: {
+                    url: apiUrl,
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'kodop' },
+                    { data: 'firma', defaultContent: '' },
+                    { data: 'meno', defaultContent: '' },
+                    { data: 'ico', defaultContent: '' },
+                    { data: 'miesto', defaultContent: '' },
+                    {
+                        data: null,
+                        orderable: false,
+                        render: function (data, type, row) {
+                            return `<button onclick='editPartnerFromTable(` + JSON.stringify(row) + `)'>Upraviť</button>
+                                    <button onclick='deletePartner(` + row.kodop + `)' style='margin-left: 5px;'>Zmazať</button>`;
+                        }
+                    }
+                ],
+                language: {
+                    search: "Vyhľadávanie:",
+                    lengthMenu: "Zobraziť _MENU_ záznamov na stranu",
+                    zeroRecords: "Žiadne záznamy neboli nájdené",
+                    info: "Zobrazených _START_ až _END_ z _TOTAL_ záznamov",
+                    infoEmpty: "Zobrazených 0 až 0 z 0 záznamov",
+                    infoFiltered: "(vyfiltrované z _MAX_ celkových záznamov)",
+                    emptyTable: "Žiadne dáta nie sú k dispozícii",
+                    paginate: {
+                        first: "Prvá",
+                        previous: "Predchádzajúca",
+                        next: "Ďalšia",
+                        last: "Posledná"
+                    }
+                },
+                ordering: true,
+                paging: true,
+                pageLength: 25
+            });
+        });
+
+        function editPartnerFromTable(rowObj) {
+            openEditModal(rowObj);
+        }
 
         async function loadPartners() {
-            try {
-                const response = await fetch(apiUrl);
-                const data = await response.json();
-
-                const tbody = document.querySelector('#partnersTable tbody');
-                tbody.innerHTML = '';
-
-                data.forEach(partner => {
-                    const tr = document.createElement('tr');
-
-                    ['kodop', 'firma', 'meno', 'ico', 'miesto'].forEach(key => {
-                        const td = document.createElement('td');
-                        td.textContent = partner[key] || '';
-                        tr.appendChild(td);
-                    });
-
-                    const actionTd = document.createElement('td');
-                    const editBtn = document.createElement('button');
-                    editBtn.textContent = 'Upraviť';
-                    editBtn.onclick = () => openEditModal(partner);
-
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.textContent = 'Zmazať';
-                    deleteBtn.onclick = () => deletePartner(partner.kodop);
-                    deleteBtn.style.marginLeft = '5px';
-
-                    actionTd.appendChild(editBtn);
-                    actionTd.appendChild(deleteBtn);
-                    tr.appendChild(actionTd);
-
-                    tbody.appendChild(tr);
-                });
-            } catch (error) {
-                console.error('Error loading partners:', error);
-                alert('Nepodarilo sa načítať partnerov.');
+            if (partnersTable) {
+                partnersTable.ajax.reload(null, false); // reload without resetting pagination
             }
         }
 
@@ -222,7 +290,7 @@
             }
         }
 
-        window.onload = loadPartners;
+        // // window.onload = loadPartners; handled by DataTables handled by DataTables
     </script>
 </body>
 </html>

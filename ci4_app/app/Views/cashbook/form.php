@@ -29,7 +29,7 @@
         </div>
     <?php endif; ?>
 
-    <form method="post" action="<?= $entry ? '/cashbook/update/' . esc($entry['b']) . '/' . esc($year) : '/cashbook/store' ?>">
+    <form method="post" action="<?= $entry ? site_url('cashbook/update/' . esc($entry['b']) . '/' . esc($year)) : site_url('cashbook/store') ?>" >
 
         <div class="fieldset">
             <legend>Základné údaje</legend>
@@ -122,7 +122,7 @@
 
         <div style="margin-top: 20px;">
             <button type="submit">Uložiť</button>
-            <a href="/cashbook?year=<?= esc($year) ?>" class="btn-cancel">Zrušiť</a>
+            <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>" class="btn-cancel">Zrušiť</a>
         </div>
     </form>
 </body>
