@@ -173,7 +173,7 @@
         <div class="row">
             <div class="col" style="flex: 7.5;"></div>
             <div class="col-left tree-line" style="flex:1;"> SC</div>
-            <div class="col" style="flex:1;">0.00</div>
+            <div class="col" style="flex:1;"><?= number_format($summary['sc_spolu'] ?? 0, 2, '.', '') ?></div>
             <div class="col-left tree-line" style="flex:0.5;">─┤</div>
         </div>
 

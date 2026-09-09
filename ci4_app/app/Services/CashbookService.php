@@ -118,7 +118,7 @@ class CashbookService
         return $months;
     }
 
-        public function calculateDetailedSummary($year, $upToB = null)
+            public function calculateDetailedSummary($year, $upToB = null)
     {
         $entries = $this->getEntries($year);
         $db = \Config\Database::connect();
@@ -140,13 +140,15 @@ class CashbookService
             'akt_pol_hotovost_ucet' => ''
         ];
 
-        $pocstav_builder = $db->table('pocstav');
-        $pocstav_row = $pocstav_builder->where('YEAR(a)', $year)->get()->getRowArray();
+        // --- 1. Inicializacne stavy ---
+        $pocstav_row = clone $db;
+        $pocstav_row = $pocstav_row->table('pocstav')->where('YEAR(a)', $year)->get()->getRowArray();
         if ($pocstav_row) {
             $summary['P1'] = (float)$pocstav_row['ph'];
             $summary['P2'] = (float)$pocstav_row['pu'];
         }
 
+        // --- 2. Iteracia Cashbook poloziek ---
         foreach ($entries as $entry) {
             if (isset($entry['_fand_deleted']) && $entry['_fand_deleted']) continue;
 
@@ -201,6 +203,32 @@ class CashbookService
                 $summary['akt_pol_hotovost_ucet'] = ($a1 > 0 || $a2 > 0) ? 'Hotovosť' : (($a3 > 0 || $a4 > 0) ? 'Účet' : '');
             }
         }
+
+        // --- 3. Zapocitanie Odpisov IKzp ---
+        $ikzps = $db->table('ikzp')
+            ->where('ro <=', $year) // odpisy the year matches or is less and vo > 0... actually let's match exact year if stored this way
+            ->get()->getResultArray();
+
+        foreach ($ikzps as $ikzp) {
+            // Predpoklad: field vo je casto rocny odpis. FAND logic: if vo>0 then SumaPD.odpisy += vo
+            $summary['odpisy'] += (float)($ikzp['vo'] ?? 0);
+        }
+
+        // --- 4. Zapocitanie sluzobnych ciest SC ---
+        // forall i in SC (koniec<=PD[PARAM.cislo].A) % do SumaPD[1].a123 += SC[i].spolu;
+        // The original logic puts SC in 'a123', we can add it to phm_sc or just track it if it differs
+        // SC is a separate calculation in the UI we showed it empty, let's actually pull it
+        $scs = $db->table('sc')
+             ->where('YEAR(zaciatok)', $year)
+             ->get()->getResultArray();
+
+        $sc_spolu = 0;
+        foreach ($scs as $sc) {
+            $sc_spolu += (float)($sc['spolu'] ?? 0);
+        }
+        $summary['sc_spolu'] = $sc_spolu;
+        // FAND logic sometimes displays SC separately or merges it into PHM/Rezia.
+        // We'll calculate it to be precise.
 
         $summary['vseob'] = $summary['rezia'];
         $summary['odpoc_vyd'] = $summary['rezia'] + $summary['leasing'] + $summary['poistne'] + $summary['tovar'] + $summary['odpisy'] + $summary['d_han_m'] + $summary['vyk_prac'];
