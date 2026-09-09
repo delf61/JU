@@ -16,8 +16,7 @@ class PdModel extends Model
     protected $useAutoIncrement = false;
 
     protected $allowedFields = [
-        '_year',
-        '_fand_deleted',
+                '_fand_deleted',
         'a',
         'b',
         'zp',

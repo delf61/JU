@@ -14,7 +14,7 @@
 </head>
 <body>
     <h1>Údaje o podnikateľovi</h1>
-    <a href="/partners">Späť na obchodných partnerov</a>
+    <a href="<?= site_url('partners') ?>">Späť na obchodných partnerov</a>
     <hr>
 
     <div id="message" style="display:none; padding: 10px; margin-bottom: 15px; background: #d4edda; color: #155724; border: 1px solid #c3e6cb;"></div>
@@ -79,7 +79,7 @@
     </form>
 
     <script>
-        const apiUrl = '/partners/api/udaje';
+        const apiUrl = '<?= site_url('partners/api/udaje') ?>';
 
         async function loadUdaje() {
             try {
