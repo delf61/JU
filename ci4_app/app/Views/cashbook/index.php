@@ -325,7 +325,7 @@
 
 
 
-    <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; background: #f2f2f2; padding: 15px; border: 1px solid #ddd;">
+    <div class="card" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; padding: 15px; border: 1px solid var(--border-color); background-color: var(--card-bg);">
         <a href="#" class="btn" style="background: #17a2b8;">Hot.príjem/výdaj</a>
         <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('pPDkod otvára detail rozúčtovania na formulári - implementované priamo v Editácií záznamu.')">Kódy operácií</a>
         <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>&filter=bez_kodu" class="btn" style="background: #17a2b8;" title="pVyd_Bez_Kod">Bez kódu</a>
