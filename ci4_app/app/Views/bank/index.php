@@ -12,6 +12,7 @@
         th { background-color: #f2f2f2; }
         .text-right { text-align: right; }
         .text-center { text-align: center; }
+        .btn-action { padding: 4px 8px; border-radius: 3px; font-size: 0.85em; text-decoration: none; margin: 0 2px; display: inline-block; }
     </style>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
@@ -189,9 +190,16 @@
     </script>
 
     <div class="header">
-        <h1>Bankové výpisy (Ucet) - Rok <?= esc($year) ?></h1>
+        <h1>Bankové výpisy (Ucet) - Všetky roky</h1>
         <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>" class="btn-back">Späť na Peňažný denník</a>
     </div>
+
+    <?php if (session()->getFlashdata('success')): ?>
+        <div style="color: #28a745; margin-bottom: 15px; font-weight: bold;"><?= esc(session()->getFlashdata('success')) ?></div>
+    <?php endif; ?>
+    <?php if (session()->getFlashdata('error')): ?>
+        <div style="color: #dc3545; margin-bottom: 15px; font-weight: bold;"><?= esc(session()->getFlashdata('error')) ?></div>
+    <?php endif; ?>
 
     <table id="bankTable" class="display">
         <thead>
@@ -202,6 +210,7 @@
                 <th class="text-right">Čiastka<br>€</th>
                 <th class="text-center">C</th>
                 <th class="text-center">P</th>
+                <th class="text-center">Akcie</th>
             </tr>
         </thead>
         <tbody>
@@ -212,7 +221,22 @@
                 <td><?= esc($row['ua']) ?></td>
                 <td class="text-right"><?= number_format($row['pa'], 2, '.', '') ?></td>
                 <td class="text-center"><?= !empty($row['ra']) ? 'A' : 'N' ?></td>
-                <td class="text-center"><?= !empty($row['qa']) ? 'A' : 'N' ?></td>
+                                <td class="text-center"><?= !empty($row['qa']) ? 'A' : 'N' ?></td>
+                <td class="text-center">
+                    <?php
+                        $enc_b = base64_encode($row['b']);
+                        $enc_d = base64_encode($row['d']);
+                    ?>
+                    <a href="<?= site_url("bank/edit/$enc_b/$enc_d") ?>" class="btn-action" style="background:#ffc107; color:#000;">Editovať</a>
+
+                    <form action="<?= site_url("bank/copy/$enc_b/$enc_d") ?>" method="post" style="display:inline;">
+                        <button type="submit" class="btn-action" style="background:#17a2b8; color:#fff; border:none; cursor:pointer;" onclick="return confirm('Naozaj vytvoriť kópiu tohto záznamu?');">Kópia</button>
+                    </form>
+
+                    <form action="<?= site_url("bank/delete/$enc_b/$enc_d") ?>" method="post" style="display:inline;">
+                        <button type="submit" class="btn-action" style="background:#dc3545; color:#fff; border:none; cursor:pointer;" onclick="return confirm('Naozaj vymazať tento záznam?');">Vymazať</button>
+                    </form>
+                </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
@@ -230,7 +254,7 @@
                         first: "Prvá", previous: "Predchádzajúca", next: "Ďalšia", last: "Posledná"
                     }
                 },
-                pageLength: 10
+                pageLength: 20
             });
         });
     </script>
