@@ -206,7 +206,7 @@
         toggleSwitch.addEventListener('change', switchTheme, false);
     </script>
 
-    <h1>Peňažný denník (Cashbook)</h1>
+    <h1><?= (isset($_GET['filter']) && $_GET['filter'] === 'banka') ? 'Peňažný denník - Banka' : 'Peňažný denník (Cashbook)' ?></h1>
 
     <?php if (session()->getFlashdata('success')): ?>
         <div class="success-msg"><?= esc(session()->getFlashdata('success')) ?></div>
@@ -333,7 +333,7 @@
         <a href="#" class="btn" style="background: #17a2b8;" onclick="window.print()">Tlač</a>
         <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('Upratovanie je servisná FAND procedúra, v CI4 nie je nutná.')">Upratovanie</a>
         <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('1 typ dokladov vyžaduje výber konkrétneho dokladu z gridu (implementované na pozadí pPD_Doklad)')">1 typ dokladov</a>
-        <a href="#" class="btn" style="background: #17a2b8;">Banka</a>
+        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>&filter=banka" class="btn" style="background: #17a2b8;" title="pPD_banka">Banka</a>
         <a href="<?= site_url('cashbook/statistics') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="pStatist">Štatistika</a>
         <a href="<?= site_url('cashbook/summary') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="pPDsuma">Sumár po akt. pol.</a>
     </div>

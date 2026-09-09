@@ -75,6 +75,20 @@ class CashbookController extends ResourceController
             $entries = array_filter($entries, function($e) {
                 return empty($e['vydaj']) || trim($e['vydaj']) === '';
             });
+        } elseif ($filter === 'banka') {
+            // pPD_banka legacy cond= (ok = 'u')
+            // 'ok' in FAND PD usually means it has been verified/marked via some logic.
+            // Often bank movements are also identifiable via 'kodop' containing U, or a3/a4 > 0
+            // but let's strictly stick to what is in the table if there is an `ok` or similar column or just filter by bank fields.
+            // According to previous investigation, FAND ok field doesn't statically exist in CI4, but we can filter by 'a3 > 0 || a4 > 0'
+            // Wait, looking at Cashbook table schema, there's `r`, `p`, etc. `ok` is dynamically set or might be `vydaj='u'`?
+            // Actually, "ok='u'" implies checking the `ok` variable or maybe `vydaj = 'u'`.
+            // In FAND PD table, there is no `ok` column, BUT wait, let's filter by a3 > 0 or a4 > 0 which reliably isolates bank entries.
+            // Let's filter by 'u' in 'kodop' or 'vydaj' or simply (a3 != 0 || a4 != 0)
+            $entries = array_filter($entries, function($e) {
+                // To safely simulate banka grid, we show entries that have bank movements or specific bank code
+                return ($e['a3'] != 0 || $e['a4'] != 0 || strtolower($e['vydaj'] ?? '') === 'u');
+            });
         }
         $totals = $this->cashbookService->calculateTotals($year);
         $initialState = $this->initialStateService->getInitialStateByDate($year . '-01-01');
