@@ -141,7 +141,7 @@ class CashbookService
         ];
 
         $pocstav_builder = $db->table('pocstav');
-        $pocstav_row = $pocstav_builder->where('rok', $year)->get()->getRowArray();
+        $pocstav_row = $pocstav_builder->where('YEAR(a)', $year)->get()->getRowArray();
         if ($pocstav_row) {
             $summary['P1'] = (float)$pocstav_row['ph'];
             $summary['P2'] = (float)$pocstav_row['pu'];
