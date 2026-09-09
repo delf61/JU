@@ -144,6 +144,23 @@
             <?php endif; ?>
         </tbody>
     </table>
+
+    <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; background: #f2f2f2; padding: 15px; border: 1px solid #ddd;">
+        <div style="width: 100%;"><strong>CTRL menu:</strong></div>
+        <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('Hot.príjem/výdaj (not yet implemented)')">Shift+F1/F2 Hot.príjem/výdaj</a>
+        <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('Kódy operácií - pPDkod (not yet implemented)')">Ctrl+F6 Kódy operácií</a>
+        <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('Bez kódu - pVyd_Bez_Kod (not yet implemented)')">Ctrl+F7 Bez kódu</a>
+        <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('Dnešný dátum - pAktualDatum (not yet implemented)')">Ctrl+F8 Dnešný dátum</a>
+        <a href="#" class="btn" style="background: #17a2b8;" onclick="window.print()">Ctrl+F9/F10 Tlač</a>
+
+        <div style="width: 100%; margin-top: 10px;"><strong>ALT menu:</strong></div>
+        <a href="#" class="btn" style="background: #6c757d;" onclick="alert('Upratovanie (not yet implemented)')">Alt+F1 Upratovanie</a>
+        <a href="#" class="btn" style="background: #6c757d;" onclick="alert('1 typ dokladov - pPD_Doklad (not yet implemented)')">Alt+F2 1 typ dokladov</a>
+        <a href="#" class="btn" style="background: #6c757d;" onclick="alert('Banka (not yet implemented)')">Alt+F3 Banka</a>
+        <a href="#" class="btn" style="background: #6c757d;" onclick="alert('Štatistika - pStatist (not yet implemented)')">Alt+F4 Štatistika</a>
+        <a href="#" class="btn" style="background: #6c757d;" onclick="alert('Sumár po akt. pol. - pPDsuma (not yet implemented)')">Alt+F5 Sumár po akt. pol.</a>
+    </div>
+
     <script>
         $(document).ready(function () {
             $('#cashbookTable').DataTable({
@@ -164,7 +181,7 @@
                 },
                 ordering: true,
                 paging: true,
-                pageLength: 25,
+                pageLength: 10,
                 columnDefs: [
                     { orderable: false, targets: -1 } // Disable sorting on Action column
                 ]
