@@ -118,34 +118,94 @@ class CashbookService
         return $months;
     }
 
-    public function calculateDetailedSummary($year, $upToB = null)
+        public function calculateDetailedSummary($year, $upToB = null)
     {
         $entries = $this->getEntries($year);
+        $db = \Config\Database::connect();
 
         $summary = [
-            'zZP' => 0, 'odpisy' => 0, 'zp' => 0,
-            'prijmy_celkom' => 0, 'vydaje_celkom' => 0,
-            'dph_prijem' => 0, 'dph_vydaj' => 0,
-            'zaklad_dane' => 0
+            'P1' => 0, 'P2' => 0,
+            'a1_priebezen' => 0, 'a1_ine' => 0, 'a1_celkove' => 0,
+            'a2_priebezen' => 0, 'a2_ine' => 0, 'a2_celkove' => 0,
+            'a3_priebezen' => 0, 'a3_ine' => 0, 'a3_celkove' => 0,
+            'a4_priebezen' => 0, 'a4_ine' => 0, 'a4_celkove' => 0,
+            'hot_prijem' => 0, 'hot_vydaj' => 0, 'ucet_prijem' => 0, 'ucet_vydaj' => 0,
+
+            'phm_sc' => 0, 'os_ucet' => 0, 'dan_z_pr' => 0, 'dph' => 0, 'nak_hanim' => 0,
+            'zdan_prijmy' => 0, 'dochodok' => 0, 'dopdochspor' => 0,
+            'ine_vydaje' => 0, 'vseob' => 0, 'banka' => 0, 'rezia' => 0,
+            'leasing' => 0, 'poistne' => 0, 'tovar' => 0, 'odpisy' => 0, 'd_han_m' => 0, 'vyk_prac' => 0,
+
+            'akt_pol_p' => 0, 'akt_pol_i' => 0, 'akt_pol_c' => 0,
+            'akt_pol_hotovost_ucet' => ''
         ];
+
+        $pocstav_builder = $db->table('pocstav');
+        $pocstav_row = $pocstav_builder->where('rok', $year)->get()->getRowArray();
+        if ($pocstav_row) {
+            $summary['P1'] = (float)$pocstav_row['ph'];
+            $summary['P2'] = (float)$pocstav_row['pu'];
+        }
 
         foreach ($entries as $entry) {
             if (isset($entry['_fand_deleted']) && $entry['_fand_deleted']) continue;
 
-            $summary['prijmy_celkom'] += (float)($entry['a1'] ?? 0) + (float)($entry['a3'] ?? 0);
-            $summary['vydaje_celkom'] += (float)($entry['a2'] ?? 0) + (float)($entry['a4'] ?? 0);
+            $r = !empty($entry['r']);
+            $p = !empty($entry['p']);
 
-            // Legacy pPDsuma logic
-            if (isset($entry['vydaj']) && $entry['vydaj'] === 'd') {
-                $summary['dph_vydaj'] += (float)($entry['a2'] ?? 0) + (float)($entry['a4'] ?? 0);
+            $a1 = (float)($entry['a1'] ?? 0);
+            $a2 = (float)($entry['a2'] ?? 0);
+            $a3 = (float)($entry['a3'] ?? 0);
+            $a4 = (float)($entry['a4'] ?? 0);
+            $vydaj = $entry['vydaj'] ?? '';
+
+            if ($p) {
+                $summary['a1_priebezen'] += $a1; $summary['a2_priebezen'] += $a2;
+                $summary['a3_priebezen'] += $a3; $summary['a4_priebezen'] += $a4;
+            } elseif ($r) {
+                $summary['a1_celkove'] += $a1; $summary['a2_celkove'] += $a2;
+                $summary['a3_celkove'] += $a3; $summary['a4_celkove'] += $a4;
+                $summary['hot_prijem'] += $a1; $summary['hot_vydaj'] += $a2;
+                $summary['ucet_prijem'] += $a3; $summary['ucet_vydaj'] += $a4;
+            } else {
+                $summary['a1_ine'] += $a1; $summary['a2_ine'] += $a2;
+                $summary['a3_ine'] += $a3; $summary['a4_ine'] += $a4;
+            }
+
+            $a13 = $a1 + $a3;
+            $a24 = $a2 + $a4;
+
+            if ($vydaj === 'h') $summary['phm_sc'] += $a24;
+            elseif ($vydaj === '3') $summary['os_ucet'] += $a24;
+            elseif ($vydaj === '8') $summary['dan_z_pr'] += $a24;
+            elseif ($vydaj === 'd') $summary['dph'] += $a24;
+            elseif ($vydaj === '6') $summary['nak_hanim'] += $a24;
+            elseif ($vydaj === '1' || $vydaj === '2' || $vydaj === '7') $summary['rezia'] += $a24;
+            elseif ($vydaj === 'u') $summary['banka'] += $a24;
+            elseif ($vydaj === '4') $summary['poistne'] += $a24;
+            elseif ($vydaj === 't') $summary['tovar'] += $a24;
+            elseif ($vydaj === '5') $summary['d_han_m'] += $a24;
+            elseif ($vydaj === 'a') $summary['vyk_prac'] += $a24;
+
+            if (empty($vydaj) && $a24 > 0) $summary['ine_vydaje'] += $a24;
+
+            if ($a13 > 0) {
+                if ($vydaj === 'D') $summary['dochodok'] += $a13;
+                else $summary['zdan_prijmy'] += $a13;
             }
 
             if ($upToB && $entry['b'] === $upToB) {
-                break;
+                $summary['akt_pol_p'] = $p ? ($a1 + $a2 + $a3 + $a4) : 0;
+                $summary['akt_pol_i'] = (!$p && !$r) ? ($a1 + $a2 + $a3 + $a4) : 0;
+                $summary['akt_pol_c'] = $r ? ($a1 + $a2 + $a3 + $a4) : 0;
+                $summary['akt_pol_hotovost_ucet'] = ($a1 > 0 || $a2 > 0) ? 'Hotovosť' : (($a3 > 0 || $a4 > 0) ? 'Účet' : '');
             }
         }
 
-        $summary['zaklad_dane'] = $summary['prijmy_celkom'] - $summary['vydaje_celkom'];
+        $summary['vseob'] = $summary['rezia'];
+        $summary['odpoc_vyd'] = $summary['rezia'] + $summary['leasing'] + $summary['poistne'] + $summary['tovar'] + $summary['odpisy'] + $summary['d_han_m'] + $summary['vyk_prac'];
+        $summary['zaklad_pre_vyp'] = $summary['zdan_prijmy'] - $summary['odpoc_vyd'];
+
         return $summary;
     }
-}
+}}
