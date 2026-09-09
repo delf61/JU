@@ -79,6 +79,9 @@ $routes->post('cashbook/delete/(:any)/(:num)', 'CashbookController::uiDelete/$1/
 
 
 
+// Bank Statement
+$routes->get('bank', 'BankStatementController::webIndex');
+
 // Cashbook Legacy Procedures
 $routes->get('cashbook/statistics', 'CashbookController::statistics');
 $routes->get('cashbook/summary', 'CashbookController::summary');
