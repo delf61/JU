@@ -145,8 +145,23 @@
         </tbody>
     </table>
 
+
     <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; background: #f2f2f2; padding: 15px; border: 1px solid #ddd;">
         <div style="width: 100%;"><strong>CTRL menu:</strong></div>
+        <a href="#" class="btn" style="background: #17a2b8;">Shift+F1/F2 Hot.príjem/výdaj</a>
+        <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('pPDkod otvára detail rozúčtovania na formulári - implementované priamo v Editácií záznamu.')">Ctrl+F6 Kódy operácií</a>
+        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>&filter=bez_kodu" class="btn" style="background: #17a2b8;" title="pVyd_Bez_Kod">Ctrl+F7 Bez kódu</a>
+        <a href="<?= site_url('cashbook') ?>" class="btn" style="background: #17a2b8;" title="pAktualDatum">Ctrl+F8 Dnešný dátum</a>
+        <a href="#" class="btn" style="background: #17a2b8;" onclick="window.print()">Ctrl+F9/F10 Tlač</a>
+
+        <div style="width: 100%; margin-top: 10px;"><strong>ALT menu:</strong></div>
+        <a href="#" class="btn" style="background: #6c757d;" onclick="alert('Upratovanie je servisná FAND procedúra, v CI4 nie je nutná.')">Alt+F1 Upratovanie</a>
+        <a href="#" class="btn" style="background: #6c757d;" onclick="alert('1 typ dokladov vyžaduje výber konkrétneho dokladu z gridu (implementované na pozadí pPD_Doklad)')">Alt+F2 1 typ dokladov</a>
+        <a href="#" class="btn" style="background: #6c757d;">Alt+F3 Banka</a>
+        <a href="<?= site_url('cashbook/statistics') ?>?year=<?= esc($year) ?>" class="btn" style="background: #6c757d;" title="pStatist">Alt+F4 Štatistika</a>
+        <a href="<?= site_url('cashbook/summary') ?>?year=<?= esc($year) ?>" class="btn" style="background: #6c757d;" title="pPDsuma">Alt+F5 Sumár po akt. pol.</a>
+    </div>
+
         <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('Hot.príjem/výdaj (not yet implemented)')">Shift+F1/F2 Hot.príjem/výdaj</a>
         <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('Kódy operácií - pPDkod (not yet implemented)')">Ctrl+F6 Kódy operácií</a>
         <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('Bez kódu - pVyd_Bez_Kod (not yet implemented)')">Ctrl+F7 Bez kódu</a>

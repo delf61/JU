@@ -98,4 +98,54 @@ class CashbookService
 
         return $totals;
     }
+
+    public function calculateStatistics($year)
+    {
+        $entries = $this->getEntries($year);
+
+        $months = array_fill(1, 12, ['income' => 0, 'expense' => 0]);
+
+        foreach ($entries as $entry) {
+            if (isset($entry['_fand_deleted']) && $entry['_fand_deleted']) continue;
+
+            $month = (int)date('n', strtotime($entry['a']));
+            if ($month >= 1 && $month <= 12) {
+                $months[$month]['income'] += (float)($entry['a1'] ?? 0) + (float)($entry['a3'] ?? 0);
+                $months[$month]['expense'] += (float)($entry['a2'] ?? 0) + (float)($entry['a4'] ?? 0);
+            }
+        }
+
+        return $months;
+    }
+
+    public function calculateDetailedSummary($year, $upToB = null)
+    {
+        $entries = $this->getEntries($year);
+
+        $summary = [
+            'zZP' => 0, 'odpisy' => 0, 'zp' => 0,
+            'prijmy_celkom' => 0, 'vydaje_celkom' => 0,
+            'dph_prijem' => 0, 'dph_vydaj' => 0,
+            'zaklad_dane' => 0
+        ];
+
+        foreach ($entries as $entry) {
+            if (isset($entry['_fand_deleted']) && $entry['_fand_deleted']) continue;
+
+            $summary['prijmy_celkom'] += (float)($entry['a1'] ?? 0) + (float)($entry['a3'] ?? 0);
+            $summary['vydaje_celkom'] += (float)($entry['a2'] ?? 0) + (float)($entry['a4'] ?? 0);
+
+            // Legacy pPDsuma logic
+            if (isset($entry['vydaj']) && $entry['vydaj'] === 'd') {
+                $summary['dph_vydaj'] += (float)($entry['a2'] ?? 0) + (float)($entry['a4'] ?? 0);
+            }
+
+            if ($upToB && $entry['b'] === $upToB) {
+                break;
+            }
+        }
+
+        $summary['zaklad_dane'] = $summary['prijmy_celkom'] - $summary['vydaje_celkom'];
+        return $summary;
+    }
 }

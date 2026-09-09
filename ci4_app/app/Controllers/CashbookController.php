@@ -64,11 +64,18 @@ class CashbookController extends ResourceController
     {
         $year = $this->request->getGet('year');
         if (!$year) {
-            // Default to current year or 2026 for testing purposes
             $year = date('Y');
         }
 
+        $filter = $this->request->getGet('filter');
+
         $entries = $this->cashbookService->getEntries($year);
+
+        if ($filter === 'bez_kodu') {
+            $entries = array_filter($entries, function($e) {
+                return empty($e['vydaj']) || trim($e['vydaj']) === '';
+            });
+        }
         $totals = $this->cashbookService->calculateTotals($year);
         $initialState = $this->initialStateService->getInitialStateByDate($year . '-01-01');
 
@@ -234,5 +241,47 @@ class CashbookController extends ResourceController
            ->where('YEAR(a)', $year)
            ->delete();
         return redirect()->to('cashbook?year=' . $year)->with('success', 'Záznam bol úspešne vymazaný.');
+    }
+
+    // --- Legacy Migrated Procedures ---
+
+    public function statistics()
+    {
+        $year = $this->request->getGet('year') ?: date('Y');
+        $stats = $this->cashbookService->calculateStatistics($year);
+
+        return view('cashbook/statistics', [
+            'year' => $year,
+            'stats' => $stats
+        ]);
+    }
+
+    public function summary()
+    {
+        $year = $this->request->getGet('year') ?: date('Y');
+        $b = $this->request->getGet('b');
+
+        $summary = $this->cashbookService->calculateDetailedSummary($year, $b);
+
+        return view('cashbook/summary', [
+            'year' => $year,
+            'b' => $b,
+            'summary' => $summary
+        ]);
+    }
+
+    public function documentRedirect($b, $year)
+    {
+        // Legacy pPD_Doklad logic
+        $prefix = substr($b, 0, 2);
+        if ($prefix === '40') {
+            // SC (Logbook)
+            return redirect()->to('trips?year=' . $year);
+        } elseif ($prefix === '50') {
+            // Invoices?
+            return redirect()->to('invoices?year=' . $year);
+        }
+
+        return redirect()->back()->with('error', 'Neznámy typ dokladu pre presmerovanie.');
     }
 }

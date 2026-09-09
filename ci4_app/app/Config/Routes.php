@@ -78,7 +78,14 @@ $routes->post('cashbook/update/(:any)/(:num)', 'CashbookController::uiUpdate/$1/
 $routes->post('cashbook/delete/(:any)/(:num)', 'CashbookController::uiDelete/$1/$2');
 
 
+
+// Cashbook Legacy Procedures
+$routes->get('cashbook/statistics', 'CashbookController::statistics');
+$routes->get('cashbook/summary', 'CashbookController::summary');
+$routes->get('cashbook/document/(:any)/(:num)', 'CashbookController::documentRedirect/$1/$2');
+
 $routes->group('cashbook', function($routes) {
+
     // API
     $routes->get('api', 'CashbookController::index');
     $routes->get('api/reasons', 'CashbookController::reasons');
