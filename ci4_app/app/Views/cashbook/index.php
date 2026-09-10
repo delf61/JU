@@ -146,5 +146,154 @@
             });
         });
     </script>
+
+    <!-- Codes Modal -->
+    <div id="codesModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center;">
+        <div style="background:var(--card-bg); width:750px; max-width:95%; border-radius:8px; border:1px solid var(--border-color); box-shadow:0 4px 10px rgba(0,0,0,0.2); display:flex; flex-direction:column;">
+            <div style="padding:15px; border-bottom:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
+                <h3 id="modalTitle" style="margin:0; color:var(--text-color);">Kódy operácií</h3>
+                <button onclick="closeCodesModal()" style="background:none; border:none; color:var(--text-color); font-size:1.5em; cursor:pointer;">&times;</button>
+            </div>
+            <div style="padding:15px; overflow-y:auto; max-height:60vh;">
+                <table id="codesTable" style="width:100%; border-collapse:collapse;">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center;">Kód</th>
+                            <th>Popis výdaja / príjmu</th>
+                            <th style="text-align:center;">Počet</th>
+                            <th style="text-align:right;">Suma v PD €</th>
+                            <th style="text-align:center;">Akcie</th>
+                        </tr>
+                    </thead>
+                    <tbody id="codesTableBody">
+                    </tbody>
+                </table>
+            </div>
+            <div style="padding:15px; border-top:1px solid var(--border-color); text-align:right;">
+                <button onclick="closeCodesModal()" class="btn btn-secondary">Zrušiť</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentB = '';
+        let currentYear = '';
+
+        function openCodesModal(b, year, type, currentCode) {
+            currentB = b;
+            currentYear = year;
+
+            const title = type === 'v' ? 'Číselník Výdavkov' : 'Číselník Príjmov';
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('codesModal').style.display = 'flex';
+
+            const tbody = document.getElementById('codesTableBody');
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Načítavam dáta...</td></tr>';
+
+            fetch(`<?= site_url('api/cashbook/codes') ?>?type=${type}&year=${year}`)
+                .then(res => res.json())
+                .then(data => {
+                    tbody.innerHTML = '';
+                    if (data.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Číselník je prázdny.</td></tr>';
+                        return;
+                    }
+
+                    let totalCount = 0;
+                    let totalSum = 0.0;
+
+                    data.forEach(item => {
+                        const isSelected = item.kodvyd === currentCode;
+                        const rowStyle = isSelected ? 'background-color: var(--hover-bg); font-weight:bold;' : '';
+
+                        const cnt = parseInt(item.pocet) || 0;
+                        const sm = parseFloat(item.suma) || 0;
+                        totalCount += cnt;
+                        totalSum += sm;
+
+                        const tr = document.createElement('tr');
+                        tr.style = rowStyle;
+
+                        tr.innerHTML = `
+                            <td style="text-align:center; font-size:1.2em; color:var(--text-color); border:1px solid var(--border-color);">${item.kodvyd}</td>
+                            <td style="border:1px solid var(--border-color);">
+                                <span id="desc_text_${item.PK}" style="color:var(--text-color);">${item.d}</span>
+                                <input type="text" id="desc_input_${item.PK}" value="${item.d}" style="display:none; width:100%;" onkeydown="if(event.key==='Enter') saveDesc(${item.PK})">
+                            </td>
+                            <td style="text-align:center; border:1px solid var(--border-color); color:var(--text-color);">${cnt}</td>
+                            <td style="text-align:right; border:1px solid var(--border-color); color:var(--text-color);">${sm.toFixed(2)}</td>
+                            <td style="text-align:center; border:1px solid var(--border-color); padding:5px;">
+                                <button onclick="selectCode('${item.kodvyd}')" class="btn btn-action" style="background:#28a745; color:#fff;" title="F3 Vybrať kód pre tento riadok">Vybrať (F3)</button>
+                                <button onclick="editDesc(${item.PK})" class="btn btn-action" style="background:#ffc107; color:#000;" title="F4 Upraviť názov kategórie">Editovať (F4)</button>
+                                <a href="<?= site_url('cashbook') ?>?year=${year}&filter_kod=${item.kodvyd}" class="btn btn-action" style="background:#17a2b8; color:#fff; text-decoration:none;" title="F1 Zobraziť históriu (iba položky s týmto kódom)">História (F1)</a>
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+
+                    // Add Summary Row matching DOS JU structure
+                    const tfoot = document.createElement('tr');
+                    tfoot.style = 'font-weight:bold; background-color: var(--th-bg);';
+                    tfoot.innerHTML = `
+                        <td colspan="2" style="text-align:right; border:1px solid var(--border-color); color:var(--text-color);">─ Spolu v PD :</td>
+                        <td style="text-align:center; border:1px solid var(--border-color); color:var(--text-color);">${totalCount}</td>
+                        <td style="text-align:right; border:1px solid var(--border-color); color:var(--text-color);">${totalSum.toFixed(2)}</td>
+                        <td style="border:1px solid var(--border-color);"></td>
+                    `;
+                    tbody.appendChild(tfoot);
+                })
+                .catch(err => {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:red;">Chyba pri načítaní: ' + err + '</td></tr>';
+                });
+        }
+
+        function closeCodesModal() {
+            document.getElementById('codesModal').style.display = 'none';
+        }
+
+        function selectCode(code) {
+            const formData = new FormData();
+            formData.append('b', currentB);
+            formData.append('year', currentYear);
+            formData.append('kod', code);
+
+            fetch(`<?= site_url('api/cashbook/update_code') ?>`, {
+                method: 'POST',
+                body: formData
+            }).then(res => res.json()).then(data => {
+                if(data.status === 'success') {
+                    location.reload();
+                } else {
+                    alert('Chyba: ' + data.message);
+                }
+            });
+        }
+
+        function editDesc(pk) {
+            document.getElementById('desc_text_' + pk).style.display = 'none';
+            const inp = document.getElementById('desc_input_' + pk);
+            inp.style.display = 'inline-block';
+            inp.focus();
+        }
+
+        function saveDesc(pk) {
+            const newDesc = document.getElementById('desc_input_' + pk).value;
+            const formData = new FormData();
+            formData.append('pk', pk);
+            formData.append('desc', newDesc);
+
+            fetch(`<?= site_url('api/cashbook/update_desc') ?>`, {
+                method: 'POST',
+                body: formData
+            }).then(res => res.json()).then(data => {
+                if(data.status === 'success') {
+                    document.getElementById('desc_text_' + pk).innerText = newDesc;
+                    document.getElementById('desc_text_' + pk).style.display = 'inline-block';
+                    document.getElementById('desc_input_' + pk).style.display = 'none';
+                }
+            });
+        }
+    </script>
+
 </body>
 </html>

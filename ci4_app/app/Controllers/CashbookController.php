@@ -235,4 +235,73 @@ class CashbookController extends ResourceController
            ->delete();
         return redirect()->to('cashbook?year=' . $year)->with('success', 'Záznam bol úspešne vymazaný.');
     }
+    public function getCodesApi()
+    {
+        $type = $this->request->getGet('type'); // 'v' for vydaje, 'p' for prijmy
+        $year = $this->request->getGet('year');
+        $pv = ($type === 'v') ? 1 : 0;
+
+        $db = \Config\Database::connect();
+        $codes = $db->table('vydaje')->where('pv', $pv)->get()->getResultArray();
+
+        $entries = $db->table('pd')->where('YEAR(a)', $year)->get()->getResultArray();
+
+        $aggMap = [];
+        foreach ($entries as $row) {
+            if (!empty($row['_fand_deleted'])) continue;
+
+            $k = trim($row['vydaj'] ?? '');
+            $a1 = (float)($row['a1'] ?? 0);
+            $a2 = (float)($row['a2'] ?? 0);
+            $a3 = (float)($row['a3'] ?? 0);
+            $a4 = (float)($row['a4'] ?? 0);
+
+            if (!isset($aggMap[$k])) {
+                $aggMap[$k] = ['pocet' => 0, 'suma' => 0.0];
+            }
+
+            if ($pv === 1) { // Vydaje
+                if ($a2 != 0 || $a4 != 0) {
+                    $aggMap[$k]['pocet'] += 1;
+                    $aggMap[$k]['suma'] += ($a2 + $a4);
+                }
+            } else { // Prijmy
+                if ($a1 != 0 || $a3 != 0) {
+                    $aggMap[$k]['pocet'] += 1;
+                    $aggMap[$k]['suma'] += ($a1 + $a3);
+                }
+            }
+        }
+
+        foreach ($codes as &$c) {
+            $k = trim($c['kodvyd']);
+            $c['pocet'] = isset($aggMap[$k]) ? $aggMap[$k]['pocet'] : 0;
+            $c['suma']  = isset($aggMap[$k]) ? number_format($aggMap[$k]['suma'], 2, '.', '') : '0.00';
+        }
+
+        return $this->response->setJSON($codes);
+    }
+
+    public function updateCodeApi()
+    {
+        $b = $this->request->getPost('b');
+        $year = $this->request->getPost('year');
+        $newCode = $this->request->getPost('kod');
+        if (!$b || !$year) return $this->response->setJSON(['status' => 'error', 'message' => 'Missing data']);
+
+        $db = \Config\Database::connect();
+        $db->table('pd')->where('b', hex2bin($b))->where('YEAR(a)', $year)->update(['vydaj' => $newCode]);
+        return $this->response->setJSON(['status' => 'success']);
+    }
+
+    public function updateCodeDescriptionApi()
+    {
+        $pk = $this->request->getPost('pk');
+        $newDesc = $this->request->getPost('desc');
+        if (!$pk) return $this->response->setJSON(['status' => 'error']);
+
+        $db = \Config\Database::connect();
+        $db->table('vydaje')->where('PK', $pk)->update(['d' => $newDesc]);
+        return $this->response->setJSON(['status' => 'success']);
+    }
 }
