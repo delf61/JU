@@ -307,10 +307,46 @@ class CashbookController extends ResourceController
     public function getCodesApi()
     {
         $type = $this->request->getGet('type'); // 'v' for vydaje, 'p' for prijmy
+        $year = $this->request->getGet('year');
         $pv = ($type === 'v') ? 1 : 0;
 
         $db = \Config\Database::connect();
         $codes = $db->table('vydaje')->where('pv', $pv)->get()->getResultArray();
+
+        $entries = $db->table('pd')->where('YEAR(a)', $year)->get()->getResultArray();
+
+        $aggMap = [];
+        foreach ($entries as $row) {
+            if (!empty($row['_fand_deleted'])) continue;
+
+            $k = trim($row['vydaj'] ?? '');
+            $a1 = (float)($row['a1'] ?? 0);
+            $a2 = (float)($row['a2'] ?? 0);
+            $a3 = (float)($row['a3'] ?? 0);
+            $a4 = (float)($row['a4'] ?? 0);
+
+            if (!isset($aggMap[$k])) {
+                $aggMap[$k] = ['pocet' => 0, 'suma' => 0.0];
+            }
+
+            if ($pv === 1) { // Vydaje
+                if ($a2 != 0 || $a4 != 0) {
+                    $aggMap[$k]['pocet'] += 1;
+                    $aggMap[$k]['suma'] += ($a2 + $a4);
+                }
+            } else { // Prijmy
+                if ($a1 != 0 || $a3 != 0) {
+                    $aggMap[$k]['pocet'] += 1;
+                    $aggMap[$k]['suma'] += ($a1 + $a3);
+                }
+            }
+        }
+
+        foreach ($codes as &$c) {
+            $k = trim($c['kodvyd']);
+            $c['pocet'] = isset($aggMap[$k]) ? $aggMap[$k]['pocet'] : 0;
+            $c['suma']  = isset($aggMap[$k]) ? number_format($aggMap[$k]['suma'], 2, '.', '') : '0.00';
+        }
 
         return $this->response->setJSON($codes);
     }

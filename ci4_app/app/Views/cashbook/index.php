@@ -357,7 +357,9 @@
                     <thead>
                         <tr>
                             <th style="text-align:center;">Kód</th>
-                            <th>Popis</th>
+                            <th>Popis výdaja / príjmu</th>
+                            <th style="text-align:center;">Počet v PD</th>
+                            <th style="text-align:right;">Suma €</th>
                             <th style="text-align:center;">Akcie</th>
                         </tr>
                     </thead>
@@ -386,7 +388,7 @@
             const tbody = document.getElementById('codesTableBody');
             tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;">Načítavam dáta...</td></tr>';
 
-            fetch(`<?= site_url('api/cashbook/codes') ?>?type=${type}`)
+            fetch(`<?= site_url('api/cashbook/codes') ?>?type=${type}&year=${year}`)
                 .then(res => res.json())
                 .then(data => {
                     tbody.innerHTML = '';
@@ -395,9 +397,17 @@
                         return;
                     }
 
+                    let totalCount = 0;
+                    let totalSum = 0.0;
+
                     data.forEach(item => {
                         const isSelected = item.kodvyd === currentCode;
                         const rowStyle = isSelected ? 'background-color: var(--hover-bg); font-weight:bold;' : '';
+
+                        const cnt = parseInt(item.pocet) || 0;
+                        const sm = parseFloat(item.suma) || 0;
+                        totalCount += cnt;
+                        totalSum += sm;
 
                         const tr = document.createElement('tr');
                         tr.style = rowStyle;
@@ -408,6 +418,8 @@
                                 <span id="desc_text_${item.PK}" style="color:var(--text-color);">${item.d}</span>
                                 <input type="text" id="desc_input_${item.PK}" value="${item.d}" style="display:none; width:100%;" onkeydown="if(event.key==='Enter') saveDesc(${item.PK})">
                             </td>
+                            <td style="text-align:center; border:1px solid var(--border-color); color:var(--text-color);">${cnt}</td>
+                            <td style="text-align:right; border:1px solid var(--border-color); color:var(--text-color);">${sm.toFixed(2)}</td>
                             <td style="text-align:center; border:1px solid var(--border-color); padding:5px;">
                                 <button onclick="selectCode('${item.kodvyd}')" class="btn btn-action" style="background:#28a745; color:#fff;" title="F3 Vybrať kód pre tento riadok">Vybrať (F3)</button>
                                 <button onclick="editDesc(${item.PK})" class="btn btn-action" style="background:#ffc107; color:#000;" title="F4 Upraviť názov kategórie">Editovať (F4)</button>
@@ -416,6 +428,17 @@
                         `;
                         tbody.appendChild(tr);
                     });
+
+                    // Add Summary Row
+                    const tfoot = document.createElement('tr');
+                    tfoot.style = 'font-weight:bold; background-color: var(--th-bg);';
+                    tfoot.innerHTML = `
+                        <td colspan="2" style="text-align:right; border:1px solid var(--border-color); color:var(--text-color);">─ Spolu v PD :</td>
+                        <td style="text-align:center; border:1px solid var(--border-color); color:var(--text-color);">${totalCount}</td>
+                        <td style="text-align:right; border:1px solid var(--border-color); color:var(--text-color);">${totalSum.toFixed(2)}</td>
+                        <td style="border:1px solid var(--border-color);"></td>
+                    `;
+                    tbody.appendChild(tfoot);
                 })
                 .catch(err => {
                     tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:red;">Chyba pri načítaní: ' + err + '</td></tr>';
