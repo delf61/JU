@@ -2,24 +2,21 @@
 <html lang="sk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Všeobecné číselníky - DOS JU Migration</title>
+    <title>Bankové výpisy</title>
     <style>
-        body { font-family: sans-serif; margin: 20px; }
-        .container { display: flex; gap: 20px; }
-        .sidebar { min-width: 200px; border-right: 1px solid #ccc; padding-right: 20px; }
-        .content { flex-grow: 1; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .btn-back { display: inline-block; padding: 8px 15px; background-color: #6c757d; color: #fff; text-decoration: none; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
         th { background-color: #f2f2f2; }
-        .btn { padding: 5px 10px; cursor: pointer; }
-        .form-group { margin-bottom: 10px; }
-        .form-group label { display: block; margin-bottom: 5px; }
-        .form-group input { width: 100%; padding: 8px; box-sizing: border-box; }
-        #dictionary-form-container { display: none; margin-top: 20px; padding: 20px; border: 1px solid #ccc; background: #f9f9f9; }
-        #error-message { color: red; margin-bottom: 10px; display: none; }
-        #success-message { color: green; margin-bottom: 10px; display: none; }
+        .text-right { text-align: right; }
+        .text-center { text-align: center; }
+        .btn-action { padding: 4px 8px; border-radius: 3px; font-size: 0.85em; text-decoration: none; margin: 0 2px; display: inline-block; }
     </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 
     <!-- Theme Switcher CSS -->
     <style>
@@ -156,14 +153,6 @@
         table.dataTable tbody tr {
             background-color: var(--card-bg) !important;
         }
-
-        .summary-list li {
-            border-bottom: 1px dashed var(--border-color) !important;
-        }
-
-        .summary-list li.total {
-            border-top: 2px solid var(--border-color) !important;
-        }
     </style>
 </head>
 <body>
@@ -200,53 +189,70 @@
         toggleSwitch.addEventListener('change', switchTheme, false);
     </script>
 
-
-<h1>Všeobecné číselníky</h1>
-
-<div class="container">
-    <div class="sidebar">
-        <h3>Typy číselníkov</h3>
-        <ul id="dictionary-list" style="list-style-type: none; padding: 0;">
-            <li><button class="btn" style="width: 100%; margin-bottom: 5px;" onclick="app.loadDictionaries('kraje')">Kraje</button></li>
-            <li><button class="btn" style="width: 100%; margin-bottom: 5px;" onclick="app.loadDictionaries('okresy')">Okresy</button></li>
-            <li><button class="btn" style="width: 100%; margin-bottom: 5px;" onclick="app.loadDictionaries('mesta')">Mestá</button></li>
-            <li><button class="btn" style="width: 100%; margin-bottom: 5px;" onclick="app.loadDictionaries('banky')">Banky</button></li>
-        </ul>
+    <div class="header">
+        <h1>Bankové výpisy</h1>
+        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>" class="btn-back">Späť na Peňažný denník</a>
     </div>
 
-    <div class="content">
-        <h2 id="dictionary-title">Vyberte číselník</h2>
+    <?php if (session()->getFlashdata('success')): ?>
+        <div style="color: #28a745; margin-bottom: 15px; font-weight: bold;"><?= esc(session()->getFlashdata('success')) ?></div>
+    <?php endif; ?>
+    <?php if (session()->getFlashdata('error')): ?>
+        <div style="color: #dc3545; margin-bottom: 15px; font-weight: bold;"><?= esc(session()->getFlashdata('error')) ?></div>
+    <?php endif; ?>
 
-        <div id="messages">
-            <div id="error-message"></div>
-            <div id="success-message"></div>
-        </div>
+    <table id="bankTable" class="display">
+        <thead>
+            <tr>
+                <th class="text-center">Realizov.<br>dňa</th>
+                <th class="text-center">Por.<br>50</th>
+                <th>Popis operácie</th>
+                <th class="text-right">Čiastka<br>€</th>
+                <th class="text-center">C</th>
+                <th class="text-center">P</th>
+                <th class="text-center">Akcie</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($entries as $row): ?>
+            <tr>
+                <td class="text-center"><?= esc(date('Y.m.d', strtotime($row['d']))) ?></td>
+                <td class="text-center"><?= esc($row['b']) ?></td>
+                <td><?= esc($row['ua']) ?></td>
+                <td class="text-right"><?= number_format($row['pa'], 2, '.', '') ?></td>
+                <td class="text-center"><?= !empty($row['ra']) ? 'A' : 'N' ?></td>
+                                <td class="text-center"><?= !empty($row['qa']) ? 'A' : 'N' ?></td>
+                                                <td class="text-center">
+                    <a href="<?= site_url("bank/edit/" . esc($row['PK'])) ?>" class="btn-action" style="background:#ffc107; color:#000;">Editovať</a>
 
-        <button id="btn-add-new" class="btn" style="display:none;" onclick="app.showForm()">Pridať nový záznam</button>
+                    <form action="<?= site_url("bank/copy") ?>" method="post" style="display:inline;">
+                        <input type="hidden" name="PK" value="<?= esc($row['PK'] ?? '') ?>">
+                        <button type="submit" class="btn-action" style="background:#17a2b8; color:#fff; border:none; cursor:pointer;" >Kópia</button>
+                    </form>
 
-        <div id="table-container">
-            <table id="data-table" style="display:none;">
-                <thead id="data-table-head"></thead>
-                <tbody id="data-table-body"></tbody>
-            </table>
-        </div>
+                    <form action="<?= site_url("bank/delete") ?>" method="post" style="display:inline;">
+                        <input type="hidden" name="PK" value="<?= esc($row['PK'] ?? '') ?>">
+                        <button type="submit" class="btn-action" style="background:#dc3545; color:#fff; border:none; cursor:pointer;" onclick="return confirm('Naozaj vymazať tento záznam?');">Vymazať</button>
+                    </form>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 
-        <div id="dictionary-form-container">
-            <h3 id="form-title">Pridať záznam</h3>
-            <form id="dictionary-form" onsubmit="app.saveDictionary(event)">
-                <input type="hidden" id="form-action-type" value="create">
-                <input type="hidden" id="form-record-id" value="">
-
-                <div id="form-fields"></div>
-
-                <button type="submit" class="btn" style="background-color: #4CAF50; color: white;">Uložiť</button>
-                <button type="button" class="btn" onclick="app.hideForm()">Zrušiť</button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<script src="/js/modules/dictionary.js"></script>
-
+    <script>
+        $(document).ready(function() {
+            $('#bankTable').DataTable({
+                stateSave: true,
+                pagingType: 'numbers',
+                language: {
+                    search: "Vyhľadávanie:",
+                    lengthMenu: "Zobraziť _MENU_ záznamov na stranu",
+                    zeroRecords: "Žiadne záznamy",
+                    info: "Zobrazených _START_ až _END_ z _TOTAL_ záznamov"},
+                pageLength: 15
+            });
+        });
+    </script>
 </body>
 </html>
