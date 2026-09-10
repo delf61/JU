@@ -41,21 +41,22 @@ class BankStatementController extends ResourceController
 
     public function uiCopy($b, $date)
     {
-        // Basic copy logic
         $db = \Config\Database::connect();
         $record = $db->table('ucet')->where('b', hex2bin($b))->where('d', hex2bin($date))->get()->getRowArray();
 
         if ($record) {
-            $orig_b = trim($record['b']);
-            if (strlen($orig_b) < 6) {
-                $record['b'] = $orig_b . '_C';
-            } else {
-                $record['b'] = substr($orig_b, 0, 6) . '_C';
+            // Pouzivatel chce cistu kopiu 1:1. Ak sa vyskytne nejaky interny auto-increment primarny kluc (napr id),
+            // musim ho zmazat z pola zaznamu aby ho DB vygenerovala nanovo. Tabulka zvycajne v MariaDB ma `id`.
+            if (isset($record['id'])) {
+                unset($record['id']);
+            }
+            if (isset($record['_id'])) {
+                unset($record['_id']);
             }
 
             try {
                 $db->table('ucet')->insert($record);
-                return redirect()->back()->with('success', 'Záznam bol úspešne skopírovaný.');
+                return redirect()->back()->with('success', 'Záznam bol úspešne skopírovaný 1:1.');
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Chyba pri kopírovaní: ' . $e->getMessage());
             }
