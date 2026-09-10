@@ -75,6 +75,13 @@ class CashbookController extends ResourceController
             $entries = array_filter($entries, function($e) {
                 return empty($e['vydaj']) || trim($e['vydaj']) === '';
             });
+        }
+
+        $filter_kod = $this->request->getGet('filter_kod');
+        if ($filter_kod) {
+            $entries = array_filter($entries, function($e) use ($filter_kod) {
+                return isset($e['vydaj']) && $e['vydaj'] === $filter_kod;
+            });
         } elseif ($filter === 'banka') {
             // pPD_banka legacy cond= (ok = 'u')
             // 'ok' in FAND PD usually means it has been verified/marked via some logic.
@@ -296,5 +303,42 @@ class CashbookController extends ResourceController
         }
 
         return redirect()->back()->with('error', 'Neznámy typ dokladu pre presmerovanie. Doklad: ' . esc($b_decoded));
+    }
+    public function getCodesApi()
+    {
+        $type = $this->request->getGet('type'); // 'v' for vydaje, 'p' for prijmy
+        $pv = ($type === 'v') ? 1 : 0;
+
+        $db = \Config\Database::connect();
+        $codes = $db->table('vydaje')->where('pv', $pv)->get()->getResultArray();
+
+        return $this->response->setJSON($codes);
+    }
+
+    public function updateCodeApi()
+    {
+        $b = $this->request->getPost('b');
+        $year = $this->request->getPost('year');
+        $newCode = $this->request->getPost('kod');
+
+        if (!$b || !$year) return $this->response->setJSON(['status' => 'error', 'message' => 'Missing data']);
+
+        $db = \Config\Database::connect();
+        $db->table('pd')->where('b', hex2bin($b))->where('YEAR(a)', $year)->update(['vydaj' => $newCode]);
+
+        return $this->response->setJSON(['status' => 'success']);
+    }
+
+    public function updateCodeDescriptionApi()
+    {
+        $pk = $this->request->getPost('pk');
+        $newDesc = $this->request->getPost('desc');
+
+        if (!$pk) return $this->response->setJSON(['status' => 'error']);
+
+        $db = \Config\Database::connect();
+        $db->table('vydaje')->where('PK', $pk)->update(['d' => $newDesc]);
+
+        return $this->response->setJSON(['status' => 'success']);
     }
 }
