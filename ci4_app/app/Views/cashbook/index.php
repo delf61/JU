@@ -311,11 +311,11 @@
                         <td><?= esc($row['vydaj'] ?? '') ?></td>
                         <td><?= esc($ok) ?></td>
                         <td>
-                            <a href="<?= site_url('cashbook/edit/' . esc($row['b']) . '/' . esc($year)) ?>" class="btn btn-edit" style="margin-bottom: 5px;">Editovať</a>
+                            <a href="<?= site_url('cashbook/edit/' . esc($row['b']) . '/' . esc($year)) ?>" class="btn btn-edit" >Editovať</a>
                             <form action="<?= site_url('cashbook/delete/' . esc($row['b']) . '/' . esc($year)) ?>" method="post" style="display:inline;" onsubmit="return confirm('Naozaj vymazať tento záznam?');">
-                                <button type="submit" class="btn btn-danger" style="background:#dc3545;color:white;border:none;padding:5px 10px;border-radius:3px;cursor:pointer;margin-bottom: 5px;">Vymazať</button>
+                                <button type="submit" class="btn btn-danger" style="background:#dc3545;color:white;border:none;padding:5px 10px;border-radius:3px;cursor:pointer;">Vymazať</button>
                             </form>
-                            <a href="<?= site_url('cashbook/document/' . bin2hex($row['b']) . '/' . esc($year)) ?>" class="btn" style="background:#6c757d; color:#fff;" title="Otvoriť zdrojový modul dokladu">1 typ dokladov</a>
+
                         </td>
                     </tr>
                 <?php endforeach; ?>
