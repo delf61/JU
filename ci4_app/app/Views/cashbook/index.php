@@ -232,8 +232,8 @@
                 <th>popis</th>
                 <th class="text-right">celkove</th>
                 <th class="text-right">s DPH</th>
-                <th>typ</th>
-                <th>kód op.</th>
+                <th class="text-right">typ</th>
+                <th class="text-right">kód op.</th>
                 <th>ok</th>
                 <th>akcie</th>
             </tr>
@@ -288,7 +288,7 @@
                         <td><?= esc($row['d'] ?? '') ?></td>
                         <td class="text-right"><?= number_format($celkove, 2, '.', '') ?></td>
                         <td class="text-right"><?= number_format($sDPH, 2, '.', '') ?></td>
-                        <td><?= esc($row['kodop'] ?? '') ?></td>
+                        <td class="text-right"><?= esc($row['kodop'] ?? '') ?></td>
                         <td class="text-center"><a href="#" onclick="openCodesModal('<?= bin2hex($row['b']) ?>', <?= $year ?>, '<?= ($row['a2'] > 0 || $row['a4'] > 0) ? 'v' : 'p' ?>', '<?= esc($row['vydaj'] ?? '') ?>'); return false;" style="font-weight:bold; color:var(--link-color);" title="Kódy operácií (Ctrl+F6)"><?= esc($row['vydaj'] ?? '') ?: '[+]' ?></a></td>
                         <td><?= esc($ok) ?></td>
                         <td>
