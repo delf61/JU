@@ -3,112 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Prehľad celkových súm - Peňažný denník</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f6f9;
-            color: #333;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            background: #fff;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: var(--text-color);
-        }
-        .btn-back {
-            display: inline-block;
-            padding: 8px 15px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 500;
-        }
-        .btn-back:hover { background-color: #0056b3; }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .card {
-            background: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .card-full {
-            grid-column: 1 / -1;
-        }
-        .card h2 {
-            margin-top: 0;
-            font-size: 1.2rem;
-            color: #34495e;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
-        th, td {
-            padding: 10px 12px;
-            text-align: right;
-            border-bottom: 1px solid #eee;
-        }
-        th {
-            background-color: #f8f9fa;
-            color: #495057;
-            font-weight: 600;
-        }
-        th.text-left, td.text-left { text-align: left; }
-        th.text-center, td.text-center { text-align: center; }
-
-        .table-striped tbody tr:nth-of-type(odd) { background-color: #f9f9f9; }
-        .font-weight-bold { font-weight: bold; }
-        .text-success { color: #28a745; }
-        .text-danger { color: #dc3545; }
-        .text-primary { color: #007bff; }
-
-        .summary-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .summary-list li {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px dashed #eee;
-        }
-        .summary-list li:last-child { border-bottom: none; }
-        .summary-list li.total {
-            font-weight: bold;
-            border-top: 2px solid #ddd;
-            margin-top: 5px;
-            padding-top: 10px;
-        }
-    </style>
-
     <!-- Theme Switcher CSS -->
     <style>
         :root {
@@ -132,43 +26,117 @@
         }
 
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.3s, color 0.3s;
         }
 
-        .card, .summary-box, .dos-frame, .dos-table, table {
-            background-color: var(--card-bg) !important;
-            border-color: var(--border-color) !important;
-            color: var(--text-color) !important;
+        .container {
+            max-width: 1700px;
+            margin: 0 auto;
         }
 
-        th, td, .card h2, .header, .summary-section h3 {
-            border-color: var(--border-color) !important;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background: var(--card-bg) !important;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--text-color) !important;
+        }
+        .btn-back {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .btn-back:hover { background-color: #0056b3; }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg) !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .card-full {
+            grid-column: 1 / -1;
+        }
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: var(--text-color) !important;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            background-color: var(--card-bg) !important;
+            color: var(--text-color) !important;
+        }
+        th, td {
+            padding: 10px 12px;
+            text-align: right;
+            border: 1px solid var(--border-color) !important;
             color: var(--text-color) !important;
             background-color: transparent !important;
         }
-
         th {
             background-color: var(--th-bg) !important;
+            font-weight: 600;
         }
+        th.text-left, td.text-left { text-align: left; }
+        th.text-center, td.text-center { text-align: center; }
 
         tr:nth-child(even) {
             background-color: var(--hover-bg) !important;
         }
 
-        .header {
-            background-color: var(--card-bg) !important;
-        }
+        .font-weight-bold { font-weight: bold; }
+        .text-success { color: #28a745; }
+        .text-danger { color: #dc3545; }
+        .text-primary { color: #007bff; }
 
-        a {
-            color: var(--link-color);
+        .summary-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
-
-        input, select {
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
+        .summary-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--border-color) !important;
+        }
+        .summary-list li:last-child { border-bottom: none !important; }
+        .summary-list li.total {
+            font-weight: bold;
+            border-top: 2px solid var(--border-color) !important;
+            margin-top: 5px;
+            padding-top: 10px;
         }
 
         .theme-switch-wrapper {
@@ -187,9 +155,7 @@
             width: 60px;
         }
 
-        .theme-switch input {
-            display: none;
-        }
+        .theme-switch input { display: none; }
 
         .slider {
             background-color: #ccc;
@@ -215,46 +181,13 @@
             border-radius: 50%;
         }
 
-        input:checked + .slider {
-            background-color: #2196F3;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-
-        .theme-label {
-            margin-right: 10px;
-            font-weight: bold;
-        }
-
-        /* DataTables dark mode overrides */
-        .dataTables_wrapper .dataTables_length,
-        .dataTables_wrapper .dataTables_filter,
-        .dataTables_wrapper .dataTables_info,
-        .dataTables_wrapper .dataTables_processing,
-        .dataTables_wrapper .dataTables_paginate {
-            color: var(--text-color) !important;
-        }
-
-        .dataTables_wrapper .dataTables_paginate .paginate_button {
-            color: var(--text-color) !important;
-        }
-
-        table.dataTable tbody tr {
-            background-color: var(--card-bg) !important;
-        }
-
-        .summary-list li {
-            border-bottom: 1px dashed var(--border-color) !important;
-        }
-
-        .summary-list li.total {
-            border-top: 2px solid var(--border-color) !important;
-        }
+        input:checked + .slider { background-color: #2196F3; }
+        input:checked + .slider:before { transform: translateX(26px); }
+        .theme-label { margin-right: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
+
     <!-- Theme Switcher JS -->
     <div class="theme-switch-wrapper">
         <span class="theme-label">Téma</span>
@@ -287,7 +220,6 @@
 
         toggleSwitch.addEventListener('change', switchTheme, false);
     </script>
-
 
 <?php
     $res1 = $summary['a1_priebezen'] - $summary['a2_priebezen'];
@@ -323,14 +255,14 @@
             <thead>
                 <tr>
                     <th rowspan="2" class="text-left" style="vertical-align: middle;">Položka</th>
-                    <th colspan="3" class="text-center" style="border-left: 1px solid #ddd; border-right: 1px solid #ddd;">Hotovosť</th>
+                    <th colspan="3" class="text-center">Hotovosť</th>
                     <th colspan="3" class="text-center">Bankový účet</th>
-                    <th rowspan="2" style="vertical-align: middle; border-left: 1px solid #ddd;">Spolu (H+Ú)</th>
+                    <th rowspan="2" class="text-center" style="vertical-align: middle;">Spolu (H+Ú)</th>
                 </tr>
                 <tr>
-                    <th class="text-center" style="border-left: 1px solid #ddd;">Priebežné</th>
+                    <th class="text-center">Priebežné</th>
                     <th class="text-center">Iné</th>
-                    <th class="text-center" style="border-right: 1px solid #ddd;">Celkové</th>
+                    <th class="text-center">Celkové</th>
                     <th class="text-center">Priebežné</th>
                     <th class="text-center">Iné</th>
                     <th class="text-center">Celkové</th>
@@ -339,52 +271,52 @@
             <tbody>
                 <tr>
                     <td class="text-left font-weight-bold">Počiatočný stav</td>
-                    <td colspan="3" class="text-center font-weight-bold" style="border-left: 1px solid #ddd; border-right: 1px solid #ddd; background: #f8f9fa;"><?= number_format($summary['P1'], 2, '.', ' ') ?></td>
-                    <td colspan="3" class="text-center font-weight-bold" style="background: #f8f9fa;"><?= number_format($summary['P2'], 2, '.', ' ') ?></td>
-                    <td class="font-weight-bold" style="border-left: 1px solid #ddd; background: #f8f9fa;"><?= number_format($summary['P1'] + $summary['P2'], 2, '.', ' ') ?></td>
+                    <td colspan="3" class="text-center font-weight-bold"><?= number_format($summary['P1'], 2, '.', ' ') ?></td>
+                    <td colspan="3" class="text-center font-weight-bold"><?= number_format($summary['P2'], 2, '.', ' ') ?></td>
+                    <td class="font-weight-bold"><?= number_format($summary['P1'] + $summary['P2'], 2, '.', ' ') ?></td>
                 </tr>
                 <tr>
                     <td class="text-left text-success">Príjmy (+)</td>
-                    <td class="text-success" style="border-left: 1px solid #ddd;"><?= number_format($summary['a1_priebezen'], 2, '.', ' ') ?></td>
+                    <td class="text-success"><?= number_format($summary['a1_priebezen'], 2, '.', ' ') ?></td>
                     <td class="text-success"><?= number_format($summary['a1_ine'], 2, '.', ' ') ?></td>
-                    <td class="text-success" style="border-right: 1px solid #ddd;"><?= number_format($summary['a1_celkove'], 2, '.', ' ') ?></td>
+                    <td class="text-success"><?= number_format($summary['a1_celkove'], 2, '.', ' ') ?></td>
                     <td class="text-success"><?= number_format($summary['a3_priebezen'], 2, '.', ' ') ?></td>
                     <td class="text-success"><?= number_format($summary['a3_ine'], 2, '.', ' ') ?></td>
                     <td class="text-success"><?= number_format($summary['a3_celkove'], 2, '.', ' ') ?></td>
-                    <td class="text-success font-weight-bold" style="border-left: 1px solid #ddd;"><?= number_format($sum1, 2, '.', ' ') ?></td>
+                    <td class="text-success font-weight-bold"><?= number_format($sum1, 2, '.', ' ') ?></td>
                 </tr>
                 <tr>
                     <td class="text-left text-danger">Výdavky (-)</td>
-                    <td class="text-danger" style="border-left: 1px solid #ddd;"><?= number_format($summary['a2_priebezen'], 2, '.', ' ') ?></td>
+                    <td class="text-danger"><?= number_format($summary['a2_priebezen'], 2, '.', ' ') ?></td>
                     <td class="text-danger"><?= number_format($summary['a2_ine'], 2, '.', ' ') ?></td>
-                    <td class="text-danger" style="border-right: 1px solid #ddd;"><?= number_format($summary['a2_celkove'], 2, '.', ' ') ?></td>
+                    <td class="text-danger"><?= number_format($summary['a2_celkove'], 2, '.', ' ') ?></td>
                     <td class="text-danger"><?= number_format($summary['a4_priebezen'], 2, '.', ' ') ?></td>
                     <td class="text-danger"><?= number_format($summary['a4_ine'], 2, '.', ' ') ?></td>
                     <td class="text-danger"><?= number_format($summary['a4_celkove'], 2, '.', ' ') ?></td>
-                    <td class="text-danger font-weight-bold" style="border-left: 1px solid #ddd;"><?= number_format($sum2, 2, '.', ' ') ?></td>
+                    <td class="text-danger font-weight-bold"><?= number_format($sum2, 2, '.', ' ') ?></td>
                 </tr>
-                <tr style="background: #fdfdfe;">
+                <tr>
                     <td class="text-left font-weight-bold">Rozdiel</td>
-                    <td style="border-left: 1px solid #ddd;"><?= number_format($res1, 2, '.', ' ') ?></td>
+                    <td><?= number_format($res1, 2, '.', ' ') ?></td>
                     <td><?= number_format($res2, 2, '.', ' ') ?></td>
-                    <td style="border-right: 1px solid #ddd;"><?= number_format($res3, 2, '.', ' ') ?></td>
+                    <td><?= number_format($res3, 2, '.', ' ') ?></td>
                     <td><?= number_format($res4, 2, '.', ' ') ?></td>
                     <td><?= number_format($res5, 2, '.', ' ') ?></td>
                     <td><?= number_format($res6, 2, '.', ' ') ?></td>
-                    <td class="font-weight-bold" style="border-left: 1px solid #ddd;"><?= number_format($res7, 2, '.', ' ') ?></td>
+                    <td class="font-weight-bold"><?= number_format($res7, 2, '.', ' ') ?></td>
                 </tr>
                 <tr>
                     <td class="text-left font-weight-bold text-primary" style="font-size: 1.1rem;">Aktuálny stav</td>
-                    <td colspan="3" class="text-center font-weight-bold text-primary" style="font-size: 1.1rem; border-left: 1px solid #ddd; border-right: 1px solid #ddd; background: #e9ecef;"><?= number_format($p1_res, 2, '.', ' ') ?></td>
-                    <td colspan="3" class="text-center font-weight-bold text-primary" style="font-size: 1.1rem; background: #e9ecef;"><?= number_format($p2_res, 2, '.', ' ') ?></td>
-                    <td class="font-weight-bold text-primary" style="font-size: 1.1rem; border-left: 1px solid #ddd; background: #e9ecef;"><?= number_format($p1_res + $p2_res, 2, '.', ' ') ?></td>
+                    <td colspan="3" class="text-center font-weight-bold text-primary" style="font-size: 1.1rem;"><?= number_format($p1_res, 2, '.', ' ') ?></td>
+                    <td colspan="3" class="text-center font-weight-bold text-primary" style="font-size: 1.1rem;"><?= number_format($p2_res, 2, '.', ' ') ?></td>
+                    <td class="font-weight-bold text-primary" style="font-size: 1.1rem;"><?= number_format($p1_res + $p2_res, 2, '.', ' ') ?></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
     <div class="grid-container">
-        <!-- Príjmy -->
+        <!-- 1. Stlpec: Príjmy -->
         <div class="card">
             <h2>Príjmy</h2>
             <ul class="summary-list">
@@ -395,7 +327,7 @@
             </ul>
         </div>
 
-        <!-- Výdavky -->
+        <!-- 2. Stlpec: Výdavky -->
         <div class="card">
             <h2>Odpočítateľné výdavky</h2>
             <ul class="summary-list">
@@ -410,25 +342,7 @@
             </ul>
         </div>
 
-                <div style="display: flex; flex-direction: column; gap: 20px;">
-<!-- Daňový základ a kalkulácia -->
-        <div class="card" style="background-color: #f8f9fa; border: 1px solid #e9ecef;">
-            <h2>Kalkulácia dane z príjmu</h2>
-            <ul class="summary-list">
-                <li><span>Zdaniteľné príjmy</span> <span class="text-success"><?= number_format($summary['zdan_prijmy'], 2, '.', ' ') ?> &euro;</span></li>
-                <li><span>Odpočítateľné výdavky</span> <span class="text-danger">-<?= number_format($summary['odpoc_vyd'], 2, '.', ' ') ?> &euro;</span></li>
-                <li><span>Nezdaniteľná suma</span> <span class="text-danger">-0.00 &euro;</span></li>
-                <li><span>Doplnkové dôchod. sporenie</span> <span class="text-danger">-<?= number_format($summary['dopdochspor'], 2, '.', ' ') ?> &euro;</span></li>
-                <li><span>Strata z minulých rokov</span> <span class="text-danger">-0.00 &euro;</span></li>
-                <li class="total" style="font-size: 1.2rem; color: #007bff; border-top: 2px solid #007bff;">
-                    <span>Základ pre výpočet dane</span>
-                    <span><?= number_format($summary['zaklad_pre_vyp'], 2, '.', ' ') ?> &euro;</span>
-                </li>
-                <li><span>Vypočítaná daň</span> <span>0.00 &euro;</span></li>
-                <li><span>Daň k úhrade</span> <span>0.00 &euro;</span></li>
-            </ul>
-        </div>
-<!-- Nedaňové a iné položky -->
+        <!-- 3. Stlpec: Nedaňové a špecifické položky -->
         <div class="card">
             <h2>Nedaňové a špecifické položky</h2>
             <ul class="summary-list">
@@ -444,19 +358,24 @@
             </ul>
         </div>
 
-                </div>
-    </div>
-
-    <div class="card card-full" style="margin-bottom: 40px; background-color: #eef2f5;">
-        <h2 style="border-bottom-color: #d1d8e0;">Detail aktívnej položky z gridu</h2>
-        <div style="display: flex; gap: 30px;">
-            <div><strong>Priebežná:</strong> <?= number_format($summary['akt_pol_p'], 2, '.', ' ') ?> &euro;</div>
-            <div><strong>Iná:</strong> <?= number_format($summary['akt_pol_i'], 2, '.', ' ') ?> &euro;</div>
-            <div><strong>Celková:</strong> <?= number_format($summary['akt_pol_c'], 2, '.', ' ') ?> &euro;</div>
-            <div><strong>Účet/Hotovosť:</strong> <span class="text-primary"><?= esc($summary['akt_pol_hotovost_ucet'] ?: 'Nešpecifikované') ?></span></div>
+        <!-- 4. Stlpec: Daňový základ a kalkulácia -->
+        <div class="card">
+            <h2>Kalkulácia dane z príjmu</h2>
+            <ul class="summary-list">
+                <li><span>Zdaniteľné príjmy</span> <span class="text-success"><?= number_format($summary['zdan_prijmy'], 2, '.', ' ') ?> &euro;</span></li>
+                <li><span>Odpočítateľné výdavky</span> <span class="text-danger">-<?= number_format($summary['odpoc_vyd'], 2, '.', ' ') ?> &euro;</span></li>
+                <li><span>Nezdaniteľná suma</span> <span class="text-danger">-0.00 &euro;</span></li>
+                <li><span>Doplnkové dôchod. sporenie</span> <span class="text-danger">-<?= number_format($summary['dopdochspor'], 2, '.', ' ') ?> &euro;</span></li>
+                <li><span>Strata z minulých rokov</span> <span class="text-danger">-0.00 &euro;</span></li>
+                <li class="total" style="font-size: 1.1rem; color: var(--link-color); border-top: 2px solid var(--link-color);">
+                    <span>Základ pre výpočet dane</span>
+                    <span><?= number_format($summary['zaklad_pre_vyp'], 2, '.', ' ') ?> &euro;</span>
+                </li>
+                <li><span>Vypočítaná daň</span> <span>0.00 &euro;</span></li>
+                <li><span>Daň k úhrade</span> <span>0.00 &euro;</span></li>
+            </ul>
         </div>
     </div>
-
 </div>
 
 </body>
