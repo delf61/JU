@@ -223,10 +223,7 @@
                 <td class="text-center"><?= !empty($row['ra']) ? 'A' : 'N' ?></td>
                                 <td class="text-center"><?= !empty($row['qa']) ? 'A' : 'N' ?></td>
                                                 <td class="text-center">
-                    <form action="<?= site_url("bank/edit") ?>" method="post" style="display:inline;">
-                        <input type="hidden" name="PK" value="<?= esc($row['PK'] ?? '') ?>">
-                        <button type="submit" class="btn-action" style="background:#ffc107; color:#000; border:none; cursor:pointer;">Editovať</button>
-                    </form>
+                    <a href="<?= site_url("bank/edit/" . esc($row['PK'])) ?>" class="btn-action" style="background:#ffc107; color:#000;">Editovať</a>
 
                     <form action="<?= site_url("bank/copy") ?>" method="post" style="display:inline;">
                         <input type="hidden" name="PK" value="<?= esc($row['PK'] ?? '') ?>">

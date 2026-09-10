@@ -81,7 +81,8 @@ $routes->post('cashbook/delete/(:any)/(:num)', 'CashbookController::uiDelete/$1/
 
 // Bank Statement
 $routes->get('bank', 'BankStatementController::webIndex');
-$routes->post('bank/edit', 'BankStatementController::uiEdit');
+$routes->get('bank/edit/(:num)', 'BankStatementController::uiEdit/$1');
+$routes->post('bank/update/(:num)', 'BankStatementController::uiUpdate/$1');
 $routes->post('bank/delete', 'BankStatementController::uiDelete');
 $routes->post('bank/copy', 'BankStatementController::uiCopy');
 

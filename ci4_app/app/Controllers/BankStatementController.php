@@ -27,9 +27,37 @@ class BankStatementController extends ResourceController
         ]);
     }
 
-            public function uiEdit()
+                public function uiEdit($pk)
     {
-        return redirect()->back()->with('error', 'Editácia výpisu nie je zatiaľ implementovaná.');
+        $db = \Config\Database::connect();
+        $record = $db->table('ucet')->where('PK', $pk)->get()->getRowArray();
+
+        if (!$record) {
+            return redirect()->to('bank')->with('error', 'Záznam na editáciu nebol nájdený.');
+        }
+
+        return view('bank/form', [
+            'entry' => $record,
+            'pk' => $pk
+        ]);
+    }
+
+    public function uiUpdate($pk)
+    {
+        $postData = $this->request->getPost();
+
+        // Zabezpecenie boolean checkboxov (ak niesu poslane v POST, nastavime na 0)
+        $postData['ra'] = isset($postData['ra']) ? 1 : 0;
+        $postData['qa'] = isset($postData['qa']) ? 1 : 0;
+
+        $db = \Config\Database::connect();
+
+        try {
+            $db->table('ucet')->where('PK', $pk)->update($postData);
+            return redirect()->to('bank')->with('success', 'Záznam bol úspešne upravený.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->with('error', 'Chyba pri ukladaní úprav: ' . $e->getMessage());
+        }
     }
 
     public function uiDelete()
