@@ -7,7 +7,3 @@ blocks/
 ci4_app/vendor/
 ci4_app/writable/
 ci4_app/tests/
-temp.sql
-CI4_JU_EXPORT.zip
-ju_migration_pk.gz
-ju_migration_pk.zip

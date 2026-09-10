@@ -12,12 +12,11 @@ class PdModel extends Model
     // MariaDB primary key will either be an auto-increment ID or a composite (b, _year).
     // In CI4 we map to the primary identifier 'b', but we have to enforce queries manually
     // via CashbookService since CI4 doesn't fully support composite keys natively.
-    protected $primaryKey = 'PK';
-    protected $useAutoIncrement = true;
+    protected $primaryKey = 'b';
+    protected $useAutoIncrement = false;
 
     protected $allowedFields = [
                 '_fand_deleted',
-        'PK',
         'a',
         'b',
         'zp',
