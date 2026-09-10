@@ -325,6 +325,7 @@
     <script>
         $(document).ready(function () {
             $('#cashbookTable').DataTable({
+                lengthChange: false,
                 stateSave: true,
                 pagingType: 'numbers',
                 language: {

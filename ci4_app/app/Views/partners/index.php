@@ -287,6 +287,7 @@
 
         $(document).ready(function() {
             partnersTable = $('#partnersTable').DataTable({
+                lengthChange: false,
                 stateSave: true,
                 pagingType: 'numbers',
                 ajax: {
@@ -330,6 +331,7 @@
 
         $(document).ready(function() {
             partnersTable = $('#partnersTable').DataTable({
+                lengthChange: false,
                 stateSave: true,
                 pagingType: 'numbers',
                 ajax: {

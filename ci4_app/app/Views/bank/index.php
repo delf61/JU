@@ -243,6 +243,7 @@
     <script>
         $(document).ready(function() {
             $('#bankTable').DataTable({
+                lengthChange: false,
                 stateSave: true,
                 pagingType: 'numbers',
                 language: {
