@@ -43,11 +43,15 @@ class BankStatementController extends ResourceController
     {
         // Basic copy logic
         $db = \Config\Database::connect();
-        $record = $db->table('ucet')->where('b', base64_decode($b))->where('d', base64_decode($date))->get()->getRowArray();
+        $record = $db->table('ucet')->where('b', hex2bin($b))->where('d', hex2bin($date))->get()->getRowArray();
 
         if ($record) {
-            // Append _COPY to the document number to prevent primary key collision if applicable
-            $record['b'] = substr($record['b'] . '_COPY', 0, 8); // b is A,8 in FAND
+            $orig_b = trim($record['b']);
+            if (strlen($orig_b) < 6) {
+                $record['b'] = $orig_b . '_C';
+            } else {
+                $record['b'] = substr($orig_b, 0, 6) . '_C';
+            }
 
             try {
                 $db->table('ucet')->insert($record);

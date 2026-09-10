@@ -224,13 +224,13 @@
                                 <td class="text-center"><?= !empty($row['qa']) ? 'A' : 'N' ?></td>
                 <td class="text-center">
                     <?php
-                        $enc_b = base64_encode($row['b']);
-                        $enc_d = base64_encode($row['d']);
+                        $enc_b = bin2hex($row['b']);
+                        $enc_d = bin2hex($row['d']);
                     ?>
                     <a href="<?= site_url("bank/edit/$enc_b/$enc_d") ?>" class="btn-action" style="background:#ffc107; color:#000;">Editovať</a>
 
                     <form action="<?= site_url("bank/copy/$enc_b/$enc_d") ?>" method="post" style="display:inline;">
-                        <button type="submit" class="btn-action" style="background:#17a2b8; color:#fff; border:none; cursor:pointer;" onclick="return confirm('Naozaj vytvoriť kópiu tohto záznamu?');">Kópia</button>
+                        <button type="submit" class="btn-action" style="background:#17a2b8; color:#fff; border:none; cursor:pointer;" >Kópia</button>
                     </form>
 
                     <form action="<?= site_url("bank/delete/$enc_b/$enc_d") ?>" method="post" style="display:inline;">
@@ -254,7 +254,7 @@
                         first: "Prvá", previous: "Predchádzajúca", next: "Ďalšia", last: "Posledná"
                     }
                 },
-                pageLength: 20
+                pageLength: 15
             });
         });
     </script>
