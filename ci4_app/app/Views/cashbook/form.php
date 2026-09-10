@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $entry ? 'Editácia' : 'Nový záznam' ?> - Peňažný denník</title>
     <style>
-        body { font-family: sans-serif; margin: 20px; max-width: 800px; }
+        body { font-family: sans-serif; margin: 20px; max-width: 1200px; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
         .form-group input, .form-group select { width: 100%; padding: 8px; box-sizing: border-box; }

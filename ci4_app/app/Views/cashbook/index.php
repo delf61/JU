@@ -306,14 +306,14 @@
 
         <div class="card" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; padding: 15px; border: 1px solid var(--border-color); background-color: var(--card-bg);">
         <a href="<?= site_url('cashbook/create') ?>?year=<?= esc($year) ?>" class="btn" style="background-color: #28a745;">Pridať nový záznam</a>
-        <a href="#" class="btn" style="background: #17a2b8;">Hot. príjem (F1)</a>
-        <a href="#" class="btn" style="background: #17a2b8;">Hot. výdaj (F2)</a>
-        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>&filter=bez_kodu" class="btn" style="background: <?= isset($_GET['filter']) && $_GET['filter'] === 'bez_kodu' ? '#dc3545' : '#17a2b8' ?>;" title="pVyd_Bez_Kod">Bez kódu (Ctrl+F7)</a>
+        <a href="#" class="btn" style="background: #17a2b8;">Hot. príjem</a>
+        <a href="#" class="btn" style="background: #17a2b8;">Hot. výdaj</a>
+        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>&filter=bez_kodu" class="btn" style="background: <?= isset($_GET['filter']) && $_GET['filter'] === 'bez_kodu' ? '#dc3545' : '#17a2b8' ?>;" title="pVyd_Bez_Kod">Bez kódu</a>
         <a href="#" class="btn" style="background: #17a2b8;" onclick="window.print()">Tlač</a>
         <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('Upratovanie je servisná FAND procedúra, v CI4 nie je nutná.')">Upratovanie</a>
-        <a href="<?= site_url('bank') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="Otvoriť bankové výpisy (Ucet)">Účet (F7)</a>
-        <a href="<?= site_url('cashbook/statistics') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="pStatist">Štatistika (Alt+F4)</a>
-        <a href="<?= site_url('cashbook/summary') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="pPDsuma">Sumár po akt. pol. (Alt+F5)</a>
+        <a href="<?= site_url('bank') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="Otvoriť bankové výpisy (Ucet)">Účet</a>
+        <a href="<?= site_url('cashbook/statistics') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="pStatist">Štatistika</a>
+        <a href="<?= site_url('cashbook/summary') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="pPDsuma">Sumár po akt. pol.</a>
         <a href="<?= base_url() ?>" class="btn" style="background-color: #6c757d; margin-left: auto;">Späť na domovskú stránku</a>
     </div>
 
@@ -347,12 +347,12 @@
 
     <!-- Codes Modal -->
     <div id="codesModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center;">
-        <div style="background:var(--card-bg); width:700px; max-width:90%; border-radius:8px; border:1px solid var(--border-color); box-shadow:0 4px 10px rgba(0,0,0,0.2); display:flex; flex-direction:column;">
+        <div style="background:var(--card-bg); width:1200px; max-width:90%; border-radius:8px; border:1px solid var(--border-color); box-shadow:0 4px 10px rgba(0,0,0,0.2); display:flex; flex-direction:column;">
             <div style="padding:15px; border-bottom:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
                 <h3 id="modalTitle" style="margin:0; color:var(--text-color);">Kódy operácií</h3>
                 <button onclick="closeCodesModal()" style="background:none; border:none; color:var(--text-color); font-size:1.5em; cursor:pointer;">&times;</button>
             </div>
-            <div style="padding:15px; overflow-y:auto; max-height:60vh;">
+            <div style="padding:15px; overflow-y:auto; max-height:850px;">
                 <table id="codesTable" style="width:100%; border-collapse:collapse;">
                     <thead>
                         <tr>
