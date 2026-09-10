@@ -220,33 +220,9 @@
         <a href="<?= site_url('cashbook') ?>?year=<?= esc($year + 1) ?><?= isset($_GET['filter']) ? '&filter='.esc($_GET['filter']) : '' ?>" style="text-decoration: none; padding: 0 10px; font-size: 1.5em; background: #333; color: #fff; border-radius: 4px;">+</a>
     </div>
 
-        <div style="margin-bottom: 15px; display: flex; gap: 10px; align-items: center;">
-        <a href="<?= site_url('cashbook/create') ?>?year=<?= esc($year) ?>" class="btn" style="background-color: #28a745;">Pridať nový záznam</a>
-        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?><?= isset($_GET['filter']) && $_GET['filter'] === 'bez_kodu' ? '' : '&filter=bez_kodu' ?>" class="btn" style="background-color: <?= isset($_GET['filter']) && $_GET['filter'] === 'bez_kodu' ? '#dc3545' : '#6c757d' ?>;">
-            <?= isset($_GET['filter']) && $_GET['filter'] === 'bez_kodu' ? 'Zrušiť filter Bez kódu' : 'Zobraziť nevyúčtované (Bez kódu)' ?>
-        </a>
-        <a href="<?= site_url('cashbook/summary') ?>?year=<?= esc($year) ?>" class="btn" style="background-color: #17a2b8;" title="Sumár peňažného denníka">Sumár PD</a>
-        <a href="<?= site_url('cashbook/statistics') ?>?year=<?= esc($year) ?>" class="btn" style="background-color: #17a2b8;" title="Mesačná štatistika">Štatistika</a>
-        <a href="<?= base_url() ?>" class="btn" style="background-color: #6c757d; margin-left: auto;">Späť na domovskú stránku</a>
-    </div>
 
-    <div class="summary-box">
-        <div class="summary-section">
-            <h3>Zostatky</h3>
-            <p><strong>Hotovosť (Poč. stav):</strong> <?= number_format($initialState['ph'] ?? 0, 2, '.', '') ?></p>
-            <p><strong>BÚ (Poč. stav):</strong> <?= number_format($initialState['pu'] ?? 0, 2, '.', '') ?></p>
-            <hr>
-            <p><strong>Hotovosť konečný zostatok:</strong> <?= number_format($runningTotals['income_cash'] - $runningTotals['expense_cash'], 2, '.', '') ?></p>
-            <p><strong>BÚ konečný zostatok:</strong> <?= number_format($runningTotals['income_bank'] - $runningTotals['expense_bank'], 2, '.', '') ?></p>
-        </div>
-        <div class="summary-section">
-            <h3>Pohyby celkom</h3>
-            <p><strong>Príjmy hotovosť (a1):</strong> <?= number_format($totals['income_cash'], 2, '.', '') ?></p>
-            <p><strong>Výdavky hotovosť (a2):</strong> <?= number_format($totals['expense_cash'], 2, '.', '') ?></p>
-            <p><strong>Príjmy BÚ (a3):</strong> <?= number_format($totals['income_bank'], 2, '.', '') ?></p>
-            <p><strong>Výdavky BÚ (a4):</strong> <?= number_format($totals['expense_bank'], 2, '.', '') ?></p>
-        </div>
-    </div>
+
+
 
     <table id="cashbookTable" class="display" style="width:100%">
         <thead>
@@ -328,15 +304,17 @@
         </tbody>
     </table>
 
-    <div class="card" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; padding: 15px; border: 1px solid var(--border-color); background-color: var(--card-bg);">
+        <div class="card" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; padding: 15px; border: 1px solid var(--border-color); background-color: var(--card-bg);">
+        <a href="<?= site_url('cashbook/create') ?>?year=<?= esc($year) ?>" class="btn" style="background-color: #28a745;">Pridať nový záznam</a>
         <a href="#" class="btn" style="background: #17a2b8;">Hot. príjem (F1)</a>
         <a href="#" class="btn" style="background: #17a2b8;">Hot. výdaj (F2)</a>
-        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>&filter=bez_kodu" class="btn" style="background: #17a2b8;" title="pVyd_Bez_Kod">Bez kódu (Ctrl+F7)</a>
+        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>&filter=bez_kodu" class="btn" style="background: <?= isset($_GET['filter']) && $_GET['filter'] === 'bez_kodu' ? '#dc3545' : '#17a2b8' ?>;" title="pVyd_Bez_Kod">Bez kódu (Ctrl+F7)</a>
         <a href="#" class="btn" style="background: #17a2b8;" onclick="window.print()">Tlač</a>
         <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('Upratovanie je servisná FAND procedúra, v CI4 nie je nutná.')">Upratovanie</a>
         <a href="<?= site_url('bank') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="Otvoriť bankové výpisy (Ucet)">Účet (F7)</a>
         <a href="<?= site_url('cashbook/statistics') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="pStatist">Štatistika (Alt+F4)</a>
         <a href="<?= site_url('cashbook/summary') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="pPDsuma">Sumár po akt. pol. (Alt+F5)</a>
+        <a href="<?= base_url() ?>" class="btn" style="background-color: #6c757d; margin-left: auto;">Späť na domovskú stránku</a>
     </div>
 
 
@@ -359,7 +337,7 @@
                     emptyTable: "Žiadne dáta nie sú k dispozícii"},
                 ordering: true,
                 paging: true,
-                pageLength: 10,
+                pageLength: 15,
                 columnDefs: [
                     { orderable: false, targets: -1 } // Disable sorting on Action column
                 ]
