@@ -222,27 +222,19 @@
                 <td class="text-right"><?= number_format($row['pa'], 2, '.', '') ?></td>
                 <td class="text-center"><?= !empty($row['ra']) ? 'A' : 'N' ?></td>
                                 <td class="text-center"><?= !empty($row['qa']) ? 'A' : 'N' ?></td>
-                                <td class="text-center">
-                    <?php
-                        // Encode all fields as hidden inputs to ensure 100% exact matching
-                        $hiddenInputs = '';
-                        foreach ($row as $key => $val) {
-                            // Skip strictly internal CI4/DB fields if they crept in, though we want to match exact FAND fields
-                            $hiddenInputs .= '<input type="hidden" name="'.esc($key).'" value="'.esc($val).'">';
-                        }
-                    ?>
+                                                <td class="text-center">
                     <form action="<?= site_url("bank/edit") ?>" method="post" style="display:inline;">
-                        <?= $hiddenInputs ?>
+                        <input type="hidden" name="PK" value="<?= esc($row['PK'] ?? '') ?>">
                         <button type="submit" class="btn-action" style="background:#ffc107; color:#000; border:none; cursor:pointer;">Editovať</button>
                     </form>
 
                     <form action="<?= site_url("bank/copy") ?>" method="post" style="display:inline;">
-                        <?= $hiddenInputs ?>
+                        <input type="hidden" name="PK" value="<?= esc($row['PK'] ?? '') ?>">
                         <button type="submit" class="btn-action" style="background:#17a2b8; color:#fff; border:none; cursor:pointer;" >Kópia</button>
                     </form>
 
                     <form action="<?= site_url("bank/delete") ?>" method="post" style="display:inline;">
-                        <?= $hiddenInputs ?>
+                        <input type="hidden" name="PK" value="<?= esc($row['PK'] ?? '') ?>">
                         <button type="submit" class="btn-action" style="background:#dc3545; color:#fff; border:none; cursor:pointer;" onclick="return confirm('Naozaj vymazať tento záznam?');">Vymazať</button>
                     </form>
                 </td>

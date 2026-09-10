@@ -27,30 +27,22 @@ class BankStatementController extends ResourceController
         ]);
     }
 
-        public function uiEdit()
+            public function uiEdit()
     {
         return redirect()->back()->with('error', 'Editácia výpisu nie je zatiaľ implementovaná.');
     }
 
     public function uiDelete()
     {
-        $postData = $this->request->getPost();
-        if (empty($postData)) {
+        $pk = $this->request->getPost('PK');
+        if (empty($pk)) {
             return redirect()->back()->with('error', 'Chýbajú dáta pre vymazanie.');
         }
 
         $db = \Config\Database::connect();
-        $builder = $db->table('ucet');
-
-        // Match ALL fields exactly to prevent deleting wrong record
-        foreach ($postData as $k => $v) {
-            if ($k !== 'id' && $k !== '_id') {
-                $builder->where($k, $v);
-            }
-        }
 
         try {
-            $builder->delete();
+            $db->table('ucet')->where('PK', $pk)->delete();
             return redirect()->back()->with('success', 'Záznam bol úspešne vymazaný.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Chyba pri mazaní: ' . $e->getMessage());
@@ -59,26 +51,16 @@ class BankStatementController extends ResourceController
 
     public function uiCopy()
     {
-        $postData = $this->request->getPost();
-        if (empty($postData)) {
+        $pk = $this->request->getPost('PK');
+        if (empty($pk)) {
             return redirect()->back()->with('error', 'Chýbajú dáta pre kópiu.');
         }
 
         $db = \Config\Database::connect();
-        $builder = $db->table('ucet');
-
-        // MATCH ALL EXACT FIELDS FROM POST TO ENSURE 100% ACCURACY
-        foreach ($postData as $k => $v) {
-            if ($k !== 'id' && $k !== '_id') {
-                $builder->where($k, $v);
-            }
-        }
-
-        $record = $builder->get()->getRowArray();
+        $record = $db->table('ucet')->where('PK', $pk)->get()->getRowArray();
 
         if ($record) {
-            if (isset($record['id'])) unset($record['id']);
-            if (isset($record['_id'])) unset($record['_id']);
+            unset($record['PK']); // Odstranime PK, aby databaza vygenerovala nove
 
             try {
                 $db->table('ucet')->insert($record);
@@ -88,6 +70,6 @@ class BankStatementController extends ResourceController
             }
         }
 
-        return redirect()->back()->with('error', 'Presný záznam pre kópiu nebol nájdený v databáze. Skontrolujte integritu dát.');
+        return redirect()->back()->with('error', 'Presný záznam pre kópiu nebol nájdený v databáze.');
     }
 }
