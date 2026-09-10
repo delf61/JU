@@ -191,7 +191,7 @@
 
     <div class="header">
         <h1>Bankové výpisy</h1>
-        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>" class="btn-back">Späť na Peňažný denník</a>
+
     </div>
 
     <?php if (session()->getFlashdata('success')): ?>
@@ -201,13 +201,7 @@
         <div style="color: #dc3545; margin-bottom: 15px; font-weight: bold;"><?= esc(session()->getFlashdata('error')) ?></div>
     <?php endif; ?>
 
-            <div style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-        <a href="<?= site_url('cashbook/create') ?>?year=<?= esc($year) ?>" class="btn" style="background-color: #28a745;">Pridať bankový záznam</a>
-        <a href="#" class="btn" style="background-color: #ffc107; color:#000;" onclick="openCashTransferModal()">Výber / Vklad hotovosti (F5)</a>
-        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="openInvoiceModal('kz')">Uhradiť Záväzok (F8)</a>
-        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="openInvoiceModal('kp')">Uhradiť Pohľadávku (F9)</a>
-        <a href="<?= site_url('cashbook/summary') ?>?year=<?= esc($year) ?>" class="btn" style="background-color: #6c757d; margin-left: auto;">Iné info (F10)</a>
-    </div>
+
 
     <table id="bankTable15" class="display">
         <thead>
@@ -233,7 +227,7 @@
                                                 <td class="text-center">
                     <form action="<?= site_url('bank/transfer_pd') ?>" method="post" style="display:inline;">
                         <input type="hidden" name="PK" value="<?= esc($row['PK'] ?? '') ?>">
-                        <button type="submit" class="btn-action" style="background:#28a745; color:#fff; border:none; cursor:pointer;" title="Prenos do PD (F3)">Do PD (F3)</button>
+                        <button type="submit" class="btn-action" style="background:#28a745; color:#fff; border:none; cursor:pointer;" title="Prenos do PD (F3)">Do PD</button>
                     </form>
                     <a href="<?= site_url("bank/edit/" . esc($row['PK'])) ?>" class="btn-action" style="background:#ffc107; color:#000;">Editovať</a>
 
@@ -251,6 +245,15 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <div class="card" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; padding: 15px; border: 1px solid var(--border-color); background-color: var(--card-bg);">
+        <a href="#" class="btn" style="background-color: #28a745;" onclick="alert('Bude spúšťať manuálne pridanie riadku do banky')">Pridať bankový záznam</a>
+        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="openCashTransferModal()">Výber / Vklad hotovosti</a>
+        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="openInvoiceModal('kz')">Uhradiť Záväzok</a>
+        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="openInvoiceModal('kp')">Uhradiť Pohľadávku</a>
+        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="alert('Zobrazí sumár a štatistiky k výpisom')">Iné info</a>
+        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>" class="btn" style="background-color: #6c757d; margin-left: auto;">Späť na Peňažný denník</a>
+    </div>
 
     <script>
         $(document).ready(function() {
@@ -298,7 +301,7 @@
     <!-- Cash Transfer Modal -->
     <div id="cashModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center;">
         <div style="background:var(--card-bg); width:400px; border-radius:8px; border:1px solid var(--border-color); padding:20px; color:var(--text-color);">
-            <h3 style="margin-top:0;">Výber / Vklad hotovosti (F5)</h3>
+            <h3 style="margin-top:0;">Výber / Vklad hotovosti</h3>
             <p>Kladná suma = Vklad. Záporná suma = Výber do pokladne.</p>
             <form action="<?= site_url('bank/cash_transfer') ?>" method="post">
                 <div style="margin-bottom:15px;">
