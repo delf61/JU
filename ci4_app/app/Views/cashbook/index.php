@@ -206,8 +206,6 @@
         toggleSwitch.addEventListener('change', switchTheme, false);
     </script>
 
-    <h1>Peňažný denník (Cashbook)</h1>
-
     <?php if (session()->getFlashdata('success')): ?>
         <div class="success-msg"><?= esc(session()->getFlashdata('success')) ?></div>
     <?php endif; ?>
@@ -215,11 +213,12 @@
         <div class="error-msg"><?= esc(session()->getFlashdata('error')) ?></div>
     <?php endif; ?>
 
-    <form method="get" action="<?= site_url('cashbook') ?>" class="year-selector">
-        <label for="year">Účtovný rok:</label>
-        <input type="number" name="year" id="year" value="<?= esc($year) ?>" min="1990" max="2100">
-        <button type="submit">Zobraziť</button>
-    </form>
+<div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+        <h1 style="margin: 0;">Peňažný denník</h1>
+        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year - 1) ?><?= isset($_GET['filter']) ? '&filter='.esc($_GET['filter']) : '' ?>" style="text-decoration: none; padding: 0 10px; font-size: 1.5em; background: #333; color: #fff; border-radius: 4px;">-</a>
+        <h1 style="margin: 0;"><?= esc($year) ?></h1>
+        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year + 1) ?><?= isset($_GET['filter']) ? '&filter='.esc($_GET['filter']) : '' ?>" style="text-decoration: none; padding: 0 10px; font-size: 1.5em; background: #333; color: #fff; border-radius: 4px;">+</a>
+    </div>
 
     <div style="margin-bottom: 15px;">
         <a href="<?= site_url('cashbook/create') ?>?year=<?= esc($year) ?>" class="btn">Pridať nový záznam</a>
