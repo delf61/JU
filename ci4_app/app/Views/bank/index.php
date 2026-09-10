@@ -6,6 +6,8 @@
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .btn { display: inline-block; padding: 5px 10px; text-decoration: none; background: #007bff; color: white; border-radius: 3px; font-weight: normal; }
+        .btn:hover { background: #0056b3; }
         .btn-back { display: inline-block; padding: 8px 15px; background-color: #6c757d; color: #fff; text-decoration: none; border-radius: 4px; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px; }
         th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
