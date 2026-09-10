@@ -311,10 +311,11 @@
                         <td><?= esc($row['vydaj'] ?? '') ?></td>
                         <td><?= esc($ok) ?></td>
                         <td>
-                            <a href="<?= site_url('cashbook/edit/' . esc($row['b']) . '/' . esc($year)) ?>" class="btn btn-edit">Editovať</a>
+                            <a href="<?= site_url('cashbook/edit/' . esc($row['b']) . '/' . esc($year)) ?>" class="btn btn-edit" style="margin-bottom: 5px;">Editovať</a>
                             <form action="<?= site_url('cashbook/delete/' . esc($row['b']) . '/' . esc($year)) ?>" method="post" style="display:inline;" onsubmit="return confirm('Naozaj vymazať tento záznam?');">
-                                <button type="submit" class="btn btn-danger" style="background:#dc3545;color:white;border:none;padding:5px 10px;border-radius:3px;cursor:pointer;">Vymazať</button>
+                                <button type="submit" class="btn btn-danger" style="background:#dc3545;color:white;border:none;padding:5px 10px;border-radius:3px;cursor:pointer;margin-bottom: 5px;">Vymazať</button>
                             </form>
+                            <a href="<?= site_url('cashbook/document/' . bin2hex($row['b']) . '/' . esc($year)) ?>" class="btn" style="background:#6c757d; color:#fff;" title="Otvoriť zdrojový modul dokladu">1 typ dokladov</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -328,10 +329,8 @@
         <a href="#" class="btn" style="background: #17a2b8;">Hot.príjem/výdaj</a>
         <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('pPDkod otvára detail rozúčtovania na formulári - implementované priamo v Editácií záznamu.')">Kódy operácií</a>
         <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>&filter=bez_kodu" class="btn" style="background: #17a2b8;" title="pVyd_Bez_Kod">Bez kódu</a>
-        <a href="<?= site_url('cashbook') ?>" class="btn" style="background: #17a2b8;" title="pAktualDatum">Dnešný dátum</a>
-        <a href="#" class="btn" style="background: #17a2b8;" onclick="window.print()">Tlač</a>
+                <a href="#" class="btn" style="background: #17a2b8;" onclick="window.print()">Tlač</a>
         <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('Upratovanie je servisná FAND procedúra, v CI4 nie je nutná.')">Upratovanie</a>
-        <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('1 typ dokladov vyžaduje výber konkrétneho dokladu z gridu (implementované na pozadí pPD_Doklad)')">1 typ dokladov</a>
         <a href="<?= site_url('bank') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="Otvoriť bankové výpisy (Ucet)">Banka</a>
         <a href="<?= site_url('cashbook/statistics') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="pStatist">Štatistika</a>
         <a href="<?= site_url('cashbook/summary') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="pPDsuma">Sumár po akt. pol.</a>

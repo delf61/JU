@@ -284,18 +284,17 @@ class CashbookController extends ResourceController
         ]);
     }
 
-    public function documentRedirect($b, $year)
+        public function documentRedirect($b, $year)
     {
-        // Legacy pPD_Doklad logic
-        $prefix = substr($b, 0, 2);
+        $b_decoded = hex2bin($b);
+        $prefix = substr($b_decoded, 0, 2);
+
         if ($prefix === '40') {
-            // SC (Logbook)
             return redirect()->to('trips?year=' . $year);
         } elseif ($prefix === '50') {
-            // Invoices?
-            return redirect()->to('invoices?year=' . $year);
+            return redirect()->to('bank?year=' . $year);
         }
 
-        return redirect()->back()->with('error', 'Neznámy typ dokladu pre presmerovanie.');
+        return redirect()->back()->with('error', 'Neznámy typ dokladu pre presmerovanie. Doklad: ' . esc($b_decoded));
     }
 }
