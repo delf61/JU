@@ -207,7 +207,7 @@
     <button onclick="openCreateModal()">Pridať partnera</button>
     <a href="<?= site_url('partners/udaje') ?>"><button>Údaje o podnikateľovi</button></a>
 
-    <table id="partnersTable" class="display" style="width:100%">
+    <table id="partnersTable15" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>Kód (kodop)</th>
@@ -286,7 +286,7 @@
         let partnersTable;
 
         $(document).ready(function() {
-            partnersTable = $('#partnersTable').DataTable({
+            partnersTable = $('#partnersTable15').DataTable({
                 lengthChange: false,
                 stateSave: true,
                 pagingType: 'numbers',
@@ -330,7 +330,7 @@
         let partnersTable;
 
         $(document).ready(function() {
-            partnersTable = $('#partnersTable').DataTable({
+            partnersTable = $('#partnersTable15').DataTable({
                 lengthChange: false,
                 stateSave: true,
                 pagingType: 'numbers',

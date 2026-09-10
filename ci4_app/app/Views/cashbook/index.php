@@ -224,18 +224,18 @@
 
 
 
-    <table id="cashbookTable" class="display" style="width:100%">
+    <table id="cashbookTable15" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>a</th>
-                <th>AkyDen</th>
-                <th>d40</th>
-                <th class="text-right">Celkove</th>
-                <th class="text-right">sDPH</th>
-                <th>typ_vyd</th>
-                <th>Vydaj</th>
+                <th>dátum</th>
+                <th></th>
+                <th>popis</th>
+                <th class="text-right">celkove</th>
+                <th class="text-right">s DPH</th>
+                <th>typ</th>
+                <th>kód op.</th>
                 <th>ok</th>
-                <th>Akcie</th>
+                <th>akcie</th>
             </tr>
         </thead>
         <tbody>
@@ -324,7 +324,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#cashbookTable').DataTable({
+            $('#cashbookTable15').DataTable({
                 lengthChange: false,
                 stateSave: true,
                 pagingType: 'numbers',

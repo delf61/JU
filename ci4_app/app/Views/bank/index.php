@@ -201,7 +201,7 @@
         <div style="color: #dc3545; margin-bottom: 15px; font-weight: bold;"><?= esc(session()->getFlashdata('error')) ?></div>
     <?php endif; ?>
 
-    <table id="bankTable" class="display">
+    <table id="bankTable15" class="display">
         <thead>
             <tr>
                 <th class="text-center">Realizov.<br>dňa</th>
@@ -242,7 +242,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#bankTable').DataTable({
+            $('#bankTable15').DataTable({
                 lengthChange: false,
                 stateSave: true,
                 pagingType: 'numbers',
