@@ -303,7 +303,7 @@
                         $ok = ''; // Not persistently stored in pd, dynamically evaluated in UI/Reports if matches criteria, default empty
                     ?>
                     <tr>
-                        <td><?= esc(date('d.m.Y', strtotime($row['a']))) ?></td>
+                        <td><?= esc(date('Y.m.d', strtotime($row['a']))) ?></td>
                         <td><?= esc($akyDen) ?></td>
                         <td><?= esc($row['d'] ?? '') ?></td>
                         <td class="text-right"><?= number_format($celkove, 2, '.', '') ?></td>

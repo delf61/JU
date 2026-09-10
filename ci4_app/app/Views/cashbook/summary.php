@@ -310,7 +310,7 @@
         <div>
             <h1>Sumár peňažného denníka</h1>
             <div style="color: #6c757d; font-size: 0.9rem; margin-top: 5px;">
-                Rok: <strong><?= esc($year) ?></strong> <?= $b ? " | Doklad: <strong>".esc($b)."</strong>" : "" ?> | Dátum generovania: <?= date('d.m.Y') ?>
+                Rok: <strong><?= esc($year) ?></strong> <?= $b ? " | Doklad: <strong>".esc($b)."</strong>" : "" ?> | Dátum generovania: <?= date('Y.m.d') ?>
             </div>
         </div>
         <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>" class="btn-back">Späť na Peňažný denník</a>

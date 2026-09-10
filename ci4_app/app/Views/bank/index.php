@@ -216,7 +216,7 @@
         <tbody>
             <?php foreach ($entries as $row): ?>
             <tr>
-                <td class="text-center"><?= esc(date('d.m.Y', strtotime($row['d']))) ?></td>
+                <td class="text-center"><?= esc(date('Y.m.d', strtotime($row['d']))) ?></td>
                 <td class="text-center"><?= esc($row['b']) ?></td>
                 <td><?= esc($row['ua']) ?></td>
                 <td class="text-right"><?= number_format($row['pa'], 2, '.', '') ?></td>
