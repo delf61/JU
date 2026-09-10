@@ -201,12 +201,12 @@
         <div style="color: #dc3545; margin-bottom: 15px; font-weight: bold;"><?= esc(session()->getFlashdata('error')) ?></div>
     <?php endif; ?>
 
-        <div style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-        <a href="#" class="btn" style="background-color: #28a745;" onclick="alert('Bude spúšťať manuálne pridanie riadku do banky')">Pridať bankový záznam</a>
-        <a href="#" class="btn" style="background-color: #ffc107; color:#000;" onclick="alert('Otvorí modálne okno na zadanie sumy a vytvorí priebežný prevod medzi hotovosťou a účtom (F5)')">Výber / Vklad hotovosti (F5)</a>
-        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="alert('Otvorí zoznam neuhradených prijatých faktúr (KZ) a automaticky vytvorí a prepojí úhradu (F8)')">Uhradiť Záväzok (F8)</a>
-        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="alert('Otvorí zoznam neuhradených vystavených faktúr (KP) a automaticky vytvorí a prepojí úhradu (F9)')">Uhradiť Pohľadávku (F9)</a>
-        <a href="#" class="btn" style="background-color: #6c757d; margin-left: auto;" onclick="alert('Zobrazí sumár a štatistiky k výpisom (F10)')">Iné info (F10)</a>
+            <div style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+        <a href="<?= site_url('cashbook/create') ?>?year=<?= esc($year) ?>" class="btn" style="background-color: #28a745;">Pridať bankový záznam</a>
+        <a href="#" class="btn" style="background-color: #ffc107; color:#000;" onclick="openCashTransferModal()">Výber / Vklad hotovosti (F5)</a>
+        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="openInvoiceModal('kz')">Uhradiť Záväzok (F8)</a>
+        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="openInvoiceModal('kp')">Uhradiť Pohľadávku (F9)</a>
+        <a href="<?= site_url('cashbook/summary') ?>?year=<?= esc($year) ?>" class="btn" style="background-color: #6c757d; margin-left: auto;">Iné info (F10)</a>
     </div>
 
     <table id="bankTable15" class="display">
@@ -231,7 +231,10 @@
                 <td class="text-center"><?= !empty($row['ra']) ? 'A' : 'N' ?></td>
                                 <td class="text-center"><?= !empty($row['qa']) ? 'A' : 'N' ?></td>
                                                 <td class="text-center">
-                    <button class="btn-action" style="background:#28a745; color:#fff; border:none; cursor:pointer;" onclick="alert('Prenesie tento riadok banky priamo do Peňažného denníka s korektným rozúčtovaním a DPH (F3)');" title="Prenos do PD (F3)">Do PD (F3)</button>
+                    <form action="<?= site_url('bank/transfer_pd') ?>" method="post" style="display:inline;">
+                        <input type="hidden" name="PK" value="<?= esc($row['PK'] ?? '') ?>">
+                        <button type="submit" class="btn-action" style="background:#28a745; color:#fff; border:none; cursor:pointer;" title="Prenos do PD (F3)">Do PD (F3)</button>
+                    </form>
                     <a href="<?= site_url("bank/edit/" . esc($row['PK'])) ?>" class="btn-action" style="background:#ffc107; color:#000;">Editovať</a>
 
                     <form action="<?= site_url("bank/copy") ?>" method="post" style="display:inline;">
@@ -264,5 +267,117 @@
             });
         });
     </script>
+
+    <!-- Invoices Modal -->
+    <div id="invoiceModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center;">
+        <div style="background:var(--card-bg); width:900px; max-width:95%; border-radius:8px; border:1px solid var(--border-color); box-shadow:0 4px 10px rgba(0,0,0,0.2); display:flex; flex-direction:column;">
+            <div style="padding:15px; border-bottom:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
+                <h3 id="invoiceModalTitle" style="margin:0; color:var(--text-color);">Záväzky / Pohľadávky</h3>
+                <button onclick="closeInvoiceModal()" style="background:none; border:none; color:var(--text-color); font-size:1.5em; cursor:pointer;">&times;</button>
+            </div>
+            <div style="padding:15px; overflow-y:auto; max-height:600px;">
+                <table id="invoiceSelectTable" class="display" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>Dátum</th>
+                            <th>Doklad</th>
+                            <th>Partner (od)</th>
+                            <th class="text-right">Suma celkom</th>
+                            <th class="text-right">Uhradené</th>
+                            <th class="text-right">Na úhradu</th>
+                            <th class="text-center">Akcia</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invoiceTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cash Transfer Modal -->
+    <div id="cashModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center;">
+        <div style="background:var(--card-bg); width:400px; border-radius:8px; border:1px solid var(--border-color); padding:20px; color:var(--text-color);">
+            <h3 style="margin-top:0;">Výber / Vklad hotovosti (F5)</h3>
+            <p>Kladná suma = Vklad. Záporná suma = Výber do pokladne.</p>
+            <form action="<?= site_url('bank/cash_transfer') ?>" method="post">
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px;">Suma (Eur):</label>
+                    <input type="number" step="0.01" name="amount" required style="width:100%; padding:8px; box-sizing:border-box;">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px;">Dátum:</label>
+                    <input type="date" name="date" value="<?= date('Y-m-d') ?>" required style="width:100%; padding:8px; box-sizing:border-box;">
+                </div>
+                <div style="text-align:right;">
+                    <button type="button" onclick="document.getElementById('cashModal').style.display='none';" class="btn" style="background:#6c757d;">Zrušiť</button>
+                    <button type="submit" class="btn" style="background:#28a745;">Uložiť prevod</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let invTable = null;
+
+        function openCashTransferModal() {
+            document.getElementById('cashModal').style.display = 'flex';
+        }
+
+        function openInvoiceModal(type) {
+            document.getElementById('invoiceModalTitle').innerText = (type === 'kz') ? 'Neuhradené Záväzky (Fa Prijaté)' : 'Neuhradené Pohľadávky (Fa Vystavené)';
+            document.getElementById('invoiceModal').style.display = 'flex';
+
+            const tbody = document.getElementById('invoiceTableBody');
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center">Načítavam z databázy...</td></tr>';
+
+            if (invTable) {
+                invTable.destroy();
+            }
+
+            fetch(`<?= site_url('api/bank/unpaid') ?>?type=${type}`)
+                .then(res => res.json())
+                .then(data => {
+                    tbody.innerHTML = '';
+                    if (data.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="7" class="text-center">Nenašli sa žiadne neuhradené doklady.</td></tr>';
+                        return;
+                    }
+
+                    data.forEach(item => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${item.a.substring(0,10)}</td>
+                            <td><strong>${item.b}</strong></td>
+                            <td>${item.od}</td>
+                            <td class="text-right">${item.zn}</td>
+                            <td class="text-right" style="color:var(--text-color);">${item.uhrada}</td>
+                            <td class="text-right" style="color:#dc3545; font-weight:bold;">${item.zostatok}</td>
+                            <td class="text-center">
+                                <form action="<?= site_url('bank/pay_invoice') ?>" method="post">
+                                    <input type="hidden" name="type" value="${type}">
+                                    <input type="hidden" name="invoice_pk" value="${item.PK}">
+                                    <input type="hidden" name="date" value="<?= date('Y-m-d') ?>">
+                                    <button type="submit" class="btn" style="background:#17a2b8; padding:3px 8px; font-size:0.9em;">Uhradiť</button>
+                                </form>
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+
+                    invTable = $('#invoiceSelectTable').DataTable({
+                        pageLength: 10,
+                        lengthChange: false,
+                        pagingType: 'numbers',
+                        language: { search: "Hľadať doklad/partnera:" }
+                    });
+                });
+        }
+
+        function closeInvoiceModal() {
+            document.getElementById('invoiceModal').style.display = 'none';
+        }
+    </script>
+
 </body>
 </html>

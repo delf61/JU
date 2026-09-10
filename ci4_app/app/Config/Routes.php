@@ -80,6 +80,11 @@ $routes->post('cashbook/delete/(:any)/(:num)', 'CashbookController::uiDelete/$1/
 
 
 // Bank Statement
+$routes->post('bank/transfer_pd', 'BankStatementController::transferToPd');
+$routes->post('bank/cash_transfer', 'BankStatementController::cashTransfer');
+$routes->post('bank/pay_invoice', 'BankStatementController::payInvoice');
+
+$routes->get('api/bank/unpaid', 'BankStatementController::getUnpaidInvoices');
 $routes->get('bank', 'BankStatementController::webIndex');
 $routes->get('bank/edit/(:num)', 'BankStatementController::uiEdit/$1');
 $routes->post('bank/update/(:num)', 'BankStatementController::uiUpdate/$1');
