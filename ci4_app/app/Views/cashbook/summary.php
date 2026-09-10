@@ -28,7 +28,7 @@
         .header h1 {
             margin: 0;
             font-size: 1.5rem;
-            color: #2c3e50;
+            color: var(--text-color);
         }
         .btn-back {
             display: inline-block;
@@ -43,7 +43,7 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 20px;
             margin-bottom: 20px;
         }
@@ -410,23 +410,8 @@
             </ul>
         </div>
 
-        <!-- Nedaňové a iné položky -->
-        <div class="card">
-            <h2>Nedaňové a špecifické položky</h2>
-            <ul class="summary-list">
-                <li><span>PHM (Služ. cesty)</span> <span><?= number_format($summary['phm_sc'], 2, '.', ' ') ?> &euro;</span></li>
-                <li><span>Služobné cesty (Kniha jázd)</span> <span><?= number_format($summary['sc_spolu'] ?? 0, 2, '.', ' ') ?> &euro;</span></li>
-                <li><span>Auto paušál</span> <span>0.00 &euro;</span></li>
-                <li><span>DPH</span> <span><?= number_format($summary['dph'], 2, '.', ' ') ?> &euro;</span></li>
-                <li><span>Osobný účet</span> <span><?= number_format($summary['os_ucet'], 2, '.', ' ') ?> &euro;</span></li>
-                <li><span>Nákup HaN IM</span> <span><?= number_format($summary['nak_hanim'], 2, '.', ' ') ?> &euro;</span></li>
-                <li><span>Daň z príjmu (zaplatená)</span> <span><?= number_format($summary['dan_z_pr'], 2, '.', ' ') ?> &euro;</span></li>
-                <li><span>Banka</span> <span><?= number_format($summary['banka'], 2, '.', ' ') ?> &euro;</span></li>
-                <li><span>Iné nedaň. výdavky</span> <span><?= number_format($summary['ine_vydaje'], 2, '.', ' ') ?> &euro;</span></li>
-            </ul>
-        </div>
-
-        <!-- Daňový základ a kalkulácia -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+<!-- Daňový základ a kalkulácia -->
         <div class="card" style="background-color: #f8f9fa; border: 1px solid #e9ecef;">
             <h2>Kalkulácia dane z príjmu</h2>
             <ul class="summary-list">
@@ -443,6 +428,23 @@
                 <li><span>Daň k úhrade</span> <span>0.00 &euro;</span></li>
             </ul>
         </div>
+<!-- Nedaňové a iné položky -->
+        <div class="card">
+            <h2>Nedaňové a špecifické položky</h2>
+            <ul class="summary-list">
+                <li><span>PHM (Služ. cesty)</span> <span><?= number_format($summary['phm_sc'], 2, '.', ' ') ?> &euro;</span></li>
+                <li><span>Služobné cesty (Kniha jázd)</span> <span><?= number_format($summary['sc_spolu'] ?? 0, 2, '.', ' ') ?> &euro;</span></li>
+                <li><span>Auto paušál</span> <span>0.00 &euro;</span></li>
+                <li><span>DPH</span> <span><?= number_format($summary['dph'], 2, '.', ' ') ?> &euro;</span></li>
+                <li><span>Osobný účet</span> <span><?= number_format($summary['os_ucet'], 2, '.', ' ') ?> &euro;</span></li>
+                <li><span>Nákup HaN IM</span> <span><?= number_format($summary['nak_hanim'], 2, '.', ' ') ?> &euro;</span></li>
+                <li><span>Daň z príjmu (zaplatená)</span> <span><?= number_format($summary['dan_z_pr'], 2, '.', ' ') ?> &euro;</span></li>
+                <li><span>Banka</span> <span><?= number_format($summary['banka'], 2, '.', ' ') ?> &euro;</span></li>
+                <li><span>Iné nedaň. výdavky</span> <span><?= number_format($summary['ine_vydaje'], 2, '.', ' ') ?> &euro;</span></li>
+            </ul>
+        </div>
+
+                </div>
     </div>
 
     <div class="card card-full" style="margin-bottom: 40px; background-color: #eef2f5;">
