@@ -201,6 +201,14 @@
         <div style="color: #dc3545; margin-bottom: 15px; font-weight: bold;"><?= esc(session()->getFlashdata('error')) ?></div>
     <?php endif; ?>
 
+        <div style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+        <a href="#" class="btn" style="background-color: #28a745;" onclick="alert('Bude spúšťať manuálne pridanie riadku do banky')">Pridať bankový záznam</a>
+        <a href="#" class="btn" style="background-color: #ffc107; color:#000;" onclick="alert('Otvorí modálne okno na zadanie sumy a vytvorí priebežný prevod medzi hotovosťou a účtom (F5)')">Výber / Vklad hotovosti (F5)</a>
+        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="alert('Otvorí zoznam neuhradených prijatých faktúr (KZ) a automaticky vytvorí a prepojí úhradu (F8)')">Uhradiť Záväzok (F8)</a>
+        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="alert('Otvorí zoznam neuhradených vystavených faktúr (KP) a automaticky vytvorí a prepojí úhradu (F9)')">Uhradiť Pohľadávku (F9)</a>
+        <a href="#" class="btn" style="background-color: #6c757d; margin-left: auto;" onclick="alert('Zobrazí sumár a štatistiky k výpisom (F10)')">Iné info (F10)</a>
+    </div>
+
     <table id="bankTable15" class="display">
         <thead>
             <tr>
@@ -223,6 +231,7 @@
                 <td class="text-center"><?= !empty($row['ra']) ? 'A' : 'N' ?></td>
                                 <td class="text-center"><?= !empty($row['qa']) ? 'A' : 'N' ?></td>
                                                 <td class="text-center">
+                    <button class="btn-action" style="background:#28a745; color:#fff; border:none; cursor:pointer;" onclick="alert('Prenesie tento riadok banky priamo do Peňažného denníka s korektným rozúčtovaním a DPH (F3)');" title="Prenos do PD (F3)">Do PD (F3)</button>
                     <a href="<?= site_url("bank/edit/" . esc($row['PK'])) ?>" class="btn-action" style="background:#ffc107; color:#000;">Editovať</a>
 
                     <form action="<?= site_url("bank/copy") ?>" method="post" style="display:inline;">
