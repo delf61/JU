@@ -243,15 +243,13 @@
     <script>
         $(document).ready(function() {
             $('#bankTable').DataTable({
+                stateSave: true,
+                pagingType: 'numbers',
                 language: {
                     search: "Vyhľadávanie:",
                     lengthMenu: "Zobraziť _MENU_ záznamov na stranu",
                     zeroRecords: "Žiadne záznamy",
-                    info: "Zobrazených _START_ až _END_ z _TOTAL_ záznamov",
-                    paginate: {
-                        first: "Prvá", previous: "Predchádzajúca", next: "Ďalšia", last: "Posledná"
-                    }
-                },
+                    info: "Zobrazených _START_ až _END_ z _TOTAL_ záznamov"},
                 pageLength: 15
             });
         });

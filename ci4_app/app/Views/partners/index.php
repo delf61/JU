@@ -287,6 +287,8 @@
 
         $(document).ready(function() {
             partnersTable = $('#partnersTable').DataTable({
+                stateSave: true,
+                pagingType: 'numbers',
                 ajax: {
                     url: apiUrl,
                     dataSrc: ''
@@ -313,14 +315,7 @@
                     info: "Zobrazených _START_ až _END_ z _TOTAL_ záznamov",
                     infoEmpty: "Zobrazených 0 až 0 z 0 záznamov",
                     infoFiltered: "(vyfiltrované z _MAX_ celkových záznamov)",
-                    emptyTable: "Žiadne dáta nie sú k dispozícii",
-                    paginate: {
-                        first: "Prvá",
-                        previous: "Predchádzajúca",
-                        next: "Ďalšia",
-                        last: "Posledná"
-                    }
-                },
+                    emptyTable: "Žiadne dáta nie sú k dispozícii"},
                 ordering: true,
                 paging: true,
                 pageLength: 25
@@ -335,6 +330,8 @@
 
         $(document).ready(function() {
             partnersTable = $('#partnersTable').DataTable({
+                stateSave: true,
+                pagingType: 'numbers',
                 ajax: {
                     url: apiUrl,
                     dataSrc: ''
@@ -361,14 +358,7 @@
                     info: "Zobrazených _START_ až _END_ z _TOTAL_ záznamov",
                     infoEmpty: "Zobrazených 0 až 0 z 0 záznamov",
                     infoFiltered: "(vyfiltrované z _MAX_ celkových záznamov)",
-                    emptyTable: "Žiadne dáta nie sú k dispozícii",
-                    paginate: {
-                        first: "Prvá",
-                        previous: "Predchádzajúca",
-                        next: "Ďalšia",
-                        last: "Posledná"
-                    }
-                },
+                    emptyTable: "Žiadne dáta nie sú k dispozícii"},
                 ordering: true,
                 paging: true,
                 pageLength: 25
