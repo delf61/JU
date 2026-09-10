@@ -2,7 +2,7 @@
 <html lang="sk">
 <head>
     <meta charset="UTF-8">
-    <title>Bankový výpis - DATOVÝ EDITOR</title>
+    <title>Bankové výpisy</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
@@ -190,7 +190,7 @@
     </script>
 
     <div class="header">
-        <h1>Bankové výpisy (Ucet) - Všetky roky</h1>
+        <h1>Bankové výpisy</h1>
         <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>" class="btn-back">Späť na Peňažný denník</a>
     </div>
 
