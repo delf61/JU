@@ -81,9 +81,9 @@ $routes->post('cashbook/delete/(:any)/(:num)', 'CashbookController::uiDelete/$1/
 
 // Bank Statement
 $routes->get('bank', 'BankStatementController::webIndex');
-$routes->get('bank/edit/(:any)/(:any)', 'BankStatementController::uiEdit/$1/$2');
-$routes->post('bank/delete/(:any)/(:any)', 'BankStatementController::uiDelete/$1/$2');
-$routes->post('bank/copy/(:any)/(:any)', 'BankStatementController::uiCopy/$1/$2');
+$routes->get('bank/edit/(:any)/(:any)/(:any)/(:any)', 'BankStatementController::uiEdit/$1/$2');
+$routes->post('bank/delete/(:any)/(:any)/(:any)/(:any)', 'BankStatementController::uiDelete/$1/$2');
+$routes->post('bank/copy/(:any)/(:any)/(:any)/(:any)', 'BankStatementController::uiCopy/$1/$2');
 
 // Cashbook Legacy Procedures
 $routes->get('cashbook/statistics', 'CashbookController::statistics');

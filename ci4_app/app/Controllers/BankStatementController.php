@@ -27,26 +27,31 @@ class BankStatementController extends ResourceController
         ]);
     }
 
-    public function uiEdit($b, $date)
+    public function uiEdit($b, $date, $ua, $pa)
     {
         // Placeholder for edit view
         return redirect()->back()->with('error', 'Editácia výpisu nie je zatiaľ implementovaná.');
     }
 
-    public function uiDelete($b, $date)
+    public function uiDelete($b, $date, $ua, $pa)
     {
         // Placeholder for delete logic
         return redirect()->back()->with('error', 'Mazanie výpisu nie je zatiaľ implementované.');
     }
 
-    public function uiCopy($b, $date)
+    public function uiCopy($b, $date, $ua, $pa)
     {
         $db = \Config\Database::connect();
-        $record = $db->table('ucet')->where('b', hex2bin($b))->where('d', hex2bin($date))->get()->getRowArray();
+        $record = $db->table('ucet')
+            ->where('b', hex2bin($b))
+            ->where('d', hex2bin($date))
+            ->where('ua', hex2bin($ua))
+            ->where('pa', hex2bin($pa))
+            ->get()->getRowArray();
 
         if ($record) {
             // Pouzivatel chce cistu kopiu 1:1. Ak sa vyskytne nejaky interny auto-increment primarny kluc (napr id),
-            // musim ho zmazat z pola zaznamu aby ho DB vygenerovala nanovo. Tabulka zvycajne v MariaDB ma `id`.
+            // musim ho zmazat z pola zaznamu aby ho DB vygenerovala nanovo.
             if (isset($record['id'])) {
                 unset($record['id']);
             }
