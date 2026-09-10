@@ -206,10 +206,9 @@
     <table id="bankTable15" class="display">
         <thead>
             <tr>
-                <th class="text-center">Realizov.<br>dňa</th>
-                <th class="text-center">Por.<br>50</th>
+                <th class="text-center">Realizov. dňa</th>
                 <th>Popis operácie</th>
-                <th class="text-right">Čiastka<br>€</th>
+                <th class="text-right">Čiastka €</th>
                 <th class="text-center">C</th>
                 <th class="text-center">P</th>
                 <th class="text-center">Akcie</th>
@@ -219,8 +218,7 @@
             <?php foreach ($entries as $row): ?>
             <tr>
                 <td class="text-center"><?= esc(date('Y.m.d', strtotime($row['d']))) ?></td>
-                <td class="text-center"><?= esc($row['b']) ?></td>
-                <td><?= esc($row['ua']) ?></td>
+                                <td><?= esc($row['ua']) ?></td>
                 <td class="text-right"><?= number_format($row['pa'], 2, '.', '') ?></td>
                 <td class="text-center"><?= !empty($row['ra']) ? 'A' : 'N' ?></td>
                                 <td class="text-center"><?= !empty($row['qa']) ? 'A' : 'N' ?></td>
@@ -247,12 +245,12 @@
     </table>
 
     <div class="card" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; padding: 15px; border: 1px solid var(--border-color); background-color: var(--card-bg);">
-        <a href="#" class="btn" style="background-color: #28a745;" onclick="alert('Bude spúšťať manuálne pridanie riadku do banky')">Pridať bankový záznam</a>
-        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="openCashTransferModal()">Výber / Vklad hotovosti</a>
-        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="openInvoiceModal('kz')">Uhradiť Záväzok</a>
-        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="openInvoiceModal('kp')">Uhradiť Pohľadávku</a>
-        <a href="#" class="btn" style="background-color: #17a2b8;" onclick="alert('Zobrazí sumár a štatistiky k výpisom')">Iné info</a>
-        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>" class="btn" style="background-color: #6c757d; margin-left: auto;">Späť na Peňažný denník</a>
+        <a href="#" class="btn" style="background-color: #28a745; color: white;" onclick="alert('Bude spúšťať manuálne pridanie riadku do banky')">Pridať bankový záznam</a>
+        <a href="#" class="btn" style="background-color: #17a2b8; color: white;" onclick="openCashTransferModal()">Výber / Vklad hotovosti</a>
+        <a href="#" class="btn" style="background-color: #17a2b8; color: white;" onclick="openInvoiceModal('kz')">Uhradiť Záväzok</a>
+        <a href="#" class="btn" style="background-color: #17a2b8; color: white;" onclick="openInvoiceModal('kp')">Uhradiť Pohľadávku</a>
+        <a href="#" class="btn" style="background-color: #17a2b8; color: white;" onclick="alert('Zobrazí sumár a štatistiky k výpisom')">Iné info</a>
+        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>" class="btn" style="background-color: #6c757d; margin-left: auto; color: white;">Späť na Peňažný denník</a>
     </div>
 
     <script>
