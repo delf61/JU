@@ -505,12 +505,15 @@
         }
 
         // Focus DataTables search on F9
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F9') {
+        $(document).on('keydown', function(e) {
+            if (e.key === 'F9' || e.keyCode === 120) {
                 e.preventDefault();
-                const searchInput = document.querySelector('div.dataTables_filter input');
-                if (searchInput) {
-                    searchInput.focus();
+                var $searchInput = $('input[type="search"]');
+                if ($searchInput.length) {
+                    $searchInput.focus();
+                } else {
+                    // Fallback ak by nebol type="search"
+                    $('.dataTables_filter input').focus();
                 }
             }
         });
