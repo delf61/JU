@@ -284,7 +284,7 @@
                         <tr>
                             <th>Dátum</th>
                             <th>Doklad</th>
-
+                            <!-- EXT_DOKLAD_HEADER_PLACEHOLDER -->
                             <th>Partner (od)</th>
                             <th class="text-right">Suma celkom</th>
                             <th class="text-right">Uhradené</th>
@@ -354,8 +354,22 @@
             document.getElementById('invoiceModalTitle').innerText = (type === 'kz') ? 'Záväzky' : 'Pohľadávky';
             document.getElementById('invoiceModal').style.display = 'flex';
 
+
+            const thead = document.querySelector('#invoiceSelectTable thead tr');
+            thead.innerHTML = `
+                <th>Dátum</th>
+                <th>Doklad</th>
+                ${type === 'kz' ? '<th>Ext. doklad</th>' : ''}
+                <th>Partner (od)</th>
+                <th class="text-right">Suma celkom</th>
+                <th class="text-right">Uhradené</th>
+                <th class="text-right">Na úhradu</th>
+                <th class="text-center">Akcia</th>
+            `;
+
             const tbody = document.getElementById('invoiceTableBody');
-            tbody.innerHTML = `<tr><td colspan="7" class="text-center">Načítavam z databázy...</td></tr>`;
+
+            tbody.innerHTML = `<tr><td colspan="${type === 'kz' ? 8 : 7}" class="text-center">Načítavam z databázy...</td></tr>`;
 
             if (invTable) {
                 invTable.destroy();
@@ -366,7 +380,7 @@
                 .then(data => {
                     tbody.innerHTML = '';
                     if (data.length === 0) {
-                        tbody.innerHTML = `<tr><td colspan="7" class="text-center">Nenašli sa žiadne neuhradené doklady.</td></tr>`;
+                        tbody.innerHTML = `<tr><td colspan="${type === 'kz' ? 8 : 7}" class="text-center">Nenašli sa žiadne neuhradené doklady.</td></tr>`;
                         return;
                     }
 
@@ -375,7 +389,7 @@
                         tr.innerHTML = `
                             <td>${item.a.substring(0,10)}</td>
                             <td><strong>${item.b}</strong></td>
-
+                            ${type === 'kz' ? '<td>' + (item.var_sym || '') + '</td>' : ''}
                             <td>${item.od}</td>
                             <td class="text-right">${item.zn}</td>
                             <td class="text-right" style="color:var(--text-color);">${item.uhrada}</td>
