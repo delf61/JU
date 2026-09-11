@@ -284,7 +284,7 @@
                         <tr>
                             <th>Dátum</th>
                             <th>Doklad</th>
-                            ${type === 'kz' ? '<th>Ext. doklad</th>' : ''}
+
                             <th>Partner (od)</th>
                             <th class="text-right">Suma celkom</th>
                             <th class="text-right">Uhradené</th>
@@ -355,7 +355,7 @@
             document.getElementById('invoiceModal').style.display = 'flex';
 
             const tbody = document.getElementById('invoiceTableBody');
-            tbody.innerHTML = '<tr><td colspan="${type === 'kz' ? 8 : 7}" class="text-center">Načítavam z databázy...</td></tr>';
+            tbody.innerHTML = `<tr><td colspan="7" class="text-center">Načítavam z databázy...</td></tr>`;
 
             if (invTable) {
                 invTable.destroy();
@@ -366,7 +366,7 @@
                 .then(data => {
                     tbody.innerHTML = '';
                     if (data.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="${type === 'kz' ? 8 : 7}" class="text-center">Nenašli sa žiadne neuhradené doklady.</td></tr>';
+                        tbody.innerHTML = `<tr><td colspan="7" class="text-center">Nenašli sa žiadne neuhradené doklady.</td></tr>`;
                         return;
                     }
 
@@ -375,7 +375,7 @@
                         tr.innerHTML = `
                             <td>${item.a.substring(0,10)}</td>
                             <td><strong>${item.b}</strong></td>
-                            ${type === 'kz' ? '<td>' + (item.var_sym || '') + '</td>' : ''}
+
                             <td>${item.od}</td>
                             <td class="text-right">${item.zn}</td>
                             <td class="text-right" style="color:var(--text-color);">${item.uhrada}</td>
@@ -383,7 +383,7 @@
                             <td class="text-center">
                                 <form action="<?= site_url('bank/pay_invoice') ?>" method="post">
                                     <input type="hidden" name="type" value="${type}">
-                                    <input type="hidden" name="invoice_pk" value="${item.PK}">
+                                    <input type="hidden" name="invoice_pk" value="${item.b}">
                                     <input type="hidden" name="date" value="<?= date('Y-m-d') ?>">
                                     <button type="submit" class="btn" style="background:#17a2b8; padding:3px 8px; font-size:0.9em;">Uhradiť</button>
                                 </form>
