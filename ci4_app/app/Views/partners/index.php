@@ -310,7 +310,7 @@
                     }
                 ],
                 language: {
-                    search: "Vyhľadávanie:",
+                    search: "Hľadať : ",
                     lengthMenu: "Zobraziť _MENU_ záznamov na stranu",
                     zeroRecords: "Žiadne záznamy neboli nájdené",
                     info: "Zobrazených _START_ až _END_ z _TOTAL_ záznamov",
@@ -354,7 +354,7 @@
                     }
                 ],
                 language: {
-                    search: "Vyhľadávanie:",
+                    search: "Hľadať : ",
                     lengthMenu: "Zobraziť _MENU_ záznamov na stranu",
                     zeroRecords: "Žiadne záznamy neboli nájdené",
                     info: "Zobrazených _START_ až _END_ z _TOTAL_ záznamov",
@@ -461,6 +461,17 @@
         }
 
         // // window.onload = loadPartners; handled by DataTables handled by DataTables
-    </script>
+
+        // Focus DataTables search on F9
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F9') {
+                e.preventDefault();
+                const searchInput = document.querySelector('div.dataTables_filter input');
+                if (searchInput) {
+                    searchInput.focus();
+                }
+            }
+        });
+</script>
 </body>
 </html>

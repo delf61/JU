@@ -262,7 +262,7 @@
                 stateSave: true,
                 pagingType: 'numbers',
                 language: {
-                    search: "Vyhľadávanie:",
+                    search: "Hľadať : ",
                     lengthMenu: "Zobraziť _MENU_ záznamov na stranu",
                     zeroRecords: "Žiadne záznamy",
                     info: "Zobrazených _START_ až _END_ z _TOTAL_ záznamov"},
@@ -394,7 +394,7 @@
                         pageLength: 10,
                         lengthChange: false,
                         pagingType: 'numbers',
-                        language: { search: "Hľadať doklad/partnera:" }
+                        language: { search: "Hľadať : " }
                     });
                 });
         }
@@ -402,7 +402,18 @@
         function closeInvoiceModal() {
             document.getElementById('invoiceModal').style.display = 'none';
         }
-    </script>
+
+        // Focus DataTables search on F9
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F9') {
+                e.preventDefault();
+                const searchInput = document.querySelector('div.dataTables_filter input');
+                if (searchInput) {
+                    searchInput.focus();
+                }
+            }
+        });
+</script>
 
 </body>
 </html>
