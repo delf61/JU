@@ -211,8 +211,8 @@
                 <th class="text-center">Realizov. dňa</th>
                 <th>Popis operácie</th>
                 <th class="text-right">Čiastka €</th>
-                <th class="text-center">C</th>
-                <th class="text-center">P</th>
+                <th class="text-center">Celkové</th>
+                <th class="text-center">Priebežné</th>
                 <th class="text-center">Akcie</th>
             </tr>
         </thead>
