@@ -273,12 +273,12 @@
 
     <!-- Invoices Modal -->
     <div id="invoiceModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center;">
-        <div style="background:var(--card-bg); width:900px; max-width:95%; border-radius:8px; border:1px solid var(--border-color); box-shadow:0 4px 10px rgba(0,0,0,0.2); display:flex; flex-direction:column;">
+        <div style="background:var(--card-bg); width:1200px; max-width:90%; border-radius:8px; border:1px solid var(--border-color); box-shadow:0 4px 10px rgba(0,0,0,0.2); display:flex; flex-direction:column;">
             <div style="padding:15px; border-bottom:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
                 <h3 id="invoiceModalTitle" style="margin:0; color:var(--text-color);">Záväzky / Pohľadávky</h3>
                 <button onclick="closeInvoiceModal()" style="background:none; border:none; color:var(--text-color); font-size:1.5em; cursor:pointer;">&times;</button>
             </div>
-            <div style="padding:15px; overflow-y:auto; max-height:600px;">
+            <div style="padding:15px; overflow-y:auto; max-height:850px;">
                 <table id="invoiceSelectTable" class="display" style="width:100%;">
                     <thead>
                         <tr>
@@ -295,13 +295,20 @@
                     </tbody>
                 </table>
             </div>
+            <div style="padding:15px; border-top:1px solid var(--border-color); text-align:right;">
+                <button onclick="closeInvoiceModal()" class="btn" style="background:#6c757d; color:#fff;">Zrušiť</button>
+            </div>
         </div>
     </div>
 
     <!-- Cash Transfer Modal -->
     <div id="cashModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center;">
-        <div style="background:var(--card-bg); width:400px; border-radius:8px; border:1px solid var(--border-color); padding:20px; color:var(--text-color);">
-            <h3 style="margin-top:0;">Výber / Vklad hotovosti</h3>
+        <div style="background:var(--card-bg); width:500px; max-width:90%; border-radius:8px; border:1px solid var(--border-color); box-shadow:0 4px 10px rgba(0,0,0,0.2); display:flex; flex-direction:column; color:var(--text-color);">
+            <div style="padding:15px; border-bottom:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
+                <h3 style="margin:0;">Výber / Vklad hotovosti</h3>
+                <button onclick="document.getElementById('cashModal').style.display='none';" style="background:none; border:none; color:var(--text-color); font-size:1.5em; cursor:pointer;">&times;</button>
+            </div>
+            <div style="padding:20px;">
             <p>Kladná suma = Vklad. Záporná suma = Výber do pokladne.</p>
             <form action="<?= site_url('bank/cash_transfer') ?>" method="post">
                 <div style="margin-bottom:15px;">
