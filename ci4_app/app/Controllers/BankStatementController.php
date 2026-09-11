@@ -123,6 +123,12 @@ class BankStatementController extends ResourceController
             $dph_val1 = round($y * ($dph_rate1 / 100), 2);
             $dph_val = round($z * ($dph_rate / 100), 2);
 
+            $par69 = (!empty($inv['par_69']) || !empty($inv['par69'])) ? true : false;
+            if ($par69) {
+                $dph_val1 = 0;
+                $dph_val = 0;
+            }
+
             $zn = $x + $y + $z + $dph_val1 + $dph_val;
 
             // FAND 'uhrada' stlpec
