@@ -110,6 +110,12 @@ class BankStatementController extends ResourceController
 
         $unpaid = [];
         foreach ($invoices as $inv) {
+            // Ak v poli uhrady v kp alebo kz je hodnota > 0, potom doklad povazujeme za vyrovnany
+            $uhrady_flag = (int)($inv['uhrady'] ?? 0);
+            if ($uhrady_flag > 0) {
+                continue;
+            }
+
             // Kalkulacia 'zn' (celkovej sumy). V KZ/KP su zaklady x, y, z a DPH.
             // Zjednoduseny matematicky prepis FAND logiky (z + dph_z) atd...
             // Kedze mame x,y,z a DPH, hruba suma (zn) = x + y + z + (odhad_dph z nich) alebo proste pc/spolu, v zavislosti od faktury.
@@ -235,6 +241,10 @@ class BankStatementController extends ResourceController
         $inv = $db->table($table)->where('b', $invoicePk)->get()->getRowArray();
 
         if (!$inv) return redirect()->back()->with('error', 'Faktúra nenájdená.');
+
+        if ((int)($inv['uhrady'] ?? 0) > 0) {
+            return redirect()->back()->with('error', 'Doklad je už označený ako vyrovnaný (uhrady > 0).');
+        }
 
         $x = (float)($inv['x'] ?? 0);
         $y = (float)($inv['y'] ?? 0);
