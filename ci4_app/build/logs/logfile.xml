@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/app/ci4_app/phpunit.xml" tests="82" assertions="80" errors="45" failures="0" skipped="7" time="0.085660">
+    <testsuite name="App" tests="82" assertions="80" errors="45" failures="0" skipped="7" time="0.085660">
+      <testsuite name="Tests\App\Controllers\AccountingControllerTest" file="/app/ci4_app/tests/Controllers/AccountingControllerTest.php" tests="1" assertions="0" errors="1" failures="0" skipped="0" time="0.000000">
+        <testcase name="testGetInitialStates" file="/app/ci4_app/tests/Controllers/AccountingControllerTest.php" line="21" class="Tests\App\Controllers\AccountingControllerTest" classname="Tests.App.Controllers.AccountingControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\App\Controllers\AccountingControllerTest::testGetInitialStates
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/AccountingControllerTest.php:18</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Controllers\CashbookControllerTest" file="/app/ci4_app/tests/Controllers/CashbookControllerTest.php" tests="4" assertions="0" errors="0" failures="0" skipped="4" time="0.000000">
+        <testcase name="testIndexReturnsJson" file="/app/ci4_app/tests/Controllers/CashbookControllerTest.php" line="15" class="Tests\Controllers\CashbookControllerTest" classname="Tests.Controllers.CashbookControllerTest" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testShowValidatesParameters" file="/app/ci4_app/tests/Controllers/CashbookControllerTest.php" line="19" class="Tests\Controllers\CashbookControllerTest" classname="Tests.Controllers.CashbookControllerTest" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testTotalsReturnsArrayStructure" file="/app/ci4_app/tests/Controllers/CashbookControllerTest.php" line="23" class="Tests\Controllers\CashbookControllerTest" classname="Tests.Controllers.CashbookControllerTest" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testReasonsEndpoint" file="/app/ci4_app/tests/Controllers/CashbookControllerTest.php" line="27" class="Tests\Controllers\CashbookControllerTest" classname="Tests.Controllers.CashbookControllerTest" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Controllers\CashbookWebControllerTest" file="/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php" tests="10" assertions="9" errors="6" failures="0" skipped="0" time="0.053985">
+        <testcase name="testWebIndexReturns200AndContainsBasicInfo" file="/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php" line="18" class="Tests\Controllers\CashbookWebControllerTest" classname="Tests.Controllers.CashbookWebControllerTest" assertions="0" time="0.021287">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\CashbookWebControllerTest::testWebIndexReturns200AndContainsBasicInfo
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:795
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseBuilder.php:1659
+/app/ci4_app/vendor/codeigniter4/framework/system/Model.php:255
+/app/ci4_app/vendor/codeigniter4/framework/system/BaseModel.php:676
+/app/ci4_app/app/Services/CashbookService.php:25
+/app/ci4_app/app/Controllers/CashbookController.php:72
+/app/ci4_app/vendor/codeigniter4/framework/system/CodeIgniter.php:974
+/app/ci4_app/vendor/codeigniter4/framework/system/CodeIgniter.php:520
+/app/ci4_app/vendor/codeigniter4/framework/system/CodeIgniter.php:363
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/FeatureTestTrait.php:234
+/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php:20</error>
+        </testcase>
+        <testcase name="testCreatePageLoads" file="/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php" line="27" class="Tests\Controllers\CashbookWebControllerTest" classname="Tests.Controllers.CashbookWebControllerTest" assertions="3" time="0.008757"/>
+        <testcase name="testStoreValidatesInput" file="/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php" line="36" class="Tests\Controllers\CashbookWebControllerTest" classname="Tests.Controllers.CashbookWebControllerTest" assertions="2" time="0.003856"/>
+        <testcase name="testStoreSuccess" file="/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php" line="50" class="Tests\Controllers\CashbookWebControllerTest" classname="Tests.Controllers.CashbookWebControllerTest" assertions="0" time="0.004762">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\CashbookWebControllerTest::testStoreSuccess
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:795
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseBuilder.php:2355
+/app/ci4_app/vendor/codeigniter4/framework/system/Model.php:357
+/app/ci4_app/vendor/codeigniter4/framework/system/BaseModel.php:899
+/app/ci4_app/vendor/codeigniter4/framework/system/Model.php:670
+/app/ci4_app/app/Controllers/CashbookController.php:176
+/app/ci4_app/vendor/codeigniter4/framework/system/CodeIgniter.php:974
+/app/ci4_app/vendor/codeigniter4/framework/system/CodeIgniter.php:520
+/app/ci4_app/vendor/codeigniter4/framework/system/CodeIgniter.php:363
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/FeatureTestTrait.php:234
+/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php:61</error>
+        </testcase>
+        <testcase name="testStoreNumericValidation" file="/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php" line="71" class="Tests\Controllers\CashbookWebControllerTest" classname="Tests.Controllers.CashbookWebControllerTest" assertions="2" time="0.002517"/>
+        <testcase name="testEditPageLoads" file="/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php" line="84" class="Tests\Controllers\CashbookWebControllerTest" classname="Tests.Controllers.CashbookWebControllerTest" assertions="0" time="0.002196">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\CashbookWebControllerTest::testEditPageLoads
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:795
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseBuilder.php:2355
+/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php:88</error>
+        </testcase>
+        <testcase name="testUpdateValidatesInput" file="/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php" line="103" class="Tests\Controllers\CashbookWebControllerTest" classname="Tests.Controllers.CashbookWebControllerTest" assertions="2" time="0.002528"/>
+        <testcase name="testYearScopeIsRespected" file="/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php" line="114" class="Tests\Controllers\CashbookWebControllerTest" classname="Tests.Controllers.CashbookWebControllerTest" assertions="0" time="0.003640">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\CashbookWebControllerTest::testYearScopeIsRespected
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:795
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseBuilder.php:1659
+/app/ci4_app/vendor/codeigniter4/framework/system/Model.php:255
+/app/ci4_app/vendor/codeigniter4/framework/system/BaseModel.php:676
+/app/ci4_app/app/Services/CashbookService.php:25
+/app/ci4_app/app/Controllers/CashbookController.php:72
+/app/ci4_app/vendor/codeigniter4/framework/system/CodeIgniter.php:974
+/app/ci4_app/vendor/codeigniter4/framework/system/CodeIgniter.php:520
+/app/ci4_app/vendor/codeigniter4/framework/system/CodeIgniter.php:363
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/FeatureTestTrait.php:234
+/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php:116</error>
+        </testcase>
+        <testcase name="testSummaryRendering" file="/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php" line="124" class="Tests\Controllers\CashbookWebControllerTest" classname="Tests.Controllers.CashbookWebControllerTest" assertions="0" time="0.002023">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\CashbookWebControllerTest::testSummaryRendering
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:795
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseBuilder.php:2355
+/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php:128</error>
+        </testcase>
+        <testcase name="testYearScopeFiltersEntries" file="/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php" line="146" class="Tests\Controllers\CashbookWebControllerTest" classname="Tests.Controllers.CashbookWebControllerTest" assertions="0" time="0.002420">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\CashbookWebControllerTest::testYearScopeFiltersEntries
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:795
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseBuilder.php:2355
+/app/ci4_app/tests/Controllers/CashbookWebControllerTest.php:149</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Controllers\LiabilityControllerTest" file="/app/ci4_app/tests/Controllers/LiabilityControllerTest.php" tests="6" assertions="0" errors="6" failures="0" skipped="0" time="0.000000">
+        <testcase name="testIndexReturnsAllLiabilities" file="/app/ci4_app/tests/Controllers/LiabilityControllerTest.php" line="21" class="Tests\Controllers\LiabilityControllerTest" classname="Tests.Controllers.LiabilityControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\LiabilityControllerTest::testIndexReturnsAllLiabilities
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/LiabilityControllerTest.php:18</error>
+        </testcase>
+        <testcase name="testShowReturnsLiabilityWithItems" file="/app/ci4_app/tests/Controllers/LiabilityControllerTest.php" line="35" class="Tests\Controllers\LiabilityControllerTest" classname="Tests.Controllers.LiabilityControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\LiabilityControllerTest::testShowReturnsLiabilityWithItems
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/LiabilityControllerTest.php:18</error>
+        </testcase>
+        <testcase name="testCalculateStatus" file="/app/ci4_app/tests/Controllers/LiabilityControllerTest.php" line="55" class="Tests\Controllers\LiabilityControllerTest" classname="Tests.Controllers.LiabilityControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\LiabilityControllerTest::testCalculateStatus
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/LiabilityControllerTest.php:18</error>
+        </testcase>
+        <testcase name="testCreateLiability" file="/app/ci4_app/tests/Controllers/LiabilityControllerTest.php" line="81" class="Tests\Controllers\LiabilityControllerTest" classname="Tests.Controllers.LiabilityControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\LiabilityControllerTest::testCreateLiability
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/LiabilityControllerTest.php:18</error>
+        </testcase>
+        <testcase name="testUpdateLiability" file="/app/ci4_app/tests/Controllers/LiabilityControllerTest.php" line="102" class="Tests\Controllers\LiabilityControllerTest" classname="Tests.Controllers.LiabilityControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\LiabilityControllerTest::testUpdateLiability
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/LiabilityControllerTest.php:18</error>
+        </testcase>
+        <testcase name="testDeleteLiability" file="/app/ci4_app/tests/Controllers/LiabilityControllerTest.php" line="118" class="Tests\Controllers\LiabilityControllerTest" classname="Tests.Controllers.LiabilityControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\LiabilityControllerTest::testDeleteLiability
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/LiabilityControllerTest.php:18</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Controllers\PartnerControllerTest" file="/app/ci4_app/tests/Controllers/PartnerControllerTest.php" tests="3" assertions="0" errors="3" failures="0" skipped="0" time="0.000000">
+        <testcase name="testGetPartnersEndpoint" file="/app/ci4_app/tests/Controllers/PartnerControllerTest.php" line="24" class="Tests\Controllers\PartnerControllerTest" classname="Tests.Controllers.PartnerControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\PartnerControllerTest::testGetPartnersEndpoint
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/PartnerControllerTest.php:18</error>
+        </testcase>
+        <testcase name="testCreatePartnerEndpoint" file="/app/ci4_app/tests/Controllers/PartnerControllerTest.php" line="35" class="Tests\Controllers\PartnerControllerTest" classname="Tests.Controllers.PartnerControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\PartnerControllerTest::testCreatePartnerEndpoint
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/PartnerControllerTest.php:18</error>
+        </testcase>
+        <testcase name="testUpdateUdajeEndpoint" file="/app/ci4_app/tests/Controllers/PartnerControllerTest.php" line="50" class="Tests\Controllers\PartnerControllerTest" classname="Tests.Controllers.PartnerControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\PartnerControllerTest::testUpdateUdajeEndpoint
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/PartnerControllerTest.php:18</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Controllers\ReceivableControllerTest" file="/app/ci4_app/tests/Controllers/ReceivableControllerTest.php" tests="6" assertions="0" errors="6" failures="0" skipped="0" time="0.000000">
+        <testcase name="testIndexReturnsAllReceivables" file="/app/ci4_app/tests/Controllers/ReceivableControllerTest.php" line="21" class="Tests\Controllers\ReceivableControllerTest" classname="Tests.Controllers.ReceivableControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\ReceivableControllerTest::testIndexReturnsAllReceivables
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/ReceivableControllerTest.php:18</error>
+        </testcase>
+        <testcase name="testShowReturnsInvoiceWithItems" file="/app/ci4_app/tests/Controllers/ReceivableControllerTest.php" line="38" class="Tests\Controllers\ReceivableControllerTest" classname="Tests.Controllers.ReceivableControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\ReceivableControllerTest::testShowReturnsInvoiceWithItems
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/ReceivableControllerTest.php:18</error>
+        </testcase>
+        <testcase name="testCalculateStatus" file="/app/ci4_app/tests/Controllers/ReceivableControllerTest.php" line="60" class="Tests\Controllers\ReceivableControllerTest" classname="Tests.Controllers.ReceivableControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\ReceivableControllerTest::testCalculateStatus
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/ReceivableControllerTest.php:18</error>
+        </testcase>
+        <testcase name="testCreateReceivable" file="/app/ci4_app/tests/Controllers/ReceivableControllerTest.php" line="83" class="Tests\Controllers\ReceivableControllerTest" classname="Tests.Controllers.ReceivableControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\ReceivableControllerTest::testCreateReceivable
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/ReceivableControllerTest.php:18</error>
+        </testcase>
+        <testcase name="testUpdateReceivable" file="/app/ci4_app/tests/Controllers/ReceivableControllerTest.php" line="104" class="Tests\Controllers\ReceivableControllerTest" classname="Tests.Controllers.ReceivableControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\ReceivableControllerTest::testUpdateReceivable
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/ReceivableControllerTest.php:18</error>
+        </testcase>
+        <testcase name="testDeleteReceivable" file="/app/ci4_app/tests/Controllers/ReceivableControllerTest.php" line="120" class="Tests\Controllers\ReceivableControllerTest" classname="Tests.Controllers.ReceivableControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Controllers\ReceivableControllerTest::testDeleteReceivable
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Controllers/ReceivableControllerTest.php:18</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\App\Models\PocstavModelTest" file="/app/ci4_app/tests/Models/PocstavModelTest.php" tests="1" assertions="0" errors="1" failures="0" skipped="0" time="0.000000">
+        <testcase name="testCanInstantiateModel" file="/app/ci4_app/tests/Models/PocstavModelTest.php" line="18" class="Tests\App\Models\PocstavModelTest" classname="Tests.App.Models.PocstavModelTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\App\Models\PocstavModelTest::testCanInstantiateModel
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Models/PocstavModelTest.php:15</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Services\CashbookServiceTest" file="/app/ci4_app/tests/Services/CashbookServiceTest.php" tests="3" assertions="0" errors="0" failures="0" skipped="3" time="0.000000">
+        <testcase name="testCalculateVatSkk" file="/app/ci4_app/tests/Services/CashbookServiceTest.php" line="16" class="Tests\Services\CashbookServiceTest" classname="Tests.Services.CashbookServiceTest" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testCalculateVatEur" file="/app/ci4_app/tests/Services/CashbookServiceTest.php" line="20" class="Tests\Services\CashbookServiceTest" classname="Tests.Services.CashbookServiceTest" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testCalculateTotals" file="/app/ci4_app/tests/Services/CashbookServiceTest.php" line="24" class="Tests\Services\CashbookServiceTest" classname="Tests.Services.CashbookServiceTest" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\App\Services\InitialStateGoldenTest" file="/app/ci4_app/tests/Services/InitialStateGoldenTest.php" tests="1" assertions="0" errors="1" failures="0" skipped="0" time="0.001640">
+        <testcase name="testGoldenValidationFromDatabase" file="/app/ci4_app/tests/Services/InitialStateGoldenTest.php" line="16" class="Tests\App\Services\InitialStateGoldenTest" classname="Tests.App.Services.InitialStateGoldenTest" assertions="0" time="0.001640">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\App\Services\InitialStateGoldenTest::testGoldenValidationFromDatabase
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:795
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseBuilder.php:1743
+/app/ci4_app/tests/Services/InitialStateGoldenTest.php:23</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\App\Services\InitialStateServiceTest" file="/app/ci4_app/tests/Services/InitialStateServiceTest.php" tests="2" assertions="0" errors="2" failures="0" skipped="0" time="0.000000">
+        <testcase name="testCreateInitialStateGeneratesDocumentNumberAndDefaults" file="/app/ci4_app/tests/Services/InitialStateServiceTest.php" line="23" class="Tests\App\Services\InitialStateServiceTest" classname="Tests.App.Services.InitialStateServiceTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\App\Services\InitialStateServiceTest::testCreateInitialStateGeneratesDocumentNumberAndDefaults
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Services/InitialStateServiceTest.php:18</error>
+        </testcase>
+        <testcase name="testUpdateInitialStatePreservesDocumentNumber" file="/app/ci4_app/tests/Services/InitialStateServiceTest.php" line="41" class="Tests\App\Services\InitialStateServiceTest" classname="Tests.App.Services.InitialStateServiceTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\App\Services\InitialStateServiceTest::testUpdateInitialStatePreservesDocumentNumber
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Services/InitialStateServiceTest.php:18</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Services\InventoryServiceGoldenTest" file="/app/ci4_app/tests/Services/InventoryServiceGoldenTest.php" tests="1" assertions="0" errors="1" failures="0" skipped="0" time="0.000000">
+        <testcase name="testInventoryGoldenValidation" file="/app/ci4_app/tests/Services/InventoryServiceGoldenTest.php" line="32" class="Tests\Services\InventoryServiceGoldenTest" classname="Tests.Services.InventoryServiceGoldenTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Services\InventoryServiceGoldenTest::testInventoryGoldenValidation
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Services/InventoryServiceGoldenTest.php:21</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Services\InventoryServiceTest" file="/app/ci4_app/tests/Services/InventoryServiceTest.php" tests="1" assertions="4" errors="0" failures="0" skipped="0" time="0.001322">
+        <testcase name="testCalculateDerivedFields" file="/app/ci4_app/tests/Services/InventoryServiceTest.php" line="10" class="Tests\Services\InventoryServiceTest" classname="Tests.Services.InventoryServiceTest" assertions="4" time="0.001322"/>
+      </testsuite>
+      <testsuite name="Tests\Services\PartnerServiceTest" file="/app/ci4_app/tests/Services/PartnerServiceTest.php" tests="4" assertions="0" errors="4" failures="0" skipped="0" time="0.000000">
+        <testcase name="testCreatePartner" file="/app/ci4_app/tests/Services/PartnerServiceTest.php" line="28" class="Tests\Services\PartnerServiceTest" classname="Tests.Services.PartnerServiceTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Services\PartnerServiceTest::testCreatePartner
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Services/PartnerServiceTest.php:20</error>
+        </testcase>
+        <testcase name="testGetPartners" file="/app/ci4_app/tests/Services/PartnerServiceTest.php" line="47" class="Tests\Services\PartnerServiceTest" classname="Tests.Services.PartnerServiceTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Services\PartnerServiceTest::testGetPartners
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Services/PartnerServiceTest.php:20</error>
+        </testcase>
+        <testcase name="testUpdatePartner" file="/app/ci4_app/tests/Services/PartnerServiceTest.php" line="56" class="Tests\Services\PartnerServiceTest" classname="Tests.Services.PartnerServiceTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Services\PartnerServiceTest::testUpdatePartner
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Services/PartnerServiceTest.php:20</error>
+        </testcase>
+        <testcase name="testDeletePartner" file="/app/ci4_app/tests/Services/PartnerServiceTest.php" line="67" class="Tests\Services\PartnerServiceTest" classname="Tests.Services.PartnerServiceTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Services\PartnerServiceTest::testDeletePartner
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Services/PartnerServiceTest.php:20</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Services\UdajeServiceTest" file="/app/ci4_app/tests/Services/UdajeServiceTest.php" tests="2" assertions="0" errors="2" failures="0" skipped="0" time="0.000000">
+        <testcase name="testCreateUdaje" file="/app/ci4_app/tests/Services/UdajeServiceTest.php" line="25" class="Tests\Services\UdajeServiceTest" classname="Tests.Services.UdajeServiceTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Services\UdajeServiceTest::testCreateUdaje
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Services/UdajeServiceTest.php:19</error>
+        </testcase>
+        <testcase name="testUpdateExistingUdaje" file="/app/ci4_app/tests/Services/UdajeServiceTest.php" line="41" class="Tests\Services\UdajeServiceTest" classname="Tests.Services.UdajeServiceTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\Services\UdajeServiceTest::testUpdateExistingUdaje
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/Services/UdajeServiceTest.php:19</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Services\VatServiceTest" file="/app/ci4_app/tests/Services/VatServiceTest.php" tests="7" assertions="30" errors="0" failures="0" skipped="0" time="0.005742">
+        <testcase name="testDetermineRatesForDate" file="/app/ci4_app/tests/Services/VatServiceTest.php" line="18" class="Tests\Services\VatServiceTest" classname="Tests.Services.VatServiceTest" assertions="7" time="0.001529"/>
+        <testcase name="testRoundVat" file="/app/ci4_app/tests/Services/VatServiceTest.php" line="47" class="Tests\Services\VatServiceTest" classname="Tests.Services.VatServiceTest" assertions="5" time="0.000709"/>
+        <testcase name="testAccumulatePeriodKpVystup" file="/app/ci4_app/tests/Services/VatServiceTest.php" line="59" class="Tests\Services\VatServiceTest" classname="Tests.Services.VatServiceTest" assertions="4" time="0.000703"/>
+        <testcase name="testAccumulatePeriodPdVstup" file="/app/ci4_app/tests/Services/VatServiceTest.php" line="78" class="Tests\Services\VatServiceTest" classname="Tests.Services.VatServiceTest" assertions="4" time="0.000685"/>
+        <testcase name="testAccumulatePeriodKzVstup1999" file="/app/ci4_app/tests/Services/VatServiceTest.php" line="109" class="Tests\Services\VatServiceTest" classname="Tests.Services.VatServiceTest" assertions="4" time="0.000688"/>
+        <testcase name="testAccumulatePeriodKzVstup2004" file="/app/ci4_app/tests/Services/VatServiceTest.php" line="129" class="Tests\Services\VatServiceTest" classname="Tests.Services.VatServiceTest" assertions="2" time="0.000735"/>
+        <testcase name="testAccumulatePeriodKzVstupReverseCharge" file="/app/ci4_app/tests/Services/VatServiceTest.php" line="145" class="Tests\Services\VatServiceTest" classname="Tests.Services.VatServiceTest" assertions="4" time="0.000691"/>
+      </testsuite>
+      <testsuite name="App\Controllers\DictionaryControllerTest" file="/app/ci4_app/tests/app/Controllers/DictionaryControllerTest.php" tests="1" assertions="0" errors="1" failures="0" skipped="0" time="0.000000">
+        <testcase name="testListEndpointReturnsJson" file="/app/ci4_app/tests/app/Controllers/DictionaryControllerTest.php" line="19" class="App\Controllers\DictionaryControllerTest" classname="App.Controllers.DictionaryControllerTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">App\Controllers\DictionaryControllerTest::testListEndpointReturnsJson
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\App\Services\AssetServiceTest" file="/app/ci4_app/tests/app/Services/AssetServiceTest.php" tests="4" assertions="12" errors="0" failures="0" skipped="0" time="0.002706">
+        <testcase name="testCalculateIkzpDepreciationR_Auto_Post2003" file="/app/ci4_app/tests/app/Services/AssetServiceTest.php" line="18" class="Tests\App\Services\AssetServiceTest" classname="Tests.App.Services.AssetServiceTest" assertions="3" time="0.001059"/>
+        <testcase name="testCalculateIkzpDepreciationZ_RO1" file="/app/ci4_app/tests/app/Services/AssetServiceTest.php" line="44" class="Tests\App\Services\AssetServiceTest" classname="Tests.App.Services.AssetServiceTest" assertions="3" time="0.000579"/>
+        <testcase name="testCalculateIkzpOS0" file="/app/ci4_app/tests/app/Services/AssetServiceTest.php" line="68" class="Tests\App\Services\AssetServiceTest" classname="Tests.App.Services.AssetServiceTest" assertions="1" time="0.000491"/>
+        <testcase name="testCalculateIkdkpTotals" file="/app/ci4_app/tests/app/Services/AssetServiceTest.php" line="87" class="Tests\App\Services\AssetServiceTest" classname="Tests.App.Services.AssetServiceTest" assertions="5" time="0.000578"/>
+      </testsuite>
+      <testsuite name="Tests\App\Services\AssetsGoldenTest" file="/app/ci4_app/tests/app/Services/AssetsGoldenTest.php" tests="1" assertions="0" errors="1" failures="0" skipped="0" time="0.002835">
+        <testcase name="testGoldenValidation2026" file="/app/ci4_app/tests/app/Services/AssetsGoldenTest.php" line="15" class="Tests\App\Services\AssetsGoldenTest" classname="Tests.App.Services.AssetsGoldenTest" assertions="0" time="0.002835">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\App\Services\AssetsGoldenTest::testGoldenValidation2026
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:795
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseBuilder.php:1659
+/app/ci4_app/tests/app/Services/AssetsGoldenTest.php:23</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="App\Services\DictionaryServiceTest" file="/app/ci4_app/tests/app/Services/DictionaryServiceTest.php" tests="5" assertions="0" errors="5" failures="0" skipped="0" time="0.000000">
+        <testcase name="testGetAllKraje" file="/app/ci4_app/tests/app/Services/DictionaryServiceTest.php" line="31" class="App\Services\DictionaryServiceTest" classname="App.Services.DictionaryServiceTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">App\Services\DictionaryServiceTest::testGetAllKraje
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/app/Services/DictionaryServiceTest.php:25</error>
+        </testcase>
+        <testcase name="testOkresCreateUpdatesKrajTotals" file="/app/ci4_app/tests/app/Services/DictionaryServiceTest.php" line="39" class="App\Services\DictionaryServiceTest" classname="App.Services.DictionaryServiceTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">App\Services\DictionaryServiceTest::testOkresCreateUpdatesKrajTotals
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/app/Services/DictionaryServiceTest.php:25</error>
+        </testcase>
+        <testcase name="testOkresUpdateAdjustsKrajTotals" file="/app/ci4_app/tests/app/Services/DictionaryServiceTest.php" line="59" class="App\Services\DictionaryServiceTest" classname="App.Services.DictionaryServiceTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">App\Services\DictionaryServiceTest::testOkresUpdateAdjustsKrajTotals
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/app/Services/DictionaryServiceTest.php:25</error>
+        </testcase>
+        <testcase name="testOkresDeleteAdjustsKrajTotals" file="/app/ci4_app/tests/app/Services/DictionaryServiceTest.php" line="77" class="App\Services\DictionaryServiceTest" classname="App.Services.DictionaryServiceTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">App\Services\DictionaryServiceTest::testOkresDeleteAdjustsKrajTotals
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/app/Services/DictionaryServiceTest.php:25</error>
+        </testcase>
+        <testcase name="testCannotDeleteKrajWithOkresy" file="/app/ci4_app/tests/app/Services/DictionaryServiceTest.php" line="93" class="App\Services\DictionaryServiceTest" classname="App.Services.DictionaryServiceTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">App\Services\DictionaryServiceTest::testCannotDeleteKrajWithOkresy
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/app/Services/DictionaryServiceTest.php:25</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\App\Services\InvoicesGoldenTest" file="/app/ci4_app/tests/app/Services/InvoicesGoldenTest.php" tests="1" assertions="0" errors="1" failures="0" skipped="0" time="0.002401">
+        <testcase name="testGoldenValidation2026" file="/app/ci4_app/tests/app/Services/InvoicesGoldenTest.php" line="16" class="Tests\App\Services\InvoicesGoldenTest" classname="Tests.App.Services.InvoicesGoldenTest" assertions="0" time="0.002401">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\App\Services\InvoicesGoldenTest::testGoldenValidation2026
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:795
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseBuilder.php:1659
+/app/ci4_app/tests/app/Services/InvoicesGoldenTest.php:25</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\App\Services\PropertyManagementGoldenTest" file="/app/ci4_app/tests/app/Services/PropertyManagementGoldenTest.php" tests="2" assertions="0" errors="2" failures="0" skipped="0" time="0.000000">
+        <testcase name="testGoldenElectricity2020" file="/app/ci4_app/tests/app/Services/PropertyManagementGoldenTest.php" line="21" class="Tests\App\Services\PropertyManagementGoldenTest" classname="Tests.App.Services.PropertyManagementGoldenTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\App\Services\PropertyManagementGoldenTest::testGoldenElectricity2020
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/app/Services/PropertyManagementGoldenTest.php:17</error>
+        </testcase>
+        <testcase name="testGoldenWater2025" file="/app/ci4_app/tests/app/Services/PropertyManagementGoldenTest.php" line="26" class="Tests\App\Services\PropertyManagementGoldenTest" classname="Tests.App.Services.PropertyManagementGoldenTest" assertions="0" time="0.000000">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">Tests\App\Services\PropertyManagementGoldenTest::testGoldenWater2025
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:91
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/DatabaseTestTrait.php:67
+/app/ci4_app/vendor/codeigniter4/framework/system/Test/CIUnitTestCase.php:254
+/app/ci4_app/tests/app/Services/PropertyManagementGoldenTest.php:17</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\App\Services\PropertyManagementServiceTest" file="/app/ci4_app/tests/app/Services/PropertyManagementServiceTest.php" tests="6" assertions="9" errors="0" failures="0" skipped="0" time="0.004420">
+        <testcase name="testCalculateASum" file="/app/ci4_app/tests/app/Services/PropertyManagementServiceTest.php" line="18" class="Tests\App\Services\PropertyManagementServiceTest" classname="Tests.App.Services.PropertyManagementServiceTest" assertions="1" time="0.000902"/>
+        <testcase name="testCalculateBSum" file="/app/ci4_app/tests/app/Services/PropertyManagementServiceTest.php" line="28" class="Tests\App\Services\PropertyManagementServiceTest" classname="Tests.App.Services.PropertyManagementServiceTest" assertions="1" time="0.000556"/>
+        <testcase name="testCalculateElectricityConsumption" file="/app/ci4_app/tests/app/Services/PropertyManagementServiceTest.php" line="37" class="Tests\App\Services\PropertyManagementServiceTest" classname="Tests.App.Services.PropertyManagementServiceTest" assertions="3" time="0.000513"/>
+        <testcase name="testCalculateElectricityMeterReplacement" file="/app/ci4_app/tests/app/Services/PropertyManagementServiceTest.php" line="57" class="Tests\App\Services\PropertyManagementServiceTest" classname="Tests.App.Services.PropertyManagementServiceTest" assertions="1" time="0.000944"/>
+        <testcase name="testCalculateWaterConsumption" file="/app/ci4_app/tests/app/Services/PropertyManagementServiceTest.php" line="71" class="Tests\App\Services\PropertyManagementServiceTest" classname="Tests.App.Services.PropertyManagementServiceTest" assertions="2" time="0.000939"/>
+        <testcase name="testCalculateWaterMeterReplacement" file="/app/ci4_app/tests/app/Services/PropertyManagementServiceTest.php" line="89" class="Tests\App\Services\PropertyManagementServiceTest" classname="Tests.App.Services.PropertyManagementServiceTest" assertions="1" time="0.000566"/>
+      </testsuite>
+      <testsuite name="App\Services\TripServiceGoldenTest" file="/app/ci4_app/tests/app/Services/TripServiceGoldenTest.php" tests="2" assertions="0" errors="2" failures="0" skipped="0" time="0.004967">
+        <testcase name="testScDataset" file="/app/ci4_app/tests/app/Services/TripServiceGoldenTest.php" line="20" class="App\Services\TripServiceGoldenTest" classname="App.Services.TripServiceGoldenTest" assertions="0" time="0.002873">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">App\Services\TripServiceGoldenTest::testScDataset
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:795
+/app/ci4_app/tests/app/Services/TripServiceGoldenTest.php:23</error>
+        </testcase>
+        <testcase name="testEviAutoDataset" file="/app/ci4_app/tests/app/Services/TripServiceGoldenTest.php" line="157" class="App\Services\TripServiceGoldenTest" classname="App.Services.TripServiceGoldenTest" assertions="0" time="0.002094">
+          <error type="CodeIgniter\Database\Exceptions\DatabaseException">App\Services\TripServiceGoldenTest::testEviAutoDataset
+CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:606
+/app/ci4_app/vendor/codeigniter4/framework/system/Database/BaseConnection.php:795
+/app/ci4_app/tests/app/Services/TripServiceGoldenTest.php:159</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="App\Services\TripServiceTest" file="/app/ci4_app/tests/app/Services/TripServiceTest.php" tests="8" assertions="16" errors="0" failures="0" skipped="0" time="0.005642">
+        <testcase name="testScCalculationPre2004NonFir" file="/app/ci4_app/tests/app/Services/TripServiceTest.php" line="17" class="App\Services\TripServiceTest" classname="App.Services.TripServiceTest" assertions="3" time="0.000751"/>
+        <testcase name="testScCalculationPre2004Fir" file="/app/ci4_app/tests/app/Services/TripServiceTest.php" line="42" class="App\Services\TripServiceTest" classname="App.Services.TripServiceTest" assertions="1" time="0.000805"/>
+        <testcase name="testScCalculationPost2004" file="/app/ci4_app/tests/app/Services/TripServiceTest.php" line="64" class="App\Services\TripServiceTest" classname="App.Services.TripServiceTest" assertions="1" time="0.000670"/>
+        <testcase name="testScCalculationCesOverride" file="/app/ci4_app/tests/app/Services/TripServiceTest.php" line="91" class="App\Services\TripServiceTest" classname="App.Services.TripServiceTest" assertions="2" time="0.000626"/>
+        <testcase name="testEviAutoCalculationPre2004NonFir" file="/app/ci4_app/tests/app/Services/TripServiceTest.php" line="104" class="App\Services\TripServiceTest" classname="App.Services.TripServiceTest" assertions="2" time="0.000683"/>
+        <testcase name="testEviAutoCalculationPre2004Fir" file="/app/ci4_app/tests/app/Services/TripServiceTest.php" line="128" class="App\Services\TripServiceTest" classname="App.Services.TripServiceTest" assertions="1" time="0.000674"/>
+        <testcase name="testEviAutoCalculationPre2005MestoLogic" file="/app/ci4_app/tests/app/Services/TripServiceTest.php" line="149" class="App\Services\TripServiceTest" classname="App.Services.TripServiceTest" assertions="3" time="0.000784"/>
+        <testcase name="testEviAutoCalculationPost2005MestoLogic" file="/app/ci4_app/tests/app/Services/TripServiceTest.php" line="177" class="App\Services\TripServiceTest" classname="App.Services.TripServiceTest" assertions="3" time="0.000648"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Test Documentation</title>
+        <style>
+            body {
+                text-rendering: optimizeLegibility;
+                font-family: Source SansSerif Pro, Arial, sans-serif;
+                font-variant-ligatures: common-ligatures;
+                font-kerning: normal;
+                margin-left: 2rem;
+                background-color: #fff;
+                color: #000;
+            }
+
+            body > ul > li {
+                font-size: larger;
+            }
+
+            h2 {
+                font-size: larger;
+                text-decoration-line: underline;
+                text-decoration-thickness: 2px;
+                margin: 0;
+                padding: 0.5rem 0;
+            }
+
+            ul {
+                list-style: none;
+                margin: 0 0 2rem;
+                padding: 0 0 0 1rem;
+                text-indent: -1rem;
+            }
+
+            .success:before {
+                color: #4e9a06;
+                content: '✓';
+                padding-right: 0.5rem;
+            }
+
+            .defect {
+                color: #a40000;
+            }
+
+            .defect:before {
+                color: #a40000;
+                content: '✗';
+                padding-right: 0.5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Accounting Controller (Tests\App\Controllers\AccountingController)</h2>
+        <ul>
+            <li class="defect">Get initial states</li>
+        </ul>
+        <h2>Asset Service (Tests\App\Services\AssetService)</h2>
+        <ul>
+            <li class="success">CalculateIkzpDepreciationR Auto Post2003</li>
+            <li class="success">CalculateIkzpDepreciationZ RO1</li>
+            <li class="success">Calculate ikzp o s 0</li>
+            <li class="success">Calculate ikdkp totals</li>
+        </ul>
+        <h2>Assets Golden (Tests\App\Services\AssetsGolden)</h2>
+        <ul>
+            <li class="defect">Golden validation 2026</li>
+        </ul>
+        <h2>Cashbook Web Controller (Tests\Controllers\CashbookWebController)</h2>
+        <ul>
+            <li class="defect">Web index returns 200 and contains basic info</li>
+            <li class="success">Create page loads</li>
+            <li class="success">Store validates input</li>
+            <li class="defect">Store success</li>
+            <li class="success">Store numeric validation</li>
+            <li class="defect">Edit page loads</li>
+            <li class="success">Update validates input</li>
+            <li class="defect">Year scope is respected</li>
+            <li class="defect">Summary rendering</li>
+            <li class="defect">Year scope filters entries</li>
+        </ul>
+        <h2>Dictionary Controller (App\Controllers\DictionaryController)</h2>
+        <ul>
+            <li class="defect">List endpoint returns json</li>
+        </ul>
+        <h2>Dictionary Service (App\Services\DictionaryService)</h2>
+        <ul>
+            <li class="defect">Get all kraje</li>
+            <li class="defect">Okres create updates kraj totals</li>
+            <li class="defect">Okres update adjusts kraj totals</li>
+            <li class="defect">Okres delete adjusts kraj totals</li>
+            <li class="defect">Cannot delete kraj with okresy</li>
+        </ul>
+        <h2>Initial State Golden (Tests\App\Services\InitialStateGolden)</h2>
+        <ul>
+            <li class="defect">Golden validation from database</li>
+        </ul>
+        <h2>Initial State Service (Tests\App\Services\InitialStateService)</h2>
+        <ul>
+            <li class="defect">Create initial state generates document number and defaults</li>
+            <li class="defect">Update initial state preserves document number</li>
+        </ul>
+        <h2>Inventory Service (Tests\Services\InventoryService)</h2>
+        <ul>
+            <li class="success">Calculate derived fields</li>
+        </ul>
+        <h2>Inventory Service Golden (Tests\Services\InventoryServiceGolden)</h2>
+        <ul>
+            <li class="defect">Inventory golden validation</li>
+        </ul>
+        <h2>Invoices Golden (Tests\App\Services\InvoicesGolden)</h2>
+        <ul>
+            <li class="defect">Golden validation 2026</li>
+        </ul>
+        <h2>Liability Controller (Tests\Controllers\LiabilityController)</h2>
+        <ul>
+            <li class="defect">Index returns all liabilities</li>
+            <li class="defect">Show returns liability with items</li>
+            <li class="defect">Calculate status</li>
+            <li class="defect">Create liability</li>
+            <li class="defect">Update liability</li>
+            <li class="defect">Delete liability</li>
+        </ul>
+        <h2>Partner Controller (Tests\Controllers\PartnerController)</h2>
+        <ul>
+            <li class="defect">Get partners endpoint</li>
+            <li class="defect">Create partner endpoint</li>
+            <li class="defect">Update udaje endpoint</li>
+        </ul>
+        <h2>Partner Service (Tests\Services\PartnerService)</h2>
+        <ul>
+            <li class="defect">Create partner</li>
+            <li class="defect">Get partners</li>
+            <li class="defect">Update partner</li>
+            <li class="defect">Delete partner</li>
+        </ul>
+        <h2>Pocstav Model (Tests\App\Models\PocstavModel)</h2>
+        <ul>
+            <li class="defect">Can instantiate model</li>
+        </ul>
+        <h2>Property Management Golden (Tests\App\Services\PropertyManagementGolden)</h2>
+        <ul>
+            <li class="defect">Golden electricity 2020</li>
+            <li class="defect">Golden water 2025</li>
+        </ul>
+        <h2>Property Management Service (Tests\App\Services\PropertyManagementService)</h2>
+        <ul>
+            <li class="success">Calculate a sum</li>
+            <li class="success">Calculate b sum</li>
+            <li class="success">Calculate electricity consumption</li>
+            <li class="success">Calculate electricity meter replacement</li>
+            <li class="success">Calculate water consumption</li>
+            <li class="success">Calculate water meter replacement</li>
+        </ul>
+        <h2>Receivable Controller (Tests\Controllers\ReceivableController)</h2>
+        <ul>
+            <li class="defect">Index returns all receivables</li>
+            <li class="defect">Show returns invoice with items</li>
+            <li class="defect">Calculate status</li>
+            <li class="defect">Create receivable</li>
+            <li class="defect">Update receivable</li>
+            <li class="defect">Delete receivable</li>
+        </ul>
+        <h2>Trip Service (App\Services\TripService)</h2>
+        <ul>
+            <li class="success">Sc calculation pre 2004 non fir</li>
+            <li class="success">Sc calculation pre 2004 fir</li>
+            <li class="success">Sc calculation post 2004</li>
+            <li class="success">Sc calculation ces override</li>
+            <li class="success">Evi auto calculation pre 2004 non fir</li>
+            <li class="success">Evi auto calculation pre 2004 fir</li>
+            <li class="success">Evi auto calculation pre 2005 mesto logic</li>
+            <li class="success">Evi auto calculation post 2005 mesto logic</li>
+        </ul>
+        <h2>Trip Service Golden (App\Services\TripServiceGolden)</h2>
+        <ul>
+            <li class="defect">Sc dataset</li>
+            <li class="defect">Evi auto dataset</li>
+        </ul>
+        <h2>Udaje Service (Tests\Services\UdajeService)</h2>
+        <ul>
+            <li class="defect">Create udaje</li>
+            <li class="defect">Update existing udaje</li>
+        </ul>
+        <h2>Vat Service (Tests\Services\VatService)</h2>
+        <ul>
+            <li class="success">Determine rates for date</li>
+            <li class="success">Round vat</li>
+            <li class="success">Accumulate period kp vystup</li>
+            <li class="success">Accumulate period pd vstup</li>
+            <li class="success">Accumulate period kz vstup 1999</li>
+            <li class="success">Accumulate period kz vstup 2004</li>
+            <li class="success">Accumulate period kz vstup reverse charge</li>
+        </ul>
+    </body>
+</html>

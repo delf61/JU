@@ -1,0 +1,118 @@
+Accounting Controller (Tests\App\Controllers\AccountingController)
+ [ ] Get initial states
+
+Asset Service (Tests\App\Services\AssetService)
+ [x] CalculateIkzpDepreciationR Auto Post2003
+ [x] CalculateIkzpDepreciationZ RO1
+ [x] Calculate ikzp o s 0
+ [x] Calculate ikdkp totals
+
+Assets Golden (Tests\App\Services\AssetsGolden)
+ [ ] Golden validation 2026
+
+Cashbook Web Controller (Tests\Controllers\CashbookWebController)
+ [ ] Web index returns 200 and contains basic info
+ [x] Create page loads
+ [x] Store validates input
+ [ ] Store success
+ [x] Store numeric validation
+ [ ] Edit page loads
+ [x] Update validates input
+ [ ] Year scope is respected
+ [ ] Summary rendering
+ [ ] Year scope filters entries
+
+Dictionary Controller (App\Controllers\DictionaryController)
+ [ ] List endpoint returns json
+
+Dictionary Service (App\Services\DictionaryService)
+ [ ] Get all kraje
+ [ ] Okres create updates kraj totals
+ [ ] Okres update adjusts kraj totals
+ [ ] Okres delete adjusts kraj totals
+ [ ] Cannot delete kraj with okresy
+
+Initial State Golden (Tests\App\Services\InitialStateGolden)
+ [ ] Golden validation from database
+
+Initial State Service (Tests\App\Services\InitialStateService)
+ [ ] Create initial state generates document number and defaults
+ [ ] Update initial state preserves document number
+
+Inventory Service (Tests\Services\InventoryService)
+ [x] Calculate derived fields
+
+Inventory Service Golden (Tests\Services\InventoryServiceGolden)
+ [ ] Inventory golden validation
+
+Invoices Golden (Tests\App\Services\InvoicesGolden)
+ [ ] Golden validation 2026
+
+Liability Controller (Tests\Controllers\LiabilityController)
+ [ ] Index returns all liabilities
+ [ ] Show returns liability with items
+ [ ] Calculate status
+ [ ] Create liability
+ [ ] Update liability
+ [ ] Delete liability
+
+Partner Controller (Tests\Controllers\PartnerController)
+ [ ] Get partners endpoint
+ [ ] Create partner endpoint
+ [ ] Update udaje endpoint
+
+Partner Service (Tests\Services\PartnerService)
+ [ ] Create partner
+ [ ] Get partners
+ [ ] Update partner
+ [ ] Delete partner
+
+Pocstav Model (Tests\App\Models\PocstavModel)
+ [ ] Can instantiate model
+
+Property Management Golden (Tests\App\Services\PropertyManagementGolden)
+ [ ] Golden electricity 2020
+ [ ] Golden water 2025
+
+Property Management Service (Tests\App\Services\PropertyManagementService)
+ [x] Calculate a sum
+ [x] Calculate b sum
+ [x] Calculate electricity consumption
+ [x] Calculate electricity meter replacement
+ [x] Calculate water consumption
+ [x] Calculate water meter replacement
+
+Receivable Controller (Tests\Controllers\ReceivableController)
+ [ ] Index returns all receivables
+ [ ] Show returns invoice with items
+ [ ] Calculate status
+ [ ] Create receivable
+ [ ] Update receivable
+ [ ] Delete receivable
+
+Trip Service (App\Services\TripService)
+ [x] Sc calculation pre 2004 non fir
+ [x] Sc calculation pre 2004 fir
+ [x] Sc calculation post 2004
+ [x] Sc calculation ces override
+ [x] Evi auto calculation pre 2004 non fir
+ [x] Evi auto calculation pre 2004 fir
+ [x] Evi auto calculation pre 2005 mesto logic
+ [x] Evi auto calculation post 2005 mesto logic
+
+Trip Service Golden (App\Services\TripServiceGolden)
+ [ ] Sc dataset
+ [ ] Evi auto dataset
+
+Udaje Service (Tests\Services\UdajeService)
+ [ ] Create udaje
+ [ ] Update existing udaje
+
+Vat Service (Tests\Services\VatService)
+ [x] Determine rates for date
+ [x] Round vat
+ [x] Accumulate period kp vystup
+ [x] Accumulate period pd vstup
+ [x] Accumulate period kz vstup 1999
+ [x] Accumulate period kz vstup 2004
+ [x] Accumulate period kz vstup reverse charge
