@@ -225,13 +225,20 @@ class BankStatementController extends ResourceController
 
         if (!$inv) return redirect()->back()->with('error', 'Faktúra nenájdená.');
 
-        // Sumy z faktury (Zjednoduseny FAND prepocet dolezity pre MVC)
         $x = (float)($inv['x'] ?? 0);
         $y = (float)($inv['y'] ?? 0);
         $z = (float)($inv['z'] ?? 0);
         $dph1 = round($y * ((float)($inv['dph_1'] ?? 0)/100), 2);
         $dph  = round($z * ((float)($inv['dph'] ?? 0)/100), 2);
-        $zn = $x + $y + $z + $dph1 + $dph;
+        $vyrovn = (float)($inv['vyrovn'] ?? 0);
+
+        $par69 = (!empty($inv['par_69']) || !empty($inv['par69'])) ? true : false;
+        if ($par69) {
+            $dph1 = 0;
+            $dph = 0;
+        }
+
+        $zn = $x + $y + $z + $dph1 + $dph + $vyrovn;
         $uhrada = (float)($inv['uhrada'] ?? 0);
 
         $amount_to_pay = $zn - $uhrada;
