@@ -110,6 +110,12 @@ class BankStatementController extends ResourceController
 
         $unpaid = [];
         foreach ($invoices as $inv) {
+            // Ak v poli uhrady v kp alebo kz je hodnota > 0, potom doklad povazujeme za vyrovnany
+            $uhrady_flag = (int)($inv['uhrady'] ?? 0);
+            if ($uhrady_flag > 0) {
+                continue;
+            }
+
             // Kalkulacia 'zn' (celkovej sumy). V KZ/KP su zaklady x, y, z a DPH.
             // Zjednoduseny matematicky prepis FAND logiky (z + dph_z) atd...
             // Kedze mame x,y,z a DPH, hruba suma (zn) = x + y + z + (odhad_dph z nich) alebo proste pc/spolu, v zavislosti od faktury.
@@ -123,13 +129,21 @@ class BankStatementController extends ResourceController
             $dph_val1 = round($y * ($dph_rate1 / 100), 2);
             $dph_val = round($z * ($dph_rate / 100), 2);
 
-            $zn = $x + $y + $z + $dph_val1 + $dph_val;
+            $par69 = (!empty($inv['par_69']) || (!empty($inv['par69']) && strtolower(trim($inv['par69'])) === 'a')) ? true : false;
+            if ($par69) {
+                $dph_val1 = 0;
+                $dph_val = 0;
+            }
+
+
+            $vyrovn = (float)($inv['vyrovn'] ?? 0);
+            $zn = $x + $y + $z + $dph_val1 + $dph_val + $vyrovn;
 
             // FAND 'uhrada' stlpec
             $uhrada = (float)($inv['uhrada'] ?? 0);
 
-            // Floating point tolerance check (abs(zn - uhrada) > 0.1) means UNPAID
-            if (abs($zn - $uhrada) > 0.1) {
+            // User requested tolerance: anything between -1 and 1 EUR is considered paid
+            if (abs($zn - $uhrada) >= 1.0) {
                 // Pridame zostatok
                 $inv['zn'] = number_format($zn, 2, '.', '');
                 $inv['uhrada'] = number_format($uhrada, 2, '.', '');
@@ -224,9 +238,13 @@ class BankStatementController extends ResourceController
         $db = \Config\Database::connect();
 
         $table = ($type === 'kz') ? 'kz' : 'kp';
-        $inv = $db->table($table)->where('PK', $invoicePk)->get()->getRowArray();
+        $inv = $db->table($table)->where('b', $invoicePk)->get()->getRowArray();
 
         if (!$inv) return redirect()->back()->with('error', 'Faktúra nenájdená.');
+
+        if ((int)($inv['uhrady'] ?? 0) > 0) {
+            return redirect()->back()->with('error', 'Doklad je už označený ako vyrovnaný (uhrady > 0).');
+        }
 
         $x = (float)($inv['x'] ?? 0);
         $y = (float)($inv['y'] ?? 0);
@@ -235,7 +253,7 @@ class BankStatementController extends ResourceController
         $dph  = round($z * ((float)($inv['dph'] ?? 0)/100), 2);
         $vyrovn = (float)($inv['vyrovn'] ?? 0);
 
-        $par69 = (!empty($inv['par_69']) || !empty($inv['par69'])) ? true : false;
+        $par69 = (!empty($inv['par_69']) || (!empty($inv['par69']) && strtolower(trim($inv['par69'])) === 'a')) ? true : false;
         if ($par69) {
             $dph1 = 0;
             $dph = 0;
@@ -245,10 +263,10 @@ class BankStatementController extends ResourceController
         $uhrada = (float)($inv['uhrada'] ?? 0);
 
         $amount_to_pay = $zn - $uhrada;
-        if ($amount_to_pay <= 0.1) return redirect()->back()->with('error', 'Doklad je už uhradený.');
+        if (abs($amount_to_pay) < 1.0) return redirect()->back()->with('error', 'Doklad je už uhradený (rozdiel je menej ako 1 Euro).');
 
         // Update fakturu s uhradenou sumou
-        $db->table($table)->where('PK', $invoicePk)->update(['uhrada' => $zn]);
+        $db->table($table)->where('b', $invoicePk)->update(['uhrada' => $zn]);
 
         // Zaznam do Banky
         $ucet = [
