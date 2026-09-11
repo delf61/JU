@@ -446,6 +446,17 @@
                 });
         }
 
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('codesModal');
+                if (modal && modal.style.display !== 'none') {
+                    closeCodesModal();
+                }
+            }
+        });
+
         function closeCodesModal() {
             document.getElementById('codesModal').style.display = 'none';
         }

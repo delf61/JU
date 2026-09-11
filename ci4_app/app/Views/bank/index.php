@@ -330,6 +330,21 @@
     <script>
         let invTable = null;
 
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const invModal = document.getElementById('invoiceModal');
+                if (invModal && invModal.style.display !== 'none') {
+                    closeInvoiceModal();
+                }
+                const cashModal = document.getElementById('cashModal');
+                if (cashModal && cashModal.style.display !== 'none') {
+                    cashModal.style.display = 'none';
+                }
+            }
+        });
+
         function openCashTransferModal() {
             document.getElementById('cashModal').style.display = 'flex';
         }
