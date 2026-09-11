@@ -2,7 +2,7 @@
 <html lang="sk">
 <head>
     <meta charset="UTF-8">
-    <title>Bankové výpisy</title>
+    <title>Bankový účet</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
@@ -192,7 +192,7 @@
     </script>
 
     <div class="header">
-        <h1>Bankové výpisy</h1>
+        <h1>Bankový účet</h1>
 
     </div>
 

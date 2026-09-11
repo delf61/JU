@@ -311,7 +311,7 @@
         <a href="<?= site_url('cashbook') ?>?year=<?= esc($year) ?>&filter=bez_kodu" class="btn" style="background: <?= isset($_GET['filter']) && $_GET['filter'] === 'bez_kodu' ? '#dc3545' : '#17a2b8' ?>;" title="pVyd_Bez_Kod">Bez kódu</a>
         <a href="#" class="btn" style="background: #17a2b8;" onclick="window.print()">Tlač</a>
         <a href="#" class="btn" style="background: #17a2b8;" onclick="alert('Upratovanie je servisná FAND procedúra, v CI4 nie je nutná.')">Upratovanie</a>
-        <a href="<?= site_url('bank') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="Otvoriť bankové výpisy (Ucet)">Účet</a>
+        <a href="<?= site_url('bank') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="Otvoriť bankové výpisy (Ucet)">Bankový účet</a>
         <a href="<?= site_url('cashbook/statistics') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="pStatist">Štatistika</a>
         <a href="<?= site_url('cashbook/summary') ?>?year=<?= esc($year) ?>" class="btn" style="background: #17a2b8;" title="pPDsuma">Sumár po akt. pol.</a>
         <a href="<?= base_url() ?>" class="btn" style="background-color: #6c757d; margin-left: auto;">Späť na domovskú stránku</a>
