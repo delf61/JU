@@ -284,7 +284,6 @@
                         <tr>
                             <th>Dátum</th>
                             <th>Doklad</th>
-                            <!-- EXT_DOKLAD_HEADER_PLACEHOLDER -->
                             <th>Partner (od)</th>
                             <th class="text-right">Suma celkom</th>
                             <th class="text-right">Uhradené</th>
@@ -355,25 +354,32 @@
             document.getElementById('invoiceModal').style.display = 'flex';
 
 
-            const thead = document.querySelector('#invoiceSelectTable thead tr');
-            thead.innerHTML = `
-                <th>Dátum</th>
-                <th>Doklad</th>
-                ${type === 'kz' ? '<th>Ext. doklad</th>' : ''}
-                <th>Partner (od)</th>
-                <th class="text-right">Suma celkom</th>
-                <th class="text-right">Uhradené</th>
-                <th class="text-right">Na úhradu</th>
-                <th class="text-center">Akcia</th>
-            `;
-
-            const tbody = document.getElementById('invoiceTableBody');
-
-            tbody.innerHTML = `<tr><td colspan="${type === 'kz' ? 8 : 7}" class="text-center">Načítavam z databázy...</td></tr>`;
-
             if (invTable) {
                 invTable.destroy();
+                $('#invoiceSelectTable').empty(); // Clear everything (thead and tbody) internally
             }
+
+            // Re-build the structure for DataTables
+            const tableEl = document.getElementById('invoiceSelectTable');
+            tableEl.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Dátum</th>
+                        <th>Doklad</th>
+                        ${type === 'kz' ? '<th>Ext. doklad</th>' : ''}
+                        <th>Partner (od)</th>
+                        <th class="text-right">Suma celkom</th>
+                        <th class="text-right">Uhradené</th>
+                        <th class="text-right">Na úhradu</th>
+                        <th class="text-center">Akcia</th>
+                    </tr>
+                </thead>
+                <tbody id="invoiceTableBody">
+                    <tr><td colspan="${type === 'kz' ? 8 : 7}" class="text-center">Načítavam z databázy...</td></tr>
+                </tbody>
+            `;
+            const tbody = document.getElementById('invoiceTableBody');
+
 
             fetch(`<?= site_url('api/bank/unpaid') ?>?type=${type}`)
                 .then(res => res.json())
