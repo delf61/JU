@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body { padding-top: 60px; }
+        [data-bs-theme="light"] body { background-color: #f8f9fa !important; }
         .navbar-brand { font-weight: bold; }
         .card-icon { font-size: 2rem; color: #0d6efd; margin-bottom: 10px; }
         .dashboard-card { transition: transform 0.2s, box-shadow 0.2s; height: 100%; cursor: pointer;}
