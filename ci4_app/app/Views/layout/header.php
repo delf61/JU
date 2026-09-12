@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="sk" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +7,21 @@
     <!-- Bootstrap CSS for layout without heavy JS frameworks -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { padding-top: 60px; background-color: #f8f9fa; }
+        body { padding-top: 60px; }
         .navbar-brand { font-weight: bold; }
         .card-icon { font-size: 2rem; color: #0d6efd; margin-bottom: 10px; }
         .dashboard-card { transition: transform 0.2s, box-shadow 0.2s; height: 100%; cursor: pointer;}
         .dashboard-card:hover { transform: translateY(-5px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         a.card-link-wrapper { text-decoration: none; color: inherit; display: block; height: 100%;}
     </style>
+    <script>
+        // Init theme from localStorage or default to dark
+        (function() {
+            const storedTheme = localStorage.getItem('theme');
+            const theme = storedTheme ? storedTheme : 'dark';
+            document.documentElement.setAttribute('data-bs-theme', theme);
+        })();
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -28,9 +36,12 @@
                 <li class="nav-item"><a class="nav-link" href="<?= base_url('cashbook') ?>">Peňažný denník</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= base_url('invoices/receivables') ?>">Faktúry</a></li>
             </ul>
-            <span class="navbar-text">
+            <div class="navbar-text me-3">
                 Rok: <?= esc($current_year ?? date('Y')) ?>
-            </span>
+            </div>
+            <button class="btn btn-outline-light btn-sm" id="theme-toggle" type="button">
+                🌓 Téma
+            </button>
         </div>
     </div>
 </nav>
