@@ -21,6 +21,22 @@ class ReceivableController extends ResourceController
         return $this->respond($data);
     }
 
+    public function webIndex()
+    {
+        $year = $this->request->getGet('year');
+        if (!$year) {
+            $year = session()->get('accounting_year') ?? date('Y');
+        }
+
+        $data = [
+            'year' => $year,
+            'entries' => $this->receivableService->getAllReceivables() // Ideálne by malo byť filtrované na rok, to dorobíme ak treba
+        ];
+
+        return view('invoices/receivables', $data);
+    }
+
+
     public function show($a = null, $b = null)
     {
         if ($a === null || $b === null) {
