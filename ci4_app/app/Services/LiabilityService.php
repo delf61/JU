@@ -45,11 +45,27 @@ class LiabilityService
     }
 
     /**
-     * Fetch all liabilities
+     * Fetch all liabilities for a given year and append calculated totals
      */
-    public function getAllLiabilities()
+    public function getAllLiabilities($year = null)
     {
-        return $this->kzModel->findAll();
+        if ($year) {
+            $this->kzModel->where('YEAR(a)', $year);
+        }
+
+        $invoices = $this->kzModel->findAll();
+
+        foreach ($invoices as &$invoice) {
+            $invYear = $year ? $year : (int)date('Y', strtotime($invoice['a']));
+            $statusData = $this->calculateStatus($invoice, $invYear);
+
+            $invoice['zn'] = $statusData['zn'];
+            $invoice['dph_sk'] = $statusData['dph_sk'];
+            $invoice['uhrada'] = $statusData['uhrada'];
+            $invoice['uhr'] = $statusData['status'];
+        }
+
+        return $invoices;
     }
 
     /**

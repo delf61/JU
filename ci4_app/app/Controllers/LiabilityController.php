@@ -17,9 +17,20 @@ class LiabilityController extends ResourceController
 
     public function index()
     {
-        $data = $this->liabilityService->getAllLiabilities();
+        $year = $this->request->getGet('year') ?: (session()->get('accounting_year') ?? date('Y'));
+        $data = $this->liabilityService->getAllLiabilities($year);
         return $this->respond($data);
     }
+
+    public function webIndex()
+    {
+        $year = $this->request->getGet('year') ?: (session()->get('accounting_year') ?? date('Y'));
+        $data = [
+            'year' => $year
+        ];
+        return view('invoices/liabilities', $data);
+    }
+
 
     public function show($a = null, $b = null)
     {

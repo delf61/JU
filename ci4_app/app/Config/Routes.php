@@ -60,7 +60,8 @@ $routes->group('invoices', function($routes) {
     $routes->get('receivables/(:segment)/(:segment)/status', 'ReceivableController::calculateStatus/$1/$2');
 
     // Liabilities (kz/kzpol)
-    $routes->get('liabilities', 'LiabilityController::index');
+    $routes->get('liabilities', 'LiabilityController::webIndex');
+    $routes->get('api/liabilities', 'LiabilityController::index');
     $routes->post('liabilities', 'LiabilityController::create');
     $routes->get('liabilities/(:segment)/(:segment)', 'LiabilityController::show/$1/$2');
     $routes->put('liabilities/(:segment)/(:segment)', 'LiabilityController::update/$1/$2');
