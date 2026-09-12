@@ -171,8 +171,31 @@
             border-top: 2px solid var(--border-color) !important;
         }
     </style>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = now.getFullYear();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+
+        const clockEl = document.getElementById('navbar-clock');
+        if (clockEl) {
+            clockEl.textContent = `${day}.${month}.${year} ${hours}:${minutes}`;
+        }
+    }
+    setInterval(updateClock, 1000);
+</script>
+
 </head>
-<body>
+<body onload="updateClock()">
+
+<div style="text-align: center; font-weight: bold; font-size: 1.2em; margin-bottom: 15px;" id="navbar-clock">
+    <?= date('d.m.Y H:i') ?>
+</div>
+
     <!-- Theme Switcher JS -->
     <div class="theme-switch-wrapper">
         <span class="theme-label">Téma</span>
