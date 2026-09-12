@@ -118,3 +118,6 @@ $routes->group('vat', function($routes) {
     $routes->get('api/rates', 'VatController::rates');
     $routes->get('api/history', 'VatController::history');
 });
+
+// Global Year context endpoint
+$routes->post('api/settings/set-year', 'Home::setYear');
