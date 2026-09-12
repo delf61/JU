@@ -55,6 +55,17 @@ class LiabilityService
 
         $invoices = $this->kzModel->findAll();
 
+        $attachmentModel = new \App\Models\KzAttachmentModel();
+        // Načítajme si zoznam dokladov, ktoré majú aspoň 1 prílohu na minimalizáciu DB queries
+        $dokladySPrilohou = [];
+        if (!empty($invoices)) {
+            $doklady = array_column($invoices, 'b');
+            if (!empty($doklady)) {
+                $prilohy = $attachmentModel->select('kz_b')->whereIn('kz_b', $doklady)->groupBy('kz_b')->findAll();
+                $dokladySPrilohou = array_column($prilohy, 'kz_b');
+            }
+        }
+
         foreach ($invoices as &$invoice) {
             $invYear = $year ? $year : (int)date('Y', strtotime($invoice['a']));
             $statusData = $this->calculateStatus($invoice, $invYear);
@@ -63,6 +74,7 @@ class LiabilityService
             $invoice['dph_sk'] = $statusData['dph_sk'];
             $invoice['uhrada'] = $statusData['uhrada'];
             $invoice['uhr'] = $statusData['status'];
+            $invoice['has_attachment'] = in_array($invoice['b'], $dokladySPrilohou);
         }
 
         return $invoices;

@@ -21,8 +21,43 @@
         .btn-edit { background: #ffc107; color: black; }
         .btn-edit:hover { background: #e0a800; }
 
-    .btn-attachment { background: #17a2b8; color: white; border: 1px solid #117a8b; }
-    .btn-attachment:hover { background: #138496; }
+
+    .btn-attachment-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-attachment-has {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #343a40; /* tmavy stvorec */
+        color: white; /* biela sponka */
+        border: 1px solid #23272b;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-has:hover { background-color: #23272b; }
+
+    .btn-attachment-empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #e9ecef; /* sedy stvorec */
+        color: transparent; /* bez sponky - text je transparentny alebo ziadny */
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-empty:hover { background-color: #dde0e3; }
+
 
     /* Modal styles mimicking DOS UI overlay */
     .dos-modal {
@@ -221,8 +256,43 @@
             border-top: 2px solid var(--border-color) !important;
         }
 
-    .btn-attachment { background: #17a2b8; color: white; border: 1px solid #117a8b; }
-    .btn-attachment:hover { background: #138496; }
+
+    .btn-attachment-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-attachment-has {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #343a40; /* tmavy stvorec */
+        color: white; /* biela sponka */
+        border: 1px solid #23272b;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-has:hover { background-color: #23272b; }
+
+    .btn-attachment-empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #e9ecef; /* sedy stvorec */
+        color: transparent; /* bez sponky - text je transparentny alebo ziadny */
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-empty:hover { background-color: #dde0e3; }
+
 
     /* Modal styles mimicking DOS UI overlay */
     .dos-modal {
@@ -367,8 +437,43 @@
         font-family: monospace;
     }
 
-    .btn-attachment { background: #17a2b8; color: white; border: 1px solid #117a8b; }
-    .btn-attachment:hover { background: #138496; }
+
+    .btn-attachment-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-attachment-has {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #343a40; /* tmavy stvorec */
+        color: white; /* biela sponka */
+        border: 1px solid #23272b;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-has:hover { background-color: #23272b; }
+
+    .btn-attachment-empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #e9ecef; /* sedy stvorec */
+        color: transparent; /* bez sponky - text je transparentny alebo ziadny */
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-empty:hover { background-color: #dde0e3; }
+
 
     /* Modal styles mimicking DOS UI overlay */
     .dos-modal {
@@ -468,10 +573,14 @@ $(document).ready(function() {
             { "data": "var_sym" },
             {
                 "data": null,
-                "className": "text-center",
+                "className": "text-center align-middle",
                 "orderable": false,
                 "render": function(data, type, row) {
-                    return `<button class="btn btn-action btn-attachment" onclick="openAttachments('${row.b}')">📎</button>`;
+                    if (row.has_attachment) {
+                        return `<div class="btn-attachment-container"><button class="btn-attachment-has" onclick="openAttachments('${row.b}')" title="Zobraziť prílohy">📎</button></div>`;
+                    } else {
+                        return `<div class="btn-attachment-container"><button class="btn-attachment-empty" onclick="openAttachments('${row.b}')" title="Pridať prílohu">&nbsp;</button></div>`;
+                    }
                 }
             },
 
