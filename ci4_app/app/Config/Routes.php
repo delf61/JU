@@ -62,6 +62,12 @@ $routes->group('invoices', function($routes) {
     // Liabilities (kz/kzpol)
     $routes->get('liabilities', 'LiabilityController::webIndex');
     $routes->get('api/liabilities', 'LiabilityController::index');
+
+    // Liabilities Attachments
+    $routes->get('api/liabilities/attachments', 'LiabilityController::getAttachments');
+    $routes->post('api/liabilities/attachments/upload', 'LiabilityController::uploadAttachment');
+    $routes->get('api/liabilities/attachments/download/(:num)', 'LiabilityController::downloadAttachment/$1');
+
     $routes->post('liabilities', 'LiabilityController::create');
     $routes->get('liabilities/(:segment)/(:segment)', 'LiabilityController::show/$1/$2');
     $routes->put('liabilities/(:segment)/(:segment)', 'LiabilityController::update/$1/$2');

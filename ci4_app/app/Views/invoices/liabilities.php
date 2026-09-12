@@ -20,7 +20,57 @@
         .btn:hover { background: #0056b3; }
         .btn-edit { background: #ffc107; color: black; }
         .btn-edit:hover { background: #e0a800; }
-    </style>
+
+    .btn-attachment { background: #17a2b8; color: white; border: 1px solid #117a8b; }
+    .btn-attachment:hover { background: #138496; }
+
+    /* Modal styles mimicking DOS UI overlay */
+    .dos-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+    }
+    .dos-modal-content {
+        background-color: var(--card-bg);
+        margin: 5% auto;
+        padding: 20px;
+        border: 2px solid var(--border-color);
+        width: 50%;
+        color: var(--text-color);
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .dos-modal-header {
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+    }
+    .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close-modal:hover,
+    .close-modal:focus {
+        color: #fff;
+        text-decoration: none;
+    }
+    .attachment-list {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 15px;
+    }
+    .attachment-list li {
+        padding: 5px;
+        border-bottom: 1px dashed var(--border-color);
+    }
+</style>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- DataTables CSS & JS -->
@@ -170,7 +220,57 @@
         .summary-list li.total {
             border-top: 2px solid var(--border-color) !important;
         }
-    </style>
+
+    .btn-attachment { background: #17a2b8; color: white; border: 1px solid #117a8b; }
+    .btn-attachment:hover { background: #138496; }
+
+    /* Modal styles mimicking DOS UI overlay */
+    .dos-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+    }
+    .dos-modal-content {
+        background-color: var(--card-bg);
+        margin: 5% auto;
+        padding: 20px;
+        border: 2px solid var(--border-color);
+        width: 50%;
+        color: var(--text-color);
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .dos-modal-header {
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+    }
+    .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close-modal:hover,
+    .close-modal:focus {
+        color: #fff;
+        text-decoration: none;
+    }
+    .attachment-list {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 15px;
+    }
+    .attachment-list li {
+        padding: 5px;
+        border-bottom: 1px dashed var(--border-color);
+    }
+</style>
 </head>
 <body>
     <!-- Theme Switcher JS -->
@@ -243,6 +343,56 @@
         border-radius: 4px;
         font-family: monospace;
     }
+
+    .btn-attachment { background: #17a2b8; color: white; border: 1px solid #117a8b; }
+    .btn-attachment:hover { background: #138496; }
+
+    /* Modal styles mimicking DOS UI overlay */
+    .dos-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+    }
+    .dos-modal-content {
+        background-color: var(--card-bg);
+        margin: 5% auto;
+        padding: 20px;
+        border: 2px solid var(--border-color);
+        width: 50%;
+        color: var(--text-color);
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .dos-modal-header {
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+    }
+    .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close-modal:hover,
+    .close-modal:focus {
+        color: #fff;
+        text-decoration: none;
+    }
+    .attachment-list {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 15px;
+    }
+    .attachment-list li {
+        padding: 5px;
+        border-bottom: 1px dashed var(--border-color);
+    }
 </style>
 
 <div style="margin-bottom: 20px;">
@@ -262,6 +412,7 @@
             <th>Dátum</th>
             <th>Doklad</th>
             <th>Ext. doklad</th>
+            <th class="text-center">📎</th>
             <th>Dodávateľ</th>
             <th class="text-right">Suma (zn)</th>
             <th class="text-right">Uhradené (pc)</th>
@@ -289,8 +440,18 @@ $(document).ready(function() {
                 let d = new Date(data);
                 return d.toLocaleDateString('sk-SK');
             }},
+
             { "data": "b" },
             { "data": "var_sym" },
+            {
+                "data": null,
+                "className": "text-center",
+                "orderable": false,
+                "render": function(data, type, row) {
+                    return `<button class="btn btn-action btn-attachment" onclick="openAttachments('${row.b}')">📎</button>`;
+                }
+            },
+
             { "data": "od" },
             { "data": "zn", className: "text-right", render: $.fn.dataTable.render.number(' ', ',', 2, '', ' €') },
             { "data": "uhrada", className: "text-right", render: $.fn.dataTable.render.number(' ', ',', 2, '', ' €') },
@@ -327,7 +488,110 @@ $(document).ready(function() {
         }
     });
 });
+
+// Attachment logic
+var currentDoklad = '';
+
+function openAttachments(doklad) {
+    currentDoklad = doklad;
+    $('#modalDoklad').text(doklad);
+    $('#uploadDoklad').val(doklad);
+    $('#uploadStatus').text('');
+    $('#fileInput').val('');
+
+    loadAttachments();
+
+    $('#attachmentsModal').show();
+}
+
+function loadAttachments() {
+    $('#attachmentList').html('<li>Načítavam...</li>');
+    $.ajax({
+        url: '<?= base_url('invoices/api/liabilities/attachments') ?>',
+        type: 'GET',
+        data: { b: currentDoklad },
+        success: function(data) {
+            $('#attachmentList').empty();
+            if (data.length === 0) {
+                $('#attachmentList').html('<li>Zatiaľ neboli nahraté žiadne prílohy.</li>');
+            } else {
+                data.forEach(function(att) {
+                    let dlUrl = '<?= base_url('invoices/api/liabilities/attachments/download/') ?>' + att.id;
+                    let li = `<li>
+                        <a href="${dlUrl}" target="_blank">📄 ${att.original_name}</a>
+                        <span style="float:right; font-size: 0.8em; color: #888;">${att.created_at}</span>
+                    </li>`;
+                    $('#attachmentList').append(li);
+                });
+            }
+        },
+        error: function(err) {
+            $('#attachmentList').html('<li style="color:red;">Chyba pri načítaní príloh.</li>');
+        }
+    });
+}
+
+$('.close-modal').click(function() {
+    $('#attachmentsModal').hide();
+});
+
+$(window).click(function(event) {
+    if ($(event.target).is('#attachmentsModal')) {
+        $('#attachmentsModal').hide();
+    }
+});
+
+$('#uploadForm').submit(function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+
+    $('#uploadStatus').text('Nahrávam...').css('color', 'orange');
+
+    $.ajax({
+        url: '<?= base_url('invoices/api/liabilities/attachments/upload') ?>',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            $('#uploadStatus').text(response.message).css('color', 'green');
+            $('#fileInput').val(''); // clear input
+            loadAttachments(); // reload list
+        },
+        error: function(xhr) {
+            let msg = 'Chyba pri nahrávaní.';
+            if (xhr.responseJSON && xhr.responseJSON.error) {
+                msg = xhr.responseJSON.error;
+            }
+            $('#uploadStatus').text(msg).css('color', 'red');
+        }
+    });
+});
 </script>
+
+
+<!-- Attachments Modal -->
+<div id="attachmentsModal" class="dos-modal">
+    <div class="dos-modal-content">
+        <div class="dos-modal-header">
+            <span class="close-modal">&times;</span>
+            <h3 style="margin:0;">Prílohy k dokladu: <span id="modalDoklad"></span></h3>
+        </div>
+        <div id="modalBody">
+            <ul id="attachmentList" class="attachment-list">
+                <!-- Attachments will be loaded here -->
+            </ul>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input type="hidden" id="uploadDoklad" name="b">
+                <div style="margin-bottom: 10px;">
+                    <input type="file" id="fileInput" name="attachment" accept=".pdf, .jpg, .jpeg, .png" required style="width: 100%; padding: 5px;">
+                </div>
+                <button type="submit" class="btn btn-action btn-attachment" style="padding: 8px 15px;">Nahrať súbor</button>
+                <span id="uploadStatus" style="margin-left: 10px; font-weight: bold;"></span>
+            </form>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
