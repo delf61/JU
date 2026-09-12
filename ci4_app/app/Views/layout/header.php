@@ -43,23 +43,17 @@
 <body class="d-flex flex-column min-vh-100" onload="updateClock()">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="<?= base_url('/') ?>">JU Systém</a>
+        <a class="navbar-brand" href="<?= base_url('/') ?>">delf JU</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link" href="<?= base_url('/') ?>">Domov</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?= base_url('cashbook') ?>">Peňažný denník</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?= base_url('invoices/receivables') ?>">Faktúry</a></li>
-            </ul>
-            <div class="navbar-text me-3">
-                Rok: <?= esc($current_year ?? date('Y')) ?>
+            <div class="ms-auto">
+                <button class="btn btn-outline-light btn-sm" id="theme-toggle" type="button">
+                    🌓 Téma
+                </button>
             </div>
-            <button class="btn btn-outline-light btn-sm" id="theme-toggle" type="button">
-                🌓 Téma
-            </button>
         </div>
     </div>
 
@@ -68,4 +62,11 @@
         <?= date('d.m.Y H:i') ?>
     </div>
 </nav>
-<div class="container mt-4">
+
+<div class="container mt-4 flex-grow-1 d-flex flex-column">
+    <!-- Year selector -->
+    <div class="d-flex justify-content-center align-items-center mb-4">
+        <button class="btn btn-outline-secondary fs-4 px-3 me-4 fw-bold">-</button>
+        <span class="display-5 fw-bold"><?= esc($current_year ?? date('Y')) ?></span>
+        <button class="btn btn-outline-secondary fs-4 px-3 ms-4 fw-bold">+</button>
+    </div>
