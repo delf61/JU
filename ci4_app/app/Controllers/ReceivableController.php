@@ -31,7 +31,7 @@ class ReceivableController extends ResourceController
 
         $data = [
             'year' => $year,
-            'entries' => $this->receivableService->getAllReceivables() // Ideálne by malo byť filtrované na rok, to dorobíme ak treba
+            // 'entries' fetched via API call by DataTables
         ];
 
         return view('invoices/receivables', $data);
