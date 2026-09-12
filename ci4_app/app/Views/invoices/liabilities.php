@@ -695,16 +695,24 @@ $('#uploadForm').submit(function(e) {
 
     $('#uploadStatus').text('Nahrávam...').css('color', 'orange');
 
+    // Dynamicky pridame najnovsi CSRF token z globalnej premennej alebo formulara
+    formData.append('<?= csrf_token() ?>', window.csrfHash || '<?= csrf_hash() ?>');
+
     $.ajax({
         url: '<?= base_url('invoices/api/liabilities/attachments/upload') ?>',
         type: 'POST',
-        headers: {'X-CSRF-TOKEN': '<?= csrf_hash() ?>'},
         data: formData,
         contentType: false,
         processData: false,
         success: function(response) {
             $('#uploadStatus').text(response.message).css('color', 'green');
             $('#fileInput').val(''); // clear input
+
+            // Aktualizujeme CSRF hash pre dalsie volania (zabezpecenie CI4 regenerate)
+            if(response.csrf_token) {
+                window.csrfHash = response.csrf_token;
+            }
+
             loadAttachments(); // reload list
         },
         error: function(xhr) {
