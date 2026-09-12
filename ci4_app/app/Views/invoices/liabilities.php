@@ -698,6 +698,7 @@ $('#uploadForm').submit(function(e) {
     $.ajax({
         url: '<?= base_url('invoices/api/liabilities/attachments/upload') ?>',
         type: 'POST',
+        headers: {'X-CSRF-TOKEN': '<?= csrf_hash() ?>'},
         data: formData,
         contentType: false,
         processData: false,
