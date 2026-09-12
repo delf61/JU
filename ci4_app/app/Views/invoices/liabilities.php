@@ -582,9 +582,9 @@ $(document).ready(function() {
                 "orderable": false,
                 "render": function(data, type, row) {
                     if (row.has_attachment) {
-                        return `<div class="btn-attachment-container"><button class="btn-attachment-has" onclick="openAttachments('${row.b}')" title="Zobraziť prílohy">📎</button></div>`;
+                        return `<div class="btn-attachment-container"><button class="btn-attachment-has attachment-trigger" title="Zobraziť prílohy">📎</button></div>`;
                     } else {
-                        return `<div class="btn-attachment-container"><button class="btn-attachment-empty" onclick="openAttachments('${row.b}')" title="Pridať prílohu">&nbsp;</button></div>`;
+                        return `<div class="btn-attachment-container"><button class="btn-attachment-empty attachment-trigger" title="Pridať prílohu">&nbsp;</button></div>`;
                     }
                 }
             },
@@ -629,17 +629,28 @@ $(document).ready(function() {
 // Attachment logic
 var currentDoklad = '';
 
-function openAttachments(doklad) {
-    currentDoklad = doklad;
-    $('#modalDoklad').text(doklad);
-    $('#uploadDoklad').val(doklad);
-    $('#uploadStatus').text('');
-    $('#fileInput').val('');
+$('#liabilitiesTable tbody').on('click', '.attachment-trigger', function () {
+    var tr = $(this).closest('tr');
+    var row = $('#liabilitiesTable').DataTable().row(tr).data();
 
-    loadAttachments();
+    if (row) {
+        currentDoklad = row.b;
 
-    $('#attachmentsModal').show();
-}
+        let d = new Date(row.a);
+        let datumStr = d.toLocaleDateString('sk-SK');
+
+        let displayStr = `${datumStr} | ${row.var_sym || ''} | ${row.od || ''}`;
+
+        $('#modalDoklad').text(displayStr);
+        $('#uploadDoklad').val(row.b);
+        $('#uploadStatus').text('');
+        $('#fileInput').val('');
+
+        loadAttachments();
+
+        $('#attachmentsModal').show();
+    }
+});
 
 function loadAttachments() {
     $('#attachmentList').html('<li>Načítavam...</li>');
@@ -712,7 +723,7 @@ $('#uploadForm').submit(function(e) {
     <div class="dos-modal-content">
         <div class="dos-modal-header">
             <span class="close-modal">&times;</span>
-            <h3 style="margin:0;">Prílohy k dokladu: <span id="modalDoklad"></span></h3>
+            <h3 style="margin:0; font-size: 1.2rem;">Prílohy: <span id="modalDoklad"></span></h3>
         </div>
         <div id="modalBody">
             <ul id="attachmentList" class="attachment-list">
