@@ -213,12 +213,10 @@
         <div class="error-msg"><?= esc(session()->getFlashdata('error')) ?></div>
     <?php endif; ?>
 
-<div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-        <h1 style="margin: 0;">Peňažný denník</h1>
-        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year - 1) ?><?= isset($_GET['filter']) ? '&filter='.esc($_GET['filter']) : '' ?>" style="text-decoration: none; padding: 0 10px; font-size: 1.5em; background: #333; color: #fff; border-radius: 4px;">-</a>
-        <h1 style="margin: 0;"><?= esc($year) ?></h1>
-        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year + 1) ?><?= isset($_GET['filter']) ? '&filter='.esc($_GET['filter']) : '' ?>" style="text-decoration: none; padding: 0 10px; font-size: 1.5em; background: #333; color: #fff; border-radius: 4px;">+</a>
-    </div>
+<div style="margin-bottom: 20px;">
+    <h1 style="margin: 0; padding-bottom: 10px;">Peňažný denník</h1>
+    <h2 style="margin: 0; border-top: 2px solid #ccc; padding-top: 10px;"><?= esc($year) ?></h2>
+</div>
 
 
 
