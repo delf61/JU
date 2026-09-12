@@ -17,7 +17,8 @@ class ReceivableController extends ResourceController
 
     public function index()
     {
-        $data = $this->receivableService->getAllReceivables();
+        $year = $this->request->getGet('year') ?: (session()->get('accounting_year') ?? date('Y'));
+        $data = $this->receivableService->getAllReceivables($year);
         return $this->respond($data);
     }
 
