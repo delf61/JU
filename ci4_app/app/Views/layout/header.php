@@ -39,34 +39,6 @@
         }
         setInterval(updateClock, 1000); // Update every second
 
-        // Year context updater
-        function changeYear(delta) {
-            const yearSpan = document.getElementById('current-year-display');
-            if (!yearSpan) return;
-
-            let currentYear = parseInt(yearSpan.innerText, 10);
-            if (isNaN(currentYear)) return;
-
-            let newYear = currentYear + delta;
-
-            fetch("<?= base_url('api/settings/set-year') ?>", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ year: newYear })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    // Update globally, refresh page to reload data with new year context
-                    location.reload();
-                } else {
-                    alert('Chyba pri zmene roka');
-                }
-            })
-            .catch(err => console.error(err));
-        }
     </script>
 </head>
 <body class="d-flex flex-column min-vh-100" onload="updateClock()">
@@ -93,9 +65,3 @@
 </nav>
 
 <div class="container mt-4 flex-grow-1 d-flex flex-column">
-    <!-- Year selector -->
-    <div class="d-flex justify-content-center align-items-center mb-4">
-        <button class="btn btn-outline-secondary fs-4 px-3 me-4 fw-bold" onclick="changeYear(-1)">-</button>
-        <span class="display-5 fw-bold" id="current-year-display"><?= esc($current_year ?? date('Y')) ?></span>
-        <button class="btn btn-outline-secondary fs-4 px-3 ms-4 fw-bold" onclick="changeYear(1)">+</button>
-    </div>

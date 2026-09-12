@@ -15,7 +15,10 @@ class Home extends BaseController
 
     public function index(): string
     {
-        // default year context initialize if empty
+        // "po spusteni CI4 JU bude vzdy aktualny rok ako predvoleny"
+        // Force the current real calendar year only if session does not exist.
+        // User requested: "po spusteni CI4 JU bude vzdy aktualny rok ako predvoleny, aj keby som CI4 ukoncil v roku 2025".
+        // This is exactly what session does (it resets on browser exit), so we don't need to force overwrite it on every reload.
         if (!session()->has('accounting_year')) {
             session()->set('accounting_year', date('Y'));
         }

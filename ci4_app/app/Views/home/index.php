@@ -1,6 +1,44 @@
 <?= $this->include('layout/header') ?>
 
+
+<script>
+    // Year context updater for Dashboard
+    function changeYear(delta) {
+        const yearSpan = document.getElementById('current-year-display');
+        if (!yearSpan) return;
+
+        let currentYear = parseInt(yearSpan.innerText, 10);
+        if (isNaN(currentYear)) return;
+
+        let newYear = currentYear + delta;
+
+        fetch("<?= base_url('api/settings/set-year') ?>", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ year: newYear })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'success') {
+                location.reload();
+            } else {
+                alert('Chyba pri zmene roka');
+            }
+        })
+        .catch(err => console.error(err));
+    }
+</script>
+
+<div class="d-flex justify-content-center align-items-center mb-4">
+    <button class="btn btn-outline-secondary fs-4 px-3 me-4 fw-bold" onclick="changeYear(-1)">-</button>
+    <span class="display-5 fw-bold" id="current-year-display"><?= esc($current_year ?? date('Y')) ?></span>
+    <button class="btn btn-outline-secondary fs-4 px-3 ms-4 fw-bold" onclick="changeYear(1)">+</button>
+</div>
+
 <div class="d-flex flex-column justify-content-evenly flex-grow-1">
+
     <!-- Účtovníctvo a financie -->
     <div>
         <h4 class="mb-3 border-bottom border-secondary pb-2">Účtovníctvo a financie</h4>

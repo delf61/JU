@@ -1,5 +1,25 @@
 <?= $this->include('layout/header') ?>
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- DataTables CSS & JS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+
+<style>
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_processing,
+    .dataTables_wrapper .dataTables_paginate {
+        color: inherit !important;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        color: inherit !important;
+    }
+</style>
+
+
 
     <h1 class="mb-4">Peňažný denník - <?= esc($year) ?></h1>
     <?php if (session()->getFlashdata('success')): ?>
