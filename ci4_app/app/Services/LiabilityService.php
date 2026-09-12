@@ -62,10 +62,10 @@ class LiabilityService
             $doklady = array_column($invoices, 'b');
             if (!empty($doklady)) {
                 try {
-                    $prilohy = $attachmentModel->select('kz_b')->whereIn('kz_b', $doklady)->groupBy('kz_b')->findAll();
+                    $prilohy = $attachmentModel->select('kz_b')->distinct()->whereIn('kz_b', $doklady)->findAll();
                     $dokladySPrilohou = array_column($prilohy, 'kz_b');
-                } catch (\Exception $e) {
-                    // Ignorujeme chybu, ak tabuľka kz_prilohy neexistuje kvôli nespustenej migrácii
+                } catch (\Throwable $e) {
+                    log_message('error', 'Chyba pri nacitani priloh: ' . $e->getMessage());
                     $dokladySPrilohou = [];
                 }
             }

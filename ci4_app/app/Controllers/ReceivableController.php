@@ -17,9 +17,14 @@ class ReceivableController extends ResourceController
 
     public function index()
     {
-        $year = $this->request->getGet('year') ?: (session()->get('accounting_year') ?? date('Y'));
-        $data = $this->receivableService->getAllReceivables($year);
-        return $this->respond($data);
+        try {
+            $year = $this->request->getGet('year') ?: (session()->get('accounting_year') ?? date('Y'));
+            $data = $this->receivableService->getAllReceivables($year);
+            return $this->respond($data);
+        } catch (\Throwable $e) {
+            log_message('error', $e->getMessage());
+            return $this->respond(['error' => 'Chyba databázy: ' . $e->getMessage()], 500);
+        }
     }
 
     public function webIndex()

@@ -266,6 +266,11 @@
 
 <script>
 $(document).ready(function() {
+    $.fn.dataTable.ext.errMode = 'none';
+    $('#receivablesTable').on('error.dt', function(e, settings, techNote, message) {
+        console.error('DataTables Error:', message);
+        alert('Nepodarilo sa načítať dáta (možno chýbajúca tabuľka v DB alebo spojenie). Skontrolujte konzolu.');
+    });
     var table = $('#receivablesTable').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/sk.json"
