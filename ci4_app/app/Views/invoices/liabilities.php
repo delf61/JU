@@ -559,7 +559,7 @@ $(document).ready(function() {
             "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/sk.json"
         },
         "ajax": {
-            "url": "<?= base_url('invoices/api/liabilities') ?>?year=<?= esc($year) ?>",
+            "url": "<?= base_url('api/liabilities') ?>?year=<?= esc($year) ?>",
             "dataSrc": ""
         },
         "columns": [
@@ -639,7 +639,7 @@ function openAttachments(doklad) {
 function loadAttachments() {
     $('#attachmentList').html('<li>Načítavam...</li>');
     $.ajax({
-        url: '<?= base_url('invoices/api/liabilities/attachments') ?>',
+        url: '<?= base_url('api/liabilities/attachments') ?>',
         type: 'GET',
         data: { b: currentDoklad },
         success: function(data) {
@@ -648,7 +648,7 @@ function loadAttachments() {
                 $('#attachmentList').html('<li>Zatiaľ neboli nahraté žiadne prílohy.</li>');
             } else {
                 data.forEach(function(att) {
-                    let dlUrl = '<?= base_url('invoices/api/liabilities/attachments/download/') ?>' + att.id;
+                    let dlUrl = '<?= base_url('api/liabilities/attachments/download/') ?>' + att.id;
                     let li = `<li>
                         <a href="${dlUrl}" target="_blank">📄 ${att.original_name}</a>
                         <span style="float:right; font-size: 0.8em; color: #888;">${att.created_at}</span>
@@ -680,7 +680,7 @@ $('#uploadForm').submit(function(e) {
     $('#uploadStatus').text('Nahrávam...').css('color', 'orange');
 
     $.ajax({
-        url: '<?= base_url('invoices/api/liabilities/attachments/upload') ?>',
+        url: '<?= base_url('api/liabilities/attachments/upload') ?>',
         type: 'POST',
         data: formData,
         contentType: false,
