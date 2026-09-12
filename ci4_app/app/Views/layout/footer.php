@@ -1,5 +1,5 @@
 </div> <!-- End Container -->
-<footer class="bg-body-tertiary text-center text-muted py-3 mt-5 border-top border-secondary">
+<footer class="bg-body-tertiary text-center text-muted py-3 mt-auto border-top border-secondary">
     <div class="container">
         <small>&copy; <?= date('Y') ?> Migrácia FAND DOS JU do CodeIgniter 4</small>
     </div>

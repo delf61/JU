@@ -40,7 +40,7 @@
         setInterval(updateClock, 1000); // Update every second
     </script>
 </head>
-<body onload="updateClock()">
+<body class="d-flex flex-column min-vh-100" onload="updateClock()">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="<?= base_url('/') ?>">JU Systém</a>
