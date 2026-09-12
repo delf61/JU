@@ -1,7 +1,7 @@
 <?= $this->include('layout/header') ?>
 
 
-    <h1 class="mb-4">Peňažný denník</h1>
+    <h1 class="mb-4">Peňažný denník - <?= esc($year) ?></h1>
     <?php if (session()->getFlashdata('success')): ?>
         <div class="success-msg"><?= esc(session()->getFlashdata('success')) ?></div>
     <?php endif; ?>
