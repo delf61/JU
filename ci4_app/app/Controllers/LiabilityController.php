@@ -215,4 +215,111 @@ class LiabilityController extends ResourceController
             ->setHeader('Content-Disposition', 'inline; filename="' . $attachment['original_name'] . '"');
     }
 
+    public function decodeBysquare()
+    {
+        $payload = $this->request->getJSON(true);
+        if (empty($payload['qr_string'])) {
+            return $this->response->setJSON(['error' => 'Chýba QR reťazec'])->setStatusCode(400);
+        }
+
+        $string = $payload['qr_string'];
+
+        // Kontrola bysquare hlavicky (0000, 0001, 2003...)
+        if (strlen($string) < 10) {
+            return $this->response->setJSON(['error' => 'Neplatný QR kód'])->setStatusCode(400);
+        }
+
+        $body = substr($string, 4);
+        $body .= str_repeat('=', (8 - strlen($body) % 8) % 8);
+
+        $dictionary = '0123456789ABCDEFGHIJKLMNOPQRSTUV';
+        $standard = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+
+        $body = strtr($body, $dictionary, $standard);
+
+        // Base32 manual decode
+        $binary = '';
+        foreach(str_split($body) as $c) {
+            $pos = strpos($standard, $c);
+            if ($pos !== false) {
+                $binary .= str_pad(base_convert($pos, 10, 2), 5, '0', STR_PAD_LEFT);
+            }
+        }
+
+        $r = '';
+        foreach(str_split($binary, 8) as $c) {
+            if (strlen($c) == 8) {
+                $r .= chr(base_convert($c, 2, 10));
+            }
+        }
+
+        // Dlzka 2 bajty pre LZMA uncompressed
+        $binaryBody = substr($r, 2);
+
+        // Dekompresia cez XZ
+        $xzProcess = proc_open("'xz' '--format=raw' '--lzma1=lc=3,lp=0,pb=2,dict=128KiB' '-c' '-d' '-'", [
+            0 => ['pipe', 'r'],
+            1 => ['pipe', 'w'],
+            2 => ['pipe', 'w']
+        ], $pipes);
+
+        if (!is_resource($xzProcess)) {
+            return $this->response->setJSON(['error' => 'Chýba podpora XZ dekompresie na serveri'])->setStatusCode(500);
+        }
+
+        fwrite($pipes[0], $binaryBody);
+        fclose($pipes[0]);
+
+        $uncompressed = stream_get_contents($pipes[1]);
+        $error = stream_get_contents($pipes[2]);
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+        proc_close($xzProcess);
+
+        if (empty($uncompressed)) {
+            return $this->response->setJSON(['error' => 'Chyba dekompresie QR kódu'])->setStatusCode(400);
+        }
+
+        $parts = explode("	", $uncompressed);
+
+        // Parse the TSV according to Pay/Invoice by square format
+        // The format varies slightly depending on if it's INVOICE (2003) or PAY (0000)
+        $isInvoice = substr($string, 0, 4) === '2003';
+
+        $parsed = [];
+        if ($isInvoice) {
+            $parsed['ext_doklad'] = $parts[0] ? substr($parts[0], 3) : ''; // first bytes contain some prefix usually
+            // Clean non-alphanumeric chars at start
+            $parsed['ext_doklad'] = preg_replace('/^[^A-Za-z0-9]+/', '', $parsed['ext_doklad']);
+            $parsed['splatnost'] = $parts[1] ?? ''; // YYYYMMDD
+            $parsed['dodanie'] = $parts[2] ?? ''; // YYYYMMDD
+            $parsed['cislo_fa'] = $parts[3] ?? '';
+            $parsed['mena'] = $parts[5] ?? 'EUR';
+            $parsed['dodavatel'] = $parts[9] ?? '';
+            $parsed['dodavatel_dic'] = $parts[10] ?? '';
+            $parsed['dodavatel_ico'] = $parts[12] ?? '';
+            $parsed['odberatel'] = $parts[22] ?? '';
+            $parsed['odberatel_ico'] = $parts[25] ?? '';
+            $parsed['iban'] = $parts[26] ?? '';
+            $parsed['zaklad_dane'] = $parts[43] ?? 0;
+            $parsed['dph'] = $parts[44] ?? 0;
+            $parsed['suma'] = $parts[47] ?? 0;
+        } else {
+            // Standard PayBySquare
+            $parsed['iban'] = $parts[6] ?? ''; // roughly
+            $parsed['suma'] = $parts[7] ?? 0;
+            $parsed['mena'] = $parts[8] ?? 'EUR';
+            $parsed['ext_doklad'] = $parts[10] ?? ''; // VS
+            $parsed['ks'] = $parts[11] ?? '';
+            $parsed['ss'] = $parts[12] ?? '';
+            $parsed['pozn'] = $parts[13] ?? '';
+        }
+
+        return $this->response->setJSON([
+            'success' => true,
+            'raw' => $parts,
+            'parsed' => $parsed
+        ]);
+    }
+
 }

@@ -427,6 +427,8 @@
     setInterval(updateClock, 1000);
 </script>
 
+    <!-- HTML5 QR Code Scanner -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 </head>
 <body onload="updateClock()">
 
@@ -630,11 +632,12 @@
     <h2 style="margin: 0; border-top: 2px solid #ccc; padding-top: 10px;"><?= esc($year) ?></h2>
 </div>
 
-<div class="mb-3">
-    <span class="hotkey-hint"><span class="key-badge">F2 / F10 / F1 / F5</span> Návrat (Domov)</span>
-    <span class="hotkey-hint"><span class="key-badge">F4</span> Položky (Aktuálny riadok)</span>
-    <span class="hotkey-hint"><span class="key-badge">F8</span> Detail faktúry</span>
-</div>
+    <div style="margin-bottom: 10px; font-size: 0.9em; color: #666;">
+        <strong>F2 / F10 / F1 / F5</strong>: Návrat domov &nbsp;|&nbsp;
+        <strong>F3</strong>: Skenovať QR Faktúru &nbsp;|&nbsp;
+        <strong>F4</strong>: Položky (Aktuálny riadok) &nbsp;|&nbsp;
+        <strong>F8</strong>: Detail faktúry
+    </div>
 
 <table id="liabilitiesTable" class="display" style="width:100%">
     <thead>
@@ -655,6 +658,66 @@
 </table>
 
 <script>
+
+// QR Scanner Logic
+var html5QrcodeScanner;
+
+function onScanSuccess(decodedText, decodedResult) {
+    // Zastavime skener po uspesnom nacitani
+    html5QrcodeScanner.clear();
+    $('#qr-reader').hide();
+
+    // Posleme bysquare kod na server
+    $.ajax({
+        url: '<?= base_url('invoices/api/liabilities/decode-bysquare') ?>',
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
+        data: JSON.stringify({ qr_string: decodedText }),
+        contentType: 'application/json',
+        success: function(res) {
+            if(res.parsed) {
+                $('#qr-dodavatel').text(res.parsed.dodavatel);
+                $('#qr-ico').text(res.parsed.dodavatel_ico);
+                $('#qr-vs').text(res.parsed.ext_doklad);
+                $('#qr-suma').text(res.parsed.suma);
+
+                let spl = res.parsed.splatnost;
+                if(spl && spl.length === 8) {
+                    $('#qr-splatnost').text(spl.substr(6,2) + '.' + spl.substr(4,2) + '.' + spl.substr(0,4));
+                }
+
+                $('#qr-result').show();
+            }
+        },
+        error: function(xhr) {
+            $('#qr-error').text('Nepodarilo sa dekódovať QR kód (chyba komunikácie alebo nepodporovaný formát).').show();
+        }
+    });
+}
+
+function onScanFailure(error) {
+    // ignurujeme varovania pri skenovani, kym sa nenajde kod
+}
+
+function startScanner() {
+    $('#qr-result').hide();
+    $('#qr-error').hide();
+    $('#qr-reader').show();
+    $('#qrModal').show();
+
+    html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: {width: 250, height: 250} }, /* verbose= */ false);
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+}
+
+$('.close-qr-modal').click(function() {
+    $('#qrModal').hide();
+    if(html5QrcodeScanner) {
+        html5QrcodeScanner.clear();
+    }
+});
+
+
+
 $(document).ready(function() {
     $.fn.dataTable.ext.errMode = 'none';
     $('#liabilitiesTable').on('error.dt', function(e, settings, techNote, message) {
@@ -716,6 +779,10 @@ $(document).ready(function() {
         if (e.key === "F2" || e.key === "F10" || e.key === "F1" || e.key === "F5") {
             e.preventDefault();
             window.location.href = "<?= base_url('/') ?>";
+        }
+        else if (e.key === "F3") {
+            e.preventDefault();
+            startScanner();
         }
         else if (e.key === "F4") {
             e.preventDefault();
@@ -903,6 +970,32 @@ $(document).on('submit', '#uploadForm', function(e) {
         }
     });
 </script>
+
+
+<!-- QR Scanner Modal -->
+<div id="qrModal" class="dos-modal">
+    <div class="dos-modal-content" style="width: 50%; max-width: 600px; height: auto;">
+        <div class="dos-modal-header">
+            <span class="close-qr-modal close-modal">&times;</span>
+            <h3 style="margin:0; font-size: 1.2rem;">Skenovať INVOICE by square</h3>
+        </div>
+        <div id="modalBody">
+            <div id="qr-reader" style="width:100%; min-height:300px; background:#000;"></div>
+            <div id="qr-result" style="margin-top: 15px; display:none;">
+                <h4 style="color: green;">Kód úspešne načítaný!</h4>
+                <div style="background: var(--card-bg); padding: 10px; border: 1px solid var(--border-color); font-family: monospace;">
+                    <div><strong>Dodávateľ:</strong> <span id="qr-dodavatel"></span></div>
+                    <div><strong>IČO:</strong> <span id="qr-ico"></span></div>
+                    <div><strong>Ext. Doklad (VS):</strong> <span id="qr-vs"></span></div>
+                    <div><strong>Suma:</strong> <span id="qr-suma"></span> EUR</div>
+                    <div><strong>Splatnosť:</strong> <span id="qr-splatnost"></span></div>
+                </div>
+                <button class="btn btn-action" style="margin-top:15px; background:#28a745; color:white; width:100%; font-size: 1.1em;" onclick="alert('Tu v buducnosti prepojime tlacitko na vytvorenie novej faktury v systeme.')">Pokračovať a vytvoriť Záväzok</button>
+            </div>
+            <div id="qr-error" style="margin-top: 15px; color: red; font-weight: bold; display:none;"></div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

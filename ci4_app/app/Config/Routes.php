@@ -65,6 +65,7 @@ $routes->group('invoices', function($routes) {
 
     // Liabilities Attachments
     $routes->get('api/liabilities/attachments', 'LiabilityController::getAttachments');
+    $routes->post('api/liabilities/decode-bysquare', 'LiabilityController::decodeBysquare');
     $routes->post('api/liabilities/attachments/upload', 'LiabilityController::uploadAttachment');
     $routes->get('api/liabilities/attachments/download/(:num)', 'LiabilityController::downloadAttachment/$1');
     $routes->get('api/liabilities/attachments/view/(:num)', 'LiabilityController::viewAttachment/$1');
