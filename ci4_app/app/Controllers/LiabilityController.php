@@ -137,22 +137,37 @@ class LiabilityController extends ResourceController
         }
 
         if ($file->move($uploadPath, $newName)) {
-            $model = new \App\Models\KzAttachmentModel();
-            $data = [
-                'kz_b' => $doklad,
-                'path' => $newName,
-                'original_name' => $file->getClientName()
-            ];
-            $model->insert($data);
+            try {
+                $model = new \App\Models\KzAttachmentModel();
+                $data = [
+                    'kz_b' => $doklad,
+                    'path' => $newName,
+                    'original_name' => $file->getClientName()
+                ];
 
-            return $this->response->setJSON([
-                'success' => true,
-                'message' => 'Súbor bol úspešne nahratý.',
-                'attachment' => $data
-            ]);
+                $insertID = $model->insert($data);
+
+                if ($insertID === false) {
+                    // Ak databaza vrati chybu (napr. constraint)
+                    log_message('error', 'Upload attachment insert failed: ' . json_encode($model->errors()));
+                    return $this->response->setJSON(['error' => 'Chyba databázy: Záznam sa neuložil do tabuľky kz_prilohy.'])->setStatusCode(500);
+                }
+
+                // Generovanie noveho CSRF hashu (pre pripad ze form po uploade potrebuje byt nadalej "zivy")
+                return $this->response->setJSON([
+                    'success' => true,
+                    'message' => 'Súbor bol úspešne nahratý.',
+                    'attachment' => $data,
+                    'csrf_token' => csrf_hash()
+                ]);
+            } catch (\Throwable $e) {
+                log_message('error', 'Upload DB Exception: ' . $e->getMessage());
+                return $this->response->setJSON(['error' => 'Kritická chyba DB: ' . $e->getMessage()])->setStatusCode(500);
+            }
         }
 
-        return $this->response->setJSON(['error' => 'Chyba pri ukladaní súboru na server.'])->setStatusCode(500);
+        $errorMsg = $file->getErrorString() . ' (' . $file->getError() . ')';
+        return $this->response->setJSON(['error' => 'Chyba pri ukladaní súboru na disk: ' . $errorMsg])->setStatusCode(500);
     }
 
     public function downloadAttachment($id)
