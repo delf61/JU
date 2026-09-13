@@ -458,6 +458,10 @@
 
     <!-- HTML5 QR Code Scanner -->
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <!-- Flatpickr CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/sk.js"></script>
 </head>
 <body onload="updateClock()">
 
@@ -889,6 +893,13 @@ $(document).on('submit', '#createForm', function(e) {
     });
 });
 $(document).ready(function() {
+    // Init flatpickr on date inputs
+    flatpickr("input[type=date]", {
+        locale: "sk",
+        dateFormat: "Y-m-d",
+        allowInput: true
+    });
+
     $.fn.dataTable.ext.errMode = 'none';
     $('#liabilitiesTable').on('error.dt', function(e, settings, techNote, message) {
         console.error('DataTables Error:', message);
@@ -1521,13 +1532,11 @@ $(document).on('submit', '#createForm', function(e) {
 <div id="createModal" class="dos-modal">
     <div class="dos-modal-content">
         <div class="dos-modal-header" style="display: flex; justify-content: space-between; align-items: center;">
-            <h3 style="margin:0; font-size: 1.2rem;">DATOVÝ EDITOR &nbsp;&nbsp;&nbsp; Zadávanie novej došlej faktúry</h3>
+            <h3 style="margin:0; font-size: 1.2rem;">Nová došlá faktúra</h3>
             <span class="close-create-modal close-modal">&times;</span>
         </div>
 
-        <div style="margin: 15px 0; display: flex; gap: 10px;">
-            <button type="button" id="btnQROpen" class="btn" style="background-color: #17a2b8; border: none; font-size: 1rem; cursor: pointer;">📷 Načítať z QR kódu (Kamera / Čítačka)</button>
-        </div>
+
 
         <form id="createForm" class="fand-form-grid">
             <!-- Row 1 -->
@@ -1623,9 +1632,14 @@ $(document).on('submit', '#createForm', function(e) {
                 <input type="number" step="0.01" id="create_zavazok" class="text-right" style="flex:1; background: var(--hover-bg);" value="0.00" readonly disabled>
             </div>
 
-            <div class="fand-span-12" style="margin-top: 20px; text-align: right;">
-                <div id="createStatus" style="font-weight: bold; margin-bottom: 10px;"></div>
-                <button type="submit" class="btn btn-action" style="background: #28a745; color: white; padding: 10px 30px; font-size: 1.1rem;">Uložiť záznam</button>
+            <div class="fand-span-12" style="margin-top: 20px; display: flex; justify-content: space-between; align-items: flex-end;">
+                <div>
+                    <button type="button" id="btnQROpen" class="btn" style="background-color: #17a2b8; border: none; font-size: 1rem; padding: 10px 20px; cursor: pointer;">📷 Načítať z QR kódu (Kamera / Čítačka)</button>
+                </div>
+                <div style="text-align: right;">
+                    <div id="createStatus" style="font-weight: bold; margin-bottom: 10px;"></div>
+                    <button type="submit" class="btn btn-action" style="background: #28a745; color: white; padding: 10px 30px; font-size: 1.1rem;">Uložiť záznam</button>
+                </div>
             </div>
         </form>
     </div>
@@ -1657,13 +1671,11 @@ $(document).on('submit', '#createForm', function(e) {
 <div id="createModal" class="dos-modal">
     <div class="dos-modal-content">
         <div class="dos-modal-header" style="display: flex; justify-content: space-between; align-items: center;">
-            <h3 style="margin:0; font-size: 1.2rem;">DATOVÝ EDITOR &nbsp;&nbsp;&nbsp; Zadávanie novej došlej faktúry</h3>
+            <h3 style="margin:0; font-size: 1.2rem;">Nová došlá faktúra</h3>
             <span class="close-create-modal close-modal">&times;</span>
         </div>
 
-        <div style="margin: 15px 0; display: flex; gap: 10px;">
-            <button type="button" id="btnQROpen" class="btn" style="background-color: #17a2b8; border: none; font-size: 1rem; cursor: pointer;">📷 Načítať z QR kódu (Kamera / Čítačka)</button>
-        </div>
+
 
         <form id="createForm" class="fand-form-grid">
             <!-- Row 1 -->
@@ -1759,9 +1771,14 @@ $(document).on('submit', '#createForm', function(e) {
                 <input type="number" step="0.01" id="create_zavazok" class="text-right" style="flex:1; background: var(--hover-bg);" value="0.00" readonly disabled>
             </div>
 
-            <div class="fand-span-12" style="margin-top: 20px; text-align: right;">
-                <div id="createStatus" style="font-weight: bold; margin-bottom: 10px;"></div>
-                <button type="submit" class="btn btn-action" style="background: #28a745; color: white; padding: 10px 30px; font-size: 1.1rem;">Uložiť záznam</button>
+            <div class="fand-span-12" style="margin-top: 20px; display: flex; justify-content: space-between; align-items: flex-end;">
+                <div>
+                    <button type="button" id="btnQROpen" class="btn" style="background-color: #17a2b8; border: none; font-size: 1rem; padding: 10px 20px; cursor: pointer;">📷 Načítať z QR kódu (Kamera / Čítačka)</button>
+                </div>
+                <div style="text-align: right;">
+                    <div id="createStatus" style="font-weight: bold; margin-bottom: 10px;"></div>
+                    <button type="submit" class="btn btn-action" style="background: #28a745; color: white; padding: 10px 30px; font-size: 1.1rem;">Uložiť záznam</button>
+                </div>
             </div>
         </form>
     </div>
