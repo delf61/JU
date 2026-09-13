@@ -72,17 +72,22 @@
     }
     .dos-modal-content {
         background-color: var(--card-bg);
-        margin: 3% auto;
+        margin: 2vh auto;
         padding: 20px;
         border: 2px solid var(--border-color);
-        width: 85%;
-        max-width: 1200px;
+        width: 90%;
+        height: 96vh;
+        max-width: 1600px;
         color: var(--text-color);
         box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        display: flex;
+        flex-direction: column;
     }
     .modal-flex {
         display: flex;
         gap: 20px;
+        flex-grow: 1;
+        height: calc(100% - 40px); /* Odrata header */
     }
     .modal-sidebar {
         flex: 1;
@@ -90,21 +95,22 @@
         max-width: 350px;
         border-right: 1px solid var(--border-color);
         padding-right: 15px;
+        overflow-y: auto;
     }
     .modal-preview {
         flex: 3;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         background: #f8f9fa;
-        min-height: 600px;
+        height: 100%;
         border: 1px solid var(--border-color);
         overflow: hidden;
     }
     .modal-preview iframe, .modal-preview img {
         width: 100%;
         height: 100%;
-        min-height: 600px;
+        border: none;
         object-fit: contain;
     }
     .dos-modal-header {
@@ -335,17 +341,22 @@
     }
     .dos-modal-content {
         background-color: var(--card-bg);
-        margin: 3% auto;
+        margin: 2vh auto;
         padding: 20px;
         border: 2px solid var(--border-color);
-        width: 85%;
-        max-width: 1200px;
+        width: 90%;
+        height: 96vh;
+        max-width: 1600px;
         color: var(--text-color);
         box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        display: flex;
+        flex-direction: column;
     }
     .modal-flex {
         display: flex;
         gap: 20px;
+        flex-grow: 1;
+        height: calc(100% - 40px); /* Odrata header */
     }
     .modal-sidebar {
         flex: 1;
@@ -353,21 +364,22 @@
         max-width: 350px;
         border-right: 1px solid var(--border-color);
         padding-right: 15px;
+        overflow-y: auto;
     }
     .modal-preview {
         flex: 3;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         background: #f8f9fa;
-        min-height: 600px;
+        height: 100%;
         border: 1px solid var(--border-color);
         overflow: hidden;
     }
     .modal-preview iframe, .modal-preview img {
         width: 100%;
         height: 100%;
-        min-height: 600px;
+        border: none;
         object-fit: contain;
     }
     .dos-modal-header {
@@ -544,17 +556,22 @@
     }
     .dos-modal-content {
         background-color: var(--card-bg);
-        margin: 3% auto;
+        margin: 2vh auto;
         padding: 20px;
         border: 2px solid var(--border-color);
-        width: 85%;
-        max-width: 1200px;
+        width: 90%;
+        height: 96vh;
+        max-width: 1600px;
         color: var(--text-color);
         box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        display: flex;
+        flex-direction: column;
     }
     .modal-flex {
         display: flex;
         gap: 20px;
+        flex-grow: 1;
+        height: calc(100% - 40px); /* Odrata header */
     }
     .modal-sidebar {
         flex: 1;
@@ -562,21 +579,22 @@
         max-width: 350px;
         border-right: 1px solid var(--border-color);
         padding-right: 15px;
+        overflow-y: auto;
     }
     .modal-preview {
         flex: 3;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         background: #f8f9fa;
-        min-height: 600px;
+        height: 100%;
         border: 1px solid var(--border-color);
         overflow: hidden;
     }
     .modal-preview iframe, .modal-preview img {
         width: 100%;
         height: 100%;
-        min-height: 600px;
+        border: none;
         object-fit: contain;
     }
     .dos-modal-header {
