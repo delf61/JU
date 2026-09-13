@@ -72,12 +72,40 @@
     }
     .dos-modal-content {
         background-color: var(--card-bg);
-        margin: 5% auto;
+        margin: 3% auto;
         padding: 20px;
         border: 2px solid var(--border-color);
-        width: 50%;
+        width: 85%;
+        max-width: 1200px;
         color: var(--text-color);
         box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .modal-flex {
+        display: flex;
+        gap: 20px;
+    }
+    .modal-sidebar {
+        flex: 1;
+        min-width: 300px;
+        max-width: 350px;
+        border-right: 1px solid var(--border-color);
+        padding-right: 15px;
+    }
+    .modal-preview {
+        flex: 3;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background: #f8f9fa;
+        min-height: 600px;
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+    }
+    .modal-preview iframe, .modal-preview img {
+        width: 100%;
+        height: 100%;
+        min-height: 600px;
+        object-fit: contain;
     }
     .dos-modal-header {
         border-bottom: 1px solid var(--border-color);
@@ -307,12 +335,40 @@
     }
     .dos-modal-content {
         background-color: var(--card-bg);
-        margin: 5% auto;
+        margin: 3% auto;
         padding: 20px;
         border: 2px solid var(--border-color);
-        width: 50%;
+        width: 85%;
+        max-width: 1200px;
         color: var(--text-color);
         box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .modal-flex {
+        display: flex;
+        gap: 20px;
+    }
+    .modal-sidebar {
+        flex: 1;
+        min-width: 300px;
+        max-width: 350px;
+        border-right: 1px solid var(--border-color);
+        padding-right: 15px;
+    }
+    .modal-preview {
+        flex: 3;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background: #f8f9fa;
+        min-height: 600px;
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+    }
+    .modal-preview iframe, .modal-preview img {
+        width: 100%;
+        height: 100%;
+        min-height: 600px;
+        object-fit: contain;
     }
     .dos-modal-header {
         border-bottom: 1px solid var(--border-color);
@@ -488,12 +544,40 @@
     }
     .dos-modal-content {
         background-color: var(--card-bg);
-        margin: 5% auto;
+        margin: 3% auto;
         padding: 20px;
         border: 2px solid var(--border-color);
-        width: 50%;
+        width: 85%;
+        max-width: 1200px;
         color: var(--text-color);
         box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .modal-flex {
+        display: flex;
+        gap: 20px;
+    }
+    .modal-sidebar {
+        flex: 1;
+        min-width: 300px;
+        max-width: 350px;
+        border-right: 1px solid var(--border-color);
+        padding-right: 15px;
+    }
+    .modal-preview {
+        flex: 3;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background: #f8f9fa;
+        min-height: 600px;
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+    }
+    .modal-preview iframe, .modal-preview img {
+        width: 100%;
+        height: 100%;
+        min-height: 600px;
+        object-fit: contain;
     }
     .dos-modal-header {
         border-bottom: 1px solid var(--border-color);
@@ -652,6 +736,19 @@ $('#liabilitiesTable tbody').on('click', '.attachment-trigger', function () {
     }
 });
 
+function renderPreview(attId, originalName) {
+    let viewUrl = '<?= base_url('invoices/api/liabilities/attachments/view/') ?>' + attId;
+    let ext = originalName.split('.').pop().toLowerCase();
+
+    if (ext === 'pdf') {
+        $('#attachmentPreview').html(`<iframe src="${viewUrl}" frameborder="0"></iframe>`);
+    } else if (ext === 'jpg' || ext === 'jpeg' || ext === 'png') {
+        $('#attachmentPreview').html(`<img src="${viewUrl}" alt="${originalName}">`);
+    } else {
+        $('#attachmentPreview').html(`<div style="margin-top: 20%; color: #888; text-align: center;">Tento typ súboru nepodporuje náhľad. <a href="${viewUrl}" target="_blank">Kliknite sem pre stiahnutie</a>.</div>`);
+    }
+}
+
 function loadAttachments() {
     $('#attachmentList').html('<li>Načítavam...</li>');
     $.ajax({
@@ -662,15 +759,21 @@ function loadAttachments() {
             $('#attachmentList').empty();
             if (data.length === 0) {
                 $('#attachmentList').html('<li>Zatiaľ neboli nahraté žiadne prílohy.</li>');
+                $('#attachmentPreview').html('<div style="margin-top: 20%; color: #888; text-align: center;">Žiadna príloha na zobrazenie.</div>');
             } else {
                 data.forEach(function(att) {
                     let dlUrl = '<?= base_url('invoices/api/liabilities/attachments/download/') ?>' + att.id;
                     let li = `<li>
-                        <a href="${dlUrl}" target="_blank">📄 ${att.original_name}</a>
+                        <a href="#" onclick="renderPreview(${att.id}, '${att.original_name}'); return false;" style="font-weight: bold;">👁️ ${att.original_name}</a>
+                        <br>
+                        <a href="${dlUrl}" target="_blank" style="font-size: 0.8em; color: #007bff;">[Stiahnuť]</a>
                         <span style="float:right; font-size: 0.8em; color: #888;">${att.created_at}</span>
                     </li>`;
                     $('#attachmentList').append(li);
                 });
+
+                // Automaticky zobraz prvu prilohu
+                renderPreview(data[0].id, data[0].original_name);
             }
         },
         error: function(err) {
@@ -734,18 +837,24 @@ $(document).on('submit', '#uploadForm', function(e) {
             <span class="close-modal">&times;</span>
             <h3 style="margin:0; font-size: 1.2rem;">Prílohy: <span id="modalDoklad"></span></h3>
         </div>
-        <div id="modalBody">
-            <ul id="attachmentList" class="attachment-list">
-                <!-- Attachments will be loaded here -->
-            </ul>
-            <form id="uploadForm" enctype="multipart/form-data">
-                <input type="hidden" id="uploadDoklad" name="b">
-                <div style="margin-bottom: 10px;">
-                    <input type="file" id="fileInput" name="attachment" accept=".pdf, .jpg, .jpeg, .png" required style="width: 100%; padding: 5px;">
-                </div>
-                <button type="submit" class="btn btn-action btn-attachment" style="padding: 8px 15px;">Nahrať súbor</button>
-                <span id="uploadStatus" style="margin-left: 10px; font-weight: bold;"></span>
-            </form>
+        <div id="modalBody" class="modal-flex">
+            <div class="modal-sidebar">
+                <form id="uploadForm" enctype="multipart/form-data" style="margin-bottom: 20px; border-bottom: 1px dashed var(--border-color); padding-bottom: 15px;">
+                    <input type="hidden" id="uploadDoklad" name="b">
+                    <div style="margin-bottom: 10px;">
+                        <input type="file" id="fileInput" name="attachment" accept=".pdf, .jpg, .jpeg, .png" required style="width: 100%; padding: 5px;">
+                    </div>
+                    <button type="submit" class="btn btn-action btn-attachment" style="padding: 8px 15px;">Nahrať súbor</button>
+                    <div id="uploadStatus" style="margin-top: 10px; font-weight: bold; font-size: 0.9em;"></div>
+                </form>
+                <h4>Zoznam príloh:</h4>
+                <ul id="attachmentList" class="attachment-list">
+                    <!-- Attachments will be loaded here -->
+                </ul>
+            </div>
+            <div class="modal-preview" id="attachmentPreview">
+                <div style="margin-top: 20%; color: #888; text-align: center;">Pre zobrazenie ukážky vyberte prílohu zo zoznamu, alebo nahrajte nový súbor.</div>
+            </div>
         </div>
     </div>
 </div>

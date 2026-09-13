@@ -67,6 +67,7 @@ $routes->group('invoices', function($routes) {
     $routes->get('api/liabilities/attachments', 'LiabilityController::getAttachments');
     $routes->post('api/liabilities/attachments/upload', 'LiabilityController::uploadAttachment');
     $routes->get('api/liabilities/attachments/download/(:num)', 'LiabilityController::downloadAttachment/$1');
+    $routes->get('api/liabilities/attachments/view/(:num)', 'LiabilityController::viewAttachment/$1');
 
     $routes->post('liabilities', 'LiabilityController::create');
     $routes->get('liabilities/(:segment)/(:segment)', 'LiabilityController::show/$1/$2');

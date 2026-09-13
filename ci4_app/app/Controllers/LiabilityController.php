@@ -188,4 +188,31 @@ class LiabilityController extends ResourceController
         return $this->response->download($filePath, null)->setFileName($attachment['original_name']);
     }
 
+    public function viewAttachment($id)
+    {
+        $model = new \App\Models\KzAttachmentModel();
+        $attachment = $model->find($id);
+
+        if (!$attachment) {
+            return $this->response->setStatusCode(404)->setBody('Príloha neexistuje.');
+        }
+
+        $filePath = WRITEPATH . 'uploads/zavazky/' . $attachment['path'];
+
+        if (!file_exists($filePath)) {
+            return $this->response->setStatusCode(404)->setBody('Súbor na disku neexistuje.');
+        }
+
+        $mime = mime_content_type($filePath);
+        if (!$mime) {
+            $mime = 'application/octet-stream';
+        }
+
+        return $this->response
+            ->setStatusCode(200)
+            ->setContentType($mime)
+            ->setBody(file_get_contents($filePath))
+            ->setHeader('Content-Disposition', 'inline; filename="' . $attachment['original_name'] . '"');
+    }
+
 }
