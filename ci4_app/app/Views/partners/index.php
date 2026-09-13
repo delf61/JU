@@ -499,5 +499,32 @@
             }
         });
 </script>
+
+<!-- Global ESC key handler for all modals -->
+<script>
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape") {
+            // Close any custom .modal or .dos-modal
+            document.querySelectorAll('.modal, .dos-modal').forEach(function(modal) {
+                modal.style.display = 'none';
+            });
+            // Also attempt to close any standard Bootstrap modals if Bootstrap is loaded
+            if (typeof bootstrap !== 'undefined' && typeof bootstrap.Modal !== 'undefined') {
+                const openModals = document.querySelectorAll('.modal.show');
+                openModals.forEach(modalEl => {
+                    const modalInstance = bootstrap.Modal.getInstance(modalEl);
+                    if (modalInstance) {
+                        modalInstance.hide();
+                    }
+                });
+            }
+            // And if jQuery is used with hide() logic
+            if (typeof $ !== 'undefined') {
+                $('.modal, .dos-modal').hide();
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
