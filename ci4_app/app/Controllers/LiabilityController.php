@@ -77,7 +77,7 @@ class LiabilityController extends ResourceController
         $items = $data['items'] ?? [];
         unset($data['items']);
         $this->liabilityService->createLiability($data, $items);
-        return $this->respondCreated(['a' => $data['a'], 'b' => $data['b']]);
+        return $this->respondCreated(['a' => $data['a'], 'b' => $data['b'], 'csrf_token' => csrf_hash()]);
     }
 
     public function update($a = null, $b = null)
@@ -219,14 +219,14 @@ class LiabilityController extends ResourceController
     {
         $payload = $this->request->getJSON(true);
         if (empty($payload['qr_string'])) {
-            return $this->response->setJSON(['error' => 'Chýba QR reťazec'])->setStatusCode(400);
+            return $this->response->setJSON(['error' => 'Chýba QR reťazec', 'csrf_token' => csrf_hash()])->setStatusCode(400);
         }
 
         $string = $payload['qr_string'];
 
         // Kontrola bysquare hlavicky (0000, 0001, 2003...)
         if (strlen($string) < 10) {
-            return $this->response->setJSON(['error' => 'Neplatný QR kód'])->setStatusCode(400);
+            return $this->response->setJSON(['error' => 'Neplatný QR kód', 'csrf_token' => csrf_hash()])->setStatusCode(400);
         }
 
         $body = substr($string, 4);
@@ -264,7 +264,7 @@ class LiabilityController extends ResourceController
         ], $pipes);
 
         if (!is_resource($xzProcess)) {
-            return $this->response->setJSON(['error' => 'Chýba podpora XZ dekompresie na serveri'])->setStatusCode(500);
+            return $this->response->setJSON(['error' => 'Chýba podpora XZ dekompresie na serveri', 'csrf_token' => csrf_hash()])->setStatusCode(500);
         }
 
         fwrite($pipes[0], $binaryBody);
@@ -277,7 +277,7 @@ class LiabilityController extends ResourceController
         proc_close($xzProcess);
 
         if (empty($uncompressed)) {
-            return $this->response->setJSON(['error' => 'Chyba dekompresie QR kódu'])->setStatusCode(400);
+            return $this->response->setJSON(['error' => 'Chyba dekompresie QR kódu', 'csrf_token' => csrf_hash()])->setStatusCode(400);
         }
 
         $parts = explode("	", $uncompressed);
@@ -318,7 +318,8 @@ class LiabilityController extends ResourceController
         return $this->response->setJSON([
             'success' => true,
             'raw' => $parts,
-            'parsed' => $parsed
+            'parsed' => $parsed,
+            'csrf_token' => csrf_hash()
         ]);
     }
 

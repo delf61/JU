@@ -978,6 +978,180 @@ $(document).on('submit', '#uploadForm', function(e) {
         }
     });
 });
+
+// Create Liability & QR Decoder Logic
+var html5QrcodeScanner;
+
+$('#btnOpenCreateLiability').click(function(e) {
+    e.preventDefault();
+    openCreateModal();
+});
+
+$('.close-create-modal').click(function() {
+    closeCreateModal();
+});
+
+function closeCreateModal() {
+    $('#createModal').hide();
+    stopScanner();
+}
+
+function openCreateModal() {
+    $('#createModal').show();
+    $('#createStatus').text('');
+    $('#qr-status').text('');
+    $('#qrScannerArea').hide();
+    $('#qrInputArea').hide();
+
+    // Predvyplnit dnesny datum a vyprazdnit hodnoty
+    document.getElementById('create_a').valueAsDate = new Date();
+    $('#create_od').val('');
+    $('#create_varsym').val('');
+    $('#create_splat').val('');
+    $('#create_z').val('0.00');
+    $('#create_vyrovn').val('0.00');
+}
+
+$('#btnStartQrScanner').click(function() {
+    $('#qrInputArea').hide();
+    $('#qr-status').text('Inicializujem kameru...').css('color', 'orange');
+    $('#qrScannerArea').show();
+
+    if (!html5QrcodeScanner) {
+        html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: {width: 250, height: 250} }, false);
+    }
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+});
+
+$('#btnQrTextInput').click(function() {
+    stopScanner();
+    $('#qrScannerArea').hide();
+    $('#qr-status').text('');
+    $('#qrTextInputField').val('');
+    $('#qrInputArea').show();
+    $('#qrTextInputField').focus();
+});
+
+$('#btnCancelQrText').click(function() {
+    $('#qrInputArea').hide();
+});
+
+$('#btnCancelQrScan').click(function() {
+    stopScanner();
+    $('#qrScannerArea').hide();
+    $('#qr-status').text('');
+});
+
+$('#btnProcessQrText').click(function() {
+    let text = $('#qrTextInputField').val().trim();
+    if(text) {
+        processQrString(text);
+        $('#qrInputArea').hide();
+    }
+});
+
+function stopScanner() {
+    if (html5QrcodeScanner) {
+        html5QrcodeScanner.clear();
+    }
+}
+
+function onScanSuccess(decodedText, decodedResult) {
+    stopScanner();
+    $('#qrScannerArea').hide();
+    processQrString(decodedText);
+}
+
+function processQrString(qrString) {
+    $('#qr-status').text('Spracovávam kód na serveri...').css('color', 'orange');
+
+    $.ajax({
+        url: '<?= base_url('invoices/api/liabilities/decode-bysquare') ?>',
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
+        data: JSON.stringify({ qr_string: qrString }),
+        contentType: 'application/json',
+        success: function(res) {
+            if(res.parsed) {
+                $('#qr-status').text('Údaje z kódu úspešne prenesené do formulára!').css('color', '#28a745');
+
+                if(res.parsed.dodavatel) $('#create_od').val(res.parsed.dodavatel);
+                if(res.parsed.ext_doklad) $('#create_varsym').val(res.parsed.ext_doklad);
+                if(res.parsed.suma) $('#create_z').val(res.parsed.suma);
+
+                let spl = res.parsed.splatnost;
+                if(spl && spl.length === 8) {
+                    let y = spl.substr(0,4); let m = spl.substr(4,2); let d = spl.substr(6,2);
+                    $('#create_splat').val(`${y}-${m}-${d}`);
+                }
+                let dod = res.parsed.dodanie;
+                if(dod && dod.length === 8) {
+                    let y = dod.substr(0,4); let m = dod.substr(4,2); let d = dod.substr(6,2);
+                    $('#create_a').val(`${y}-${m}-${d}`);
+                }
+
+                if(res.csrf_token) { window.csrfHash = res.csrf_token; }
+            }
+        },
+        error: function(xhr) {
+            let errorMsg = 'Nepodarilo sa dekódovať INVOICE/PAY kód.';
+            if (xhr.responseJSON && xhr.responseJSON.error) {
+                errorMsg = xhr.responseJSON.error;
+            }
+            $('#qr-status').text(errorMsg).css('color', 'red');
+            if (xhr.responseJSON && xhr.responseJSON.csrf_token) {
+                window.csrfHash = xhr.responseJSON.csrf_token;
+            }
+        }
+    });
+}
+
+function onScanFailure(error) {
+    // ignurujeme varovania pri skenovani
+}
+
+$(document).on('submit', '#createForm', function(e) {
+    e.preventDefault();
+    $('#createStatus').text('Ukladám záznam...').css('color', 'orange');
+
+    var jsonData = {
+        a: $('#create_a').val(),
+        // b: je generovane backendom
+        od: $('#create_od').val(),
+        var_sym: $('#create_varsym').val(),
+        splat: $('#create_splat').val(),
+        z: $('#create_z').val(),
+        vyrovn: $('#create_vyrovn').val(),
+        items: []
+    };
+
+    $.ajax({
+        url: '<?= base_url('invoices/liabilities') ?>',
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
+        data: JSON.stringify(jsonData),
+        contentType: 'application/json',
+        success: function(response) {
+            $('#createStatus').text('Úspešne uložené! (Číslo dokladu: ' + response.b + ')').css('color', 'green');
+            if(response.csrf_token) window.csrfHash = response.csrf_token;
+            setTimeout(function() {
+                closeCreateModal();
+                $('#liabilitiesTable').DataTable().ajax.reload();
+            }, 2000);
+        },
+        error: function(xhr) {
+            let msg = 'Chyba pri ukladaní.';
+            if (xhr.responseJSON && xhr.responseJSON.messages) {
+                msg = Object.values(xhr.responseJSON.messages).join(', ');
+            }
+            $('#createStatus').text(msg).css('color', 'red');
+            if (xhr.responseJSON && xhr.responseJSON.csrf_token) {
+                window.csrfHash = xhr.responseJSON.csrf_token;
+            }
+        }
+    });
+});
+
 </script>
 
 
@@ -1035,6 +1209,180 @@ $(document).on('submit', '#uploadForm', function(e) {
             }
         }
     });
+
+// Create Liability & QR Decoder Logic
+var html5QrcodeScanner;
+
+$('#btnOpenCreateLiability').click(function(e) {
+    e.preventDefault();
+    openCreateModal();
+});
+
+$('.close-create-modal').click(function() {
+    closeCreateModal();
+});
+
+function closeCreateModal() {
+    $('#createModal').hide();
+    stopScanner();
+}
+
+function openCreateModal() {
+    $('#createModal').show();
+    $('#createStatus').text('');
+    $('#qr-status').text('');
+    $('#qrScannerArea').hide();
+    $('#qrInputArea').hide();
+
+    // Predvyplnit dnesny datum a vyprazdnit hodnoty
+    document.getElementById('create_a').valueAsDate = new Date();
+    $('#create_od').val('');
+    $('#create_varsym').val('');
+    $('#create_splat').val('');
+    $('#create_z').val('0.00');
+    $('#create_vyrovn').val('0.00');
+}
+
+$('#btnStartQrScanner').click(function() {
+    $('#qrInputArea').hide();
+    $('#qr-status').text('Inicializujem kameru...').css('color', 'orange');
+    $('#qrScannerArea').show();
+
+    if (!html5QrcodeScanner) {
+        html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: {width: 250, height: 250} }, false);
+    }
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+});
+
+$('#btnQrTextInput').click(function() {
+    stopScanner();
+    $('#qrScannerArea').hide();
+    $('#qr-status').text('');
+    $('#qrTextInputField').val('');
+    $('#qrInputArea').show();
+    $('#qrTextInputField').focus();
+});
+
+$('#btnCancelQrText').click(function() {
+    $('#qrInputArea').hide();
+});
+
+$('#btnCancelQrScan').click(function() {
+    stopScanner();
+    $('#qrScannerArea').hide();
+    $('#qr-status').text('');
+});
+
+$('#btnProcessQrText').click(function() {
+    let text = $('#qrTextInputField').val().trim();
+    if(text) {
+        processQrString(text);
+        $('#qrInputArea').hide();
+    }
+});
+
+function stopScanner() {
+    if (html5QrcodeScanner) {
+        html5QrcodeScanner.clear();
+    }
+}
+
+function onScanSuccess(decodedText, decodedResult) {
+    stopScanner();
+    $('#qrScannerArea').hide();
+    processQrString(decodedText);
+}
+
+function processQrString(qrString) {
+    $('#qr-status').text('Spracovávam kód na serveri...').css('color', 'orange');
+
+    $.ajax({
+        url: '<?= base_url('invoices/api/liabilities/decode-bysquare') ?>',
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
+        data: JSON.stringify({ qr_string: qrString }),
+        contentType: 'application/json',
+        success: function(res) {
+            if(res.parsed) {
+                $('#qr-status').text('Údaje z kódu úspešne prenesené do formulára!').css('color', '#28a745');
+
+                if(res.parsed.dodavatel) $('#create_od').val(res.parsed.dodavatel);
+                if(res.parsed.ext_doklad) $('#create_varsym').val(res.parsed.ext_doklad);
+                if(res.parsed.suma) $('#create_z').val(res.parsed.suma);
+
+                let spl = res.parsed.splatnost;
+                if(spl && spl.length === 8) {
+                    let y = spl.substr(0,4); let m = spl.substr(4,2); let d = spl.substr(6,2);
+                    $('#create_splat').val(`${y}-${m}-${d}`);
+                }
+                let dod = res.parsed.dodanie;
+                if(dod && dod.length === 8) {
+                    let y = dod.substr(0,4); let m = dod.substr(4,2); let d = dod.substr(6,2);
+                    $('#create_a').val(`${y}-${m}-${d}`);
+                }
+
+                if(res.csrf_token) { window.csrfHash = res.csrf_token; }
+            }
+        },
+        error: function(xhr) {
+            let errorMsg = 'Nepodarilo sa dekódovať INVOICE/PAY kód.';
+            if (xhr.responseJSON && xhr.responseJSON.error) {
+                errorMsg = xhr.responseJSON.error;
+            }
+            $('#qr-status').text(errorMsg).css('color', 'red');
+            if (xhr.responseJSON && xhr.responseJSON.csrf_token) {
+                window.csrfHash = xhr.responseJSON.csrf_token;
+            }
+        }
+    });
+}
+
+function onScanFailure(error) {
+    // ignurujeme varovania pri skenovani
+}
+
+$(document).on('submit', '#createForm', function(e) {
+    e.preventDefault();
+    $('#createStatus').text('Ukladám záznam...').css('color', 'orange');
+
+    var jsonData = {
+        a: $('#create_a').val(),
+        // b: je generovane backendom
+        od: $('#create_od').val(),
+        var_sym: $('#create_varsym').val(),
+        splat: $('#create_splat').val(),
+        z: $('#create_z').val(),
+        vyrovn: $('#create_vyrovn').val(),
+        items: []
+    };
+
+    $.ajax({
+        url: '<?= base_url('invoices/liabilities') ?>',
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
+        data: JSON.stringify(jsonData),
+        contentType: 'application/json',
+        success: function(response) {
+            $('#createStatus').text('Úspešne uložené! (Číslo dokladu: ' + response.b + ')').css('color', 'green');
+            if(response.csrf_token) window.csrfHash = response.csrf_token;
+            setTimeout(function() {
+                closeCreateModal();
+                $('#liabilitiesTable').DataTable().ajax.reload();
+            }, 2000);
+        },
+        error: function(xhr) {
+            let msg = 'Chyba pri ukladaní.';
+            if (xhr.responseJSON && xhr.responseJSON.messages) {
+                msg = Object.values(xhr.responseJSON.messages).join(', ');
+            }
+            $('#createStatus').text(msg).css('color', 'red');
+            if (xhr.responseJSON && xhr.responseJSON.csrf_token) {
+                window.csrfHash = xhr.responseJSON.csrf_token;
+            }
+        }
+    });
+});
+
 </script>
 
 
@@ -1118,6 +1466,77 @@ $(document).on('submit', '#uploadForm', function(e) {
                     Pre urýchlenie namierte kameru na INVOICE/PAY by square kód.
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Create Liability Modal (DATOVÝ EDITOR) -->
+<div id="createModal" class="dos-modal">
+    <div class="dos-modal-content" style="width: 50%; max-width: 800px; height: auto;">
+        <div class="dos-modal-header">
+            <span class="close-create-modal close-modal">&times;</span>
+            <h3 style="margin:0; font-size: 1.2rem;">DATOVÝ EDITOR - Zadávanie novej došlej faktúry</h3>
+        </div>
+        <div id="modalBody" style="margin-top: 15px;">
+            <div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed var(--border-color); text-align: center;">
+                <button type="button" id="btnStartQrScanner" class="btn" style="background-color: #17a2b8; border: none; font-size: 1.1rem; padding: 8px 20px; cursor: pointer;">📷 Načítať údaje z QR kódu (kamera)</button>
+                <button type="button" id="btnQrTextInput" class="btn" style="background-color: #6c757d; border: none; font-size: 1.1rem; padding: 8px 20px; cursor: pointer;">⌨️ Vložiť QR kód ako text (čítačka)</button>
+            </div>
+
+            <div id="qrInputArea" style="display: none; margin-bottom: 20px; padding: 15px; background: #333; color: white;">
+                <label style="display:block; font-weight:bold; margin-bottom: 5px;">Pípni kód z ručnej čítačky sem:</label>
+                <textarea id="qrTextInputField" style="width: 100%; height: 80px; padding: 5px; color: black;"></textarea>
+                <div style="text-align: right; margin-top: 10px;">
+                    <button type="button" id="btnProcessQrText" class="btn btn-action" style="background: #28a745;">Spracovať kód</button>
+                    <button type="button" id="btnCancelQrText" class="btn btn-action" style="background: #dc3545;">Zrušiť</button>
+                </div>
+            </div>
+
+            <div id="qrScannerArea" style="display: none; margin-bottom: 20px; background: #000;">
+                <div id="qr-reader" style="width: 100%; min-height: 250px;"></div>
+                <div style="text-align: center; padding: 10px;">
+                    <button type="button" id="btnCancelQrScan" class="btn btn-action" style="background: #dc3545;">Zastaviť kameru</button>
+                </div>
+            </div>
+
+            <div id="qr-status" style="font-weight: bold; text-align: center; margin-bottom: 15px;"></div>
+
+            <form id="createForm" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div style="grid-column: 1 / -1;">
+                    <label style="display:block; font-weight:bold;">Číslo dokladu (b) <small style="color: gray;">[Auto-inkrement]</small></label>
+                    <input type="text" id="create_b" name="b" style="width: 100%; padding: 5px;" placeholder="Bude vygenerované..." readonly disabled>
+                </div>
+                <div>
+                    <label style="display:block; font-weight:bold;">Dátum (a)</label>
+                    <input type="date" id="create_a" name="a" required style="width: 100%; padding: 5px;">
+                </div>
+                <div>
+                    <label style="display:block; font-weight:bold;">Dodávateľ (od)</label>
+                    <input type="text" id="create_od" name="od" required style="width: 100%; padding: 5px;">
+                </div>
+                <div>
+                    <label style="display:block; font-weight:bold;">Ext. doklad (var_sym)</label>
+                    <input type="text" id="create_varsym" name="var_sym" style="width: 100%; padding: 5px;">
+                </div>
+                <div>
+                    <label style="display:block; font-weight:bold;">Splatnosť (splat)</label>
+                    <input type="date" id="create_splat" name="splat" style="width: 100%; padding: 5px;">
+                </div>
+                <div>
+                    <label style="display:block; font-weight:bold;">Suma celkom (zn)</label>
+                    <input type="number" step="0.01" id="create_z" name="z" required style="width: 100%; padding: 5px;" value="0.00">
+                </div>
+                <div>
+                    <label style="display:block; font-weight:bold;">Vyrovnanie (vyrovn)</label>
+                    <input type="number" step="0.01" id="create_vyrovn" name="vyrovn" style="width: 100%; padding: 5px;" value="0.00">
+                </div>
+
+                <div style="grid-column: 1 / -1; margin-top: 15px;">
+                    <button type="submit" class="btn btn-action" style="background: #28a745; color: white; width: 100%; padding: 10px; font-size: 1.1rem;">💾 Uložiť novú faktúru</button>
+                </div>
+                <div id="createStatus" style="grid-column: 1 / -1; font-weight: bold; text-align: center; margin-top: 10px;"></div>
+            </form>
         </div>
     </div>
 </div>
