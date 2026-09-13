@@ -263,6 +263,10 @@
         <tbody>
         </tbody>
     </table>
+        <div class="card" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; padding: 15px; border: 1px solid var(--border-color); background-color: var(--card-bg);">
+        <button id="btnOpenCreateReceivable" class="btn" style="background-color: #28a745; border:none; cursor:pointer;" onclick="alert('Formulár pre pohľadávky zatiaľ nie je vytvorený.')">Pridať nový záznam</button>
+        <a href="<?= base_url() ?>" class="btn" style="background-color: #6c757d; margin-left: auto;">Späť na domovskú stránku</a>
+    </div>
 
 <script>
 $(document).ready(function() {

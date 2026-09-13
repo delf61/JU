@@ -71,8 +71,8 @@ class LiabilityController extends ResourceController
     public function create()
     {
         $data = $this->request->getJSON(true);
-        if (empty($data['a']) || empty($data['b'])) {
-            return $this->failValidationError('Missing a or b');
+        if (empty($data['a'])) {
+            return $this->failValidationError('Missing date (a)');
         }
         $items = $data['items'] ?? [];
         unset($data['items']);

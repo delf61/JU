@@ -656,18 +656,51 @@
     <tbody>
     </tbody>
 </table>
+        <div class="card" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; padding: 15px; border: 1px solid var(--border-color); background-color: var(--card-bg);">
+        <button id="btnOpenCreateLiability" class="btn" style="background-color: #28a745; border:none; cursor:pointer;">Pridať nový záznam</button>
+        <a href="<?= base_url() ?>" class="btn" style="background-color: #6c757d; margin-left: auto;">Späť na domovskú stránku</a>
+    </div>
 
 <script>
 
-// QR Scanner Logic
+
+// Create Form & QR Logic
 var html5QrcodeScanner;
 
-function onScanSuccess(decodedText, decodedResult) {
-    // Zastavime skener po uspesnom nacitani
-    html5QrcodeScanner.clear();
-    $('#qr-reader').hide();
+$('#btnOpenCreateLiability').click(function() {
+    openCreateModal();
+});
 
-    // Posleme bysquare kod na server
+$('.close-create-modal').click(function() {
+    closeCreateModal();
+});
+
+function closeCreateModal() {
+    $('#createModal').hide();
+    if (html5QrcodeScanner) {
+        html5QrcodeScanner.clear();
+    }
+}
+
+function openCreateModal() {
+    $('#createModal').show();
+    $('#createStatus').text('');
+
+    // Predvyplnit dnesny datum
+    document.getElementById('create_a').valueAsDate = new Date();
+
+    // Spustit kameru
+    $('#qr-status').text('Inicializujem kameru...').css('color', 'orange');
+    if (!html5QrcodeScanner) {
+        html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: {width: 250, height: 250} }, false);
+    }
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+}
+
+function onScanSuccess(decodedText, decodedResult) {
+    html5QrcodeScanner.clear();
+    $('#qr-status').text('Spracovávam kód...').css('color', 'orange');
+
     $.ajax({
         url: '<?= base_url('invoices/api/liabilities/decode-bysquare') ?>',
         type: 'POST',
@@ -676,45 +709,81 @@ function onScanSuccess(decodedText, decodedResult) {
         contentType: 'application/json',
         success: function(res) {
             if(res.parsed) {
-                $('#qr-dodavatel').text(res.parsed.dodavatel);
-                $('#qr-ico').text(res.parsed.dodavatel_ico);
-                $('#qr-vs').text(res.parsed.ext_doklad);
-                $('#qr-suma').text(res.parsed.suma);
+                $('#qr-status').text('Kód úspešne načítaný! Formulár predvyplnený.').css('color', '#28a745');
+
+                $('#create_od').val(res.parsed.dodavatel);
+                $('#create_varsym').val(res.parsed.ext_doklad);
+                $('#create_z').val(res.parsed.suma);
 
                 let spl = res.parsed.splatnost;
                 if(spl && spl.length === 8) {
-                    $('#qr-splatnost').text(spl.substr(6,2) + '.' + spl.substr(4,2) + '.' + spl.substr(0,4));
+                    let y = spl.substr(0,4);
+                    let m = spl.substr(4,2);
+                    let d = spl.substr(6,2);
+                    $('#create_splat').val(`${y}-${m}-${d}`);
                 }
-
-                $('#qr-result').show();
+                let dod = res.parsed.dodanie;
+                if(dod && dod.length === 8) {
+                    let y = dod.substr(0,4);
+                    let m = dod.substr(4,2);
+                    let d = dod.substr(6,2);
+                    $('#create_a').val(`${y}-${m}-${d}`);
+                }
             }
         },
         error: function(xhr) {
-            $('#qr-error').text('Nepodarilo sa dekódovať QR kód (chyba komunikácie alebo nepodporovaný formát).').show();
+            $('#qr-status').text('Nepodarilo sa dekódovať QR kód.').css('color', 'red');
+            // Znovu nastartuj skener po 3 sekundach
+            setTimeout(function() {
+                html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+                $('#qr-status').text('Skúste skenovať znova...').css('color', 'orange');
+            }, 3000);
         }
     });
 }
 
 function onScanFailure(error) {
-    // ignurujeme varovania pri skenovani, kym sa nenajde kod
+    // ignore errors while scanning
 }
 
-function startScanner() {
-    $('#qr-result').hide();
-    $('#qr-error').hide();
-    $('#qr-reader').show();
-    $('#qrModal').show();
+$(document).on('submit', '#createForm', function(e) {
+    e.preventDefault();
+    $('#createStatus').text('Ukladám...').css('color', 'orange');
 
-    html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: {width: 250, height: 250} }, /* verbose= */ false);
+    var jsonData = {
+        a: $('#create_a').val(),
+        // b: cislo dokladu sa vygeneruje v backend logike
+        od: $('#create_od').val(),
+        var_sym: $('#create_varsym').val(),
+        splat: $('#create_splat').val(),
+        z: $('#create_z').val(),
+        vyrovn: $('#create_vyrovn').val(),
+        items: []
+    };
+
+    $.ajax({
+        url: '<?= base_url('invoices/liabilities') ?>',
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
+        data: JSON.stringify(jsonData),
+        contentType: 'application/json',
+        success: function(response) {
+            $('#createStatus').text('Úspešne uložené!').css('color', 'green');
+            setTimeout(function() {
+                closeCreateModal();
+                $('#liabilitiesTable').DataTable().ajax.reload();
+            }, 1500);
+        },
+        error: function(xhr) {
+            $('#createStatus').text('Chyba pri ukladaní.').css('color', 'red');
+        }
+    });
+});
+ }, /* verbose= */ false);
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 }
 
-$('.close-qr-modal').click(function() {
-    $('#qrModal').hide();
-    if(html5QrcodeScanner) {
-        html5QrcodeScanner.clear();
-    }
-});
+
 
 
 
@@ -782,7 +851,7 @@ $(document).ready(function() {
         }
         else if (e.key === "F3") {
             e.preventDefault();
-            startScanner();
+            openCreateModal();
         }
         else if (e.key === "F4") {
             e.preventDefault();
@@ -993,6 +1062,65 @@ $(document).on('submit', '#uploadForm', function(e) {
                 <button class="btn btn-action" style="margin-top:15px; background:#28a745; color:white; width:100%; font-size: 1.1em;" onclick="alert('Tu v buducnosti prepojime tlacitko na vytvorenie novej faktury v systeme.')">Pokračovať a vytvoriť Záväzok</button>
             </div>
             <div id="qr-error" style="margin-top: 15px; color: red; font-weight: bold; display:none;"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Create Liability Modal -->
+<div id="createModal" class="dos-modal">
+    <div class="dos-modal-content" style="width: 80%; max-width: 1200px; height: 80vh; display: flex; flex-direction: column;">
+        <div class="dos-modal-header">
+            <span class="close-create-modal close-modal">&times;</span>
+            <h3 style="margin:0; font-size: 1.2rem;">DATOVÝ EDITOR - Zadávanie novej došlej faktúry</h3>
+        </div>
+        <div class="modal-flex" style="flex-grow: 1; margin-top: 15px;">
+            <!-- Left Side: Form -->
+            <div class="modal-sidebar" style="flex: 1; display: flex; flex-direction: column;">
+                <form id="createForm" style="display: flex; flex-direction: column; gap: 10px;">
+                    <div>
+                        <label style="display:block; font-weight:bold;">Číslo dokladu (b)</label>
+                        <input type="text" id="create_b" name="b" style="width: 100%; padding: 5px;" placeholder="Bude vygenerované..." readonly>
+                    </div>
+                    <div>
+                        <label style="display:block; font-weight:bold;">Dátum (a)</label>
+                        <input type="date" id="create_a" name="a" required style="width: 100%; padding: 5px;">
+                    </div>
+                    <div>
+                        <label style="display:block; font-weight:bold;">Dodávateľ (od)</label>
+                        <input type="text" id="create_od" name="od" required style="width: 100%; padding: 5px;">
+                    </div>
+                    <div>
+                        <label style="display:block; font-weight:bold;">Ext. doklad (var_sym)</label>
+                        <input type="text" id="create_varsym" name="var_sym" style="width: 100%; padding: 5px;">
+                    </div>
+                    <div>
+                        <label style="display:block; font-weight:bold;">Splatnosť (splat)</label>
+                        <input type="date" id="create_splat" name="splat" style="width: 100%; padding: 5px;">
+                    </div>
+                    <div>
+                        <label style="display:block; font-weight:bold;">Suma celkom (zn)</label>
+                        <!-- Suma is practically mapped to z if we don't have items, but let's just create an empty field for UI representation for now, normally it maps to 'z' -->
+                        <input type="number" step="0.01" id="create_z" name="z" required style="width: 100%; padding: 5px;">
+                    </div>
+                    <div>
+                        <label style="display:block; font-weight:bold;">Vyrovnanie (vyrovn)</label>
+                        <input type="number" step="0.01" id="create_vyrovn" name="vyrovn" value="0.00" style="width: 100%; padding: 5px;">
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <button type="submit" class="btn btn-action" style="background: #28a745; color: white; width: 100%; padding: 10px; font-size: 1.1rem;">💾 Uložiť záznam</button>
+                    </div>
+                    <div id="createStatus" style="font-weight: bold; text-align: center; margin-top: 10px;"></div>
+                </form>
+            </div>
+
+            <!-- Right Side: QR Scanner -->
+            <div class="modal-preview" style="flex: 2; flex-direction: column; background: #000;">
+                <div id="qr-reader" style="width: 100%; height: 100%;"></div>
+                <div id="qr-status" style="padding: 10px; background: #333; color: white; width: 100%; text-align: center; font-weight: bold;">
+                    Pre urýchlenie namierte kameru na INVOICE/PAY by square kód.
+                </div>
+            </div>
         </div>
     </div>
 </div>

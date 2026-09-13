@@ -88,8 +88,47 @@ class LiabilityService
     /**
      * Create a liability with items
      */
-    public function createLiability($header, $items = [])
+
+    /**
+     * Legacy pCislo_Kz logic emulation: Find max `b` for the year and increment
+     */
+    public function generateNextB($year)
     {
+        $prefix = substr($year, 2, 2); // e.g., 2026 -> 26
+        // Many JU instances use prefix MM or YY. Let's just find the max b starting with the year or find max numeric.
+        // Actually, FAND typically stores 'b' as VARCHAR.
+        // To be safe, we query all 'b' for the given year 'a' and find the max numeric part.
+        $db = \Config\Database::connect();
+        $builder = $db->table('kz');
+        $builder->select('b');
+        $builder->where('YEAR(a)', $year);
+        $builder->orderBy('b', 'DESC');
+        $builder->limit(1);
+        $result = $builder->get()->getRowArray();
+
+        if ($result && !empty($result['b'])) {
+            // Usually b is something like '26001' or '26-001'
+            $lastB = $result['b'];
+            // Extract numeric part from the right
+            if (preg_match('/(\d+)$/', $lastB, $matches)) {
+                $num = (int)$matches[1];
+                $newNum = $num + 1;
+                $len = strlen($matches[1]);
+                $newB = preg_replace('/(\d+)$/', str_pad($newNum, $len, '0', STR_PAD_LEFT), $lastB);
+                return $newB;
+            }
+        }
+
+        // Default fallback if no invoices exist for the year
+        return $year . '0001';
+    }
+
+    public function createLiability(&$header, $items = [])
+    {
+        if (empty($header['b'])) {
+            $year = date('Y', strtotime($header['a']));
+            $header['b'] = $this->generateNextB($year);
+        }
         $db = \Config\Database::connect();
         $db->transStart();
 
