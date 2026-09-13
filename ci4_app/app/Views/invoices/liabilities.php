@@ -689,7 +689,7 @@ $(window).click(function(event) {
     }
 });
 
-$('#uploadForm').submit(function(e) {
+$(document).on('submit', '#uploadForm', function(e) {
     e.preventDefault();
     var formData = new FormData(this);
 
