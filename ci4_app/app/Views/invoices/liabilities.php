@@ -779,9 +779,6 @@ $(document).on('submit', '#createForm', function(e) {
         }
     });
 });
- }, /* verbose= */ false);
-    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
-}
 
 
 
