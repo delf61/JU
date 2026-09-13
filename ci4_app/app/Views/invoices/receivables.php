@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Všeobecné číselníky - DOS JU Migration</title>
+    <title>Pohľadávky</title>
     <style>
         body { font-family: sans-serif; margin: 20px; }
-        .container { display: flex; gap: 20px; }
-        .sidebar { min-width: 200px; border-right: 1px solid #ccc; padding-right: 20px; }
-        .content { flex-grow: 1; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; font-size: 14px; }
+        th, td { border: 1px solid #ddd; padding: 6px 8px; text-align: left; }
         th { background-color: #f2f2f2; }
-        .btn { padding: 5px 10px; cursor: pointer; }
-        .form-group { margin-bottom: 10px; }
-        .form-group label { display: block; margin-bottom: 5px; }
-        .form-group input { width: 100%; padding: 8px; box-sizing: border-box; }
-        #dictionary-form-container { display: none; margin-top: 20px; padding: 20px; border: 1px solid #ccc; background: #f9f9f9; }
-        #error-message { color: red; margin-bottom: 10px; display: none; }
-        #success-message { color: green; margin-bottom: 10px; display: none; }
+        .text-right { text-align: right; }
+        .success-msg { color: green; font-weight: bold; margin-bottom: 10px; }
+        .error-msg { color: red; font-weight: bold; margin-bottom: 10px; }
+        .summary-box { background: #f9f9f9; border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; display: flex; gap: 20px; }
+        .summary-section { flex: 1; }
+        .summary-section h3 { margin-top: 0; }
+        form.year-selector { margin-bottom: 20px; }
+        .btn { display: inline-block; padding: 5px 10px; text-decoration: none; background: #007bff; color: white; border-radius: 3px; }
+        .btn:hover { background: #0056b3; }
+        .btn-edit { background: #ffc107; color: black; }
+        .btn-edit:hover { background: #e0a800; }
     </style>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- DataTables CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 
     <!-- Theme Switcher CSS -->
     <style>
@@ -224,53 +230,98 @@
     </script>
 
 
-<h1>Všeobecné číselníky</h1>
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="success-msg"><?= esc(session()->getFlashdata('success')) ?></div>
+    <?php endif; ?>
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="error-msg"><?= esc(session()->getFlashdata('error')) ?></div>
+    <?php endif; ?>
 
-<div class="container">
-    <div class="sidebar">
-        <h3>Typy číselníkov</h3>
-        <ul id="dictionary-list" style="list-style-type: none; padding: 0;">
-            <li><button class="btn" style="width: 100%; margin-bottom: 5px;" onclick="app.loadDictionaries('kraje')">Kraje</button></li>
-            <li><button class="btn" style="width: 100%; margin-bottom: 5px;" onclick="app.loadDictionaries('okresy')">Okresy</button></li>
-            <li><button class="btn" style="width: 100%; margin-bottom: 5px;" onclick="app.loadDictionaries('mesta')">Mestá</button></li>
-            <li><button class="btn" style="width: 100%; margin-bottom: 5px;" onclick="app.loadDictionaries('banky')">Banky</button></li>
-        </ul>
-    </div>
-
-    <div class="content">
-        <h2 id="dictionary-title">Vyberte číselník</h2>
-
-        <div id="messages">
-            <div id="error-message"></div>
-            <div id="success-message"></div>
-        </div>
-
-        <button id="btn-add-new" class="btn" style="display:none;" onclick="app.showForm()">Pridať nový záznam</button>
-
-        <div id="table-container">
-            <table id="data-table" style="display:none;">
-                <thead id="data-table-head"></thead>
-                <tbody id="data-table-body"></tbody>
-            </table>
-        </div>
-
-        <div id="dictionary-form-container">
-            <h3 id="form-title">Pridať záznam</h3>
-            <form id="dictionary-form" onsubmit="app.saveDictionary(event)">
-                <input type="hidden" id="form-action-type" value="create">
-                <input type="hidden" id="form-record-id" value="">
-
-                <div id="form-fields"></div>
-
-                <button type="submit" class="btn" style="background-color: #4CAF50; color: white;">Uložiť</button>
-                <button type="button" class="btn" onclick="app.hideForm()">Zrušiť</button>
-            </form>
-        </div>
-    </div>
+<div style="margin-bottom: 20px;">
+    <h1 style="margin: 0; padding-bottom: 10px;">Pohľadávky</h1>
+    <h2 style="margin: 0; border-top: 2px solid #ccc; padding-top: 10px;"><?= esc($year) ?></h2>
 </div>
 
-<script src="/js/modules/dictionary.js"></script>
+    <div style="margin-bottom: 10px; font-size: 0.9em; color: #666;">
+        <strong>F2 / F10</strong>: Návrat domov &nbsp;|&nbsp;
+        <strong>F4</strong>: Položky (kppol) &nbsp;|&nbsp;
+        <strong>F8</strong>: Detail faktúry
+    </div>
 
+    <table id="receivablesTable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>dátum</th>
+                <th>doklad</th>
+                <th>zákazník</th>
+                <th class="text-right">celkove (zn)</th>
+                <th class="text-right">uhradené (pc)</th>
+                <th class="text-center">stav</th>
+                <th>akcie</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+<script>
+$(document).ready(function() {
+    $.fn.dataTable.ext.errMode = 'none';
+    $('#receivablesTable').on('error.dt', function(e, settings, techNote, message) {
+        console.error('DataTables Error:', message);
+        alert('Nepodarilo sa načítať dáta (možno chýbajúca tabuľka v DB alebo spojenie). Skontrolujte konzolu.');
+    });
+    var table = $('#receivablesTable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/sk.json"
+        },
+        "ajax": {
+            "url": "<?= base_url('invoices/api/receivables') ?>?year=<?= esc($year) ?>",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "a", render: function(data) {
+                if(!data) return '';
+                let d = new Date(data);
+                return d.toLocaleDateString('sk-SK');
+            }},
+            { "data": "b" },
+            { "data": "od" },
+            { "data": "zn", className: "text-right", render: $.fn.dataTable.render.number(' ', ',', 2, '', ' €') },
+            { "data": "uhrada", className: "text-right", render: $.fn.dataTable.render.number(' ', ',', 2, '', ' €') },
+            { "data": "uhr", className: "text-center", render: function(data) {
+                if (data === '■') return '<span style="color:green;">Uhradené</span>';
+                if (data === '<') return '<span style="color:orange;">Preplatok</span>';
+                if (data === '>') return '<span style="color:red;">Čiastočne</span>';
+                return '<span style="color:gray;">Neuhradené</span>';
+            }},
+            {
+                "data": null,
+                "render": function(data, type, row) {
+                    return `<button class="btn btn-action" onclick="alert('F4 Položky pre doklad: ${row.b}')">F4</button>
+                            <button class="btn btn-action btn-edit" onclick="alert('F8 Detail pre doklad: ${row.b}')">F8</button>`;
+                }
+            }
+        ],
+        "order": [[0, "desc"]]
+    });
+
+    $(document).keydown(function(e) {
+        if (e.key === "F2" || e.key === "F10") {
+            e.preventDefault();
+            window.location.href = "<?= base_url('/') ?>";
+        }
+        else if (e.key === "F4") {
+            e.preventDefault();
+            alert("Stlačené F4 - zobrazenie položiek (kppol) pre aktuálne vybraný riadok (vyžaduje select logiku).");
+        }
+        else if (e.key === "F8") {
+            e.preventDefault();
+            alert("Stlačené F8 - zobrazenie detailu (eKP) pre aktuálne vybraný riadok.");
+        }
+    });
+});
+</script>
 
 <!-- Global ESC key handler for all modals -->
 <script>

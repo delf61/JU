@@ -45,11 +45,44 @@ class LiabilityService
     }
 
     /**
-     * Fetch all liabilities
+     * Fetch all liabilities for a given year and append calculated totals
      */
-    public function getAllLiabilities()
+    public function getAllLiabilities($year = null)
     {
-        return $this->kzModel->findAll();
+        if ($year) {
+            $this->kzModel->where('YEAR(a)', $year);
+        }
+
+        $invoices = $this->kzModel->findAll();
+
+        $attachmentModel = new \App\Models\KzAttachmentModel();
+        // Načítajme si zoznam dokladov, ktoré majú aspoň 1 prílohu na minimalizáciu DB queries
+        $dokladySPrilohou = [];
+        if (!empty($invoices)) {
+            $doklady = array_column($invoices, 'b');
+            if (!empty($doklady)) {
+                try {
+                    $prilohy = $attachmentModel->select('kz_b')->distinct()->whereIn('kz_b', $doklady)->findAll();
+                    $dokladySPrilohou = array_column($prilohy, 'kz_b');
+                } catch (\Throwable $e) {
+                    log_message('error', 'Chyba pri nacitani priloh: ' . $e->getMessage());
+                    $dokladySPrilohou = [];
+                }
+            }
+        }
+
+        foreach ($invoices as &$invoice) {
+            $invYear = $year ? $year : (int)date('Y', strtotime($invoice['a']));
+            $statusData = $this->calculateStatus($invoice, $invYear);
+
+            $invoice['zn'] = $statusData['zn'];
+            $invoice['dph_sk'] = $statusData['dph_sk'];
+            $invoice['uhrada'] = $statusData['uhrada'];
+            $invoice['uhr'] = $statusData['status'];
+            $invoice['has_attachment'] = in_array($invoice['b'], $dokladySPrilohou);
+        }
+
+        return $invoices;
     }
 
     /**

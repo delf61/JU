@@ -51,7 +51,8 @@ $routes->group('partners', function($routes) {
 // Invoices Routes (Receivables and Liabilities)
 $routes->group('invoices', function($routes) {
     // Receivables (kp/kppol)
-    $routes->get('receivables', 'ReceivableController::index');
+    $routes->get('receivables', 'ReceivableController::webIndex');
+    $routes->get('api/receivables', 'ReceivableController::index');
     $routes->post('receivables', 'ReceivableController::create');
     $routes->get('receivables/(:segment)/(:segment)', 'ReceivableController::show/$1/$2');
     $routes->put('receivables/(:segment)/(:segment)', 'ReceivableController::update/$1/$2');
@@ -59,7 +60,15 @@ $routes->group('invoices', function($routes) {
     $routes->get('receivables/(:segment)/(:segment)/status', 'ReceivableController::calculateStatus/$1/$2');
 
     // Liabilities (kz/kzpol)
-    $routes->get('liabilities', 'LiabilityController::index');
+    $routes->get('liabilities', 'LiabilityController::webIndex');
+    $routes->get('api/liabilities', 'LiabilityController::index');
+
+    // Liabilities Attachments
+    $routes->get('api/liabilities/attachments', 'LiabilityController::getAttachments');
+    $routes->post('api/liabilities/attachments/upload', 'LiabilityController::uploadAttachment');
+    $routes->get('api/liabilities/attachments/download/(:num)', 'LiabilityController::downloadAttachment/$1');
+    $routes->get('api/liabilities/attachments/view/(:num)', 'LiabilityController::viewAttachment/$1');
+
     $routes->post('liabilities', 'LiabilityController::create');
     $routes->get('liabilities/(:segment)/(:segment)', 'LiabilityController::show/$1/$2');
     $routes->put('liabilities/(:segment)/(:segment)', 'LiabilityController::update/$1/$2');
@@ -118,3 +127,6 @@ $routes->group('vat', function($routes) {
     $routes->get('api/rates', 'VatController::rates');
     $routes->get('api/history', 'VatController::history');
 });
+
+// Global Year context endpoint
+$routes->post('api/settings/set-year', 'Home::setYear');

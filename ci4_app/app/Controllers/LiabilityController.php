@@ -17,9 +17,25 @@ class LiabilityController extends ResourceController
 
     public function index()
     {
-        $data = $this->liabilityService->getAllLiabilities();
-        return $this->respond($data);
+        try {
+            $year = $this->request->getGet('year') ?: (session()->get('accounting_year') ?? date('Y'));
+            $data = $this->liabilityService->getAllLiabilities($year);
+            return $this->respond($data);
+        } catch (\Throwable $e) {
+            log_message('error', $e->getMessage());
+            return $this->respond(['error' => 'Chyba databázy: ' . $e->getMessage()], 500);
+        }
     }
+
+    public function webIndex()
+    {
+        $year = $this->request->getGet('year') ?: (session()->get('accounting_year') ?? date('Y'));
+        $data = [
+            'year' => $year
+        ];
+        return view('invoices/liabilities', $data);
+    }
+
 
     public function show($a = null, $b = null)
     {
@@ -80,4 +96,123 @@ class LiabilityController extends ResourceController
         }
         return $this->fail('Failed to delete');
     }
+
+    // --- Prílohy (Smart Attachments) ---
+
+    public function getAttachments()
+    {
+        $doklad = $this->request->getGet('b');
+        if (!$doklad) {
+            return $this->response->setJSON(['error' => 'Chýba číslo dokladu (b)'])->setStatusCode(400);
+        }
+
+        $model = new \App\Models\KzAttachmentModel();
+        $attachments = $model->where('kz_b', $doklad)->findAll();
+
+        return $this->response->setJSON($attachments);
+    }
+
+    public function uploadAttachment()
+    {
+        $doklad = $this->request->getPost('b');
+        if (!$doklad) {
+            return $this->response->setJSON(['error' => 'Chýba číslo dokladu (b)'])->setStatusCode(400);
+        }
+
+        $file = $this->request->getFile('attachment');
+        if (!$file || !$file->isValid()) {
+            return $this->response->setJSON(['error' => 'Súbor nie je platný alebo nebol nahratý.'])->setStatusCode(400);
+        }
+
+        $allowedTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+        if (!in_array($file->getMimeType(), $allowedTypes)) {
+             return $this->response->setJSON(['error' => 'Nepovolený formát. Povolené sú len PDF, JPG, PNG.'])->setStatusCode(400);
+        }
+
+        $newName = $file->getRandomName();
+        $uploadPath = WRITEPATH . 'uploads/zavazky';
+
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0755, true);
+        }
+
+        if ($file->move($uploadPath, $newName)) {
+            try {
+                $model = new \App\Models\KzAttachmentModel();
+                $data = [
+                    'kz_b' => $doklad,
+                    'path' => $newName,
+                    'original_name' => $file->getClientName()
+                ];
+
+                $insertID = $model->insert($data);
+
+                if ($insertID === false) {
+                    // Ak databaza vrati chybu (napr. constraint)
+                    log_message('error', 'Upload attachment insert failed: ' . json_encode($model->errors()));
+                    return $this->response->setJSON(['error' => 'Chyba databázy: Záznam sa neuložil do tabuľky kz_prilohy.'])->setStatusCode(500);
+                }
+
+                // Generovanie noveho CSRF hashu (pre pripad ze form po uploade potrebuje byt nadalej "zivy")
+                return $this->response->setJSON([
+                    'success' => true,
+                    'message' => 'Súbor bol úspešne nahratý.',
+                    'attachment' => $data,
+                    'csrf_token' => csrf_hash()
+                ]);
+            } catch (\Throwable $e) {
+                log_message('error', 'Upload DB Exception: ' . $e->getMessage());
+                return $this->response->setJSON(['error' => 'Kritická chyba DB: ' . $e->getMessage()])->setStatusCode(500);
+            }
+        }
+
+        $errorMsg = $file->getErrorString() . ' (' . $file->getError() . ')';
+        return $this->response->setJSON(['error' => 'Chyba pri ukladaní súboru na disk: ' . $errorMsg])->setStatusCode(500);
+    }
+
+    public function downloadAttachment($id)
+    {
+        $model = new \App\Models\KzAttachmentModel();
+        $attachment = $model->find($id);
+
+        if (!$attachment) {
+            return $this->response->setStatusCode(404)->setBody('Príloha neexistuje.');
+        }
+
+        $filePath = WRITEPATH . 'uploads/zavazky/' . $attachment['path'];
+
+        if (!file_exists($filePath)) {
+            return $this->response->setStatusCode(404)->setBody('Súbor na disku neexistuje.');
+        }
+
+        return $this->response->download($filePath, null)->setFileName($attachment['original_name']);
+    }
+
+    public function viewAttachment($id)
+    {
+        $model = new \App\Models\KzAttachmentModel();
+        $attachment = $model->find($id);
+
+        if (!$attachment) {
+            return $this->response->setStatusCode(404)->setBody('Príloha neexistuje.');
+        }
+
+        $filePath = WRITEPATH . 'uploads/zavazky/' . $attachment['path'];
+
+        if (!file_exists($filePath)) {
+            return $this->response->setStatusCode(404)->setBody('Súbor na disku neexistuje.');
+        }
+
+        $mime = mime_content_type($filePath);
+        if (!$mime) {
+            $mime = 'application/octet-stream';
+        }
+
+        return $this->response
+            ->setStatusCode(200)
+            ->setContentType($mime)
+            ->setBody(file_get_contents($filePath))
+            ->setHeader('Content-Disposition', 'inline; filename="' . $attachment['original_name'] . '"');
+    }
+
 }

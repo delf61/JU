@@ -171,8 +171,31 @@
             border-top: 2px solid var(--border-color) !important;
         }
     </style>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = now.getFullYear();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+
+        const clockEl = document.getElementById('navbar-clock');
+        if (clockEl) {
+            clockEl.textContent = `${day}.${month}.${year} ${hours}:${minutes}`;
+        }
+    }
+    setInterval(updateClock, 1000);
+</script>
+
 </head>
-<body>
+<body onload="updateClock()">
+
+<div style="text-align: center; font-weight: bold; font-size: 1.2em; margin-bottom: 15px;" id="navbar-clock">
+    <?= date('d.m.Y H:i') ?>
+</div>
+
     <!-- Theme Switcher JS -->
     <div class="theme-switch-wrapper">
         <span class="theme-label">Téma</span>
@@ -213,12 +236,10 @@
         <div class="error-msg"><?= esc(session()->getFlashdata('error')) ?></div>
     <?php endif; ?>
 
-<div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-        <h1 style="margin: 0;">Peňažný denník</h1>
-        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year - 1) ?><?= isset($_GET['filter']) ? '&filter='.esc($_GET['filter']) : '' ?>" style="text-decoration: none; padding: 0 10px; font-size: 1.5em; background: #333; color: #fff; border-radius: 4px;">-</a>
-        <h1 style="margin: 0;"><?= esc($year) ?></h1>
-        <a href="<?= site_url('cashbook') ?>?year=<?= esc($year + 1) ?><?= isset($_GET['filter']) ? '&filter='.esc($_GET['filter']) : '' ?>" style="text-decoration: none; padding: 0 10px; font-size: 1.5em; background: #333; color: #fff; border-radius: 4px;">+</a>
-    </div>
+<div style="margin-bottom: 20px;">
+    <h1 style="margin: 0; padding-bottom: 10px;">Peňažný denník</h1>
+    <h2 style="margin: 0; border-top: 2px solid #ccc; padding-top: 10px;"><?= esc($year) ?></h2>
+</div>
 
 
 
@@ -517,6 +538,33 @@
                 }
             }
         });
+</script>
+
+
+<!-- Global ESC key handler for all modals -->
+<script>
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape") {
+            // Close any custom .modal or .dos-modal
+            document.querySelectorAll('.modal, .dos-modal').forEach(function(modal) {
+                modal.style.display = 'none';
+            });
+            // Also attempt to close any standard Bootstrap modals if Bootstrap is loaded
+            if (typeof bootstrap !== 'undefined' && typeof bootstrap.Modal !== 'undefined') {
+                const openModals = document.querySelectorAll('.modal.show');
+                openModals.forEach(modalEl => {
+                    const modalInstance = bootstrap.Modal.getInstance(modalEl);
+                    if (modalInstance) {
+                        modalInstance.hide();
+                    }
+                });
+            }
+            // And if jQuery is used with hide() logic
+            if (typeof $ !== 'undefined') {
+                $('.modal, .dos-modal').hide();
+            }
+        }
+    });
 </script>
 
 </body>

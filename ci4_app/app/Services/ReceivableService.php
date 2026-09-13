@@ -45,11 +45,27 @@ class ReceivableService
     }
 
     /**
-     * Fetch all receivables
+     * Fetch all receivables for a given year and append calculated totals
      */
-    public function getAllReceivables()
+    public function getAllReceivables($year = null)
     {
-        return $this->kpModel->findAll();
+        if ($year) {
+            $this->kpModel->where('YEAR(a)', $year);
+        }
+
+        $invoices = $this->kpModel->findAll();
+
+        foreach ($invoices as &$invoice) {
+            $invYear = $year ? $year : (int)date('Y', strtotime($invoice['a']));
+            $statusData = $this->calculateStatus($invoice, $invYear);
+
+            $invoice['zn'] = $statusData['zn'];
+            $invoice['dph_sk'] = $statusData['dph_sk'];
+            $invoice['uhrada'] = $statusData['uhrada'];
+            $invoice['uhr'] = $statusData['status'];
+        }
+
+        return $invoices;
     }
 
     /**
