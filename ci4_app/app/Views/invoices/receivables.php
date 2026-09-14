@@ -18,143 +18,61 @@
 
     <!-- Theme Switcher CSS -->
     <style>
-        :root {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --card-bg: #1e1e1e;
-            --border-color: #333;
-            --th-bg: #2d2d2d;
-            --hover-bg: #2a2a2a;
-            --link-color: #4da3ff;
-        }
+        body { font-family: sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; font-size: 14px; }
+        th, td { border: 1px solid #ddd; padding: 6px 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .text-right { text-align: right; }
+        .success-msg { color: green; font-weight: bold; margin-bottom: 10px; }
+        .error-msg { color: red; font-weight: bold; margin-bottom: 10px; }
+        .summary-box { background: #f9f9f9; border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; display: flex; gap: 20px; }
+        .summary-section { flex: 1; }
+        .summary-section h3 { margin-top: 0; }
+        form.year-selector { margin-bottom: 20px; }
+        .btn { display: inline-block; padding: 5px 10px; text-decoration: none; background: #007bff; color: white; border-radius: 3px; }
+        .btn:hover { background: #0056b3; }
+        .btn-edit { background: #ffc107; color: black; }
+        .btn-edit:hover { background: #e0a800; }
 
-        [data-theme="light"] {
-            --bg-color: #f8f9fa;
-            --text-color: #212529;
-            --card-bg: #ffffff;
-            --border-color: #dee2e6;
-            --th-bg: #e9ecef;
-            --hover-bg: #f2f2f2;
-            --link-color: #0d6efd;
-        }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: monospace;
-            padding: 20px;
-        }
+    .btn-attachment-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-        table.dataTable {
-            color: var(--text-color) !important;
-            border-collapse: collapse;
-        }
+    .btn-attachment-has {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #343a40; /* tmavy stvorec */
+        color: white; /* biela sponka */
+        border: 1px solid #23272b;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-has:hover { background-color: #23272b; }
 
-        table.dataTable thead th {
-            border-bottom: 2px solid var(--border-color) !important;
-            background-color: var(--th-bg) !important;
-        }
+    .btn-attachment-empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #e9ecef; /* sedy stvorec */
+        color: transparent; /* bez sponky - text je transparentny alebo ziadny */
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-empty:hover { background-color: #dde0e3; }
 
-        tr:nth-child(even) {
-            background-color: var(--hover-bg) !important;
-        }
 
-        .header {
-            background-color: var(--card-bg) !important;
-        }
-
-        a {
-            color: var(--link-color);
-        }
-
-        input, select {
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-        }
-
-        .theme-switch-wrapper {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .theme-switch {
-            display: inline-block;
-            height: 34px;
-            position: relative;
-            width: 60px;
-        }
-
-        .theme-switch input {
-            display: none;
-        }
-
-        .slider {
-            background-color: #ccc;
-            bottom: 0;
-            cursor: pointer;
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: 0;
-            transition: .4s;
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            background-color: #fff;
-            bottom: 4px;
-            content: "";
-            height: 26px;
-            left: 4px;
-            position: absolute;
-            transition: .4s;
-            width: 26px;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #2196F3;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-
-        .theme-label {
-            margin-right: 10px;
-            font-weight: bold;
-        }
-
-        /* DataTables dark mode overrides */
-        .dataTables_wrapper .dataTables_length,
-        .dataTables_wrapper .dataTables_filter,
-        .dataTables_wrapper .dataTables_info,
-        .dataTables_wrapper .dataTables_processing,
-        .dataTables_wrapper .dataTables_paginate {
-            color: var(--text-color) !important;
-        }
-
-        .dataTables_wrapper .dataTables_paginate .paginate_button {
-            color: var(--text-color) !important;
-        }
-
-        table.dataTable tbody tr {
-            background-color: var(--card-bg) !important;
-        }
-
-        .summary-list li {
-            border-bottom: 1px dashed var(--border-color) !important;
-        }
-
-        .summary-list li.total {
-            border-top: 2px solid var(--border-color) !important;
-        }
-
+    /* Modal styles mimicking DOS UI overlay */
     .dos-modal {
         display: none;
         position: fixed;
@@ -165,7 +83,7 @@
         height: 100%;
         background-color: rgba(0,0,0,0.7);
     }
-    .dos-modal-content {
+        .dos-modal-content {
         background-color: var(--card-bg);
         margin: 5% auto;
         padding: 20px;
@@ -178,24 +96,7 @@
         color: var(--text-color);
         box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
-    .dos-modal-header {
-        border-bottom: 1px solid var(--border-color);
-        margin-bottom: 15px;
-        padding-bottom: 5px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .close-modal {
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    .close-modal:hover, .close-modal:focus {
-        color: #fff;
-        text-decoration: none;
-    }
+
     .fand-form-grid {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
@@ -211,9 +112,6 @@
     .fand-form-grid input, .fand-form-grid select {
         padding: 4px;
         width: 100%;
-        background-color: var(--card-bg);
-        color: var(--text-color);
-        border: 1px solid var(--border-color);
     }
     .fand-span-1 { grid-column: span 1; }
     .fand-span-2 { grid-column: span 2; }
@@ -227,7 +125,63 @@
     .fand-span-10 { grid-column: span 10; }
     .fand-span-12 { grid-column: span 12; }
 
-    </style>
+
+    .fand-form-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 8px;
+        align-items: center;
+        font-family: monospace;
+        font-size: 1.1em;
+    }
+    .fand-form-grid label {
+        margin: 0;
+        white-space: nowrap;
+    }
+    .fand-form-grid input, .fand-form-grid select {
+        padding: 4px;
+        width: 100%;
+    }
+    .fand-span-1 { grid-column: span 1; }
+    .fand-span-2 { grid-column: span 2; }
+    .fand-span-3 { grid-column: span 3; }
+    .fand-span-4 { grid-column: span 4; }
+    .fand-span-5 { grid-column: span 5; }
+    .fand-span-6 { grid-column: span 6; }
+    .fand-span-7 { grid-column: span 7; }
+    .fand-span-8 { grid-column: span 8; }
+    .fand-span-9 { grid-column: span 9; }
+    .fand-span-10 { grid-column: span 10; }
+    .fand-span-12 { grid-column: span 12; }
+
+
+    .dos-modal-header {
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+    }
+    .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close-modal:hover,
+    .close-modal:focus {
+        color: #fff;
+        text-decoration: none;
+    }
+    .attachment-list {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 15px;
+    }
+    .attachment-list li {
+        padding: 5px;
+        border-bottom: 1px dashed var(--border-color);
+    }
+</style>
 
 <script>
     function updateClock() {
