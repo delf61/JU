@@ -338,10 +338,7 @@ $(document).ready(function() {
 });
 
 // Create Receivable (DATOVÝ EDITOR eKP) Logic
-$('#btnOpenCreateReceivable').click(function(e) {
-    e.preventDefault();
-    openCreateModal();
-});
+
 
 $('.close-create-modal').click(function() {
     $('#createModal').hide();
@@ -403,10 +400,7 @@ function openCreateModal() {
     });
 
 // Create Receivable (DATOVÝ EDITOR eKP) Logic
-$('#btnOpenCreateReceivable').click(function(e) {
-    e.preventDefault();
-    openCreateModal();
-});
+
 
 $('.close-create-modal').click(function() {
     $('#createModal').hide();
@@ -486,6 +480,30 @@ function openCreateModal() {
             }
         });
     });
+
+    $('#btnOpenCreateReceivable').click(function(e) {
+        e.preventDefault();
+        $('#createForm')[0].reset();
+
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const todayStr = `${year}-${month}-${day}`;
+        $('#create_a').val(todayStr);
+
+        $.get('/api/receivables/next-b', function(data) {
+            if (data && data.next_b) {
+                $('#create_b').val(data.next_b);
+            }
+        });
+
+        $('#createModal').show();
+    });
+
+    $('.close-modal').click(function() {
+        $('#createModal').hide();
+    });
 });
 
 
@@ -496,7 +514,7 @@ function openCreateModal() {
 <div id="createModal" class="dos-modal">
     <div class="dos-modal-content">
         <div class="dos-modal-header">
-            <h3 style="margin:0; font-size: 1.2rem;">DATOVÝ EDITOR &nbsp;&nbsp;&nbsp; Zadávanie novej odoslanej faktúry</h3>
+            <h3 style="margin:0; font-size: 1.2rem;">Zadávanie novej odoslanej faktúry</h3>
             <span class="close-create-modal close-modal">&times;</span>
         </div>
 
