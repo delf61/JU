@@ -53,6 +53,7 @@ $routes->group('invoices', function($routes) {
     // Receivables (kp/kppol)
     $routes->get('receivables', 'ReceivableController::webIndex');
     $routes->get('api/receivables', 'ReceivableController::index');
+    $routes->get('api/receivables/next-b', 'ReceivableController::nextB');
     $routes->post('receivables', 'ReceivableController::create');
     $routes->get('receivables/(:segment)/(:segment)', 'ReceivableController::show/$1/$2');
     $routes->put('receivables/(:segment)/(:segment)', 'ReceivableController::update/$1/$2');

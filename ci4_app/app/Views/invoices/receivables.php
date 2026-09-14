@@ -398,7 +398,7 @@ $(document).ready(function() {
             } else {
                 $('#dph_label').text('DPH (€)');
             }
-            $.get('/vat/api/rates?date=' + dateStr, function(data) {
+            $.get('<?= base_url('vat/api/rates') ?>?date=' + dateStr, function(data) {
                 if (data && data.upper !== undefined) {
                     $('#dph').val(data.upper.toFixed(2));
                 }
@@ -423,14 +423,14 @@ $(document).ready(function() {
             $('#dph_label').text('DPH (€)');
         }
 
-        $.get('/vat/api/rates?date=' + todayStr, function(data) {
+        $.get('<?= base_url('vat/api/rates') ?>?date=' + todayStr, function(data) {
             if (data && data.upper !== undefined) {
                 $('#dph').val(data.upper.toFixed(2));
             }
         });
 
 
-        $.get('/invoices/api/receivables/next-b', function(data) {
+        $.get('<?= base_url('invoices/api/receivables/next-b') ?>', function(data) {
             if (data && data.next_b) {
                 $('#create_b').val(data.next_b);
             }
@@ -455,7 +455,7 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: '/invoices/receivables',
+            url: '<?= base_url('invoices/receivables') ?>',
             type: 'POST',
             data: formData,
             processData: false,
@@ -517,7 +517,7 @@ $(document).ready(function() {
     });
 
     // Autocomplete pre pole Zákazník (#od)
-    $.get('/partners/api', function(data) {
+    $.get('<?= base_url('partners/api') ?>', function(data) {
         if (data && Array.isArray(data)) {
             let partnerData = data.map(function(p) {
                 return {

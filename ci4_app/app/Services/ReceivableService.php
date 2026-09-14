@@ -69,6 +69,26 @@ class ReceivableService
     /**
      * Create a receivable with items
      */
+        public function generateNextB($year)
+    {
+        $lastInvoice = $this->kpModel->where('YEAR(a)', $year)
+            ->orderBy('b', 'DESC')
+            ->first();
+
+        if (!$lastInvoice || empty($lastInvoice['b'])) {
+            return '50-001-' . $year; // FAND format fallback (or similar)
+        }
+
+        $parts = explode('-', $lastInvoice['b']);
+        if (count($parts) >= 2 && is_numeric($parts[1])) {
+            $num = (int)$parts[1] + 1;
+            $parts[1] = str_pad((string)$num, 3, '0', STR_PAD_LEFT);
+            return implode('-', $parts);
+        }
+
+        return $lastInvoice['b'] . '-1';
+    }
+
     public function createReceivable($header, $items = [])
     {
         $db = \Config\Database::connect();

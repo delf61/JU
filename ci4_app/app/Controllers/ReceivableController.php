@@ -65,6 +65,13 @@ class ReceivableController extends ResourceController
         return $this->respond($status);
     }
 
+        public function nextB()
+    {
+        $year = $this->request->getGet('year') ?: session()->get('accounting_year') ?? date('Y');
+        $next = $this->receivableService->generateNextB($year);
+        return $this->respond(['next_b' => $next]);
+    }
+
     public function create()
     {
         $data = $this->request->getJSON(true) ?: $this->request->getPost();
