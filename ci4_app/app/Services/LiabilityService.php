@@ -45,90 +45,18 @@ class LiabilityService
     }
 
     /**
-     * Fetch all liabilities for a given year and append calculated totals
+     * Fetch all liabilities
      */
-    public function getAllLiabilities($year = null)
+    public function getAllLiabilities()
     {
-        if ($year) {
-            $this->kzModel->where('YEAR(a)', $year);
-        }
-
-        $invoices = $this->kzModel->findAll();
-
-        $attachmentModel = new \App\Models\KzAttachmentModel();
-        // Načítajme si zoznam dokladov, ktoré majú aspoň 1 prílohu na minimalizáciu DB queries
-        $dokladySPrilohou = [];
-        if (!empty($invoices)) {
-            $doklady = array_column($invoices, 'b');
-            if (!empty($doklady)) {
-                try {
-                    $prilohy = $attachmentModel->select('kz_b')->distinct()->whereIn('kz_b', $doklady)->findAll();
-                    $dokladySPrilohou = array_column($prilohy, 'kz_b');
-                } catch (\Throwable $e) {
-                    log_message('error', 'Chyba pri nacitani priloh: ' . $e->getMessage());
-                    $dokladySPrilohou = [];
-                }
-            }
-        }
-
-        foreach ($invoices as &$invoice) {
-            $invYear = $year ? $year : (int)date('Y', strtotime($invoice['a']));
-            $statusData = $this->calculateStatus($invoice, $invYear);
-
-            $invoice['zn'] = $statusData['zn'];
-            $invoice['dph_sk'] = $statusData['dph_sk'];
-            $invoice['uhrada'] = $statusData['uhrada'];
-            $invoice['uhr'] = $statusData['status'];
-            $invoice['has_attachment'] = in_array($invoice['b'], $dokladySPrilohou);
-        }
-
-        return $invoices;
+        return $this->kzModel->findAll();
     }
 
     /**
      * Create a liability with items
      */
-
-    /**
-     * Legacy pCislo_Kz logic emulation: Find max `b` for the year and increment
-     */
-    public function generateNextB($year)
+    public function createLiability($header, $items = [])
     {
-        $prefix = substr($year, 2, 2); // e.g., 2026 -> 26
-        // Many JU instances use prefix MM or YY. Let's just find the max b starting with the year or find max numeric.
-        // Actually, FAND typically stores 'b' as VARCHAR.
-        // To be safe, we query all 'b' for the given year 'a' and find the max numeric part.
-        $db = \Config\Database::connect();
-        $builder = $db->table('kz');
-        $builder->select('b');
-        $builder->where('YEAR(a)', $year);
-        $builder->orderBy('b', 'DESC');
-        $builder->limit(1);
-        $result = $builder->get()->getRowArray();
-
-        if ($result && !empty($result['b'])) {
-            // Usually b is something like '26001' or '26-001'
-            $lastB = $result['b'];
-            // Extract numeric part from the right
-            if (preg_match('/(\d+)$/', $lastB, $matches)) {
-                $num = (int)$matches[1];
-                $newNum = $num + 1;
-                $len = strlen($matches[1]);
-                $newB = preg_replace('/(\d+)$/', str_pad($newNum, $len, '0', STR_PAD_LEFT), $lastB);
-                return $newB;
-            }
-        }
-
-        // Default fallback if no invoices exist for the year
-        return $year . '0001';
-    }
-
-    public function createLiability(&$header, $items = [])
-    {
-        if (empty($header['b'])) {
-            $year = date('Y', strtotime($header['a']));
-            $header['b'] = $this->generateNextB($year);
-        }
         $db = \Config\Database::connect();
         $db->transStart();
 

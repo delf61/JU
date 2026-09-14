@@ -23,25 +23,9 @@ class ReceivableController extends ResourceController
             return $this->respond($data);
         } catch (\Throwable $e) {
             log_message('error', $e->getMessage());
-            return $this->respond(['error' => 'Chyba databázy: ' . $e->getMessage()], 500);
+            return $this->respond(['error' => 'Chyba databazy: ' . $e->getMessage()], 500);
         }
     }
-
-    public function webIndex()
-    {
-        $year = $this->request->getGet('year');
-        if (!$year) {
-            $year = session()->get('accounting_year') ?? date('Y');
-        }
-
-        $data = [
-            'year' => $year,
-            // 'entries' fetched via API call by DataTables
-        ];
-
-        return view('invoices/receivables', $data);
-    }
-
 
     public function show($a = null, $b = null)
     {

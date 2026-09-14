@@ -45,7 +45,7 @@ class ReceivableService
     }
 
     /**
-     * Fetch all receivables for a given year and append calculated totals
+     * Fetch all receivables
      */
     public function getAllReceivables($year = null)
     {
@@ -58,11 +58,9 @@ class ReceivableService
         foreach ($invoices as &$invoice) {
             $invYear = $year ? $year : (int)date('Y', strtotime($invoice['a']));
             $statusData = $this->calculateStatus($invoice, $invYear);
-
-            $invoice['zn'] = $statusData['zn'];
-            $invoice['dph_sk'] = $statusData['dph_sk'];
-            $invoice['uhrada'] = $statusData['uhrada'];
-            $invoice['uhr'] = $statusData['status'];
+            $invoice['zn'] = $statusData['zn'] ?? 0;
+            $invoice['uhrada'] = $statusData['uhrada'] ?? 0;
+            $invoice['uhr'] = $statusData['uhr'] ?? '';
         }
 
         return $invoices;

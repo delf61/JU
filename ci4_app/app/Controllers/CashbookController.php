@@ -64,7 +64,7 @@ class CashbookController extends ResourceController
     {
         $year = $this->request->getGet('year');
         if (!$year) {
-            $year = session()->get('accounting_year') ?? date('Y');
+            $year = date('Y');
         }
 
         $filter = $this->request->getGet('filter');

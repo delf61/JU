@@ -1,0 +1,12 @@
+PHP Warning:  require(/app/ci4_app/app/Config/../../vendor/codeigniter4/framework/system/Boot.php): Failed to open stream: No such file or directory in /app/ci4_app/spark on line 85
+
+Warning: require(/app/ci4_app/app/Config/../../vendor/codeigniter4/framework/system/Boot.php): Failed to open stream: No such file or directory in /app/ci4_app/spark on line 85
+PHP Fatal error:  Uncaught Error: Failed opening required '/app/ci4_app/app/Config/../../vendor/codeigniter4/framework/system/Boot.php' (include_path='.:/usr/share/php') in /app/ci4_app/spark:85
+Stack trace:
+#0 {main}
+  thrown in /app/ci4_app/spark on line 85
+
+Fatal error: Uncaught Error: Failed opening required '/app/ci4_app/app/Config/../../vendor/codeigniter4/framework/system/Boot.php' (include_path='.:/usr/share/php') in /app/ci4_app/spark:85
+Stack trace:
+#0 {main}
+  thrown in /app/ci4_app/spark on line 85

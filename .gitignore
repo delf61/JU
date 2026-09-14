@@ -11,3 +11,6 @@ temp.sql
 CI4_JU_EXPORT.zip
 ju_migration_pk.gz
 ju_migration_pk.zip
+ju_migration.sql_pk_new
+ju_migration.sql_09_12.gz
+ju_migration_temp.sql
