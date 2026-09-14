@@ -536,12 +536,15 @@ $(document).ready(function() {
     $.get('<?= base_url('partners/api') ?>', function(data) {
         if (data && Array.isArray(data)) {
             let partnerData = data.map(function(p) {
+                let pName = p.firma ? p.firma : p.meno;
+                if (!pName) pName = '';
+                let pCity = p.miesto ? p.miesto : '';
                 return {
-                    label: p.nazov + (p.mesto ? ' (' + p.mesto + ')' : ''),
-                    value: p.nazov,
+                    label: pName + (pCity ? ' (' + pCity + ')' : ''),
+                    value: pName,
                     kodop: p.kodop,
                     ico: p.ico,
-                    mesto: p.mesto
+                    mesto: pCity
                 };
             });
 
@@ -551,8 +554,7 @@ $(document).ready(function() {
                 select: function(event, ui) {
                     $('#kodop').val(ui.item.kodop);
                     $('#ico').val(ui.item.ico);
-                    $('#n').val(ui.item.mesto); // alebo #mesto
-                    // Mame tam input #n pre Mesto (v starom formate) a tiez nejaky field mozno
+                    $('#n').val(ui.item.mesto);
                 }
             });
         }

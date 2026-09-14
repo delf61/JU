@@ -71,26 +71,33 @@ class ReceivableService
      */
         public function generateNextB($year)
     {
-        $lastInvoice = $this->kpModel->where('YEAR(a)', $year)
-            ->orderBy('b', 'DESC')
-            ->first();
-
         $shortYear = substr((string)$year, -2);
 
-        if (!$lastInvoice || empty($lastInvoice['b'])) {
+        $invoices = $this->kpModel->where('YEAR(a)', $year)->findAll();
+
+        $maxNum = 0;
+        foreach ($invoices as $inv) {
+            $b = trim($inv['b']);
+            // Zaujímajú nás len faktúry, ktoré začínajú na YY (napr. '26') a sú aspoň 5-znakové
+            if (str_starts_with($b, $shortYear)) {
+                // Odstránime akékoľvek nečíselné znaky (ako pomlčky), ak by tam boli omylom
+                $cleanB = preg_replace('/[^0-9]/', '', $b);
+                if (strlen($cleanB) >= 5) {
+                    // Prečítame prvé 5 cifier
+                    $numVal = (int)substr($cleanB, 0, 5);
+                    if ($numVal > $maxNum) {
+                        $maxNum = $numVal;
+                    }
+                }
+            }
+        }
+
+        if ($maxNum == 0) {
             return $shortYear . '001';
         }
 
-        $lastB = $lastInvoice['b'];
-
-        // Ensure the string is purely numeric and starts with the short year
-        if (is_numeric($lastB) && str_starts_with($lastB, $shortYear)) {
-            $nextNum = (int)$lastB + 1;
-            return (string)$nextNum;
-        }
-
-        // Fallback ak by bol doklad neplatny
-        return $lastB . ' (skontrolujte formát)';
+        $nextNum = $maxNum + 1;
+        return (string)$nextNum;
     }
 
     public function createReceivable($header, $items = [])
