@@ -395,7 +395,7 @@ $(document).ready(function() {
         const month = String(now.getMonth() + 1).padStart(2, '0');
         const day = String(now.getDate()).padStart(2, '0');
         const todayStr = `${year}-${month}-${day}`;
-        $('#create_a').val(todayStr);
+        $('#create_a').val(todayStr).trigger('change');
 
         $.get('/invoices/api/receivables/next-b', function(data) {
             if (data && data.next_b) {
@@ -463,14 +463,32 @@ $(document).ready(function() {
                 modal.style.display = 'none';
             });
         }
+
+    $('#create_a').on('change', function() {
+        let dateVal = $(this).val();
+        if (!dateVal) return;
+
+        let year = parseInt(dateVal.split('-')[0]);
+        if (year <= 2008) {
+            $('#dph_label').text('DPH (Sk)');
+        } else {
+            $('#dph_label').text('DPH (€)');
+        }
+
+        $.get('/vat/api/rates?date=' + dateVal, function(data) {
+            if (data && data.upper !== undefined) {
+                $('#dph').val(data.upper.toFixed(2));
+            }
+        });
     });
+});
 </script>
 
 <!-- Create Receivable Modal (eKP) -->
 <div id="createModal" class="dos-modal">
     <div class="dos-modal-content">
         <div class="dos-modal-header" style="display: flex; justify-content: flex-end; align-items: center;">
-            <h3 style="margin:0; font-size: 1.2rem;">Zadávanie novej odoslanej faktúry</h3>
+            <h3 style="margin:0; font-size: 1.2rem;">Nová faktúra</h3>
             <span class="close-create-modal close-modal">&times;</span>
         </div>
 
@@ -480,8 +498,7 @@ $(document).ready(function() {
             <div class="fand-span-4" style="display: flex; gap: 5px;">
                 <input type="date" id="create_a" name="a" required>
                 <input type="text" id="create_akyden" placeholder="Po" style="width: 40px;" readonly disabled>
-                <input type="text" id="hod" name="hod" placeholder="Čas" style="width: 60px;">
-            </div>
+                            </div>
             <label class="fand-span-2 text-right">Doklad</label>
             <input class="fand-span-4" type="text" id="create_b" name="b" placeholder="Generované..." readonly disabled>
 
@@ -514,7 +531,7 @@ $(document).ready(function() {
             <!-- DPH -->
             <label class="fand-span-2">Sadzba DPH %</label>
             <input class="fand-span-2" type="number" step="0.01" id="dph" name="dph" value="0.00" style="text-align: right;">
-            <label class="fand-span-2 text-right">DPH (Sk/€)</label>
+            <label id="dph_label" class="fand-span-2 text-right">DPH (Sk/€)</label>
             <input class="fand-span-6" type="number" step="0.01" id="dph_sk" name="dph_Sk" value="0.00" style="text-align: right;">
 
             <!-- Tovar a Služby -->
