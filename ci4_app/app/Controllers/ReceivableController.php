@@ -15,6 +15,13 @@ class ReceivableController extends ResourceController
         $this->receivableService = new ReceivableService();
     }
 
+
+    public function webIndex()
+    {
+        $year = session()->get('accounting_year') ?? date('Y');
+        return view('invoices/receivables', ['year' => $year]);
+    }
+
     public function index()
     {
         try {

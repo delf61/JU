@@ -51,7 +51,8 @@ $routes->group('partners', function($routes) {
 // Invoices Routes (Receivables and Liabilities)
 $routes->group('invoices', function($routes) {
     // Receivables (kp/kppol)
-    $routes->get('receivables', 'ReceivableController::index');
+    $routes->get('receivables', 'ReceivableController::webIndex');
+    $routes->get('api/receivables', 'ReceivableController::index');
     $routes->post('receivables', 'ReceivableController::create');
     $routes->get('receivables/(:segment)/(:segment)', 'ReceivableController::show/$1/$2');
     $routes->put('receivables/(:segment)/(:segment)', 'ReceivableController::update/$1/$2');
@@ -59,7 +60,8 @@ $routes->group('invoices', function($routes) {
     $routes->get('receivables/(:segment)/(:segment)/status', 'ReceivableController::calculateStatus/$1/$2');
 
     // Liabilities (kz/kzpol)
-    $routes->get('liabilities', 'LiabilityController::index');
+    $routes->get('liabilities', 'LiabilityController::webIndex');
+    $routes->get('api/liabilities', 'LiabilityController::index');
     $routes->post('liabilities', 'LiabilityController::create');
     $routes->get('liabilities/(:segment)/(:segment)', 'LiabilityController::show/$1/$2');
     $routes->put('liabilities/(:segment)/(:segment)', 'LiabilityController::update/$1/$2');
