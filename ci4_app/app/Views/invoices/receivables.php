@@ -555,6 +555,7 @@ $(document).ready(function() {
                     $('#kodop').val(ui.item.kodop);
 
                     $('#n').val(ui.item.mesto);
+                    $('#ico_display').val(ui.item.ico);
                 }
             });
         }
@@ -596,7 +597,9 @@ $(document).ready(function() {
             <input class="fand-span-4" type="text" id="kodop" name="kodop">
 
             <label class="fand-span-2">Mesto</label>
-            <input class="fand-span-10" type="text" id="n" name="n">
+            <input class="fand-span-4" type="text" id="n" name="n">
+            <label class="fand-span-2 text-right">IČO</label>
+            <input class="fand-span-4" type="text" id="ico_display" readonly disabled style="background: #e9ecef; font-weight:bold; color: #000;">
 
             <!-- Riadok 4: z (Zákazka) -->
             <label class="fand-span-2">Zákazka</label>
