@@ -75,18 +75,22 @@ class ReceivableService
             ->orderBy('b', 'DESC')
             ->first();
 
+        $shortYear = substr((string)$year, -2);
+
         if (!$lastInvoice || empty($lastInvoice['b'])) {
-            return '50-001-' . $year; // FAND format fallback (or similar)
+            return $shortYear . '001';
         }
 
-        $parts = explode('-', $lastInvoice['b']);
-        if (count($parts) >= 2 && is_numeric($parts[1])) {
-            $num = (int)$parts[1] + 1;
-            $parts[1] = str_pad((string)$num, 3, '0', STR_PAD_LEFT);
-            return implode('-', $parts);
+        $lastB = $lastInvoice['b'];
+
+        // Ensure the string is purely numeric and starts with the short year
+        if (is_numeric($lastB) && str_starts_with($lastB, $shortYear)) {
+            $nextNum = (int)$lastB + 1;
+            return (string)$nextNum;
         }
 
-        return $lastInvoice['b'] . '-1';
+        // Fallback ak by bol doklad neplatny
+        return $lastB . ' (skontrolujte formát)';
     }
 
     public function createReceivable($header, $items = [])
