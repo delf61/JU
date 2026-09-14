@@ -74,6 +74,14 @@ class ReceivableService
         $db = \Config\Database::connect();
         $db->transStart();
 
+        // Remove non-db fields sent from UI
+        unset($header['iban']);
+        unset($header['v_z'], $header['v_d'], $header['v_s']);
+        unset($header['p_z'], $header['p_d'], $header['p_s']);
+        unset($header['z_z'], $header['z_d'], $header['z_s']);
+        unset($header['n_p']);
+        unset($header['zn'], $header['vyrovn'], $header['pc'], $header['pohladavka_display']);
+
         $this->kpModel->insert($header);
 
         foreach ($items as $item) {

@@ -594,7 +594,7 @@ $(document).ready(function() {
             <label class="fand-span-2">Sadzba DPH %</label>
             <input class="fand-span-2" type="number" step="0.01" id="dph" name="dph" value="0.00" style="text-align: right;">
             <label id="dph_label" class="fand-span-2 text-right">DPH (Sk/€)</label>
-            <input class="fand-span-6" type="number" step="0.01" id="dph_sk" name="dph_Sk" value="0.00" style="text-align: right;">
+            <input class="fand-span-6" type="number" step="0.01" id="dph_sk" name="dph_sk" value="0.00" style="text-align: right;">
 
             <!-- Tovar a Služby -->
             <label class="fand-span-2">Tovar</label>
