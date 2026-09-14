@@ -553,7 +553,7 @@ $(document).ready(function() {
                 minLength: 2,
                 select: function(event, ui) {
                     $('#kodop').val(ui.item.kodop);
-                    $('#ico').val(ui.item.ico);
+
                     $('#n').val(ui.item.mesto);
                 }
             });
@@ -592,7 +592,7 @@ $(document).ready(function() {
             <!-- Riadok 3: od (Zákazník), kodOP (IČO?), n (Názov/Mesto) -->
             <label class="fand-span-2">Zákazník</label>
             <input class="fand-span-4" type="text" id="od" name="od" required>
-            <label class="fand-span-2 text-right">IČO</label>
+            <label class="fand-span-2 text-right">Kód OP</label>
             <input class="fand-span-4" type="text" id="kodop" name="kodop">
 
             <label class="fand-span-2">Mesto</label>
