@@ -20,7 +20,8 @@
         .btn:hover { background: #0056b3; }
         .btn-edit { background: #ffc107; color: black; }
         .btn-edit:hover { background: #e0a800; }
-    </style>
+
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- DataTables CSS & JS -->
@@ -170,7 +171,80 @@
         .summary-list li.total {
             border-top: 2px solid var(--border-color) !important;
         }
-    </style>
+
+    .dos-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+    }
+    .dos-modal-content {
+        background-color: var(--card-bg);
+        margin: 5% auto;
+        padding: 20px;
+        border: 2px solid var(--border-color);
+        width: 60%;
+        max-width: 1000px;
+        height: auto;
+        max-height: 90vh;
+        overflow-y: auto;
+        color: var(--text-color);
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .dos-modal-header {
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .close-modal {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close-modal:hover, .close-modal:focus {
+        color: #fff;
+        text-decoration: none;
+    }
+    .fand-form-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 8px;
+        align-items: center;
+        font-family: monospace;
+        font-size: 1.1em;
+    }
+    .fand-form-grid label {
+        margin: 0;
+        white-space: nowrap;
+    }
+    .fand-form-grid input, .fand-form-grid select {
+        padding: 4px;
+        width: 100%;
+        background-color: var(--card-bg);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+    }
+    .fand-span-1 { grid-column: span 1; }
+    .fand-span-2 { grid-column: span 2; }
+    .fand-span-3 { grid-column: span 3; }
+    .fand-span-4 { grid-column: span 4; }
+    .fand-span-5 { grid-column: span 5; }
+    .fand-span-6 { grid-column: span 6; }
+    .fand-span-7 { grid-column: span 7; }
+    .fand-span-8 { grid-column: span 8; }
+    .fand-span-9 { grid-column: span 9; }
+    .fand-span-10 { grid-column: span 10; }
+    .fand-span-12 { grid-column: span 12; }
+
+</style>
 
 <script>
     function updateClock() {
@@ -371,67 +445,7 @@ function openCreateModal() {
 }
 
 // Dynamicke prepocitavanie eKP
-$('#createForm input[type="number"]').on('input', function() {
-    let z = parseFloat($('#create_z').val()) || 0;
-    let dphRate = parseFloat($('#create_dph').val()) || 0;
-    let vyrovn = parseFloat($('#create_vyrovn').val()) || 0;
-    let pc = parseFloat($('#create_pc').val()) || 0;
 
-    let dphSum = z * (dphRate / 100);
-    let zn = z + dphSum + vyrovn;
-    let pohladavka = zn - pc;
-
-    $('#create_dph_sk').val(dphSum.toFixed(2));
-    $('#create_zn').val(zn.toFixed(2));
-    $('#create_pohlad').val(pohladavka.toFixed(2));
-});
-
-$(document).on('submit', '#createForm', function(e) {
-    e.preventDefault();
-    $('#createStatus').text('Ukladám záznam...').css('color', 'orange');
-
-    var jsonData = {
-        a: $('#create_a').val(),
-        zp: $('#create_zp').val(),
-        ds: $('#create_splat').val(), // v DB je to ds podla FAND eKP (Dátum splatnosti je ds)
-        od: $('#create_od').val(),
-        n: $('#create_n').val(),
-        z: $('#create_z').val(),
-        dph: $('#create_dph').val(),
-        tovar: $('#create_tovar').val(),
-        sluzby: $('#create_sluzby').val(),
-        vyrovn: $('#create_vyrovn').val(),
-        pc: $('#create_pc').val(),
-        items: []
-    };
-
-    $.ajax({
-        url: '<?= base_url('invoices/receivables') ?>',
-        type: 'POST',
-        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
-        data: JSON.stringify(jsonData),
-        contentType: 'application/json',
-        success: function(response) {
-            $('#createStatus').text('Úspešne uložené!').css('color', 'green');
-            if(response.csrf_token) window.csrfHash = response.csrf_token;
-            setTimeout(function() {
-                $('#createModal').hide();
-                $('#receivablesTable').DataTable().ajax.reload();
-            }, 1500);
-        },
-        error: function(xhr) {
-            let msg = 'Chyba pri ukladaní.';
-            if (xhr.responseJSON && xhr.responseJSON.messages) {
-                msg = Object.values(xhr.responseJSON.messages).join(', ');
-            } else if (xhr.responseJSON && xhr.responseJSON.error) {
-                msg = xhr.responseJSON.error;
-            }
-            $('#createStatus').text(msg).css('color', 'red');
-            if (xhr.responseJSON && xhr.responseJSON.csrf_token) {
-                window.csrfHash = xhr.responseJSON.csrf_token;
-            }
-        }
-    });
 });
 
 
@@ -496,66 +510,56 @@ function openCreateModal() {
 }
 
 // Dynamicke prepocitavanie eKP
-$('#createForm input[type="number"]').on('input', function() {
-    let z = parseFloat($('#create_z').val()) || 0;
-    let dphRate = parseFloat($('#create_dph').val()) || 0;
-    let vyrovn = parseFloat($('#create_vyrovn').val()) || 0;
-    let pc = parseFloat($('#create_pc').val()) || 0;
 
-    let dphSum = z * (dphRate / 100);
-    let zn = z + dphSum + vyrovn;
-    let pohladavka = zn - pc;
 
-    $('#create_dph_sk').val(dphSum.toFixed(2));
-    $('#create_zn').val(zn.toFixed(2));
-    $('#create_pohlad').val(pohladavka.toFixed(2));
-});
+    $('#createForm input[type="number"]').on('input', function() {
+        let v_z = parseFloat($('#v_z').val()) || 0;
+        let v_d = parseFloat($('#v_d').val()) || 0;
+        let p_z = parseFloat($('#p_z').val()) || 0;
+        let p_d = parseFloat($('#p_d').val()) || 0;
+        let z_z = parseFloat($('#z_z').val()) || 0;
+        let z_d = parseFloat($('#z_d').val()) || 0;
+        let suma_zakl = v_z + p_z + z_z;
+        let suma_dph = v_d + p_d + z_d;
+        let celkom = suma_zakl + suma_dph;
+        $('#zn').val(celkom.toFixed(2));
 
-$(document).on('submit', '#createForm', function(e) {
-    e.preventDefault();
-    $('#createStatus').text('Ukladám záznam...').css('color', 'orange');
+        let vyrovn = parseFloat($('#vyrovn').val()) || 0;
+        let pohladavka = celkom + vyrovn;
+        $('#pohladavka_display').val(pohladavka.toFixed(2));
+    });
 
-    var jsonData = {
-        a: $('#create_a').val(),
-        zp: $('#create_zp').val(),
-        ds: $('#create_splat').val(), // v DB je to ds podla FAND eKP (Dátum splatnosti je ds)
-        od: $('#create_od').val(),
-        n: $('#create_n').val(),
-        z: $('#create_z').val(),
-        dph: $('#create_dph').val(),
-        tovar: $('#create_tovar').val(),
-        sluzby: $('#create_sluzby').val(),
-        vyrovn: $('#create_vyrovn').val(),
-        pc: $('#create_pc').val(),
-        items: []
-    };
+    // Handle form submit
+    $(document).on('submit', '#createForm', function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        formData.append('csrf_test_name', csrf_hash());
 
-    $.ajax({
-        url: '<?= base_url('invoices/receivables') ?>',
-        type: 'POST',
-        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
-        data: JSON.stringify(jsonData),
-        contentType: 'application/json',
-        success: function(response) {
-            $('#createStatus').text('Úspešne uložené!').css('color', 'green');
-            if(response.csrf_token) window.csrfHash = response.csrf_token;
-            setTimeout(function() {
-                $('#createModal').hide();
-                $('#receivablesTable').DataTable().ajax.reload();
-            }, 1500);
-        },
-        error: function(xhr) {
-            let msg = 'Chyba pri ukladaní.';
-            if (xhr.responseJSON && xhr.responseJSON.messages) {
-                msg = Object.values(xhr.responseJSON.messages).join(', ');
-            } else if (xhr.responseJSON && xhr.responseJSON.error) {
-                msg = xhr.responseJSON.error;
+        $.ajax({
+            url: '/api/receivables/create',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                if (response.csrf_hash) updateCSRF(response.csrf_hash);
+                if (response.success) {
+                    $('#createModal').hide();
+                    receivablesTable.ajax.reload();
+                    $('#createForm')[0].reset();
+                } else {
+                    alert('Chyba: ' + (response.message || 'Neznáma chyba'));
+                }
+            },
+            error: function(xhr) {
+                let msg = 'Chyba servera';
+                if (xhr.responseJSON) {
+                    if (xhr.responseJSON.csrf_hash) updateCSRF(xhr.responseJSON.csrf_hash);
+                    msg = xhr.responseJSON.message || msg;
+                }
+                alert('Chyba pri ukladaní: ' + msg);
             }
-            $('#createStatus').text(msg).css('color', 'red');
-            if (xhr.responseJSON && xhr.responseJSON.csrf_token) {
-                window.csrfHash = xhr.responseJSON.csrf_token;
-            }
-        }
+        });
     });
 });
 

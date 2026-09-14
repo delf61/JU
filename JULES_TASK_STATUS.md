@@ -3,6 +3,13 @@
 Tento dokument slúži na sledovanie môjho pokroku, evidenciu dokončených úloh a plánovanie ďalších krokov na základe inštrukcií používateľa.
 
 ## ✅ Hotové (nedávno dokončené)
+- **Datový Editor eKP (Pohľadávky)**:
+  - Kompletne vybudovaný modal pre pridanie Pohľadávky na obraz `PRINTER.TXT` so všetkými originálnymi DOS poľami.
+  - Dynamické JS prepočty súm a DPH.
+  - Optimalizované generovanie nového čísla faktúry metódou `generateNextB`.
+- **Aktualizácia Databázy**:
+  - Tabuľky `ju_migration` boli úspešne vyprázdnené a naplnené najnovšími údajmi zo súboru `delf_ju_nove.zip`.
+  - Aktualizovaný dump v `ju_migration.sql_pk_new.gz` v koreni repozitára.
 - **Migrácia DB a surových (raw) dát**: Všetky staré DOS FAND .dbf údaje boli úspešne naimportované do `ju_migration` MariaDB databázy so zachovaním Autoincrement PKs a štruktúry.
 - **Smart Prílohy k faktúram (Záväzky)**:
   - Vytvorená samostatná tabuľka `kz_prilohy` s bezpečnými väzbami na doklady `b`.
@@ -21,8 +28,7 @@ Tento dokument slúži na sledovanie môjho pokroku, evidenciu dokončených úl
   - Vycentrované hodinky doplnené do všetkých dátových pohľadov.
 
 ## ⏳ Čakajúce (na spracovanie / diskusiu)
-- **Pohľadávky (eKP)**:
-  - Zatiaľ čo Záväzky už majú svoj plnohodnotný Datový Editor eKZ, Pohľadávky zatiaľ obsahujú len spodnú lištu. Treba pre ne naklonovať eKP editor.
+
 - **Ďalšie FAND formuláre**:
   - Logbook (Kniha jázd) a Majetok – čakajú na presun z "Pripravuje sa".
 - **Refaktoring frontend kódov**:

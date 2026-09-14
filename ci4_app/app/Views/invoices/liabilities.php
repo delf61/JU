@@ -1496,6 +1496,39 @@ $(document).on('submit', '#createForm', function(e) {
             }
         }
     });
+
+    // Handle form submit
+    $(document).on('submit', '#createForm', function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        formData.append('csrf_test_name', csrf_hash());
+
+        $.ajax({
+            url: '/api/liabilities/create',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                if (response.csrf_hash) updateCSRF(response.csrf_hash);
+                if (response.success) {
+                    $('#createModal').hide();
+                    liabilitiesTable.ajax.reload();
+                    $('#createForm')[0].reset();
+                } else {
+                    alert('Chyba: ' + (response.message || 'Neznáma chyba'));
+                }
+            },
+            error: function(xhr) {
+                let msg = 'Chyba servera';
+                if (xhr.responseJSON) {
+                    if (xhr.responseJSON.csrf_hash) updateCSRF(xhr.responseJSON.csrf_hash);
+                    msg = xhr.responseJSON.message || msg;
+                }
+                alert('Chyba pri ukladaní: ' + msg);
+            }
+        });
+    });
 });
 
 </script>
