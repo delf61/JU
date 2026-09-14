@@ -246,6 +246,11 @@
     setInterval(updateClock, 1000);
 </script>
 
+
+    <!-- jQuery UI for Autocomplete -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
 </head>
 <body onload="updateClock()">
 
@@ -384,18 +389,48 @@ $(document).ready(function() {
     flatpickr("input[type=date]", {
         locale: "sk",
         dateFormat: "Y-m-d",
-        allowInput: true
+        allowInput: true,
+        onChange: function(selectedDates, dateStr, instance) {
+            if (!dateStr) return;
+            let year = parseInt(dateStr.split('-')[0]);
+            if (year <= 2008) {
+                $('#dph_label').text('DPH (Sk)');
+            } else {
+                $('#dph_label').text('DPH (€)');
+            }
+            $.get('/vat/api/rates?date=' + dateStr, function(data) {
+                if (data && data.upper !== undefined) {
+                    $('#dph').val(data.upper.toFixed(2));
+                }
+            });
+        }
     });
 });
 
     function openCreateModal() {
         $('#createForm')[0].reset();
+        $('#zp').val('bankovým prevodom');
         const now = new Date();
         const year = now.getFullYear();
         const month = String(now.getMonth() + 1).padStart(2, '0');
         const day = String(now.getDate()).padStart(2, '0');
         const todayStr = `${year}-${month}-${day}`;
-        $('#create_a').val(todayStr).trigger('change');
+
+        const todayStr = `${year}-${month}-${day}`;
+        $('#create_a').val(todayStr);
+
+        if (year <= 2008) {
+            $('#dph_label').text('DPH (Sk)');
+        } else {
+            $('#dph_label').text('DPH (€)');
+        }
+
+        $.get('/vat/api/rates?date=' + todayStr, function(data) {
+            if (data && data.upper !== undefined) {
+                $('#dph').val(data.upper.toFixed(2));
+            }
+        });
+
 
         $.get('/invoices/api/receivables/next-b', function(data) {
             if (data && data.next_b) {
@@ -433,6 +468,7 @@ $(document).ready(function() {
                     $('#createModal').hide();
                     $('#receivablesTable').DataTable().ajax.reload();
                     $('#createForm')[0].reset();
+        $('#zp').val('bankovým prevodom');
                 } else {
                     alert('Chyba: ' + (response.message || 'Neznáma chyba'));
                 }
@@ -481,13 +517,39 @@ $(document).ready(function() {
             }
         });
     });
+
+    // Autocomplete pre pole Zákazník (#od)
+    $.get('/partners/api', function(data) {
+        if (data && Array.isArray(data)) {
+            let partnerData = data.map(function(p) {
+                return {
+                    label: p.nazov + (p.mesto ? ' (' + p.mesto + ')' : ''),
+                    value: p.nazov,
+                    kodop: p.kodop,
+                    ico: p.ico,
+                    mesto: p.mesto
+                };
+            });
+
+            $('#od').autocomplete({
+                source: partnerData,
+                minLength: 2,
+                select: function(event, ui) {
+                    $('#kodop').val(ui.item.kodop);
+                    $('#ico').val(ui.item.ico);
+                    $('#n').val(ui.item.mesto); // alebo #mesto
+                    // Mame tam input #n pre Mesto (v starom formate) a tiez nejaky field mozno
+                }
+            });
+        }
+    });
 });
 </script>
 
 <!-- Create Receivable Modal (eKP) -->
 <div id="createModal" class="dos-modal">
     <div class="dos-modal-content">
-        <div class="dos-modal-header" style="display: flex; justify-content: flex-end; align-items: center;">
+        <div class="dos-modal-header" style="display: flex; justify-content: space-between; align-items: center;">
             <h3 style="margin:0; font-size: 1.2rem;">Nová faktúra</h3>
             <span class="close-create-modal close-modal">&times;</span>
         </div>
@@ -509,7 +571,7 @@ $(document).ready(function() {
                 <input type="text" id="create_akyden1" placeholder="Po" style="width: 40px;" readonly disabled>
             </div>
             <label class="fand-span-2 text-right">Sp. platby</label>
-            <input class="fand-span-4" type="text" id="zp" name="zp">
+            <input class="fand-span-4" type="text" id="zp" name="zp" value="bankovým prevodom">
 
             <!-- Riadok 3: od (Zákazník), kodOP (IČO?), n (Názov/Mesto) -->
             <label class="fand-span-2">Zákazník</label>
