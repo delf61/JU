@@ -11,9 +11,17 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/sk.js"></script>
 
+
+    <!-- jQuery Core (Musi byt prve) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- jQuery UI for Autocomplete -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
     <!-- DataTables CSS & JS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 
     <!-- Theme Switcher CSS -->
@@ -227,7 +235,15 @@
     .fand-span-10 { grid-column: span 10; }
     .fand-span-12 { grid-column: span 12; }
 
-    </style>
+
+    .ui-autocomplete {
+        z-index: 10000 !important;
+        max-height: 200px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+</style>
 
 <script>
     function updateClock() {
@@ -248,8 +264,8 @@
 
 
     <!-- jQuery UI for Autocomplete -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+
 
 </head>
 <body onload="updateClock()">
