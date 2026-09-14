@@ -419,6 +419,16 @@ $(document).ready(function() {
                     $('#dph').val(data.upper.toFixed(2));
                 }
             });
+
+            // Predvyplnenie splatnosti na +14 dni
+            if (selectedDates.length > 0) {
+                let d = new Date(selectedDates[0]);
+                d.setDate(d.getDate() + 14);
+                let sy = d.getFullYear();
+                let sm = String(d.getMonth() + 1).padStart(2, '0');
+                let sd = String(d.getDate()).padStart(2, '0');
+                $('#ds').val(`${sy}-${sm}-${sd}`);
+            }
         }
     });
 });
@@ -432,6 +442,13 @@ $(document).ready(function() {
         const day = String(now.getDate()).padStart(2, '0');
         const todayStr = `${year}-${month}-${day}`;
         $('#create_a').val(todayStr);
+
+        let splatDate = new Date(now);
+        splatDate.setDate(splatDate.getDate() + 14);
+        let s_year = splatDate.getFullYear();
+        let s_month = String(splatDate.getMonth() + 1).padStart(2, '0');
+        let s_day = String(splatDate.getDate()).padStart(2, '0');
+        $('#ds').val(`${s_year}-${s_month}-${s_day}`);
 
         if (year <= 2008) {
             $('#dph_label').text('DPH (Sk)');
@@ -599,7 +616,7 @@ $(document).ready(function() {
             <label class="fand-span-2">Mesto</label>
             <input class="fand-span-4" type="text" id="n" name="n">
             <label class="fand-span-2 text-right">IČO</label>
-            <input class="fand-span-4" type="text" id="ico_display" readonly disabled style="background: #e9ecef; font-weight:bold; color: #000;">
+            <input class="fand-span-4" type="text" id="ico_display" readonly disabled style="font-weight:bold;">
 
             <!-- Riadok 4: z (Zákazka) -->
             <label class="fand-span-2">Zákazka</label>
