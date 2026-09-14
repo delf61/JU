@@ -455,7 +455,7 @@ function openCreateModal() {
         formData.append('csrf_test_name', csrf_hash());
 
         $.ajax({
-            url: '/api/receivables/create',
+            url: '/invoices/receivables',
             type: 'POST',
             data: formData,
             processData: false,
@@ -464,7 +464,7 @@ function openCreateModal() {
                 if (response.csrf_hash) updateCSRF(response.csrf_hash);
                 if (response.success) {
                     $('#createModal').hide();
-                    receivablesTable.ajax.reload();
+                    table.ajax.reload();
                     $('#createForm')[0].reset();
                 } else {
                     alert('Chyba: ' + (response.message || 'Neznáma chyba'));
