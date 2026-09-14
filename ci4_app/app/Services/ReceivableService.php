@@ -71,37 +71,8 @@ class ReceivableService
     /**
      * Create a receivable with items
      */
-
-    public function generateNextB($year)
+    public function createReceivable($header, $items = [])
     {
-        $db = \Config\Database::connect();
-        $builder = $db->table('kp');
-        $builder->select('b');
-        $builder->where('YEAR(a)', $year);
-        $builder->orderBy('b', 'DESC');
-        $builder->limit(1);
-        $result = $builder->get()->getRowArray();
-
-        if ($result && !empty($result['b'])) {
-            $lastB = $result['b'];
-            if (preg_match('/(\d+)$/', $lastB, $matches)) {
-                $num = (int)$matches[1];
-                $newNum = $num + 1;
-                $len = strlen($matches[1]);
-                return preg_replace('/(\d+)$/', str_pad($newNum, $len, '0', STR_PAD_LEFT), $lastB);
-            }
-        }
-        $prefix = substr($year, 2, 2);
-        return $prefix . '-0001';
-    }
-
-    public function createReceivable(&$header, $items = [])
-    {
-        if (empty($header['b'])) {
-            $year = !empty($header['a']) ? date('Y', strtotime($header['a'])) : date('Y');
-            $header['b'] = $this->generateNextB($year);
-        }
-
         $db = \Config\Database::connect();
         $db->transStart();
 

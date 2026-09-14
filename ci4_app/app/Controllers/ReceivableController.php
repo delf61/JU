@@ -76,19 +76,14 @@ class ReceivableController extends ResourceController
 
     public function create()
     {
-        try {
-            $data = $this->request->getJSON(true);
-            if (empty($data['a'])) {
-                return $this->response->setJSON(['error' => 'Missing date (a)', 'csrf_token' => csrf_hash()])->setStatusCode(400);
-            }
-            $items = $data['items'] ?? [];
-            unset($data['items']);
-            $this->receivableService->createReceivable($data, $items);
-            return $this->response->setJSON(['success' => true, 'b' => $data['b'] ?? '', 'csrf_token' => csrf_hash()]);
-        } catch (\Throwable $e) {
-            log_message('error', $e->getMessage());
-            return $this->response->setJSON(['error' => 'Chyba databázy: ' . $e->getMessage(), 'csrf_token' => csrf_hash()])->setStatusCode(500);
+        $data = $this->request->getJSON(true);
+        if (empty($data['a']) || empty($data['b'])) {
+            return $this->failValidationError('Missing a or b');
         }
+        $items = $data['items'] ?? [];
+        unset($data['items']);
+        $this->receivableService->createReceivable($data, $items);
+        return $this->respondCreated(['a' => $data['a'], 'b' => $data['b']]);
     }
 
     public function update($a = null, $b = null)

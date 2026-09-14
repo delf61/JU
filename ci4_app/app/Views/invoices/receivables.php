@@ -20,8 +20,7 @@
         .btn:hover { background: #0056b3; }
         .btn-edit { background: #ffc107; color: black; }
         .btn-edit:hover { background: #e0a800; }
-
-
+    </style>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- DataTables CSS & JS -->
@@ -171,80 +170,7 @@
         .summary-list li.total {
             border-top: 2px solid var(--border-color) !important;
         }
-
-    .dos-modal {
-        display: none;
-        position: fixed;
-        z-index: 9999;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.7);
-    }
-    .dos-modal-content {
-        background-color: var(--card-bg);
-        margin: 5% auto;
-        padding: 20px;
-        border: 2px solid var(--border-color);
-        width: 60%;
-        max-width: 1000px;
-        height: auto;
-        max-height: 90vh;
-        overflow-y: auto;
-        color: var(--text-color);
-        box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    }
-    .dos-modal-header {
-        border-bottom: 1px solid var(--border-color);
-        margin-bottom: 15px;
-        padding-bottom: 5px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .close-modal {
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    .close-modal:hover, .close-modal:focus {
-        color: #fff;
-        text-decoration: none;
-    }
-    .fand-form-grid {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        gap: 8px;
-        align-items: center;
-        font-family: monospace;
-        font-size: 1.1em;
-    }
-    .fand-form-grid label {
-        margin: 0;
-        white-space: nowrap;
-    }
-    .fand-form-grid input, .fand-form-grid select {
-        padding: 4px;
-        width: 100%;
-        background-color: var(--card-bg);
-        color: var(--text-color);
-        border: 1px solid var(--border-color);
-    }
-    .fand-span-1 { grid-column: span 1; }
-    .fand-span-2 { grid-column: span 2; }
-    .fand-span-3 { grid-column: span 3; }
-    .fand-span-4 { grid-column: span 4; }
-    .fand-span-5 { grid-column: span 5; }
-    .fand-span-6 { grid-column: span 6; }
-    .fand-span-7 { grid-column: span 7; }
-    .fand-span-8 { grid-column: span 8; }
-    .fand-span-9 { grid-column: span 9; }
-    .fand-span-10 { grid-column: span 10; }
-    .fand-span-12 { grid-column: span 12; }
-
-</style>
+    </style>
 
 <script>
     function updateClock() {
@@ -263,10 +189,6 @@
     setInterval(updateClock, 1000);
 </script>
 
-    <!-- Flatpickr CSS & JS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://npmcdn.com/flatpickr/dist/l10n/sk.js"></script>
 </head>
 <body onload="updateClock()">
 
@@ -342,19 +264,12 @@
         </tbody>
     </table>
         <div class="card" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; padding: 15px; border: 1px solid var(--border-color); background-color: var(--card-bg);">
-        <button id="btnOpenCreateReceivable" class="btn" style="background-color: #28a745; border:none; cursor:pointer;" >Pridať nový záznam</button>
+        <button id="btnOpenCreateReceivable" class="btn" style="background-color: #28a745; border:none; cursor:pointer;" onclick="alert('Formulár pre pohľadávky zatiaľ nie je vytvorený.')">Pridať nový záznam</button>
         <a href="<?= base_url() ?>" class="btn" style="background-color: #6c757d; margin-left: auto;">Späť na domovskú stránku</a>
     </div>
 
 <script>
 $(document).ready(function() {
-    // Init flatpickr on date inputs
-    flatpickr("input[type=date]", {
-        locale: "sk",
-        dateFormat: "Y-m-d",
-        allowInput: true
-    });
-
     $.fn.dataTable.ext.errMode = 'none';
     $('#receivablesTable').on('error.dt', function(e, settings, techNote, message) {
         console.error('DataTables Error:', message);
@@ -410,45 +325,6 @@ $(document).ready(function() {
         }
     });
 });
-
-// Create Receivable (DATOVÝ EDITOR eKP) Logic
-$('#btnOpenCreateReceivable').click(function(e) {
-    e.preventDefault();
-    openCreateModal();
-});
-
-$('.close-create-modal').click(function() {
-    $('#createModal').hide();
-});
-
-function openCreateModal() {
-    $('#createModal').show();
-    $('#createStatus').text('');
-
-    // Predvyplnit dnesny datum a vyprazdnit hodnoty
-    document.getElementById('create_a').valueAsDate = new Date();
-    $('#create_zp').val($('#create_a').val());
-
-    $('#create_od').val('');
-    $('#create_n').val('');
-    $('#create_splat').val('');
-
-    $('#create_z').val('0.00');
-    $('#create_dph').val('20');
-    $('#create_dph_sk').val('0.00');
-    $('#create_tovar').val('0.00');
-    $('#create_sluzby').val('0.00');
-    $('#create_vyrovn').val('0.00');
-    $('#create_zn').val('0.00');
-    $('#create_pc').val('0.00');
-    $('#create_pohlad').val('0.00');
-}
-
-// Dynamicke prepocitavanie eKP
-
-});
-
-
 </script>
 
 <!-- Global ESC key handler for all modals -->
@@ -475,179 +351,7 @@ function openCreateModal() {
             }
         }
     });
-
-// Create Receivable (DATOVÝ EDITOR eKP) Logic
-$('#btnOpenCreateReceivable').click(function(e) {
-    e.preventDefault();
-    openCreateModal();
-});
-
-$('.close-create-modal').click(function() {
-    $('#createModal').hide();
-});
-
-function openCreateModal() {
-    $('#createModal').show();
-    $('#createStatus').text('');
-
-    // Predvyplnit dnesny datum a vyprazdnit hodnoty
-    document.getElementById('create_a').valueAsDate = new Date();
-    $('#create_zp').val($('#create_a').val());
-
-    $('#create_od').val('');
-    $('#create_n').val('');
-    $('#create_splat').val('');
-
-    $('#create_z').val('0.00');
-    $('#create_dph').val('20');
-    $('#create_dph_sk').val('0.00');
-    $('#create_tovar').val('0.00');
-    $('#create_sluzby').val('0.00');
-    $('#create_vyrovn').val('0.00');
-    $('#create_zn').val('0.00');
-    $('#create_pc').val('0.00');
-    $('#create_pohlad').val('0.00');
-}
-
-// Dynamicke prepocitavanie eKP
-
-
-    $('#createForm input[type="number"]').on('input', function() {
-        let v_z = parseFloat($('#v_z').val()) || 0;
-        let v_d = parseFloat($('#v_d').val()) || 0;
-        let p_z = parseFloat($('#p_z').val()) || 0;
-        let p_d = parseFloat($('#p_d').val()) || 0;
-        let z_z = parseFloat($('#z_z').val()) || 0;
-        let z_d = parseFloat($('#z_d').val()) || 0;
-        let suma_zakl = v_z + p_z + z_z;
-        let suma_dph = v_d + p_d + z_d;
-        let celkom = suma_zakl + suma_dph;
-        $('#zn').val(celkom.toFixed(2));
-
-        let vyrovn = parseFloat($('#vyrovn').val()) || 0;
-        let pohladavka = celkom + vyrovn;
-        $('#pohladavka_display').val(pohladavka.toFixed(2));
-    });
-
-    // Handle form submit
-    $(document).on('submit', '#createForm', function(e) {
-        e.preventDefault();
-        var formData = new FormData(this);
-        formData.append('csrf_test_name', csrf_hash());
-
-        $.ajax({
-            url: '/api/receivables/create',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                if (response.csrf_hash) updateCSRF(response.csrf_hash);
-                if (response.success) {
-                    $('#createModal').hide();
-                    receivablesTable.ajax.reload();
-                    $('#createForm')[0].reset();
-                } else {
-                    alert('Chyba: ' + (response.message || 'Neznáma chyba'));
-                }
-            },
-            error: function(xhr) {
-                let msg = 'Chyba servera';
-                if (xhr.responseJSON) {
-                    if (xhr.responseJSON.csrf_hash) updateCSRF(xhr.responseJSON.csrf_hash);
-                    msg = xhr.responseJSON.message || msg;
-                }
-                alert('Chyba pri ukladaní: ' + msg);
-            }
-        });
-    });
-});
-
-
 </script>
-
-
-<!-- Create Receivable Modal (DATOVÝ EDITOR eKP) -->
-<div id="createModal" class="dos-modal">
-    <div class="dos-modal-content">
-        <div class="dos-modal-header">
-            <h3 style="margin:0; font-size: 1.2rem;">DATOVÝ EDITOR &nbsp;&nbsp;&nbsp; Zadávanie novej odoslanej faktúry</h3>
-            <span class="close-create-modal close-modal">&times;</span>
-        </div>
-
-        <form id="createForm" class="fand-form-grid">
-            <!-- Row 1 -->
-            <label class="fand-span-3">Dátum zaradenia</label>
-            <div class="fand-span-4" style="display: flex; gap: 5px;">
-                <input type="date" id="create_a" name="a" required style="flex:1; padding: 4px;">
-                <input type="text" id="create_akyden" placeholder="Po" style="width: 40px; padding: 4px;" readonly disabled>
-            </div>
-            <label class="fand-span-2 text-right">Označenie</label>
-            <input class="fand-span-3" type="text" id="create_b" name="b" placeholder="Auto..." style="padding: 4px;" readonly disabled>
-
-            <!-- Row 2 -->
-            <label class="fand-span-3">Dátum splatnosti</label>
-            <div class="fand-span-4" style="display: flex; gap: 5px;">
-                <input type="date" id="create_splat" name="ds" style="flex:1; padding: 4px;">
-                <input type="text" id="create_akyden1" placeholder="St" style="width: 40px; padding: 4px;" readonly disabled>
-            </div>
-
-            <!-- Row 3 -->
-            <label class="fand-span-3">Dátum zdan. plnenia</label>
-            <div class="fand-span-4" style="display: flex; gap: 5px;">
-                <input type="date" id="create_zp" name="zp" style="flex:1; padding: 4px;">
-            </div>
-
-            <!-- Row 4 -->
-            <label class="fand-span-3">Odberateľ</label>
-            <input class="fand-span-7" type="text" id="create_od" name="od" required style="padding: 4px;">
-
-            <!-- Row 5 -->
-            <label class="fand-span-3">Text</label>
-            <input class="fand-span-9" type="text" id="create_n" name="n" style="padding: 4px;">
-
-            <!-- Spacer -->
-            <div class="fand-span-12" style="height: 15px;"></div>
-
-            <!-- DPH Section -->
-            <label class="fand-span-3">Fakturácia bez DPH</label>
-            <div class="fand-span-3">
-                <input type="number" step="0.01" id="create_z" name="z" value="0.00" class="text-right" style="padding: 4px;" required>
-            </div>
-            <label class="fand-span-2 text-right">DPH</label>
-            <div class="fand-span-4" style="display:flex; gap:5px; align-items:center;">
-                <input type="number" step="0.01" id="create_dph" name="dph" value="20" style="width: 60px; text-align: center; padding: 4px;"> %
-                <input type="number" step="0.01" id="create_dph_sk" name="dph_sk" value="0.00" class="text-right" style="flex:1; padding: 4px; background: var(--hover-bg);" readonly disabled>
-            </div>
-
-            <!-- Tovar a sluzby -->
-            <label class="fand-span-3 text-right">Tovar</label>
-            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_tovar" name="tovar" value="0.00" style="padding: 4px;">
-            <label class="fand-span-3 text-right">Faktur. suma s DPH</label>
-            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_zn" name="zn" value="0.00" style="font-weight:bold; padding: 4px; background: var(--hover-bg);" readonly disabled>
-
-            <label class="fand-span-3 text-right">Služby</label>
-            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_sluzby" name="sluzby" value="0.00" style="padding: 4px;">
-            <label class="fand-span-3 text-right">Halier. vyrovnanie</label>
-            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_vyrovn" name="vyrovn" value="0.00" style="padding: 4px;">
-
-            <!-- Spacer -->
-            <div class="fand-span-12" style="height: 10px;"></div>
-
-            <!-- Uhrady -->
-            <label class="fand-span-9 text-right">Uhradené - spolu</label>
-            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_pc" name="pc" value="0.00" style="padding: 4px;">
-
-            <label class="fand-span-9 text-right" style="font-weight: bold;">Pohľadávka</label>
-            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_pohlad" name="pohlad" value="0.00" style="font-weight:bold; padding: 4px; background: var(--hover-bg);" readonly disabled>
-
-            <div class="fand-span-12" style="margin-top: 20px; text-align: right;">
-                <div id="createStatus" style="font-weight: bold; margin-bottom: 10px;"></div>
-                <button type="submit" class="btn btn-action" style="background: #28a745; color: white; padding: 10px 30px; font-size: 1.1rem;">Uložiť záznam</button>
-            </div>
-        </form>
-    </div>
-</div>
 
 </body>
 </html>
