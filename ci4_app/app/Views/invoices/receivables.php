@@ -406,19 +406,16 @@ $(document).ready(function() {
     }
 
     $('#createForm input[type="number"]').on('input', function() {
-        let v_z = parseFloat($('#v_z').val()) || 0;
-        let v_d = parseFloat($('#v_d').val()) || 0;
-        let p_z = parseFloat($('#p_z').val()) || 0;
-        let p_d = parseFloat($('#p_d').val()) || 0;
-        let z_z = parseFloat($('#z_z').val()) || 0;
-        let z_d = parseFloat($('#z_d').val()) || 0;
-        let suma_zakl = v_z + p_z + z_z;
-        let suma_dph = v_d + p_d + z_d;
-        let celkom = suma_zakl + suma_dph;
+        let tovar = parseFloat($('#tovar').val()) || 0;
+        let sluzby = parseFloat($('#sluzby').val()) || 0;
+        let dph_sk = parseFloat($('#dph_sk').val()) || 0;
+
+        let celkom = tovar + sluzby + dph_sk;
         $('#zn').val(celkom.toFixed(2));
 
         let vyrovn = parseFloat($('#vyrovn').val()) || 0;
-        let pohladavka = celkom + vyrovn;
+        let pc = parseFloat($('#pc').val()) || 0;
+        let pohladavka = celkom + vyrovn - pc;
         $('#pohladavka_display').val(pohladavka.toFixed(2));
     });
 
@@ -483,98 +480,85 @@ $(document).ready(function() {
         </div>
 
         <form id="createForm" class="fand-form-grid">
-            <!-- Row 1 -->
-            <label class="fand-span-2">Dátum zaradenia</label>
+            <!-- Riadok 1: a (Dátum), hod (Čas), b (Doklad) -->
+            <label class="fand-span-2">Dátum</label>
             <div class="fand-span-4" style="display: flex; gap: 5px;">
                 <input type="date" id="create_a" name="a" required>
                 <input type="text" id="create_akyden" placeholder="Po" style="width: 40px;" readonly disabled>
+                <input type="text" id="hod" name="hod" placeholder="Čas" style="width: 60px;">
             </div>
-            <label class="fand-span-2 text-right">Označenie</label>
-            <input class="fand-span-4" type="text" id="create_b" name="b" placeholder="Bude vygenerované..." readonly disabled>
+            <label class="fand-span-2 text-right">Doklad</label>
+            <input class="fand-span-4" type="text" id="create_b" name="b" placeholder="Generované..." readonly disabled>
 
-            <!-- Row 2 -->
-            <label class="fand-span-2">IČO</label>
-            <input class="fand-span-4" type="text" id="ico" name="ico">
-            <label class="fand-span-2 text-right">Var. sym.</label>
-            <input class="fand-span-4" type="text" id="var_sym" name="var_sym">
+            <!-- Riadok 2: ds (Splatnosť), zp (Spôsob platby) -->
+            <label class="fand-span-2">Splatnosť</label>
+            <div class="fand-span-4" style="display: flex; gap: 5px;">
+                <input type="date" id="ds" name="ds">
+                <input type="text" id="create_akyden1" placeholder="Po" style="width: 40px;" readonly disabled>
+            </div>
+            <label class="fand-span-2 text-right">Sp. platby</label>
+            <input class="fand-span-4" type="text" id="zp" name="zp">
 
-            <!-- Row 3 -->
-            <label class="fand-span-2">Firma</label>
-            <input class="fand-span-10" type="text" id="od" name="od" required>
+            <!-- Riadok 3: od (Zákazník), kodOP (IČO?), n (Názov/Mesto) -->
+            <label class="fand-span-2">Zákazník</label>
+            <input class="fand-span-4" type="text" id="od" name="od" required>
+            <label class="fand-span-2 text-right">IČO</label>
+            <input class="fand-span-4" type="text" id="kodop" name="kodop">
 
-            <!-- Row 4 -->
-            <label class="fand-span-2">Ulica, Mesto</label>
-            <input class="fand-span-10" type="text" id="mesto" name="mesto">
+            <label class="fand-span-2">Mesto</label>
+            <input class="fand-span-10" type="text" id="n" name="n">
 
-            <!-- Row 5 -->
-            <label class="fand-span-2">Č. ú. (IBAN)</label>
-            <input class="fand-span-10" type="text" id="iban" name="iban">
-
-            <!-- Row 6 -->
+            <!-- Riadok 4: z (Zákazka) -->
             <label class="fand-span-2">Zákazka</label>
             <input class="fand-span-4" type="text" id="z" name="z">
-            <label class="fand-span-2 text-right">Splatnosť</label>
-            <input class="fand-span-4" type="date" id="splat" name="splat">
-
-            <div class="fand-span-12" style="border-top: 1px dashed var(--border-color); margin: 10px 0;"></div>
-
-            <!-- Table Headers -->
-            <div class="fand-span-3"></div>
-            <div class="fand-span-3 text-center" style="font-weight: bold;">Základné</div>
-            <div class="fand-span-3 text-center" style="font-weight: bold;">Daň</div>
-            <div class="fand-span-3 text-center" style="font-weight: bold;">Sadzba</div>
-
-            <!-- Vys. dan -->
-            <label class="fand-span-3">Vys. daň</label>
-            <input class="fand-span-3" type="number" step="0.01" id="v_z" name="v_z" value="0.00">
-            <input class="fand-span-3" type="number" step="0.01" id="v_d" name="v_d" value="0.00">
-            <input class="fand-span-3" type="number" step="0.01" id="v_s" name="v_s" value="0.00">
-
-            <!-- Níz. daň -->
-            <label class="fand-span-3">Níz. daň</label>
-            <input class="fand-span-3" type="number" step="0.01" id="p_z" name="p_z" value="0.00">
-            <input class="fand-span-3" type="number" step="0.01" id="p_d" name="p_d" value="0.00">
-            <input class="fand-span-3" type="number" step="0.01" id="p_s" name="p_s" value="0.00">
-
-            <!-- Zníž. daň -->
-            <label class="fand-span-3">Zníž. daň</label>
-            <input class="fand-span-3" type="number" step="0.01" id="z_z" name="z_z" value="0.00">
-            <input class="fand-span-3" type="number" step="0.01" id="z_d" name="z_d" value="0.00">
-            <input class="fand-span-3" type="number" step="0.01" id="z_s" name="z_s" value="0.00">
-
-            <!-- Nezd. pln -->
-            <label class="fand-span-3">Nezd. pln.</label>
-            <input class="fand-span-3" type="number" step="0.01" id="n_p" name="n_p" value="0.00">
             <div class="fand-span-6"></div>
 
             <div class="fand-span-12" style="border-top: 1px dashed var(--border-color); margin: 10px 0;"></div>
 
-            <!-- Fak.suma s DPH -->
-            <div class="fand-span-3"></div>
-            <label class="fand-span-6 text-right">Faktur. suma s DPH :</label>
-            <input class="fand-span-3" type="number" step="0.01" id="zn" name="zn" value="0.00" readonly disabled style="font-weight: bold;">
+            <!-- Riadky DPH a Tovar/Služby -->
+            <!-- DPH -->
+            <label class="fand-span-2">Sadzba DPH %</label>
+            <input class="fand-span-2" type="number" step="0.01" id="dph" name="dph" value="0.00" style="text-align: right;">
+            <label class="fand-span-2 text-right">DPH (Sk/€)</label>
+            <input class="fand-span-6" type="number" step="0.01" id="dph_sk" name="dph_Sk" value="0.00" style="text-align: right;">
 
-            <!-- Vyrovnanie -->
-            <div class="fand-span-3"></div>
-            <label class="fand-span-6 text-right">Vyrovnanie :</label>
-            <input class="fand-span-3" type="number" step="0.01" id="vyrovn" name="vyrovn" value="0.00">
+            <!-- Tovar a Služby -->
+            <label class="fand-span-2">Tovar</label>
+            <input class="fand-span-4" type="number" step="0.01" id="tovar" name="tovar" value="0.00" style="text-align: right;">
+            <label class="fand-span-2 text-right">Služby</label>
+            <input class="fand-span-4" type="number" step="0.01" id="sluzby" name="sluzby" value="0.00" style="text-align: right;">
+
+            <div class="fand-span-12" style="border-top: 1px dashed var(--border-color); margin: 10px 0;"></div>
+
+            <!-- Riadky Sumáre -->
+            <!-- Faktúrovaná suma (zn) -->
+            <label class="fand-span-6 text-right">Faktúrovaná suma s DPH:</label>
+            <input class="fand-span-6" type="number" step="0.01" id="zn" name="zn" value="0.00" readonly disabled style="font-weight: bold; text-align: right;">
+
+            <!-- Vyrovnanie (vyrovn) -->
+            <label class="fand-span-6 text-right">Vyrovnanie:</label>
+            <input class="fand-span-6" type="number" step="0.01" id="vyrovn" name="vyrovn" value="0.00" style="text-align: right;">
+
+            <!-- Uhradené (pc) -->
+            <label class="fand-span-6 text-right">Uhradené (PC):</label>
+            <input class="fand-span-6" type="number" step="0.01" id="pc" name="pc" value="0.00" style="text-align: right;">
 
             <!-- Pohľadávka celkom -->
-            <div class="fand-span-3"></div>
-            <label class="fand-span-6 text-right">Pohľadávka :</label>
-            <input class="fand-span-3" type="number" step="0.01" id="pohladavka_display" value="0.00" readonly disabled style="font-weight: bold; background: #e9ecef; color: #000;">
+            <label class="fand-span-6 text-right">Pohľadávka k úhrade:</label>
+            <input class="fand-span-6" type="number" step="0.01" id="pohladavka_display" value="0.00" readonly disabled style="font-weight: bold; background: #e9ecef; color: #000; text-align: right;">
 
             <div class="fand-span-12" style="border-top: 1px solid var(--border-color); margin: 15px 0;"></div>
 
-            <!-- Submit & QR -->
+            <!-- Tlačidlá (Zarovnané dole podľa priania) -->
             <div class="fand-span-12" style="display: flex; justify-content: space-between;">
                 <button type="button" class="btn btn-secondary" onclick="openScanner()">📷 Načítať z QR (F3)</button>
-                <button type="submit" class="btn btn-action" style="background: #28a745; color: white; padding: 10px 30px; font-size: 1.1rem;">Uložiť záznam</button>
+                <button type="submit" class="btn btn-action" style="background: #28a745; color: white; padding: 10px 30px; font-size: 1.1rem; border:none; cursor:pointer; border-radius:3px;">Uložiť záznam</button>
             </div>
             <div id="reader" style="width:100%; display:none; margin-top:15px;"></div>
         </form>
     </div>
 </div>
+
 
 </body>
 </html>
