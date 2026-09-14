@@ -20,7 +20,80 @@
         .btn:hover { background: #0056b3; }
         .btn-edit { background: #ffc107; color: black; }
         .btn-edit:hover { background: #e0a800; }
-    </style>
+
+    .dos-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+    }
+    .dos-modal-content {
+        background-color: var(--card-bg);
+        margin: 5% auto;
+        padding: 20px;
+        border: 2px solid var(--border-color);
+        width: 60%;
+        max-width: 1000px;
+        height: auto;
+        max-height: 90vh;
+        overflow-y: auto;
+        color: var(--text-color);
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .dos-modal-header {
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .close-modal {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close-modal:hover, .close-modal:focus {
+        color: #fff;
+        text-decoration: none;
+    }
+    .fand-form-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 8px;
+        align-items: center;
+        font-family: monospace;
+        font-size: 1.1em;
+    }
+    .fand-form-grid label {
+        margin: 0;
+        white-space: nowrap;
+    }
+    .fand-form-grid input, .fand-form-grid select {
+        padding: 4px;
+        width: 100%;
+        background-color: var(--card-bg);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+    }
+    .fand-span-1 { grid-column: span 1; }
+    .fand-span-2 { grid-column: span 2; }
+    .fand-span-3 { grid-column: span 3; }
+    .fand-span-4 { grid-column: span 4; }
+    .fand-span-5 { grid-column: span 5; }
+    .fand-span-6 { grid-column: span 6; }
+    .fand-span-7 { grid-column: span 7; }
+    .fand-span-8 { grid-column: span 8; }
+    .fand-span-9 { grid-column: span 9; }
+    .fand-span-10 { grid-column: span 10; }
+    .fand-span-12 { grid-column: span 12; }
+
+</style>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- DataTables CSS & JS -->
@@ -170,7 +243,80 @@
         .summary-list li.total {
             border-top: 2px solid var(--border-color) !important;
         }
-    </style>
+
+    .dos-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+    }
+    .dos-modal-content {
+        background-color: var(--card-bg);
+        margin: 5% auto;
+        padding: 20px;
+        border: 2px solid var(--border-color);
+        width: 60%;
+        max-width: 1000px;
+        height: auto;
+        max-height: 90vh;
+        overflow-y: auto;
+        color: var(--text-color);
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .dos-modal-header {
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .close-modal {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close-modal:hover, .close-modal:focus {
+        color: #fff;
+        text-decoration: none;
+    }
+    .fand-form-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 8px;
+        align-items: center;
+        font-family: monospace;
+        font-size: 1.1em;
+    }
+    .fand-form-grid label {
+        margin: 0;
+        white-space: nowrap;
+    }
+    .fand-form-grid input, .fand-form-grid select {
+        padding: 4px;
+        width: 100%;
+        background-color: var(--card-bg);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+    }
+    .fand-span-1 { grid-column: span 1; }
+    .fand-span-2 { grid-column: span 2; }
+    .fand-span-3 { grid-column: span 3; }
+    .fand-span-4 { grid-column: span 4; }
+    .fand-span-5 { grid-column: span 5; }
+    .fand-span-6 { grid-column: span 6; }
+    .fand-span-7 { grid-column: span 7; }
+    .fand-span-8 { grid-column: span 8; }
+    .fand-span-9 { grid-column: span 9; }
+    .fand-span-10 { grid-column: span 10; }
+    .fand-span-12 { grid-column: span 12; }
+
+</style>
 
 <script>
     function updateClock() {
@@ -268,7 +414,7 @@
         </tbody>
     </table>
         <div class="card" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; padding: 15px; border: 1px solid var(--border-color); background-color: var(--card-bg);">
-        <button id="btnOpenCreateReceivable" class="btn" style="background-color: #28a745; border:none; cursor:pointer;" >Pridať nový záznam</button>
+        <button id="btnOpenCreateReceivable" class="btn" style="background-color: #28a745; border:none; cursor:pointer;" onclick="openCreateModal()">Pridať nový záznam</button>
         <a href="<?= base_url() ?>" class="btn" style="background-color: #6c757d; margin-left: auto;">Späť na domovskú stránku</a>
     </div>
 
