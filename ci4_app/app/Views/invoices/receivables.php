@@ -183,7 +183,7 @@
         margin-bottom: 15px;
         padding-bottom: 5px;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
     }
     .close-modal {
@@ -412,11 +412,6 @@ $(document).ready(function() {
 
         let celkom = tovar + sluzby + dph_sk;
         $('#zn').val(celkom.toFixed(2));
-
-        let vyrovn = parseFloat($('#vyrovn').val()) || 0;
-        let pc = parseFloat($('#pc').val()) || 0;
-        let pohladavka = celkom + vyrovn - pc;
-        $('#pohladavka_display').val(pohladavka.toFixed(2));
     });
 
     $(document).on('submit', '#createForm', function(e) {
@@ -474,7 +469,7 @@ $(document).ready(function() {
 <!-- Create Receivable Modal (eKP) -->
 <div id="createModal" class="dos-modal">
     <div class="dos-modal-content">
-        <div class="dos-modal-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="dos-modal-header" style="display: flex; justify-content: flex-end; align-items: center;">
             <h3 style="margin:0; font-size: 1.2rem;">Zadávanie novej odoslanej faktúry</h3>
             <span class="close-create-modal close-modal">&times;</span>
         </div>
@@ -535,26 +530,20 @@ $(document).ready(function() {
             <label class="fand-span-6 text-right">Faktúrovaná suma s DPH:</label>
             <input class="fand-span-6" type="number" step="0.01" id="zn" name="zn" value="0.00" readonly disabled style="font-weight: bold; text-align: right;">
 
-            <!-- Vyrovnanie (vyrovn) -->
-            <label class="fand-span-6 text-right">Vyrovnanie:</label>
-            <input class="fand-span-6" type="number" step="0.01" id="vyrovn" name="vyrovn" value="0.00" style="text-align: right;">
 
-            <!-- Uhradené (pc) -->
-            <label class="fand-span-6 text-right">Uhradené (PC):</label>
-            <input class="fand-span-6" type="number" step="0.01" id="pc" name="pc" value="0.00" style="text-align: right;">
 
-            <!-- Pohľadávka celkom -->
-            <label class="fand-span-6 text-right">Pohľadávka k úhrade:</label>
-            <input class="fand-span-6" type="number" step="0.01" id="pohladavka_display" value="0.00" readonly disabled style="font-weight: bold; background: #e9ecef; color: #000; text-align: right;">
+
+
+
 
             <div class="fand-span-12" style="border-top: 1px solid var(--border-color); margin: 15px 0;"></div>
 
             <!-- Tlačidlá (Zarovnané dole podľa priania) -->
-            <div class="fand-span-12" style="display: flex; justify-content: space-between;">
-                <button type="button" class="btn btn-secondary" onclick="openScanner()">📷 Načítať z QR (F3)</button>
+            <div class="fand-span-12" style="display: flex; justify-content: flex-end;">
+
                 <button type="submit" class="btn btn-action" style="background: #28a745; color: white; padding: 10px 30px; font-size: 1.1rem; border:none; cursor:pointer; border-radius:3px;">Uložiť záznam</button>
             </div>
-            <div id="reader" style="width:100%; display:none; margin-top:15px;"></div>
+
         </form>
     </div>
 </div>
