@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Záväzky</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; font-size: 14px; }
+        th, td { border: 1px solid #ddd; padding: 6px 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .text-right { text-align: right; }
+        .success-msg { color: green; font-weight: bold; margin-bottom: 10px; }
+        .error-msg { color: red; font-weight: bold; margin-bottom: 10px; }
+        .summary-box { background: #f9f9f9; border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; display: flex; gap: 20px; }
+        .summary-section { flex: 1; }
+        .summary-section h3 { margin-top: 0; }
+        form.year-selector { margin-bottom: 20px; }
+        .btn { display: inline-block; padding: 5px 10px; text-decoration: none; background: #007bff; color: white; border-radius: 3px; }
+        .btn:hover { background: #0056b3; }
+        .btn-edit { background: #ffc107; color: black; }
+        .btn-edit:hover { background: #e0a800; }
+
+
+    .btn-attachment-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-attachment-has {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #343a40; /* tmavy stvorec */
+        color: white; /* biela sponka */
+        border: 1px solid #23272b;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-has:hover { background-color: #23272b; }
+
+    .btn-attachment-empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #e9ecef; /* sedy stvorec */
+        color: transparent; /* bez sponky - text je transparentny alebo ziadny */
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-empty:hover { background-color: #dde0e3; }
+
+
+    /* Modal styles mimicking DOS UI overlay */
+    .dos-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+    }
+        .dos-modal-content {
+        background-color: var(--card-bg);
+        margin: 5% auto;
+        padding: 20px;
+        border: 2px solid var(--border-color);
+        width: 60%;
+        max-width: 1000px;
+        height: auto;
+        max-height: 90vh;
+        overflow-y: auto;
+        color: var(--text-color);
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .fand-form-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 8px;
+        align-items: center;
+        font-family: monospace;
+        font-size: 1.1em;
+    }
+    .fand-form-grid label {
+        margin: 0;
+        white-space: nowrap;
+    }
+    .fand-form-grid input, .fand-form-grid select {
+        padding: 4px;
+        width: 100%;
+    }
+    .fand-span-1 { grid-column: span 1; }
+    .fand-span-2 { grid-column: span 2; }
+    .fand-span-3 { grid-column: span 3; }
+    .fand-span-4 { grid-column: span 4; }
+    .fand-span-5 { grid-column: span 5; }
+    .fand-span-6 { grid-column: span 6; }
+    .fand-span-7 { grid-column: span 7; }
+    .fand-span-8 { grid-column: span 8; }
+    .fand-span-9 { grid-column: span 9; }
+    .fand-span-10 { grid-column: span 10; }
+    .fand-span-12 { grid-column: span 12; }
+
+
+    .fand-form-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 8px;
+        align-items: center;
+        font-family: monospace;
+        font-size: 1.1em;
+    }
+    .fand-form-grid label {
+        margin: 0;
+        white-space: nowrap;
+    }
+    .fand-form-grid input, .fand-form-grid select {
+        padding: 4px;
+        width: 100%;
+    }
+    .fand-span-1 { grid-column: span 1; }
+    .fand-span-2 { grid-column: span 2; }
+    .fand-span-3 { grid-column: span 3; }
+    .fand-span-4 { grid-column: span 4; }
+    .fand-span-5 { grid-column: span 5; }
+    .fand-span-6 { grid-column: span 6; }
+    .fand-span-7 { grid-column: span 7; }
+    .fand-span-8 { grid-column: span 8; }
+    .fand-span-9 { grid-column: span 9; }
+    .fand-span-10 { grid-column: span 10; }
+    .fand-span-12 { grid-column: span 12; }
+
+
+    .dos-modal-header {
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+    }
+    .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close-modal:hover,
+    .close-modal:focus {
+        color: #fff;
+        text-decoration: none;
+    }
+    .attachment-list {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 15px;
+    }
+    .attachment-list li {
+        padding: 5px;
+        border-bottom: 1px dashed var(--border-color);
+    }
+</style>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- DataTables CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+
+    <!-- Theme Switcher CSS -->
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --th-bg: #2d2d2d;
+            --hover-bg: #2a2a2a;
+            --link-color: #4da3ff;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f4f6f9;
+            --text-color: #333;
+            --card-bg: #fff;
+            --border-color: #ddd;
+            --th-bg: #f8f9fa;
+            --hover-bg: #f9f9f9;
+            --link-color: #007bff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .card, .summary-box, .dos-frame, .dos-table, table {
+            background-color: var(--card-bg) !important;
+            border-color: var(--border-color) !important;
+            color: var(--text-color) !important;
+        }
+
+        th, td, .card h2, .header, .summary-section h3 {
+            border-color: var(--border-color) !important;
+            color: var(--text-color) !important;
+            background-color: transparent !important;
+        }
+
+        th {
+            background-color: var(--th-bg) !important;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--hover-bg) !important;
+        }
+
+        .header {
+            background-color: var(--card-bg) !important;
+        }
+
+        a {
+            color: var(--link-color);
+        }
+
+        input, select {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .theme-switch-wrapper {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .theme-switch {
+            display: inline-block;
+            height: 34px;
+            position: relative;
+            width: 60px;
+        }
+
+        .theme-switch input {
+            display: none;
+        }
+
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            background-color: #fff;
+            bottom: 4px;
+            content: "";
+            height: 26px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 26px;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .theme-label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* DataTables dark mode overrides */
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter,
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_processing,
+        .dataTables_wrapper .dataTables_paginate {
+            color: var(--text-color) !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            color: var(--text-color) !important;
+        }
+
+        table.dataTable tbody tr {
+            background-color: var(--card-bg) !important;
+        }
+
+        .summary-list li {
+            border-bottom: 1px dashed var(--border-color) !important;
+        }
+
+        .summary-list li.total {
+            border-top: 2px solid var(--border-color) !important;
+        }
+
+
+    .btn-attachment-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-attachment-has {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #343a40; /* tmavy stvorec */
+        color: white; /* biela sponka */
+        border: 1px solid #23272b;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-has:hover { background-color: #23272b; }
+
+    .btn-attachment-empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #e9ecef; /* sedy stvorec */
+        color: transparent; /* bez sponky - text je transparentny alebo ziadny */
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-empty:hover { background-color: #dde0e3; }
+
+
+    /* Modal styles mimicking DOS UI overlay */
+    .dos-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+    }
+    .dos-modal-content {
+        background-color: var(--card-bg);
+        margin: 5% auto;
+        padding: 20px;
+        border: 2px solid var(--border-color);
+        width: 60%;
+        max-width: 1000px;
+        height: auto;
+        max-height: 90vh;
+        overflow-y: auto;
+        color: var(--text-color);
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .fand-form-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 8px;
+        align-items: center;
+        font-family: monospace;
+        font-size: 1.1em;
+    }
+    .fand-form-grid label {
+        margin: 0;
+        white-space: nowrap;
+    }
+    .fand-form-grid input, .fand-form-grid select {
+        padding: 4px;
+        width: 100%;
+    }
+    .fand-span-1 { grid-column: span 1; }
+    .fand-span-2 { grid-column: span 2; }
+    .fand-span-3 { grid-column: span 3; }
+    .fand-span-4 { grid-column: span 4; }
+    .fand-span-5 { grid-column: span 5; }
+    .fand-span-6 { grid-column: span 6; }
+    .fand-span-7 { grid-column: span 7; }
+    .fand-span-8 { grid-column: span 8; }
+    .fand-span-9 { grid-column: span 9; }
+    .fand-span-10 { grid-column: span 10; }
+    .fand-span-12 { grid-column: span 12; }
+
+
+    .dos-modal-header {
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+    }
+    .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close-modal:hover,
+    .close-modal:focus {
+        color: #fff;
+        text-decoration: none;
+    }
+    .attachment-list {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 15px;
+    }
+    .attachment-list li {
+        padding: 5px;
+        border-bottom: 1px dashed var(--border-color);
+    }
+</style>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = now.getFullYear();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+
+        const clockEl = document.getElementById('navbar-clock');
+        if (clockEl) {
+            clockEl.textContent = `${day}.${month}.${year} ${hours}:${minutes}`;
+        }
+    }
+    setInterval(updateClock, 1000);
+</script>
+
+    <!-- HTML5 QR Code Scanner -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <!-- Flatpickr CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/sk.js"></script>
+</head>
+<body onload="updateClock()">
+
+<div style="text-align: center; font-weight: bold; font-size: 1.2em; margin-bottom: 15px;" id="navbar-clock">
+    <?= date('d.m.Y H:i') ?>
+</div>
+
+    <!-- Theme Switcher JS -->
+    <div class="theme-switch-wrapper">
+        <span class="theme-label">Téma</span>
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round"></div>
+        </label>
+    </div>
+
+    <script>
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : 'dark';
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'light') {
+                toggleSwitch.checked = true;
+            }
+        }
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        toggleSwitch.addEventListener('change', switchTheme, false);
+    </script>
+
+
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- DataTables CSS & JS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+
+<style>
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_processing,
+    .dataTables_wrapper .dataTables_paginate {
+        color: inherit !important;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        color: inherit !important;
+    }
+
+    .btn-action { padding: 4px 8px; border-radius: 3px; font-size: 0.85em; text-decoration: none; margin: 0 2px; display: inline-block; cursor: pointer; }
+    .btn-edit { background: #ffc107; color: black; border: 1px solid #e0a800; }
+    .btn-edit:hover { background: #e0a800; }
+
+    .hotkey-hint {
+        font-size: 0.8em;
+        color: #888;
+        display: inline-block;
+        margin-left: 15px;
+    }
+    .key-badge {
+        background: #444;
+        color: #fff;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+    }
+
+
+    .btn-attachment-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-attachment-has {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #343a40; /* tmavy stvorec */
+        color: white; /* biela sponka */
+        border: 1px solid #23272b;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-has:hover { background-color: #23272b; }
+
+    .btn-attachment-empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background-color: #e9ecef; /* sedy stvorec */
+        color: transparent; /* bez sponky - text je transparentny alebo ziadny */
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-attachment-empty:hover { background-color: #dde0e3; }
+
+
+    /* Modal styles mimicking DOS UI overlay */
+    .dos-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.7);
+    }
+    .dos-modal-content {
+        background-color: var(--card-bg);
+        margin: 5% auto;
+        padding: 20px;
+        border: 2px solid var(--border-color);
+        width: 60%;
+        max-width: 1000px;
+        height: auto;
+        max-height: 90vh;
+        overflow-y: auto;
+        color: var(--text-color);
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .fand-form-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 8px;
+        align-items: center;
+        font-family: monospace;
+        font-size: 1.1em;
+    }
+    .fand-form-grid label {
+        margin: 0;
+        white-space: nowrap;
+    }
+    .fand-form-grid input, .fand-form-grid select {
+        padding: 4px;
+        width: 100%;
+    }
+    .fand-span-1 { grid-column: span 1; }
+    .fand-span-2 { grid-column: span 2; }
+    .fand-span-3 { grid-column: span 3; }
+    .fand-span-4 { grid-column: span 4; }
+    .fand-span-5 { grid-column: span 5; }
+    .fand-span-6 { grid-column: span 6; }
+    .fand-span-7 { grid-column: span 7; }
+    .fand-span-8 { grid-column: span 8; }
+    .fand-span-9 { grid-column: span 9; }
+    .fand-span-10 { grid-column: span 10; }
+    .fand-span-12 { grid-column: span 12; }
+
+
+    .dos-modal-header {
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+    }
+    .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .close-modal:hover,
+    .close-modal:focus {
+        color: #fff;
+        text-decoration: none;
+    }
+    .attachment-list {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 15px;
+    }
+    .attachment-list li {
+        padding: 5px;
+        border-bottom: 1px dashed var(--border-color);
+    }
+</style>
+
+<div style="margin-bottom: 20px;">
+    <h1 style="margin: 0; padding-bottom: 10px;">Záväzky</h1>
+    <h2 style="margin: 0; border-top: 2px solid #ccc; padding-top: 10px;"><?= esc($year) ?></h2>
+</div>
+
+    <div style="margin-bottom: 10px; font-size: 0.9em; color: #666;">
+        <strong>F2 / F10 / F1 / F5</strong>: Návrat domov &nbsp;|&nbsp;
+        <strong>F3</strong>: Skenovať QR Faktúru &nbsp;|&nbsp;
+        <strong>F4</strong>: Položky (Aktuálny riadok) &nbsp;|&nbsp;
+        <strong>F8</strong>: Detail faktúry
+    </div>
+
+<table id="liabilitiesTable" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Dátum</th>
+            <th>Doklad</th>
+            <th>Ext. doklad</th>
+            <th class="text-center">📎</th>
+            <th>Dodávateľ</th>
+            <th class="text-right">Suma (zn)</th>
+            <th class="text-right">Uhradené (pc)</th>
+            <th class="text-center">Stav</th>
+            <th class="text-center">Akcie</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+        <div class="card" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; padding: 15px; border: 1px solid var(--border-color); background-color: var(--card-bg);">
+        <button id="btnOpenCreateLiability" class="btn" style="background-color: #28a745; border:none; cursor:pointer;">Pridať nový záznam</button>
+        <a href="<?= base_url() ?>" class="btn" style="background-color: #6c757d; margin-left: auto;">Späť na domovskú stránku</a>
+    </div>
+
+<script>
+
+
+
+// Create Liability (DATOVÝ EDITOR) & QR Logic
+var html5QrcodeScanner;
+
+$('#btnOpenCreateLiability').click(function(e) {
+    e.preventDefault();
+    openCreateModal();
+});
+
+$('.close-create-modal').click(function() {
+    $('#createModal').hide();
+});
+
+function openCreateModal() {
+    $('#createModal').show();
+    $('#createStatus').text('');
+
+    // Predvyplnit dnesny datum a vyprazdnit hodnoty
+    document.getElementById('create_a').valueAsDate = new Date();
+    $('#create_zp').val($('#create_a').val());
+
+    $('#create_od').val('');
+    $('#create_ICPD').val('');
+    $('#create_od_ucet').val('');
+    $('#create_Vydaj').val('');
+    $('#create_n').val('');
+    $('#create_varsym').val('');
+    $('#create_konsym').val('');
+    $('#create_splat').val('');
+
+    $('#create_x').val('0.00');
+    $('#create_y').val('0.00');
+    $('#create_dph_sk1').val('0.00');
+    $('#create_z').val('0.00');
+    $('#create_dph_sk').val('0.00');
+    $('#create_zn').val('0.00');
+    $('#create_pc').val('0.00');
+    $('#create_vyrovn').val('0.00');
+    $('#create_zavazok').val('0.00');
+}
+
+// Dynamicke prepocitavanie zostatku a sumy
+$('#createForm input[type="number"]').on('input', function() {
+    let zn = parseFloat($('#create_zn').val()) || 0;
+    let pc = parseFloat($('#create_pc').val()) || 0;
+    let zavazok = zn - pc;
+    $('#create_zavazok').val(zavazok.toFixed(2));
+});
+
+// QR Sub Modal Logic
+$('#btnQROpen').click(function() {
+    $('#qrSubModal').show();
+    $('#qr-status').text('Inicializujem kameru...').css('color', 'orange');
+    $('#qrTextInputField').val('');
+
+    if (!html5QrcodeScanner) {
+        html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: {width: 250, height: 250} }, false);
+    }
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+});
+
+$('.close-qr-submodal').click(function() {
+    closeQrModal();
+});
+
+function closeQrModal() {
+    $('#qrSubModal').hide();
+    if (html5QrcodeScanner) {
+        html5QrcodeScanner.clear();
+    }
+}
+
+$('#btnProcessQrText').click(function() {
+    let text = $('#qrTextInputField').val().trim();
+    if(text) {
+        processQrString(text);
+    }
+});
+
+function onScanSuccess(decodedText, decodedResult) {
+    if (html5QrcodeScanner) html5QrcodeScanner.clear();
+    processQrString(decodedText);
+}
+
+function processQrString(qrString) {
+    $('#qr-status').text('Spracovávam kód na serveri...').css('color', 'orange');
+
+    $.ajax({
+        url: '<?= base_url('invoices/api/liabilities/decode-bysquare') ?>',
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
+        data: JSON.stringify({ qr_string: qrString }),
+        contentType: 'application/json',
+        success: function(res) {
+            if(res.parsed) {
+                if(res.parsed.dodavatel) $('#create_od').val(res.parsed.dodavatel);
+                if(res.parsed.dodavatel_ico) $('#create_ICPD').val(res.parsed.dodavatel_ico);
+                if(res.parsed.ext_doklad) $('#create_varsym').val(res.parsed.ext_doklad);
+                if(res.parsed.ks) $('#create_konsym').val(res.parsed.ks);
+                if(res.parsed.iban) $('#create_od_ucet').val(res.parsed.iban);
+
+                if(res.parsed.suma) {
+                    $('#create_zn').val(res.parsed.suma);
+                    $('#create_zavazok').val(res.parsed.suma);
+                }
+
+                if (res.parsed.zaklad_dane && res.parsed.dph) {
+                    $('#create_z').val(res.parsed.zaklad_dane);
+                    $('#create_dph').val('20');
+                }
+
+                let spl = res.parsed.splatnost;
+                if(spl && spl.length === 8) {
+                    let y = spl.substr(0,4); let m = spl.substr(4,2); let d = spl.substr(6,2);
+                    $('#create_splat').val(`${y}-${m}-${d}`);
+                }
+                let dod = res.parsed.dodanie;
+                if(dod && dod.length === 8) {
+                    let y = dod.substr(0,4); let m = dod.substr(4,2); let d = dod.substr(6,2);
+                    $('#create_a').val(`${y}-${m}-${d}`);
+                    $('#create_zp').val(`${y}-${m}-${d}`);
+                }
+
+                if(res.csrf_token) { window.csrfHash = res.csrf_token; }
+                closeQrModal();
+            }
+        },
+        error: function(xhr) {
+            let errorMsg = 'Nepodarilo sa dekódovať INVOICE/PAY kód.';
+            if (xhr.responseJSON && xhr.responseJSON.error) {
+                errorMsg = xhr.responseJSON.error;
+            }
+            $('#qr-status').text(errorMsg).css('color', 'red');
+            if (xhr.responseJSON && xhr.responseJSON.csrf_token) {
+                window.csrfHash = xhr.responseJSON.csrf_token;
+            }
+        }
+    });
+}
+
+function onScanFailure(error) {}
+
+$(document).on('submit', '#createForm', function(e) {
+    e.preventDefault();
+    $('#createStatus').text('Ukladám záznam...').css('color', 'orange');
+
+    var jsonData = {
+        a: $('#create_a').val(),
+        zp: $('#create_zp').val(),
+        par_69: $('#create_par_69').is(':checked') ? 1 : 0,
+        splat: $('#create_splat').val(),
+        od: $('#create_od').val(),
+        od_ucet: $('#create_od_ucet').val(),
+        vydaj: $('#create_Vydaj').val(),
+        n: $('#create_n').val(),
+        var_sym: $('#create_varsym').val(),
+        kon_sym: $('#create_konsym').val(),
+        x: $('#create_x').val(),
+        y: $('#create_y').val(),
+        dph_1: $('#create_dph_1').val(),
+        z: $('#create_z').val(),
+        dph: $('#create_dph').val(),
+        pc: $('#create_pc').val(),
+        vyrovn: $('#create_vyrovn').val(),
+        items: []
+    };
+
+    $.ajax({
+        url: '<?= base_url('invoices/liabilities') ?>',
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
+        data: JSON.stringify(jsonData),
+        contentType: 'application/json',
+        success: function(response) {
+            $('#createStatus').text('Úspešne uložené!').css('color', 'green');
+            if(response.csrf_token) window.csrfHash = response.csrf_token;
+            setTimeout(function() {
+                $('#createModal').hide();
+                $('#liabilitiesTable').DataTable().ajax.reload();
+            }, 1500);
+        },
+        error: function(xhr) {
+            let msg = 'Chyba pri ukladaní.';
+            if (xhr.responseJSON && xhr.responseJSON.messages) {
+                msg = Object.values(xhr.responseJSON.messages).join(', ');
+            } else if (xhr.responseJSON && xhr.responseJSON.error) {
+                msg = xhr.responseJSON.error;
+            }
+            $('#createStatus').text(msg).css('color', 'red');
+            if (xhr.responseJSON && xhr.responseJSON.csrf_token) {
+                window.csrfHash = xhr.responseJSON.csrf_token;
+            }
+        }
+    });
+});
+$(document).ready(function() {
+    // Init flatpickr on date inputs
+    flatpickr("input[type=date]", {
+        locale: "sk",
+        dateFormat: "Y-m-d",
+        allowInput: true
+    });
+
+    $.fn.dataTable.ext.errMode = 'none';
+    $('#liabilitiesTable').on('error.dt', function(e, settings, techNote, message) {
+        console.error('DataTables Error:', message);
+        alert('Nepodarilo sa načítať dáta (možno chýbajúca tabuľka v DB alebo spojenie). Skontrolujte konzolu.');
+    });
+    var table = $('#liabilitiesTable').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/sk.json"
+        },
+        "ajax": {
+            "url": "<?= base_url('invoices/api/liabilities') ?>?year=<?= esc($year) ?>",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "a", render: function(data) {
+                if(!data) return '';
+                let d = new Date(data);
+                return d.toLocaleDateString('sk-SK');
+            }},
+
+            { "data": "b" },
+            { "data": "var_sym" },
+            {
+                "data": null,
+                "className": "text-center align-middle",
+                "orderable": false,
+                "render": function(data, type, row) {
+                    if (row.has_attachment) {
+                        return `<div class="btn-attachment-container"><button class="btn-attachment-has attachment-trigger" title="Zobraziť prílohy">📎</button></div>`;
+                    } else {
+                        return `<div class="btn-attachment-container"><button class="btn-attachment-empty attachment-trigger" title="Pridať prílohu">&nbsp;</button></div>`;
+                    }
+                }
+            },
+
+            { "data": "od" },
+            { "data": "zn", className: "text-right", render: $.fn.dataTable.render.number(' ', ',', 2, '', ' €') },
+            { "data": "uhrada", className: "text-right", render: $.fn.dataTable.render.number(' ', ',', 2, '', ' €') },
+            { "data": "uhr", className: "text-center", render: function(data) {
+                if (data === '\u25a0') return '<span style="color:green; font-weight:bold;">Uhradené</span>';
+                if (data === '<') return '<span style="color:orange; font-weight:bold;">Preplatok</span>';
+                if (data === '>') return '<span style="color:red; font-weight:bold;">Čiastočne</span>';
+                return '<span style="color:gray; font-weight:bold;">Neuhradené</span>';
+            }},
+            {
+                "data": null,
+                "className": "text-center",
+                "render": function(data, type, row) {
+                    return `<button class="btn btn-action" onclick="alert('F4 Položky pre doklad: ${row.b}')">F4</button>
+                            <button class="btn btn-action btn-edit" onclick="alert('F8 Detail pre doklad: ${row.b}')">F8</button>`;
+                }
+            }
+        ],
+        "order": [[0, "desc"]]
+    });
+
+    $(document).keydown(function(e) {
+        if (e.key === "F2" || e.key === "F10" || e.key === "F1" || e.key === "F5") {
+            e.preventDefault();
+            window.location.href = "<?= base_url('/') ?>";
+        }
+        else if (e.key === "F3") {
+            e.preventDefault();
+            openCreateModal();
+        }
+        else if (e.key === "F4") {
+            e.preventDefault();
+            alert("Stlačené F4 - zobrazenie položiek (kzpol) pre aktuálne vybraný riadok.");
+        }
+        else if (e.key === "F8") {
+            e.preventDefault();
+            alert("Stlačené F8 - zobrazenie detailu (eKz) pre aktuálne vybraný riadok.");
+        }
+    });
+});
+
+// Attachment logic
+var currentDoklad = '';
+
+$('#liabilitiesTable tbody').on('click', '.attachment-trigger', function () {
+    var tr = $(this).closest('tr');
+    var row = $('#liabilitiesTable').DataTable().row(tr).data();
+
+    if (row) {
+        currentDoklad = row.b;
+
+        let d = new Date(row.a);
+        let datumStr = d.toLocaleDateString('sk-SK');
+
+        let displayStr = `${datumStr} | ${row.var_sym || ''} | ${row.od || ''}`;
+
+        $('#modalDoklad').text(displayStr);
+        $('#uploadDoklad').val(row.b);
+        $('#uploadStatus').text('');
+        $('#fileInput').val('');
+
+        loadAttachments();
+
+        $('#attachmentsModal').show();
+    }
+});
+
+function renderPreview(attId, originalName) {
+    let viewUrl = '<?= base_url('invoices/api/liabilities/attachments/view/') ?>' + attId;
+    let ext = originalName.split('.').pop().toLowerCase();
+
+    if (ext === 'pdf') {
+        $('#attachmentPreview').html(`<iframe src="${viewUrl}" frameborder="0"></iframe>`);
+    } else if (ext === 'jpg' || ext === 'jpeg' || ext === 'png') {
+        $('#attachmentPreview').html(`<img src="${viewUrl}" alt="${originalName}">`);
+    } else {
+        $('#attachmentPreview').html(`<div style="margin-top: 20%; color: #888; text-align: center;">Tento typ súboru nepodporuje náhľad. <a href="${viewUrl}" target="_blank">Kliknite sem pre stiahnutie</a>.</div>`);
+    }
+}
+
+function loadAttachments() {
+    $('#attachmentList').html('<li>Načítavam...</li>');
+    $.ajax({
+        url: '<?= base_url('invoices/api/liabilities/attachments') ?>',
+        type: 'GET',
+        data: { b: currentDoklad },
+        success: function(data) {
+            $('#attachmentList').empty();
+            if (data.length === 0) {
+                $('#attachmentList').html('<li>Zatiaľ neboli nahraté žiadne prílohy.</li>');
+                $('#attachmentPreview').html('<div style="margin-top: 20%; color: #888; text-align: center;">Žiadna príloha na zobrazenie.</div>');
+            } else {
+                data.forEach(function(att) {
+                    let dlUrl = '<?= base_url('invoices/api/liabilities/attachments/download/') ?>' + att.id;
+                    let li = `<li>
+                        <a href="#" onclick="renderPreview(${att.id}, '${att.original_name}'); return false;" style="font-weight: bold;">👁️ ${att.original_name}</a>
+                        <br>
+                        <a href="${dlUrl}" target="_blank" style="font-size: 0.8em; color: #007bff;">[Stiahnuť]</a>
+                        <span style="float:right; font-size: 0.8em; color: #888;">${att.created_at}</span>
+                    </li>`;
+                    $('#attachmentList').append(li);
+                });
+
+                // Automaticky zobraz prvu prilohu
+                renderPreview(data[0].id, data[0].original_name);
+            }
+        },
+        error: function(err) {
+            $('#attachmentList').html('<li style="color:red;">Chyba pri načítaní príloh.</li>');
+        }
+    });
+}
+
+$('.close-modal').click(function() {
+    $('#attachmentsModal').hide();
+});
+
+$(window).click(function(event) {
+    if ($(event.target).is('#attachmentsModal')) {
+        $('#attachmentsModal').hide();
+    }
+});
+
+$(document).on('submit', '#uploadForm', function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+
+    $('#uploadStatus').text('Nahrávam...').css('color', 'orange');
+
+    // Dynamicky pridame najnovsi CSRF token z globalnej premennej alebo formulara
+    formData.append('<?= csrf_token() ?>', window.csrfHash || '<?= csrf_hash() ?>');
+
+    $.ajax({
+        url: '<?= base_url('invoices/api/liabilities/attachments/upload') ?>',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            $('#uploadStatus').text(response.message).css('color', 'green');
+            $('#fileInput').val(''); // clear input
+
+            // Aktualizujeme CSRF hash pre dalsie volania (zabezpecenie CI4 regenerate)
+            if(response.csrf_token) {
+                window.csrfHash = response.csrf_token;
+            }
+
+            loadAttachments(); // reload list
+        },
+        error: function(xhr) {
+            let msg = 'Chyba pri nahrávaní.';
+            if (xhr.responseJSON && xhr.responseJSON.error) {
+                msg = xhr.responseJSON.error;
+            }
+            $('#uploadStatus').text(msg).css('color', 'red');
+        }
+    });
+});
+
+// Create Liability & QR Decoder Logic
+var html5QrcodeScanner;
+
+$('#btnOpenCreateLiability').click(function(e) {
+    e.preventDefault();
+    openCreateModal();
+});
+
+$('.close-create-modal').click(function() {
+    closeCreateModal();
+});
+
+function closeCreateModal() {
+    $('#createModal').hide();
+    stopScanner();
+}
+
+function openCreateModal() {
+    $('#createModal').show();
+    $('#createStatus').text('');
+    $('#qr-status').text('');
+    $('#qrScannerArea').hide();
+    $('#qrInputArea').hide();
+
+    // Predvyplnit dnesny datum a vyprazdnit hodnoty
+    document.getElementById('create_a').valueAsDate = new Date();
+    $('#create_od').val('');
+    $('#create_varsym').val('');
+    $('#create_splat').val('');
+    $('#create_z').val('0.00');
+    $('#create_vyrovn').val('0.00');
+}
+
+$('#btnStartQrScanner').click(function() {
+    $('#qrInputArea').hide();
+    $('#qr-status').text('Inicializujem kameru...').css('color', 'orange');
+    $('#qrScannerArea').show();
+
+    if (!html5QrcodeScanner) {
+        html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: {width: 250, height: 250} }, false);
+    }
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+});
+
+$('#btnQrTextInput').click(function() {
+    stopScanner();
+    $('#qrScannerArea').hide();
+    $('#qr-status').text('');
+    $('#qrTextInputField').val('');
+    $('#qrInputArea').show();
+    $('#qrTextInputField').focus();
+});
+
+$('#btnCancelQrText').click(function() {
+    $('#qrInputArea').hide();
+});
+
+$('#btnCancelQrScan').click(function() {
+    stopScanner();
+    $('#qrScannerArea').hide();
+    $('#qr-status').text('');
+});
+
+$('#btnProcessQrText').click(function() {
+    let text = $('#qrTextInputField').val().trim();
+    if(text) {
+        processQrString(text);
+        $('#qrInputArea').hide();
+    }
+});
+
+function stopScanner() {
+    if (html5QrcodeScanner) {
+        html5QrcodeScanner.clear();
+    }
+}
+
+function onScanSuccess(decodedText, decodedResult) {
+    stopScanner();
+    $('#qrScannerArea').hide();
+    processQrString(decodedText);
+}
+
+function processQrString(qrString) {
+    $('#qr-status').text('Spracovávam kód na serveri...').css('color', 'orange');
+
+    $.ajax({
+        url: '<?= base_url('invoices/api/liabilities/decode-bysquare') ?>',
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
+        data: JSON.stringify({ qr_string: qrString }),
+        contentType: 'application/json',
+        success: function(res) {
+            if(res.parsed) {
+                $('#qr-status').text('Údaje z kódu úspešne prenesené do formulára!').css('color', '#28a745');
+
+                if(res.parsed.dodavatel) $('#create_od').val(res.parsed.dodavatel);
+                if(res.parsed.ext_doklad) $('#create_varsym').val(res.parsed.ext_doklad);
+                if(res.parsed.suma) $('#create_z').val(res.parsed.suma);
+
+                let spl = res.parsed.splatnost;
+                if(spl && spl.length === 8) {
+                    let y = spl.substr(0,4); let m = spl.substr(4,2); let d = spl.substr(6,2);
+                    $('#create_splat').val(`${y}-${m}-${d}`);
+                }
+                let dod = res.parsed.dodanie;
+                if(dod && dod.length === 8) {
+                    let y = dod.substr(0,4); let m = dod.substr(4,2); let d = dod.substr(6,2);
+                    $('#create_a').val(`${y}-${m}-${d}`);
+                }
+
+                if(res.csrf_token) { window.csrfHash = res.csrf_token; }
+            }
+        },
+        error: function(xhr) {
+            let errorMsg = 'Nepodarilo sa dekódovať INVOICE/PAY kód.';
+            if (xhr.responseJSON && xhr.responseJSON.error) {
+                errorMsg = xhr.responseJSON.error;
+            }
+            $('#qr-status').text(errorMsg).css('color', 'red');
+            if (xhr.responseJSON && xhr.responseJSON.csrf_token) {
+                window.csrfHash = xhr.responseJSON.csrf_token;
+            }
+        }
+    });
+}
+
+function onScanFailure(error) {
+    // ignurujeme varovania pri skenovani
+}
+
+$(document).on('submit', '#createForm', function(e) {
+    e.preventDefault();
+    $('#createStatus').text('Ukladám záznam...').css('color', 'orange');
+
+    var jsonData = {
+        a: $('#create_a').val(),
+        // b: je generovane backendom
+        od: $('#create_od').val(),
+        var_sym: $('#create_varsym').val(),
+        splat: $('#create_splat').val(),
+        z: $('#create_z').val(),
+        vyrovn: $('#create_vyrovn').val(),
+        items: []
+    };
+
+    $.ajax({
+        url: '<?= base_url('invoices/liabilities') ?>',
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
+        data: JSON.stringify(jsonData),
+        contentType: 'application/json',
+        success: function(response) {
+            $('#createStatus').text('Úspešne uložené! (Číslo dokladu: ' + response.b + ')').css('color', 'green');
+            if(response.csrf_token) window.csrfHash = response.csrf_token;
+            setTimeout(function() {
+                closeCreateModal();
+                $('#liabilitiesTable').DataTable().ajax.reload();
+            }, 2000);
+        },
+        error: function(xhr) {
+            let msg = 'Chyba pri ukladaní.';
+            if (xhr.responseJSON && xhr.responseJSON.messages) {
+                msg = Object.values(xhr.responseJSON.messages).join(', ');
+            }
+            $('#createStatus').text(msg).css('color', 'red');
+            if (xhr.responseJSON && xhr.responseJSON.csrf_token) {
+                window.csrfHash = xhr.responseJSON.csrf_token;
+            }
+        }
+    });
+});
+
+</script>
+
+
+<!-- Attachments Modal -->
+<div id="attachmentsModal" class="dos-modal">
+    <div class="dos-modal-content">
+        <div class="dos-modal-header">
+            <span class="close-modal">&times;</span>
+            <h3 style="margin:0; font-size: 1.2rem;">Prílohy: <span id="modalDoklad"></span></h3>
+        </div>
+        <div id="modalBody" class="modal-flex">
+            <div class="modal-sidebar">
+                <form id="uploadForm" enctype="multipart/form-data" style="margin-bottom: 20px; border-bottom: 1px dashed var(--border-color); padding-bottom: 15px;">
+                    <input type="hidden" id="uploadDoklad" name="b">
+                    <div style="margin-bottom: 10px;">
+                        <input type="file" id="fileInput" name="attachment" accept=".pdf, .jpg, .jpeg, .png" required style="width: 100%; padding: 5px;">
+                    </div>
+                    <button type="submit" class="btn btn-action btn-attachment" style="padding: 8px 15px;">Nahrať súbor</button>
+                    <div id="uploadStatus" style="margin-top: 10px; font-weight: bold; font-size: 0.9em;"></div>
+                </form>
+                <h4>Zoznam príloh:</h4>
+                <ul id="attachmentList" class="attachment-list">
+                    <!-- Attachments will be loaded here -->
+                </ul>
+            </div>
+            <div class="modal-preview" id="attachmentPreview">
+                <div style="margin-top: 20%; color: #888; text-align: center;">Pre zobrazenie ukážky vyberte prílohu zo zoznamu, alebo nahrajte nový súbor.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Global ESC key handler for all modals -->
+<script>
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape") {
+            // Close any custom .modal or .dos-modal
+            document.querySelectorAll('.modal, .dos-modal').forEach(function(modal) {
+                modal.style.display = 'none';
+            });
+            // Also attempt to close any standard Bootstrap modals if Bootstrap is loaded
+            if (typeof bootstrap !== 'undefined' && typeof bootstrap.Modal !== 'undefined') {
+                const openModals = document.querySelectorAll('.modal.show');
+                openModals.forEach(modalEl => {
+                    const modalInstance = bootstrap.Modal.getInstance(modalEl);
+                    if (modalInstance) {
+                        modalInstance.hide();
+                    }
+                });
+            }
+            // And if jQuery is used with hide() logic
+            if (typeof $ !== 'undefined') {
+                $('.modal, .dos-modal').hide();
+            }
+        }
+    });
+
+// Create Liability & QR Decoder Logic
+var html5QrcodeScanner;
+
+$('#btnOpenCreateLiability').click(function(e) {
+    e.preventDefault();
+    openCreateModal();
+});
+
+$('.close-create-modal').click(function() {
+    closeCreateModal();
+});
+
+function closeCreateModal() {
+    $('#createModal').hide();
+    stopScanner();
+}
+
+function openCreateModal() {
+    $('#createModal').show();
+    $('#createStatus').text('');
+    $('#qr-status').text('');
+    $('#qrScannerArea').hide();
+    $('#qrInputArea').hide();
+
+    // Predvyplnit dnesny datum a vyprazdnit hodnoty
+    document.getElementById('create_a').valueAsDate = new Date();
+    $('#create_od').val('');
+    $('#create_varsym').val('');
+    $('#create_splat').val('');
+    $('#create_z').val('0.00');
+    $('#create_vyrovn').val('0.00');
+}
+
+$('#btnStartQrScanner').click(function() {
+    $('#qrInputArea').hide();
+    $('#qr-status').text('Inicializujem kameru...').css('color', 'orange');
+    $('#qrScannerArea').show();
+
+    if (!html5QrcodeScanner) {
+        html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: {width: 250, height: 250} }, false);
+    }
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+});
+
+$('#btnQrTextInput').click(function() {
+    stopScanner();
+    $('#qrScannerArea').hide();
+    $('#qr-status').text('');
+    $('#qrTextInputField').val('');
+    $('#qrInputArea').show();
+    $('#qrTextInputField').focus();
+});
+
+$('#btnCancelQrText').click(function() {
+    $('#qrInputArea').hide();
+});
+
+$('#btnCancelQrScan').click(function() {
+    stopScanner();
+    $('#qrScannerArea').hide();
+    $('#qr-status').text('');
+});
+
+$('#btnProcessQrText').click(function() {
+    let text = $('#qrTextInputField').val().trim();
+    if(text) {
+        processQrString(text);
+        $('#qrInputArea').hide();
+    }
+});
+
+function stopScanner() {
+    if (html5QrcodeScanner) {
+        html5QrcodeScanner.clear();
+    }
+}
+
+function onScanSuccess(decodedText, decodedResult) {
+    stopScanner();
+    $('#qrScannerArea').hide();
+    processQrString(decodedText);
+}
+
+function processQrString(qrString) {
+    $('#qr-status').text('Spracovávam kód na serveri...').css('color', 'orange');
+
+    $.ajax({
+        url: '<?= base_url('invoices/api/liabilities/decode-bysquare') ?>',
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
+        data: JSON.stringify({ qr_string: qrString }),
+        contentType: 'application/json',
+        success: function(res) {
+            if(res.parsed) {
+                $('#qr-status').text('Údaje z kódu úspešne prenesené do formulára!').css('color', '#28a745');
+
+                if(res.parsed.dodavatel) $('#create_od').val(res.parsed.dodavatel);
+                if(res.parsed.ext_doklad) $('#create_varsym').val(res.parsed.ext_doklad);
+                if(res.parsed.suma) $('#create_z').val(res.parsed.suma);
+
+                let spl = res.parsed.splatnost;
+                if(spl && spl.length === 8) {
+                    let y = spl.substr(0,4); let m = spl.substr(4,2); let d = spl.substr(6,2);
+                    $('#create_splat').val(`${y}-${m}-${d}`);
+                }
+                let dod = res.parsed.dodanie;
+                if(dod && dod.length === 8) {
+                    let y = dod.substr(0,4); let m = dod.substr(4,2); let d = dod.substr(6,2);
+                    $('#create_a').val(`${y}-${m}-${d}`);
+                }
+
+                if(res.csrf_token) { window.csrfHash = res.csrf_token; }
+            }
+        },
+        error: function(xhr) {
+            let errorMsg = 'Nepodarilo sa dekódovať INVOICE/PAY kód.';
+            if (xhr.responseJSON && xhr.responseJSON.error) {
+                errorMsg = xhr.responseJSON.error;
+            }
+            $('#qr-status').text(errorMsg).css('color', 'red');
+            if (xhr.responseJSON && xhr.responseJSON.csrf_token) {
+                window.csrfHash = xhr.responseJSON.csrf_token;
+            }
+        }
+    });
+}
+
+function onScanFailure(error) {
+    // ignurujeme varovania pri skenovani
+}
+
+$(document).on('submit', '#createForm', function(e) {
+    e.preventDefault();
+    $('#createStatus').text('Ukladám záznam...').css('color', 'orange');
+
+    var jsonData = {
+        a: $('#create_a').val(),
+        // b: je generovane backendom
+        od: $('#create_od').val(),
+        var_sym: $('#create_varsym').val(),
+        splat: $('#create_splat').val(),
+        z: $('#create_z').val(),
+        vyrovn: $('#create_vyrovn').val(),
+        items: []
+    };
+
+    $.ajax({
+        url: '<?= base_url('invoices/liabilities') ?>',
+        type: 'POST',
+        headers: {'X-CSRF-TOKEN': window.csrfHash || '<?= csrf_hash() ?>'},
+        data: JSON.stringify(jsonData),
+        contentType: 'application/json',
+        success: function(response) {
+            $('#createStatus').text('Úspešne uložené! (Číslo dokladu: ' + response.b + ')').css('color', 'green');
+            if(response.csrf_token) window.csrfHash = response.csrf_token;
+            setTimeout(function() {
+                closeCreateModal();
+                $('#liabilitiesTable').DataTable().ajax.reload();
+            }, 2000);
+        },
+        error: function(xhr) {
+            let msg = 'Chyba pri ukladaní.';
+            if (xhr.responseJSON && xhr.responseJSON.messages) {
+                msg = Object.values(xhr.responseJSON.messages).join(', ');
+            }
+            $('#createStatus').text(msg).css('color', 'red');
+            if (xhr.responseJSON && xhr.responseJSON.csrf_token) {
+                window.csrfHash = xhr.responseJSON.csrf_token;
+            }
+        }
+    });
+});
+
+</script>
+
+
+<!-- QR Scanner Modal -->
+<div id="qrModal" class="dos-modal">
+    <div class="dos-modal-content" style="width: 50%; max-width: 600px; height: auto;">
+        <div class="dos-modal-header">
+            <span class="close-qr-modal close-modal">&times;</span>
+            <h3 style="margin:0; font-size: 1.2rem;">Skenovať INVOICE by square</h3>
+        </div>
+        <div id="modalBody">
+            <div id="qr-reader" style="width:100%; min-height:300px; background:#000;"></div>
+            <div id="qr-result" style="margin-top: 15px; display:none;">
+                <h4 style="color: green;">Kód úspešne načítaný!</h4>
+                <div style="background: var(--card-bg); padding: 10px; border: 1px solid var(--border-color); font-family: monospace;">
+                    <div><strong>Dodávateľ:</strong> <span id="qr-dodavatel"></span></div>
+                    <div><strong>IČO:</strong> <span id="qr-ico"></span></div>
+                    <div><strong>Ext. Doklad (VS):</strong> <span id="qr-vs"></span></div>
+                    <div><strong>Suma:</strong> <span id="qr-suma"></span> EUR</div>
+                    <div><strong>Splatnosť:</strong> <span id="qr-splatnost"></span></div>
+                </div>
+                <button class="btn btn-action" style="margin-top:15px; background:#28a745; color:white; width:100%; font-size: 1.1em;" onclick="alert('Tu v buducnosti prepojime tlacitko na vytvorenie novej faktury v systeme.')">Pokračovať a vytvoriť Záväzok</button>
+            </div>
+            <div id="qr-error" style="margin-top: 15px; color: red; font-weight: bold; display:none;"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Create Liability Modal (DATOVÝ EDITOR) -->
+<div id="createModal" class="dos-modal">
+    <div class="dos-modal-content">
+        <div class="dos-modal-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin:0; font-size: 1.2rem;">Nová došlá faktúra</h3>
+            <span class="close-create-modal close-modal">&times;</span>
+        </div>
+
+
+
+        <form id="createForm" class="fand-form-grid">
+            <!-- Row 1 -->
+            <label class="fand-span-2">Dátum zaradenia</label>
+            <div class="fand-span-4" style="display: flex; gap: 5px;">
+                <input type="date" id="create_a" name="a" required>
+                <input type="text" id="create_akyden" placeholder="Po" style="width: 40px;" readonly disabled>
+            </div>
+            <label class="fand-span-2 text-right">Označenie</label>
+            <input class="fand-span-4" type="text" id="create_b" name="b" placeholder="Bude vygenerované..." readonly disabled>
+
+            <!-- Row 2 -->
+            <label class="fand-span-2">Zdaniteľné plnenie</label>
+            <div class="fand-span-4" style="display: flex; gap: 5px;">
+                <input type="date" id="create_zp" name="zp">
+                <label>par.69</label>
+                <input type="checkbox" id="create_par_69" name="par_69" value="1" style="width:auto;">
+            </div>
+            <label class="fand-span-2 text-right">Splatné do</label>
+            <div class="fand-span-4" style="display: flex; gap: 5px;">
+                <input type="date" id="create_splat" name="splat">
+                <input type="text" id="create_akyden_splat" placeholder="St" style="width: 40px;" readonly disabled>
+            </div>
+
+            <!-- Row 3 -->
+            <label class="fand-span-2">Dodávateľ</label>
+            <input class="fand-span-6" type="text" id="create_od" name="od" required>
+            <input class="fand-span-4" type="text" id="create_ICPD" name="ICPD" placeholder="IČO / DIČ">
+
+            <!-- Row 4 -->
+            <label class="fand-span-2">Číslo účtu</label>
+            <input class="fand-span-4" type="text" id="create_od_ucet" name="od_ucet">
+            <label class="fand-span-2 text-right">druh výdaja</label>
+            <div class="fand-span-4" style="display: flex; gap: 5px;">
+                <input type="text" id="create_Vydaj" name="vydaj" style="width: 40px;">
+                <input type="text" id="create_Aky_Vydaj" style="flex:1;" readonly disabled>
+            </div>
+
+            <!-- Row 5 -->
+            <label class="fand-span-2">Text</label>
+            <input class="fand-span-10" type="text" id="create_n" name="n">
+
+            <!-- Row 6 -->
+            <label class="fand-span-3">Ext. ozn. (var. symbol)</label>
+            <input class="fand-span-4" type="text" id="create_varsym" name="var_sym">
+            <label class="fand-span-2 text-right">KS</label>
+            <input class="fand-span-3" type="text" id="create_konsym" name="kon_sym">
+
+            <!-- Spacer -->
+            <div class="fand-span-12" style="height: 15px;"></div>
+
+            <!-- DPH Table Headers -->
+            <div class="fand-span-2 text-center" style="font-weight:bold; border-bottom: 1px solid var(--border-color);">dph %</div>
+            <div class="fand-span-3 text-center" style="font-weight:bold; border-bottom: 1px solid var(--border-color);">bez dph</div>
+            <div class="fand-span-3 text-center" style="font-weight:bold; border-bottom: 1px solid var(--border-color);">dph</div>
+            <div class="fand-span-4 text-center" style="font-weight:bold; border-bottom: 1px solid var(--border-color);">Fakturované s dph</div>
+
+            <!-- DPH Row 0% -->
+            <div class="fand-span-2 text-center">0</div>
+            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_x" name="x" value="0.00">
+            <div class="fand-span-3"></div>
+            <div class="fand-span-4"></div>
+
+            <!-- DPH Row 10% -->
+            <input class="fand-span-2 text-center" type="number" step="0.01" id="create_dph_1" name="dph_1" value="10">
+            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_y" name="y" value="0.00">
+            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_dph_sk1" name="dph_sk1" value="0.00" readonly disabled style="background: var(--hover-bg);">
+            <div class="fand-span-4"></div>
+
+            <!-- DPH Row 20% -->
+            <input class="fand-span-2 text-center" type="number" step="0.01" id="create_dph" name="dph" value="20">
+            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_z" name="z" value="0.00">
+            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_dph_sk" name="dph_sk" value="0.00" readonly disabled style="background: var(--hover-bg);">
+            <div class="fand-span-4" style="display:flex; gap:5px;">
+                <input type="number" step="0.01" id="create_zn" class="text-right" style="flex:1; font-weight:bold;" value="0.00" required>
+                <input type="text" id="create_mena" style="width:40px;" value="EUR">
+            </div>
+
+            <!-- Spacer -->
+            <div class="fand-span-8"></div>
+            <div class="fand-span-4" style="display:flex; gap:5px;">
+                <label style="width: 70px; text-align:right; margin-right: 5px;">Uhradené</label>
+                <input type="number" step="0.01" id="create_pc" class="text-right" style="flex:1;" value="0.00">
+            </div>
+
+            <!-- Centove vyrovnanie -->
+            <label class="fand-span-3 text-right">centové vyrovnanie</label>
+            <div class="fand-span-5" style="display:flex; gap:5px;">
+                <input type="number" step="0.01" id="create_vyrovn" style="width: 80px;" class="text-right" value="0.00">
+            </div>
+            <div class="fand-span-4" style="display:flex; gap:5px;">
+                <label style="width: 70px; text-align:right; margin-right: 5px;">Zostáva</label>
+                <input type="number" step="0.01" id="create_zavazok" class="text-right" style="flex:1; background: var(--hover-bg);" value="0.00" readonly disabled>
+            </div>
+
+            <div class="fand-span-12" style="margin-top: 20px; display: flex; justify-content: space-between; align-items: flex-end;">
+                <div>
+                    <button type="button" id="btnQROpen" class="btn" style="background-color: #17a2b8; border: none; font-size: 1rem; padding: 10px 20px; cursor: pointer;">📷 Načítať z QR kódu (Kamera / Čítačka)</button>
+                </div>
+                <div style="text-align: right;">
+                    <div id="createStatus" style="font-weight: bold; margin-bottom: 10px;"></div>
+                    <button type="submit" class="btn btn-action" style="background: #28a745; color: white; padding: 10px 30px; font-size: 1.1rem;">Uložiť záznam</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- QR Scan Sub-Modal -->
+<div id="qrSubModal" class="dos-modal" style="z-index: 10000; display: none;">
+    <div class="dos-modal-content" style="width: 400px; margin: 10% auto;">
+        <div class="dos-modal-header" style="display: flex; justify-content: space-between;">
+            <h4 style="margin:0;">Zosnímať QR kód</h4>
+            <span class="close-qr-submodal close-modal">&times;</span>
+        </div>
+        <div style="margin-top: 15px; text-align: center;">
+            <div id="qr-reader" style="width: 100%; min-height: 250px; background: #000; margin-bottom: 15px;"></div>
+
+            <p><strong>Alebo vložte kód z ručnej čítačky:</strong></p>
+            <textarea id="qrTextInputField" style="width: 100%; height: 60px; padding: 5px; color: black; margin-bottom: 10px;"></textarea>
+            <button type="button" id="btnProcessQrText" class="btn btn-action" style="background: #17a2b8; width: 100%;">Spracovať textový kód</button>
+
+            <div id="qr-status" style="font-weight: bold; margin-top: 15px;"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Create Liability Modal (DATOVÝ EDITOR) -->
+<div id="createModal" class="dos-modal">
+    <div class="dos-modal-content">
+        <div class="dos-modal-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin:0; font-size: 1.2rem;">Nová došlá faktúra</h3>
+            <span class="close-create-modal close-modal">&times;</span>
+        </div>
+
+
+
+        <form id="createForm" class="fand-form-grid">
+            <!-- Row 1 -->
+            <label class="fand-span-2">Dátum zaradenia</label>
+            <div class="fand-span-4" style="display: flex; gap: 5px;">
+                <input type="date" id="create_a" name="a" required>
+                <input type="text" id="create_akyden" placeholder="Po" style="width: 40px;" readonly disabled>
+            </div>
+            <label class="fand-span-2 text-right">Označenie</label>
+            <input class="fand-span-4" type="text" id="create_b" name="b" placeholder="Bude vygenerované..." readonly disabled>
+
+            <!-- Row 2 -->
+            <label class="fand-span-2">Zdaniteľné plnenie</label>
+            <div class="fand-span-4" style="display: flex; gap: 5px;">
+                <input type="date" id="create_zp" name="zp">
+                <label>par.69</label>
+                <input type="checkbox" id="create_par_69" name="par_69" value="1" style="width:auto;">
+            </div>
+            <label class="fand-span-2 text-right">Splatné do</label>
+            <div class="fand-span-4" style="display: flex; gap: 5px;">
+                <input type="date" id="create_splat" name="splat">
+                <input type="text" id="create_akyden_splat" placeholder="St" style="width: 40px;" readonly disabled>
+            </div>
+
+            <!-- Row 3 -->
+            <label class="fand-span-2">Dodávateľ</label>
+            <input class="fand-span-6" type="text" id="create_od" name="od" required>
+            <input class="fand-span-4" type="text" id="create_ICPD" name="ICPD" placeholder="IČO / DIČ">
+
+            <!-- Row 4 -->
+            <label class="fand-span-2">Číslo účtu</label>
+            <input class="fand-span-4" type="text" id="create_od_ucet" name="od_ucet">
+            <label class="fand-span-2 text-right">druh výdaja</label>
+            <div class="fand-span-4" style="display: flex; gap: 5px;">
+                <input type="text" id="create_Vydaj" name="vydaj" style="width: 40px;">
+                <input type="text" id="create_Aky_Vydaj" style="flex:1;" readonly disabled>
+            </div>
+
+            <!-- Row 5 -->
+            <label class="fand-span-2">Text</label>
+            <input class="fand-span-10" type="text" id="create_n" name="n">
+
+            <!-- Row 6 -->
+            <label class="fand-span-3">Ext. ozn. (var. symbol)</label>
+            <input class="fand-span-4" type="text" id="create_varsym" name="var_sym">
+            <label class="fand-span-2 text-right">KS</label>
+            <input class="fand-span-3" type="text" id="create_konsym" name="kon_sym">
+
+            <!-- Spacer -->
+            <div class="fand-span-12" style="height: 15px;"></div>
+
+            <!-- DPH Table Headers -->
+            <div class="fand-span-2 text-center" style="font-weight:bold; border-bottom: 1px solid var(--border-color);">dph %</div>
+            <div class="fand-span-3 text-center" style="font-weight:bold; border-bottom: 1px solid var(--border-color);">bez dph</div>
+            <div class="fand-span-3 text-center" style="font-weight:bold; border-bottom: 1px solid var(--border-color);">dph</div>
+            <div class="fand-span-4 text-center" style="font-weight:bold; border-bottom: 1px solid var(--border-color);">Fakturované s dph</div>
+
+            <!-- DPH Row 0% -->
+            <div class="fand-span-2 text-center">0</div>
+            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_x" name="x" value="0.00">
+            <div class="fand-span-3"></div>
+            <div class="fand-span-4"></div>
+
+            <!-- DPH Row 10% -->
+            <input class="fand-span-2 text-center" type="number" step="0.01" id="create_dph_1" name="dph_1" value="10">
+            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_y" name="y" value="0.00">
+            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_dph_sk1" name="dph_sk1" value="0.00" readonly disabled style="background: var(--hover-bg);">
+            <div class="fand-span-4"></div>
+
+            <!-- DPH Row 20% -->
+            <input class="fand-span-2 text-center" type="number" step="0.01" id="create_dph" name="dph" value="20">
+            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_z" name="z" value="0.00">
+            <input class="fand-span-3 text-right" type="number" step="0.01" id="create_dph_sk" name="dph_sk" value="0.00" readonly disabled style="background: var(--hover-bg);">
+            <div class="fand-span-4" style="display:flex; gap:5px;">
+                <input type="number" step="0.01" id="create_zn" class="text-right" style="flex:1; font-weight:bold;" value="0.00" required>
+                <input type="text" id="create_mena" style="width:40px;" value="EUR">
+            </div>
+
+            <!-- Spacer -->
+            <div class="fand-span-8"></div>
+            <div class="fand-span-4" style="display:flex; gap:5px;">
+                <label style="width: 70px; text-align:right; margin-right: 5px;">Uhradené</label>
+                <input type="number" step="0.01" id="create_pc" class="text-right" style="flex:1;" value="0.00">
+            </div>
+
+            <!-- Centove vyrovnanie -->
+            <label class="fand-span-3 text-right">centové vyrovnanie</label>
+            <div class="fand-span-5" style="display:flex; gap:5px;">
+                <input type="number" step="0.01" id="create_vyrovn" style="width: 80px;" class="text-right" value="0.00">
+            </div>
+            <div class="fand-span-4" style="display:flex; gap:5px;">
+                <label style="width: 70px; text-align:right; margin-right: 5px;">Zostáva</label>
+                <input type="number" step="0.01" id="create_zavazok" class="text-right" style="flex:1; background: var(--hover-bg);" value="0.00" readonly disabled>
+            </div>
+
+            <div class="fand-span-12" style="margin-top: 20px; display: flex; justify-content: space-between; align-items: flex-end;">
+                <div>
+                    <button type="button" id="btnQROpen" class="btn" style="background-color: #17a2b8; border: none; font-size: 1rem; padding: 10px 20px; cursor: pointer;">📷 Načítať z QR kódu (Kamera / Čítačka)</button>
+                </div>
+                <div style="text-align: right;">
+                    <div id="createStatus" style="font-weight: bold; margin-bottom: 10px;"></div>
+                    <button type="submit" class="btn btn-action" style="background: #28a745; color: white; padding: 10px 30px; font-size: 1.1rem;">Uložiť záznam</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- QR Scan Sub-Modal -->
+<div id="qrSubModal" class="dos-modal" style="z-index: 10000; display: none;">
+    <div class="dos-modal-content" style="width: 400px; margin: 10% auto;">
+        <div class="dos-modal-header" style="display: flex; justify-content: space-between;">
+            <h4 style="margin:0;">Zosnímať QR kód</h4>
+            <span class="close-qr-submodal close-modal">&times;</span>
+        </div>
+        <div style="margin-top: 15px; text-align: center;">
+            <div id="qr-reader" style="width: 100%; min-height: 250px; background: #000; margin-bottom: 15px;"></div>
+
+            <p><strong>Alebo vložte kód z ručnej čítačky:</strong></p>
+            <textarea id="qrTextInputField" style="width: 100%; height: 60px; padding: 5px; color: black; margin-bottom: 10px;"></textarea>
+            <button type="button" id="btnProcessQrText" class="btn btn-action" style="background: #17a2b8; width: 100%;">Spracovať textový kód</button>
+
+            <div id="qr-status" style="font-weight: bold; margin-top: 15px;"></div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

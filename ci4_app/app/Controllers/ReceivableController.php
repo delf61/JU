@@ -15,10 +15,23 @@ class ReceivableController extends ResourceController
         $this->receivableService = new ReceivableService();
     }
 
+
+    public function webIndex()
+    {
+        $year = session()->get('accounting_year') ?? date('Y');
+        return view('invoices/receivables', ['year' => $year]);
+    }
+
     public function index()
     {
-        $data = $this->receivableService->getAllReceivables();
-        return $this->respond($data);
+        try {
+            $year = $this->request->getGet('year') ?: (session()->get('accounting_year') ?? date('Y'));
+            $data = $this->receivableService->getAllReceivables($year);
+            return $this->respond($data);
+        } catch (\Throwable $e) {
+            log_message('error', $e->getMessage());
+            return $this->respond(['error' => 'Chyba databazy: ' . $e->getMessage()], 500);
+        }
     }
 
     public function show($a = null, $b = null)
@@ -52,16 +65,30 @@ class ReceivableController extends ResourceController
         return $this->respond($status);
     }
 
+        public function nextB()
+    {
+        $year = $this->request->getGet('year') ?: session()->get('accounting_year') ?? date('Y');
+        $next = $this->receivableService->generateNextB($year);
+        return $this->respond(['next_b' => $next]);
+    }
+
     public function create()
     {
-        $data = $this->request->getJSON(true);
+        $data = $this->request->getJSON(true) ?: $this->request->getPost();
         if (empty($data['a']) || empty($data['b'])) {
             return $this->failValidationError('Missing a or b');
         }
         $items = $data['items'] ?? [];
         unset($data['items']);
+
         $this->receivableService->createReceivable($data, $items);
-        return $this->respondCreated(['a' => $data['a'], 'b' => $data['b']]);
+
+        return $this->respondCreated([
+            'success' => true,
+            'a' => $data['a'],
+            'b' => $data['b'],
+            'csrf_hash' => csrf_hash()
+        ]);
     }
 
     public function update($a = null, $b = null)

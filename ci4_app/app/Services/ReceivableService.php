@@ -47,18 +47,71 @@ class ReceivableService
     /**
      * Fetch all receivables
      */
-    public function getAllReceivables()
+    public function getAllReceivables($year = null)
     {
-        return $this->kpModel->findAll();
+        if ($year) {
+            $this->kpModel->where('YEAR(a)', $year);
+        }
+
+        $invoices = $this->kpModel->findAll();
+
+        foreach ($invoices as &$invoice) {
+            $invYear = $year ? $year : (int)date('Y', strtotime($invoice['a']));
+            $statusData = $this->calculateStatus($invoice, $invYear);
+            $invoice['zn'] = $statusData['zn'] ?? 0;
+            $invoice['uhrada'] = $statusData['uhrada'] ?? 0;
+            $invoice['uhr'] = $statusData['uhr'] ?? '';
+        }
+
+        return $invoices;
     }
 
     /**
      * Create a receivable with items
      */
+        public function generateNextB($year)
+    {
+        $shortYear = substr((string)$year, -2);
+
+        $invoices = $this->kpModel->where('YEAR(a)', $year)->findAll();
+
+        $maxNum = 0;
+        foreach ($invoices as $inv) {
+            $b = trim($inv['b']);
+            // Zaujímajú nás len faktúry, ktoré začínajú na YY (napr. '26') a sú aspoň 5-znakové
+            if (str_starts_with($b, $shortYear)) {
+                // Odstránime akékoľvek nečíselné znaky (ako pomlčky), ak by tam boli omylom
+                $cleanB = preg_replace('/[^0-9]/', '', $b);
+                if (strlen($cleanB) >= 5) {
+                    // Prečítame prvé 5 cifier
+                    $numVal = (int)substr($cleanB, 0, 5);
+                    if ($numVal > $maxNum) {
+                        $maxNum = $numVal;
+                    }
+                }
+            }
+        }
+
+        if ($maxNum == 0) {
+            return $shortYear . '001';
+        }
+
+        $nextNum = $maxNum + 1;
+        return (string)$nextNum;
+    }
+
     public function createReceivable($header, $items = [])
     {
         $db = \Config\Database::connect();
         $db->transStart();
+
+        // Remove non-db fields sent from UI
+        unset($header['iban']);
+        unset($header['v_z'], $header['v_d'], $header['v_s']);
+        unset($header['p_z'], $header['p_d'], $header['p_s']);
+        unset($header['z_z'], $header['z_d'], $header['z_s']);
+        unset($header['n_p']);
+        unset($header['zn'], $header['vyrovn'], $header['pc'], $header['pohladavka_display']);
 
         $this->kpModel->insert($header);
 
