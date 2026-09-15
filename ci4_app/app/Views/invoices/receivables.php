@@ -571,7 +571,7 @@ $(document).ready(function() {
                 select: function(event, ui) {
                     $('#kodop').val(ui.item.kodop);
 
-                    $('#mesto_display').val(ui.item.mesto);
+                    $('#mesto').val(ui.item.mesto);
                     $('#ico_display').val(ui.item.ico);
                 }
             });
@@ -614,7 +614,7 @@ $(document).ready(function() {
             <input class="fand-span-4" type="text" id="kodop" name="kodop">
 
             <label class="fand-span-2">Mesto</label>
-            <input class="fand-span-4" type="text" id="mesto_display" readonly disabled style="font-weight:bold;">
+            <input class="fand-span-4" type="text" id="mesto" name="mesto" readonly disabled style="font-weight:bold;">
             <label class="fand-span-2 text-right">IČO</label>
             <input class="fand-span-4" type="text" id="ico_display" readonly disabled style="font-weight:bold;">
 
